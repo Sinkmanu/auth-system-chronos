@@ -1,0 +1,14 @@
+SISTEMA DE AUTENTICACION DE USUARIOS
+
+1. Cambiar key_watch y key_ap en ./Authsystem/authentication.c 
+(key_watch será nuestra clave y key_ap la clave del punto de acceso, ambas te la deberá proporcionar el administrador del sistema)
+2. Para compilar el programa, será necesario msp430-gcc (http://mspgcc4.sourceforge.net/), por lo tanto lo descargamos e instalamos.
+2.1 Compilar el código de nuestro programa.
+ export PATH=$PATH:/opt/msp430-gcc-4.4.3/bin/
+ make
+3. Cargar el programa en el eZ430-Chronos (con mspdebug)
+ mspdebug rf2500
+ prog build/eZChronos.txt
+(Esto llevara unos minutos)
+4. Una vez tenemos el reloj con el programa, vamos a la seccion auth, hacemos una pulsacion larga al boton # y modificamos el uid, guardamos.
+Ya tenemos nuestro sistema listo para usarse.

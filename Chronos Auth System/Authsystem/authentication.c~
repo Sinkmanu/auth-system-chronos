@@ -1,0 +1,631 @@
+// *************************************************************************************************
+// Include section
+
+// system
+#include "project.h"
+
+// driver
+#include "display.h"
+#include "vti_as.h"
+#include "ports.h"
+#include "buzzer.h"
+#include "user.h"
+#include "string.h"
+#include "date.h"
+#include "driver/radio.h"
+#include "rf1a.h"
+#include "driver/smartrf.h"
+#include "timer.h"
+#include "clock.h"
+#include "aes.h"
+
+// Auth System
+#include "packet.h"
+#include "authentication.h"
+
+//Others
+#include "nwk_types.h"
+#include "nwk_api.h"
+#include "nwk.h"
+#include "bsp.h"
+
+
+// *************************************************************************************************
+// Prototypes section
+void reset_auth(void);
+void sx_auth(u8 line);
+void mx_auth(u8 line);
+void display_auth(u8 line, u8 update);
+
+void startComunicacion(void);
+void authentication_request(packet_t *packet);
+u8 check_packet(packet_t *packet);
+u8 wait_beacon(void);
+void session_ping(void);
+
+void authentication_timer(void);
+volatile u8 authentication_response_timeout = 0;
+void authentication_timer_ping(void);
+volatile u8 authentication_ping_timeout = 0;
+
+
+
+// *************************************************************************************************
+// Global Variable section	
+packet_t packet_beacon;
+packet_t packet_auth;
+u8 error_packet = PACKET_SIN_ERROR;
+u8 key_ap[16]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+u8 key_watch[16]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
+
+u8 paquete_ok[25];
+u8 paquete[42];
+u8 paquete_recibido[41];
+u32 random_ack;
+
+// *************************************************************************************************
+// Extern section
+struct Datos sDatos;
+
+void reset_auth(void) {
+	sDatos.view = 0; //Vista por defecto
+	sDatos.comunication_state = 0;
+	sDatos.id = 1000;
+}
+
+
+// *************************************************************************************************
+// @fn          mx_auth
+// @brief       Este es la función que usaremos para introducir el PIN_NUMBER
+// @param       line		LINE1
+// @return      none
+// *************************************************************************************************
+void mx_auth(u8 line)
+{
+	u8 select;
+	s32 passwd1;  
+	passwd1 = sDatos.id;
+	clear_display_all();
+	
+	select = 0;
+	display_chars(LCD_SEG_L2_3_0, (u8 *)" UID", SEG_ON);
+
+	while(1)
+	{
+		if (sys.flag.idle_timeout) break; //Salir sin guardar
+		if (button.flag.star) //Cuando acabamos de configurar
+		{
+			//pulsamos el boton estrella para salir del menu de configuracion de id	
+			break;
+		} 
+		switch(select)
+		{
+			case 0: set_value(&passwd1, 4, 0, 0000, 9999, SETVALUE_ROLLOVER_VALUE + SETVALUE_DISPLAY_VALUE + SETVALUE_FAST_MODE + SETVALUE_NEXT_VALUE, LCD_SEG_L1_3_0, display_value1);
+				select = 1;					
+				break;
+			case 1: display_chars(LCD_SEG_L2_3_0, (u8 *)"SAVE", SEG_ON);
+				sDatos.id = passwd1;
+				break;
+		}
+	}
+	// Clear button flag
+	button.all_flags = 0;
+}
+
+// *************************************************************************************************
+// @fn          sx_auth
+// @brief       Aqui activamos/desactivamos la authenticacion
+// @param       line		LINE1, LINE2
+// @return      none
+// *************************************************************************************************
+void sx_auth(u8 line)
+{
+	if (button.flag.down) 
+	{
+		/*if (sDatos.comunication_state)
+		{
+			 sDatos.comunication_state=0;
+		}
+		else
+		{*/
+			startComunicacion();
+		//}
+	}
+}
+
+
+void display_auth(u8 line, u8 update)
+{
+
+	if (update == DISPLAY_LINE_UPDATE_FULL)
+	{
+		switch (sDatos.view)
+		{
+			case 0: display_chars(LCD_SEG_L2_4_0, (u8 *)" AUTH", SEG_ON); break;
+			default: break;
+		}
+	}
+	else if	(update == DISPLAY_LINE_UPDATE_PARTIAL)
+	{
+		if (sDatos.view == 2) display_auth(line, DISPLAY_LINE_UPDATE_FULL);
+	}
+	else if (update == DISPLAY_LINE_CLEAR)
+	{
+	}
+}
+
+
+// *************************************************************************************************
+// @fn          compress_packet
+// @brief       Transforma un paquete en un array
+// @param       array_packet struct_packet
+// @return      none
+// *************************************************************************************************
+void compress_packet(u8 *packet_d,packet_t *packet)
+{
+	u8 i;
+	packet_d[0]= 41;  //lenght necesario si esta activada la longitud de paquete variable/infinito en PKTCTRL0 (bits 1:0) -> 01 infinite, 10 variable y el tamaño del paquete en PKTLEN = PACKET_TRANSMIT_LENGTH
+	for(i=0;i<4;i++)	
+	{
+		packet_d[1+i]= packet->dst[i]; //Necesario si el receptor tiene activado PKTCTRL1 (bits 1:0) (00 no address check,01 address check, 11 address check (0x00) (0xFF) broadcast
+	}
+	for(i=0;i<4;i++) 
+	{
+		packet_d[5+i]= packet->src[i]; //Address source
+	}
+	packet_d[9]= packet->type; //Simpliciti port number ??
+	for(i=0;i<32;i++)
+	{
+		packet_d[10+i]= packet->payload.raw[i];
+	}
+}
+
+// *************************************************************************************************
+// @fn          decompress_packet
+// @brief       Transforma un array en un packete
+// @param       array_packet struct_packet
+// @return      none
+// *************************************************************************************************
+void decompress_packet(u8 *packet_d,packet_t *packet)
+{
+	u8 i;
+	for(i=0;i<4;i++)	
+	{
+		packet->dst[i] = packet_d[i]; //Address dst
+	}
+	for(i=0;i<4;i++) 
+	{
+		packet->src[i] = packet_d[4+i]; //Address source
+	}
+	packet->type = packet_d[8];
+
+	if (packet_d[8] == PACKET_TYPE_BEACON)
+	{
+			//packet->payload.random.number = (packet_d[12] << 24) | (packet_d[11] << 16) | (packet_d[10] << 8) | packet_d[9];
+			packet->payload.random.number = (packet_d[9]*0x1000000) + 
+							(packet_d[10]*0x10000) + 
+							(packet_d[11]*0x100) + 
+							 packet_d[12];
+			random_ack = packet->payload.random.number; //Añadida para la recepcion de ack.
+			for (i=0;i<28;i++) packet->payload.random.seq[i] = 0x00;
+		
+	} else if (packet_d[8] == PACKET_TYPE_OK) 
+	{
+		for(i=0;i<16;i++)
+		{
+			packet->payload.ack.raw_ok[i] = packet_d[9+i];
+			packet->payload.ack.raw_padd[i] = 0x00;
+		}
+	} else 
+	{
+		for(i=0;i<32;i++)
+		{
+			packet->payload.raw[i] = packet_d[9+i];
+		}
+	}
+}
+
+// *************************************************************************************************
+// @fn          check packet
+// @brief       Envia un paquete y devuelve un estado
+// @param       struct packet
+// @return      none (error code)
+// *************************************************************************************************
+u8 check_packet(packet_t *packet)
+{
+	if ((packet->src[0]!=(u8)(ADDR_AP >> 24)) || (packet->src[1]!=(u8)(ADDR_AP >> 16)) || (packet->src[2]!=(u8)(ADDR_AP >> 8)) || (packet->src[3]!=(u8)(ADDR_AP))) return PACKET_ERROR_ADDR;
+	else if (packet->type != PACKET_TYPE_OK) return PACKET_ERROR_TYPE; //Comprueba que sea tipo OK. (Respuesta del AP)
+	else return PACKET_SIN_ERROR;
+}
+
+// *************************************************************************************************
+// @fn          wait beacon
+// @brief       Espera la recepcion del numero aleatorio
+// @param       none
+// @return      (error code)
+// *************************************************************************************************
+u8 wait_beacon(void)
+{
+	u8 sig=1;
+	while (sig)
+	{
+		//sig = button.flag.down;
+		if (!button.flag.down) sig = 0;
+		//Receive beacon -> sale sin error;
+		if (request.flag.radio_received)
+		{
+			if (radio_receive(paquete_recibido) != PACKET_BEACON_LENGTH) return PACKET_ERROR_LENGTH;
+			//paquete recibido, sacamos random. dst,src,type,random(32 bits)+12 bytes de relleno
+			decompress_packet(paquete_recibido,&packet_beacon);
+			return PACKET_SIN_ERROR;
+		}
+	}
+	return NO_BEACON;
+}
+
+// *************************************************************************************************
+// @fn          create_encrypt_packet
+// @brief       Envia paquete cifrado
+// @param       none
+// @return      (error code)
+// *************************************************************************************************
+void create_encrypt_packet(packet_t *packet)
+{
+	u8 i;
+	packet_beacon.payload.random.number =   (packet_beacon.payload.random.number & 0x000000FF) << 24 |
+						(packet_beacon.payload.random.number & 0x0000FF00) << 8 |
+						(packet_beacon.payload.random.number & 0x00FF0000) >> 8 |
+						(packet_beacon.payload.random.number & 0xFF000000) >> 24; 
+
+	for(i=0;i<4;i++) packet->dst[i]=0xFF; //dst address (broadcast)
+	packet->src[0] = (u8)(ADDR_AUTH >> 24);
+	packet->src[1] = (u8)(ADDR_AUTH >> 16);
+	packet->src[2] = (u8)(ADDR_AUTH >> 8);
+	packet->src[3] = (u8)(ADDR_AUTH);
+	packet->type = PACKET_TYPE_AUTH; 
+	//ID
+	packet->payload.raw[0]=(u8)(sDatos.id >> 8); packet->payload.raw[1]= (u8)(sDatos.id);
+	for(i=2;i<16;i++) packet->payload.raw[i]=0x00;
+	//RANDOM
+	u8 aes_random[16];
+	aes_random[0]= (u8)(packet_beacon.payload.random.number);					//RANDOM
+	aes_random[1]= (u8)(packet_beacon.payload.random.number >> 8);
+	aes_random[2]= (u8)(packet_beacon.payload.random.number >> 16);
+	aes_random[3]= (u8)(packet_beacon.payload.random.number >> 24); //little endian
+	for(i=4;i<16;i++) aes_random[i]=0x00;
+	aes_encrypt(aes_random,key_watch);
+	for(i=0;i<16;i++) packet->payload.raw[i+16] = aes_random[i];
+	aes_encryptCBC(packet->payload.raw,key_ap);
+}
+
+// *************************************************************************************************
+// @fn          session_ping
+// @brief       Recibe ping y envia respuesta
+// @param       none
+// @return      (error code)
+// *************************************************************************************************
+
+void session_ping(void)
+{
+	u8 timeout_seconds=2;
+	u8 timeout = 0;
+	u8 contador=0;	
+
+	display_symbol(LCD_ICON_RECORD, SEG_ON);
+
+	while (!timeout) 
+	{
+		contador=0;
+		while (contador<30) //ESPERA 30 SEGUNDOS 
+		{
+			if (!button.flag.down) 
+			{
+				break;
+			}
+			Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));
+			contador++;
+		}
+		if (contador<30) break; //Para salir clickando el boton 
+
+		/* Ahora se activara durante 2 segundos la radio a la espera de un random, si no recibe nada significara que esta lejos del AP  *
+		 * Por tanto, se cerrara la sesion y se acabara el programa en el reloj								*/
+		authentication_response_timeout = 0;
+		fptr_Timer0_A1_function = authentication_timer;
+		Timer0_A1_Start(CONV_MS_TO_TICKS(1000)); //Valor maximo que acepta el timer (16bits)
+
+		open_radio();		
+		radio_receive_on();
+		while (1)
+		{
+			if (authentication_response_timeout) 
+			{
+				if (!timeout_seconds) //SE ACTIVA SI EN 2 SEGUNDOS NO HA RECIBIDO NADA (30+2 segundos)
+				{
+					radio_receive_off();
+					display_chars(LCD_SEG_L1_3_0, (u8 *)"TIME", SEG_ON);
+					display_chars(LCD_SEG_L2_3_0, (u8 *)" OUT", SEG_ON);
+					Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));
+					timeout = 1;
+					break;
+					
+				}
+				else
+				{
+					authentication_response_timeout = 0;
+					fptr_Timer0_A1_function = authentication_timer;
+					Timer0_A1_Start(CONV_MS_TO_TICKS(1000)); 
+					timeout_seconds--;
+				}
+			}
+
+			if (request.flag.radio_received)
+			{
+				if (radio_receive(paquete_recibido) == PACKET_BEACON_LENGTH)
+				{
+					radio_receive_off();
+					decompress_packet(paquete_recibido,&packet_beacon);
+					create_encrypt_packet(&packet_auth);
+					compress_packet(paquete,&packet_auth);
+					radio_transmit((u8*)paquete, sizeof paquete);
+					Timer0_A4_Delay(CONV_MS_TO_TICKS(100));
+					while(ReadSingleReg(MARCSTATE) != 0x01); // Wait for Radio to go Idle
+					timeout_seconds=2;
+				}
+				break;
+			}
+		}//fin while 2seconds
+		close_radio();
+		Timer0_A1_Stop();
+		
+	} //Fin while timeout 30 seconds
+	
+	display_symbol(LCD_ICON_RECORD, SEG_OFF);
+}
+
+// *************************************************************************************************
+// @fn          authentication request
+// @brief       Envia un paquete y espera una respuesta
+// @param       struct packet
+// @return      none (error code)
+// *************************************************************************************************
+void authentication_request(packet_t *packet)
+{
+	packet_t packet_received;
+	u8 timeout_seconds=TIMEOUT_SECONDS; //segundos que estará esperando la respuesta de confirmacion
+	u8 packet_length;
+
+	compress_packet(paquete,packet);
+
+	/*display_symbol(LCD_ICON_BEEPER1, SEG_ON_BLINK_ON);
+	display_symbol(LCD_ICON_BEEPER2, SEG_ON_BLINK_ON);
+	display_symbol(LCD_ICON_BEEPER3, SEG_ON_BLINK_ON);*/
+	open_radio();
+	
+	// Configure timer
+	BSP_InitBoard();
+
+	radio_transmit((u8*)paquete, sizeof paquete);
+	Timer0_A4_Delay(CONV_MS_TO_TICKS(100));
+
+	while(ReadSingleReg(MARCSTATE) != 0x01); // Wait for Radio to go Idle
+
+	/*clear_display_all();
+	display_chars(LCD_SEG_L1_3_0, (u8 *)"AUTH", SEG_ON);
+	display_chars(LCD_SEG_L2_3_0, (u8 *)"SEND", SEG_ON);
+	Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));  */
+
+	/************************************************************************************
+	 * Ahora entra en modo RX y espera una respuesta del AP.			    *
+	 * Esta respuesta no deberia tardar más de 2 segundos, si tarda más será desechada  *
+	 ************************************************************************************/	
+	authentication_response_timeout = 0;
+	fptr_Timer0_A1_function = authentication_timer;
+	Timer0_A1_Start(CONV_MS_TO_TICKS(1000)); //Valor maximo que acepta el timer (16bits)
+
+	/*clear_display_all();
+	display_chars(LCD_SEG_L1_3_0, (u8 *)"WAIT", SEG_ON);
+	display_chars(LCD_SEG_L2_3_0, (u8 *)"RESP", SEG_ON);*/
+	
+	radio_receive_on();
+	while(1)
+	{
+		if (authentication_response_timeout) 
+		{
+			if (!timeout_seconds)
+			{
+				display_chars(LCD_SEG_L1_3_0, (u8 *)"TIME", SEG_ON);
+				display_chars(LCD_SEG_L2_3_0, (u8 *)" OUT", SEG_ON);
+				Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));
+				break;
+			}
+			else{
+				authentication_response_timeout = 0;
+				fptr_Timer0_A1_function = authentication_timer;
+				Timer0_A1_Start(CONV_MS_TO_TICKS(1000)); 
+				timeout_seconds--;
+			}
+		}	
+		/************************************************************************************************************
+		* Aqui recibimos el paquete y seleccionamos si es un paquete valido o no, como respuesta a la autenticacion *
+		*************************************************************************************************************/
+		if (request.flag.radio_received)
+		{
+			packet_length = radio_receive(paquete_ok);
+
+			/*display_chars(LCD_SEG_L1_2_0, itoa(packet_length, 3, 0), SEG_ON);
+			display_chars(LCD_SEG_L2_2_0, itoa(PACKET_RECEIVE_LENGTH, 3, 0), SEG_ON);
+			Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));*/
+
+			decompress_packet(paquete_ok,&packet_received);
+
+			/*display_chars(LCD_SEG_L1_2_0, itoa(packet_received.type, 3, 0), SEG_ON); 
+			Timer0_A4_Delay(CONV_MS_TO_TICKS(800));*/
+
+			//Check si el paquete es correcto
+			error_packet = check_packet(&packet_received);
+			if (packet_length != PACKET_RECEIVE_LENGTH)	
+			{
+				 error_packet=PACKET_ERROR_LENGTH;
+			}
+
+			if (error_packet == PACKET_SIN_ERROR)
+			{	
+				request.flag.packet_correct = 1;
+			}
+			else { //Error en el paquete recibido
+					switch (error_packet)
+					{
+						case PACKET_ERROR_ADDR:	display_chars(LCD_SEG_L1_3_0, (u8 *)"ADDR", SEG_ON);
+									display_chars(LCD_SEG_L2_3_0, (u8 *)"ERR ", SEG_ON);
+									break;
+						case PACKET_ERROR_TYPE: display_chars(LCD_SEG_L1_3_0, (u8 *)"TYPE", SEG_ON);
+									display_chars(LCD_SEG_L2_3_0, (u8 *)"ERR ", SEG_ON);
+									break;
+						case PACKET_ERROR_LENGTH:display_chars(LCD_SEG_L1_3_0, (u8 *)"LENG", SEG_ON);
+									 display_chars(LCD_SEG_L2_3_0, (u8 *)"ERR ", SEG_ON);
+									 break;
+					}		
+					Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));
+			}	
+			break;
+		}
+	}
+	radio_receive_off();
+	close_radio();
+
+	//Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));
+	display_symbol(LCD_ICON_BEEPER1, SEG_OFF_BLINK_OFF);
+	display_symbol(LCD_ICON_BEEPER2, SEG_OFF_BLINK_OFF);
+	display_symbol(LCD_ICON_BEEPER3, SEG_OFF_BLINK_OFF);
+
+	Timer0_A1_Stop();
+
+	if (request.flag.packet_correct)
+	{
+		request.flag.packet_correct = 0;
+		/*Decrypt payload para ver que el paquete viene desde el servidor*/
+		aes_decrypt(packet_received.payload.ack.raw_ok,key_watch); //4 bytes random + 12 bytes relleno
+		u32 random;
+		random = (packet_received.payload.ack.raw_ok[0]*0x1000000) + 
+			 (packet_received.payload.ack.raw_ok[1]*0x10000) + 
+			 (packet_received.payload.ack.raw_ok[2]*0x100) + 
+			  packet_received.payload.ack.raw_ok[3];
+		if (random == random_ack+1)
+		{
+			clear_display_all();
+			display_chars(LCD_SEG_L1_3_0, (u8 *)"AUTH", SEG_ON);
+			display_chars(LCD_SEG_L2_3_0, (u8 *)"OK  ", SEG_ON);	
+			Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));
+			display_time(LINE1, DISPLAY_LINE_UPDATE_FULL);
+			display_chars(LCD_SEG_L2_4_0, (u8 *)"LGGED", SEG_ON);
+			//Ahora podemos entrar en una funcion en la cual recibe ping y responde, si falla un ping, se cierra la sesion
+			//Se activa cada 30 segundos, si durante un segundo no ha recibido nada. bye bye
+			session_ping();
+		} 
+	}
+	display_time(LINE1, DISPLAY_LINE_UPDATE_FULL);
+}
+
+void startComunicacion(void) 
+{
+	//u8 i;
+	//sDatos.comunication_state = 1;
+
+	/************************************************************************************
+	 * Ahora entra en modo RX y espera un beacon del AP (random)	    		    *
+	 ************************************************************************************/	
+	display_symbol(LCD_ICON_BEEPER1, SEG_ON_BLINK_ON);
+	display_symbol(LCD_ICON_BEEPER2, SEG_ON_BLINK_ON);
+	display_symbol(LCD_ICON_BEEPER3, SEG_ON_BLINK_ON);
+	open_radio();
+	radio_receive_on();
+
+	error_packet = wait_beacon();
+
+	radio_receive_off();
+
+	close_radio();
+
+
+	/*display_chars(LCD_SEG_L1_3_0, (u8 *)"RECV", SEG_ON);	
+	Timer0_A4_Delay(CONV_MS_TO_TICKS(1000));*/
+
+	if (error_packet == PACKET_SIN_ERROR)
+	{
+		/*simpliciti packet: dst(4bytes) + src(4bytes) + Port number(1byte) + HCount(1byte) + transaction ID(1byte) + Payload(8bytes)*/
+		/*Creacion del paquete -> Lenght,Address dst,Address src,Type,Payload */
+		/*Preamble bits - sync word - lenght - address - data - crc16 */
+
+		/************************************************************************************
+	 	* 			PACKET = DST - SRC - TYPE - DATA			    *
+		*	DATA = AESap(ID XOR IV) - AESap(AESap(ID XOR IV) XOR AESw(RANDOM))          *
+		*	DATA = aes_encryptCBC(DATA,key_server,IV)				    *
+	 	************************************************************************************/
+		/*packet_beacon.payload.random.number =   (packet_beacon.payload.random.number & 0x000000FF) << 24 |
+							(packet_beacon.payload.random.number & 0x0000FF00) << 8 |
+							(packet_beacon.payload.random.number & 0x00FF0000) >> 8 |
+							(packet_beacon.payload.random.number & 0xFF000000) >> 24; 
+
+		packet_t packet;
+		for(i=0;i<4;i++) packet.dst[i]=0xFF; //dst address (broadcast)
+		packet.src[0] = (u8)(ADDR_AUTH >> 24);
+		packet.src[1] = (u8)(ADDR_AUTH >> 16);
+		packet.src[2] = (u8)(ADDR_AUTH >> 8);
+		packet.src[3] = (u8)(ADDR_AUTH);
+		packet.type = PACKET_TYPE_AUTH; 
+		//ID
+			packet.payload.raw[0]=(u8)(sDatos.id >> 8); packet.payload.raw[1]= (u8)(sDatos.id);
+			for(i=2;i<16;i++) packet.payload.raw[i]=0x00;
+		 //RANDOM
+			u8 aes_random[16];
+			//aes_random[0]= (u8)(packet_beacon.payload.random.number >> 24);					//RANDOM
+			//aes_random[1]= (u8)(packet_beacon.payload.random.number >> 16);
+			//aes_random[2]= (u8)(packet_beacon.payload.random.number >> 8);
+			//aes_random[3]= (u8)(packet_beacon.payload.random.number);
+			aes_random[0]= (u8)(packet_beacon.payload.random.number);					//RANDOM
+			aes_random[1]= (u8)(packet_beacon.payload.random.number >> 8);
+			aes_random[2]= (u8)(packet_beacon.payload.random.number >> 16);
+			aes_random[3]= (u8)(packet_beacon.payload.random.number >> 24); //little endian
+			for(i=4;i<16;i++) aes_random[i]=0x00;
+			aes_encrypt(aes_random,key_watch);
+			for(i=0;i<16;i++) packet.payload.raw[i+16] = aes_random[i];
+			aes_encryptCBC(packet.payload.raw,key_ap);
+			authentication_request(&packet);	*/
+			create_encrypt_packet(&packet_auth);
+			authentication_request(&packet_auth);
+	
+	} else 
+	{
+		display_symbol(LCD_ICON_BEEPER1, SEG_OFF_BLINK_OFF);
+		display_symbol(LCD_ICON_BEEPER2, SEG_OFF_BLINK_OFF);
+		display_symbol(LCD_ICON_BEEPER3, SEG_OFF_BLINK_OFF);
+	}
+	display_auth(LINE2, DISPLAY_LINE_UPDATE_FULL);
+}
+
+
+
+
+// *************************************************************************************************
+// @fn          authentication_timer
+// @brief       retorna a la funcion cuando se ha acabado el temporizador
+// @param       none
+// @return      none
+// *************************************************************************************************
+void authentication_timer(void)
+{
+	Timer0_A1_Stop();
+	authentication_response_timeout = 1;
+}
+
+// *************************************************************************************************
+// @fn          authentication_timer
+// @brief       retorna a la funcion cuando se ha acabado el temporizador
+// @param       none
+// @return      none
+// *************************************************************************************************
+void authentication_timer_ping(void)
+{
+	Timer0_A3_Stop();
+	authentication_ping_timeout = 1;
+}
