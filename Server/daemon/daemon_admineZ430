@@ -2,7 +2,7 @@
 #
 #	/etc/rc.d/init.d/daemon_adminSSL
 #
-# Starts the AdministratorSSL Daemon
+# Starts admineZ430 Daemon
 #
 # chkconfig: 2345 90 10
 # description: admineZ430 Daemon
