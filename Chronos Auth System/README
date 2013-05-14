@@ -22,7 +22,7 @@ SISTEMA DE AUTENTICACION DE USUARIOS
 2.1 Compilar el código de nuestro programa.
  export PATH=$PATH:/opt/msp430-gcc-4.4.3/bin/
  make
-3. Cargar el programa en el eZ430-Chronos (con mspdebug)
+3. Cargar el programa en el eZ430-Chronos con mspdebug
  mspdebug rf2500
  prog build/eZChronos.txt
 (Esto llevara unos minutos)
