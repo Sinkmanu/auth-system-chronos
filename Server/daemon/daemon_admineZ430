@@ -5,9 +5,9 @@
 # Starts the AdministratorSSL Daemon
 #
 # chkconfig: 2345 90 10
-# description: AdministratorSSL Daemon
-# processname: daemon_adminSSL
-# pidfile: /var/run/adminSSL.pid
+# description: admineZ430 Daemon
+# processname: daemon_admineZ430
+# pidfile: /var/run/admineZ430.pid
 
 # Source function library
 . /etc/init.d/functions
