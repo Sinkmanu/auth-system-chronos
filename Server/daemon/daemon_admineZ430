@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-#	/etc/rc.d/init.d/daemon_adminSSL
+#	/etc/rc.d/init.d/daemon_admineZ430
 #
 # Starts admineZ430 Daemon
 #
