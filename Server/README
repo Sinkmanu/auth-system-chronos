@@ -1,0 +1,71 @@
+CONFIGURACION Y ACTIVACION DEL SERVIDOR DE ADMINISTRACION DE CLAVES
+
+0x00. Copiar adminssl.conf en /etc/
+0x01. Editar adminssl.conf
+0x02. Copiar los archivos y directorios definidos en adminssl.conf
+0x03. Copiar admineZ430.py en /usr/share/admineZ430/
+
+Para resetear y/o poner los permisos correctos a los archivos puede usar:
+	$ python admineZ430.py -p
+
+Permisos que deben tener los archivos, de los cuales el propietario será root (cambiar propietario con chown root <file>):
+dataserver.txt 	-rw-------
+adminssl.conf 	-rw-r--r--
+
+
+Para generar una clave privada y un certificado para el servidor.
+	$ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout serverkey.pem -out servercert.pem
+
+Será un certificado valido para 365 dias.
+
+Modificamos permisos a la clave privada.
+
+	$ chmod 600 serverkey.pem
+
+PARA ACTIVAR EL DEMONIO DEL SERVIDOR
+
+0x00. Copiar daemon_admineZ430 en /etc/init.d/
+0x01. chmod +x /etc/init.d/daemon_admineZ430
+0x02. chkconfig daemon_admineZ430 --add
+0x03. chkconfig daemon_admineZ430 on		o	systemctl enable daemon_admineZ430			
+0x04. service daemon_admineZ430 start		o	systemctl start daemon_admineZ430
+
+
+
+
+SERVER CONFIGURATION AND ACTIVATION KEY MANAGEMENT
+
+0x00. Copy adminssl.conf in /etc/
+0x01. Edit /etc/adminssl.conf
+0x02. Copy files and directories defined in adminssl.conf
+0x03. Copy admineZ430.py in /usr/share/admineZ430/
+
+To reset and/or put the correct permissions to the files, you can use:
+	$ python admineZ430.py -p
+
+The files should have the permissions:
+
+dataserver.txt 	-rw-------
+adminssl.conf 	-rw-r--r--
+
+and its owner must be root.
+
+
+To generate a private key and a certificate for the server:
+	$ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout serverkey.pem -out servercert.pem
+
+Edit the permissions to the private key:
+	$ chmod 600 serverkey.pem
+
+
+ACTIVATE THE SERVER DAEMON
+
+0x00. Copy daemon_admineZ430 in /etc/init.d/
+0x01. chmod +x /etc/init.d/daemon_admineZ430
+0x02. chkconfig daemon_admineZ430 --add
+0x03. chkconfig daemon_admineZ430 on 		or 		systemctl enable daemon_admineZ430
+0x04. service daemon_admineZ430 start		or		systemctl start daemon_admineZ430
+
+
+
+

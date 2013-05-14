@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+#	/etc/rc.d/init.d/daemon_adminSSL
+#
+# Starts the AdministratorSSL Daemon
+#
+# chkconfig: 2345 90 10
+# description: AdministratorSSL Daemon
+# processname: daemon_adminSSL
+# pidfile: /var/run/adminSSL.pid
+
+# Source function library
+. /etc/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+[ "${NETWORKING}" = "no" ] && exit 0
+ 
+prog="/usr/bin/python /usr/share/admineZ430/admineZ430.py -S"
+pidfile="/var/run/admineZ430.pid"
+lockfile=/var/lock/subsys/admineZ430.py
+
+start() {
+	echo "Starting Server for Auth System"
+	daemon "$prog $OPTIONS" 
+  	RETVAL=$?
+ 	echo
+  	[ $RETVAL -eq 0 ] && touch $lockfile
+	return $RETVAL
+}
+
+stop() {
+	echo "Stopping Server for Auth System"
+	killproc $proc
+	RETVAL=$?
+  	echo
+	[ $RETVAL -eq 0 ] && rm -f $lockfile
+}
+
+#Script -- No changes needed below.
+case "$1" in
+	start)
+		#Start Server
+		start
+		;;
+	stop)
+		#Shutdown Server
+		stop
+		;;
+	restart)
+		stop
+		sleep 2
+		start
+		;;
+	status)
+		status $prog
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|status}"
+		exit 1
+esac
+exit 0
