@@ -12,28 +12,28 @@ Protocol: we use symmetric cryptography for communication between AP and Client,
 
 
 
-	Server (PC)					AP (CC1111+PC)				 Client (eZ430-Chronos)
-	   |							|							|
-	   |							|-----------------beacon(RAND1)------------------------>|
-	   |							|							|
-	   |							|<-------------AESks(uid,AESkw(RAND1))------------------|
-	   |							|							|
-	   |<------------uid,RAND,AESkw(RAND1)------------------|							|
-CHECK	   |							|							|
-RANDOM	   |-------------STATUS,AESkw(RAND1+1)----------------->|							|
-NUMBER	   |							|							|
-	   |							|-------------------AESkw(RAND+1)---------------------->|
-	   |						SESSION	|							|
-	   |						 OPENED	|							|
-	   |							|-----------------beacon(RAND2)------------------------>|
-	   |							|							|
-	   |							|<-------------AESks(uid,AESkw(RAND2))------------------|
-	   |							|							|
-	   |<------------uid,RAND,AESkw(RAND1)------------------|							|
-CHECK	   |							|							|
-RANDOM	   |-----------------PING OK--------------------------->|							|
-NUMBER	   |							|							|
-	   |							|							|
+	Server (PC)											AP (CC1111+PC)								 Client (eZ430-Chronos)
+	   |													|														|
+	   |													|-----------------beacon(RAND1)------------------------>|
+	   |													|														|
+	   |													|<-------------AESks(uid,AESkw(RAND1))------------------|
+	   |													|														|
+	   |<------------uid,RAND,AESkw(RAND1)------------------|														|
+	   |													|														|
+	   |-------------STATUS,AESkw(RAND1+1)----------------->|														|
+	   |													|														|
+	   |													|-------------------AESkw(RAND+1)---------------------->|
+	   |											SESSION	|														|
+	   |						 					OPENED	|														|
+	   |													|-----------------beacon(RAND2)------------------------>|
+	   |													|														|
+	   |													|<-------------AESks(uid,AESkw(RAND2))------------------|
+	   |													|														|
+	   |<------------uid,RAND,AESkw(RAND1)------------------|														|
+	   |													|														|
+	   |-----------------PING OK--------------------------->|														|
+	   |													|														|
+	   |													|														|
 
 
 
