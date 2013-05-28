@@ -1,0 +1,2379 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.11.1.40489/W32 for 8051         25/Jun/2012  16:40:54 #
+# Copyright 2004-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\PFC\Proyecto\Server\Server_IAR\wbsl\wbsl.c      #
+#    Command line       =  -f "D:\PFC\Proyecto\Server\Server_IAR\simpliciti\C #
+#                          onfiguration\Access Point\smpl_config.dat"         #
+#                          (-DNUM_CONNECTIONS=1 -DSIZE_INFRAME_Q=6            #
+#                          -DSIZE_OUTFRAME_Q=2 "-DTHIS_DEVICE_ADDRESS={0x78,  #
+#                          0x56, 0x34, 0x10}" -DACCESS_POINT                  #
+#                          -DAP_IS_DATA_HUB -DNUM_STORE_AND_FWD_CLIENTS=3     #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f                       #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Confi #
+#                          guration\smpl_nwk_config.dat (-DMAX_HOPS=3         #
+#                          -DMAX_HOPS_FROM_AP=1 -DMAX_NWK_PAYLOAD=9           #
+#                          -DMAX_APP_PAYLOAD=19 -DDEFAULT_LINK_TOKEN=0x010203 #
+#                          04 -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK  #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) D:\PFC\Proyecto\Server\Server_IAR\wbs #
+#                          l\wbsl.c -D ISM_EU -D MCU_H=<ioCC1111.h> -D        #
+#                          chip=1111 -D RF_FREQUENCY=868000 -D MRFI_CC1111    #
+#                          -D NDEBUG -lC "D:\PFC\Proyecto\Server\Server_IAR\8 #
+#                          68MHz - Limited IAR Kickstart (Europe)\List\" -o   #
+#                          "D:\PFC\Proyecto\Server\Server_IAR\868MHz -        #
+#                          Limited IAR Kickstart (Europe)\Obj\" -e            #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\bm-br1\ -I    #
+#                          D:\PFC\Proyecto\Server\Server_IAR\HAL\include\ -I  #
+#                          D:\PFC\Proyecto\Server\Server_IAR\HAL\source\ -I   #
+#                          D:\PFC\Proyecto\Server\Server_IAR\wbsl\ -I         #
+#                          D:\PFC\Proyecto\Server\Server_IAR\usb\ -I          #
+#                          D:\PFC\Proyecto\Server\Server_IAR\usb\class_cdc\   #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\usb\library\  #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\usb\library\c #
+#                          cxx11\ -I D:\PFC\Proyecto\Server\Server_IAR\sync\  #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\simpliciti\   #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Co #
+#                          mponents\bsp\ -I D:\PFC\Proyecto\Server\Server_IAR #
+#                          \simpliciti\Components\bsp\drivers\ -I             #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Compo #
+#                          nents\bsp\boards\RFUSB\ -I                         #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Compo #
+#                          nents\mrfi\ -I D:\PFC\Proyecto\Server\Server_IAR\s #
+#                          impliciti\Components\nwk\ -I                       #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Compo #
+#                          nents\nwk_applications\ -Om                        #
+#    List file          =  D:\PFC\Proyecto\Server\Server_IAR\868MHz -         #
+#                          Limited IAR Kickstart (Europe)\List\wbsl.lst       #
+#    Object file        =  D:\PFC\Proyecto\Server\Server_IAR\868MHz -         #
+#                          Limited IAR Kickstart (Europe)\Obj\wbsl.r51        #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\PFC\Proyecto\Server\Server_IAR\wbsl\wbsl.c
+      1          // *************************************************************************************************
+      2          //
+      3          //	Copyright (C) 2010 Texas Instruments Incorporated - http://www.ti.com/ 
+      4          //	 
+      5          //	 
+      6          //	  Redistribution and use in source and binary forms, with or without 
+      7          //	  modification, are permitted provided that the following conditions 
+      8          //	  are met:
+      9          //	
+     10          //	    Redistributions of source code must retain the above copyright 
+     11          //	    notice, this list of conditions and the following disclaimer.
+     12          //	 
+     13          //	    Redistributions in binary form must reproduce the above copyright
+     14          //	    notice, this list of conditions and the following disclaimer in the 
+     15          //	    documentation and/or other materials provided with the   
+     16          //	    distribution.
+     17          //	 
+     18          //	    Neither the name of Texas Instruments Incorporated nor the names of
+     19          //	    its contributors may be used to endorse or promote products derived
+     20          //	    from this software without specific prior written permission.
+     21          //	
+     22          //	  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+     23          //	  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+     24          //	  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+     25          //	  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+     26          //	  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+     27          //	  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+     28          //	  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     29          //	  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     30          //	  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+     31          //	  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+     32          //	  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     33          //
+     34          // *************************************************************************************************
+     35          // Wireless Update function
+     36          // *************************************************************************************************
+     37          
+     38          // *************************************************************************************************
+     39          // Include section
+     40          #include "wbsl.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x91
+   \   unsigned char volatile __sfr RFIM
+   \                     RFIM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9b
+   \   unsigned char volatile __sfr S1CON
+   \                     S1CON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa2
+   \   unsigned char volatile __sfr WORCTRL
+   \                     WORCTRL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa3
+   \   unsigned char volatile __sfr WOREVT0
+   \                     WOREVT0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa4
+   \   unsigned char volatile __sfr WOREVT1
+   \                     WOREVT1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb8
+   \   union <unnamed> volatile __sfr _A_IEN1
+   \                     _A_IEN1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xc6
+   \   unsigned char volatile __sfr CLKCON
+   \                     CLKCON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd1
+   \   unsigned char volatile __sfr DMAIRQ
+   \                     DMAIRQ:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd4
+   \   unsigned char volatile __sfr DMA0CFGL
+   \                     DMA0CFGL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd5
+   \   unsigned char volatile __sfr DMA0CFGH
+   \                     DMA0CFGH:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd6
+   \   unsigned char volatile __sfr DMAARM
+   \                     DMAARM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe1
+   \   unsigned char volatile __sfr RFST
+   \                     RFST:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe9
+   \   unsigned char volatile __sfr RFIF
+   \                     RFIF:
+   \   000000                DS 1
+     41          #include "hal.h"
+     42          #include "ioCCxx10_bitdef.h"
+     43          #include <string.h>
+     44          
+     45          
+     46          // *************************************************************************************************
+     47          // Local Functions Define
+     48          u8 transmitDMA(unsigned char *src, u8 size);
+     49          void rxModeOff(void);
+     50          void rxModeOn(void);
+     51          void sendDataPacket(void);
+     52          void sendInitPacket(void);
+     53          
+     54          
+     55          // *************************************************************************************************
+     56          // Global Variable section
+     57          
+     58          /* reserve space for the maximum possible peer Link IDs */
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     59          static unsigned char  wNumCurrentPeers;
+   \                     wNumCurrentPeers:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     60          
+     61          // extern defines
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     62          volatile u8 wbsl_flag;
+   \                     wbsl_flag:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     63          volatile u8 wbsl_packet_flag;
+   \                     wbsl_packet_flag:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     64          u8 wbsl_data[WBSL_MAX_PAYLOAD_LENGTH];
+   \                     wbsl_data:
+   \   000000                DS 247
+   \   0000F7                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     65          u8 wbsl_data_length = 0;
+   \                     wbsl_data_length:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     66          volatile u8 packet_ready_flag;
+   \                     packet_ready_flag:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     67          u8 TxBuffer[TX_SIZE];
+   \                     TxBuffer:
+   \   000000                DS 253
+   \   0000FD                REQUIRE __INIT_XDATA_Z
+     68          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     69          u32 total_size_in_bytes;
+   \                     total_size_in_bytes:
+   \   000000                DS 4
+   \   000004                REQUIRE __INIT_XDATA_Z
+     70          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     71          TIMER_TABLE_ENTRY timeout_table[MAX_TIMEOUT_TABLE_SIZE];
+   \                     timeout_table:
+   \   000000                DS 5
+   \   000005                REQUIRE __INIT_XDATA_Z
+     72          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     73          volatile u8 rxtx_flag = 0;
+   \                     rxtx_flag:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     74          
+     75          // Handle number of ACKs sent for an indivudual packet
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     76          unsigned char wbsl_number_of_retries;
+   \                     wbsl_number_of_retries:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     77          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     78          unsigned char RxBuffer[255];
+   \                     RxBuffer:
+   \   000000                DS 255
+   \   0000FF                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     79          unsigned char discoveryPayload[8] = {7,0,WBSL_AP_ADDRESS,0xBA,0x5E,0xBA,0x11,9};
+   \                     discoveryPayload:
+   \   000000                DS 8
+   \   000008                REQUIRE `?<Initializer for discoveryPayload>`
+   \   000008                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     80          unsigned char discoveryAck[4] = {3, 0, WBSL_AP_ADDRESS, 0};
+   \                     discoveryAck:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for discoveryAck>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     81          unsigned char initPacket[] = {5,0,WBSL_AP_ADDRESS,0,0,0};
+   \                     initPacket:
+   \   000000                DS 6
+   \   000006                REQUIRE `?<Initializer for initPacket>`
+   \   000006                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     82          unsigned char wbsl_status;
+   \                     wbsl_status:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     83          unsigned char wbsl_rftxif = 0;
+   \                     wbsl_rftxif:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     84          unsigned char wbsl_irq_done = 0;
+   \                     wbsl_irq_done:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     85          unsigned char wbsl_txfifo_filled = 0;
+   \                     wbsl_txfifo_filled:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     86          unsigned char update_complete       = 0;
+   \                     update_complete:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     87          unsigned char wbsl_rxtxMode = 0;
+   \                     wbsl_rxtxMode:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     88          unsigned char ed_address;
+   \                     ed_address:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     89          u16 watchVoltage;
+   \                     watchVoltage:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+     90          
+     91          
+     92          //Settings Structure for the RX/TX DMA Channel
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     93          DMA_DESC dmachs;
+   \                     dmachs:
+   \   000000                DS 8
+   \   000008                REQUIRE __INIT_XDATA_Z
+     94          
+     95          // Store the total number of packets to be sent to the Watch
+     96          //u16 totalPackets = 0;
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     97          unsigned int total_packets;
+   \                     total_packets:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+     98          // Keep track of which packet needs to be sent to the Watch
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     99          u16 currentPacket = 0;
+   \                     currentPacket:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    100          // Variable to see if the Init Packet has been successfully sent
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    101          u8  initOk = 0;
+   \                     initOk:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+    102          
+    103          
+    104          
+    105          // *************************************************************************************************
+    106          // @fn          wbsl_config
+    107          // @brief       Configures the Radio Settings for WBSL
+    108          // @param       none
+    109          // @return      none
+    110          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    111          void wbsl_config(void)
+   \                     wbsl_config:
+    112          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    113           
+    114             // WBSL will set the ones needed
+    115             RFIM = 0;
+   \   000004   759100       MOV     0x91,#0x0
+    116             RFIF = 0;                               // Clear Interrupts
+   \   000007   75E900       MOV     0xe9,#0x0
+    117              
+    118             // OSC=XT, TICKSPD=fref/128, CLKSPD=24MHz
+    119             CLKCON = BIT7 | BIT5 | BIT4 | BIT3; 
+   \   00000A   75C6B8       MOV     0xc6,#-0x48
+    120          
+    121             //Set the SYNC words to be used
+    122             SYNC1      =   0xD3; // SYNC1: high nyte of Sync Word
+   \   00000D   90DF00       MOV     DPTR,#-0x2100
+   \   000010   74D3         MOV     A,#-0x2d
+   \   000012   F0           MOVX    @DPTR,A
+    123             SYNC0      =   0x91;  // SYNC0: low nyte of Sync Word
+   \   000013   A3           INC     DPTR
+   \   000014   7491         MOV     A,#-0x6f
+   \   000016   F0           MOVX    @DPTR,A
+    124             //Setup radio
+    125             FSCTRL1     = 0x12;   // Frequency synthesizer control.
+   \   000017   90DF07       MOV     DPTR,#-0x20f9
+   \   00001A   7412         MOV     A,#0x12
+   \   00001C   F0           MOVX    @DPTR,A
+    126             FSCTRL0     = 0x00;   // Frequency synthesizer control.
+   \   00001D   A3           INC     DPTR
+   \   00001E   E4           CLR     A
+   \   00001F   F0           MOVX    @DPTR,A
+    127          #ifdef ISM_EU
+    128             // 869.525MHz
+    129             FREQ2       = 0x24;               //  Frequency control word, high byte
+   \   000020   A3           INC     DPTR
+   \   000021   7424         MOV     A,#0x24
+   \   000023   F0           MOVX    @DPTR,A
+    130             FREQ1       = 0x3A;               //  Frequency control word, middle byte
+   \   000024   A3           INC     DPTR
+   \   000025   743A         MOV     A,#0x3a
+   \   000027   F0           MOVX    @DPTR,A
+    131             FREQ0       = 0xEE;               //  Frequency control word, low byte
+   \   000028   A3           INC     DPTR
+   \   000029   74EE         MOV     A,#-0x12
+   \   00002B   F0           MOVX    @DPTR,A
+    132             CHANNR      = 0;                  // Channel number.
+   \   00002C   90DF06       MOV     DPTR,#-0x20fa
+   \   00002F   E4           CLR     A
+   \   000030   F0           MOVX    @DPTR,A
+    133             PA_TABLE0   = 0x8C;               // PA output power setting.
+   \   000031   90DF2E       MOV     DPTR,#-0x20d2
+   \   000034   748C         MOV     A,#-0x74
+   \   000036   F0           MOVX    @DPTR,A
+    134          #else
+    135          #ifdef ISM_US
+    136             // 902MHz (CHANNR=20 --> 906MHz)
+    137             FREQ2       = 0x25;               //  Frequency control word, high byte
+    138             FREQ1       = 0x95;               //  Frequency control word, middle byte
+    139             FREQ0       = 0x55;               //  Frequency control word, low byte
+    140             CHANNR      = 20;                // Channel number.
+    141             PA_TABLE0   = 0x8B;              // PA output power setting.
+    142          #else
+    143          #ifdef ISM_LF
+    144            // 433.30MHz
+    145            FREQ2 = 0x12;                     //  Frequency control word, high byte
+    146            FREQ1 = 0x14;                     //  Frequency control word, middle byte
+    147            FREQ0 = 0x7A;                     //  Frequency control word, low byte
+    148            CHANNR = 0;                       // Channel number.
+    149            PA_TABLE0 = 0x8D;                 // PA output power setting.
+    150          #else
+    151            #error "Wrong ISM band specified (valid are ISM_LF, ISM_EU and ISM_US)"
+    152          #endif // ISM_LF
+    153          #endif // ISM_US
+    154          #endif // ISM_EU
+    155             MDMCFG4     = 0x1D;               // Modem configuration.
+   \   000037   90DF0C       MOV     DPTR,#-0x20f4
+   \   00003A   741D         MOV     A,#0x1d
+   \   00003C   F0           MOVX    @DPTR,A
+    156             MDMCFG3     = 0x55;               // Modem configuration.
+   \   00003D   A3           INC     DPTR
+   \   00003E   7455         MOV     A,#0x55
+   \   000040   F0           MOVX    @DPTR,A
+    157             MDMCFG2     = 0x13;               // Modem configuration.
+   \   000041   A3           INC     DPTR
+   \   000042   7413         MOV     A,#0x13
+   \   000044   F0           MOVX    @DPTR,A
+    158             MDMCFG1     = 0x23;               // Modem configuration.
+   \   000045   A3           INC     DPTR
+   \   000046   7423         MOV     A,#0x23
+   \   000048   F0           MOVX    @DPTR,A
+    159             MDMCFG0     = 0x11;               // Modem configuration.
+   \   000049   A3           INC     DPTR
+   \   00004A   7411         MOV     A,#0x11
+   \   00004C   F0           MOVX    @DPTR,A
+    160             
+    161             DEVIATN   = 0x63;   // Modem deviation setting (when FSK modulation is enabled).
+   \   00004D   A3           INC     DPTR
+   \   00004E   7463         MOV     A,#0x63
+   \   000050   F0           MOVX    @DPTR,A
+    162             FREND1    = 0xB6;   // Front end RX configuration.
+   \   000051   90DF1A       MOV     DPTR,#-0x20e6
+   \   000054   74B6         MOV     A,#-0x4a
+   \   000056   F0           MOVX    @DPTR,A
+    163             FREND0    = 0x10;   // Front end TX configuration.
+   \   000057   A3           INC     DPTR
+   \   000058   7410         MOV     A,#0x10
+   \   00005A   F0           MOVX    @DPTR,A
+    164             MCSM0     = 0x18;   // Main Radio Control State Machine configuration.
+   \   00005B   90DF14       MOV     DPTR,#-0x20ec
+   \   00005E   7418         MOV     A,#0x18
+   \   000060   F0           MOVX    @DPTR,A
+    165             MCSM1     = 0x3C;
+   \   000061   90DF13       MOV     DPTR,#-0x20ed
+   \   000064   743C         MOV     A,#0x3c
+   \   000066   F0           MOVX    @DPTR,A
+    166             MCSM2     = 0x07;
+   \   000067   90DF12       MOV     DPTR,#-0x20ee
+   \   00006A   7407         MOV     A,#0x7
+   \   00006C   F0           MOVX    @DPTR,A
+    167             WOREVT1   = 0x87;
+   \   00006D   75A487       MOV     0xa4,#-0x79
+    168             WOREVT0   = 0x6B;
+   \   000070   75A36B       MOV     0xa3,#0x6b
+    169             WORCTL    = 0xF8;
+   \   000073   75A2F8       MOV     0xa2,#-0x8
+    170             FOCCFG    = 0x1D;   // Frequency Offset Compensation Configuration.
+   \   000076   90DF15       MOV     DPTR,#-0x20eb
+   \   000079   741D         MOV     A,#0x1d
+   \   00007B   F0           MOVX    @DPTR,A
+    171             BSCFG     = 0x1C;   // Bit synchronization Configuration.
+   \   00007C   A3           INC     DPTR
+   \   00007D   14           DEC     A
+   \   00007E   F0           MOVX    @DPTR,A
+    172             AGCCTRL2  = 0xC7;   // AGC control.
+   \   00007F   A3           INC     DPTR
+   \   000080   74C7         MOV     A,#-0x39
+   \   000082   F0           MOVX    @DPTR,A
+    173             AGCCTRL1  = 0x00;   // AGC control.
+   \   000083   A3           INC     DPTR
+   \   000084   E4           CLR     A
+   \   000085   F0           MOVX    @DPTR,A
+    174             AGCCTRL0  = 0xB0;   // AGC control.
+   \   000086   A3           INC     DPTR
+   \   000087   74B0         MOV     A,#-0x50
+   \   000089   F0           MOVX    @DPTR,A
+    175             FSCAL3    = 0xEA;   // Frequency synthesizer calibration.
+   \   00008A   90DF1C       MOV     DPTR,#-0x20e4
+   \   00008D   74EA         MOV     A,#-0x16
+   \   00008F   F0           MOVX    @DPTR,A
+    176             FSCAL2    = 0x2A;   // Frequency synthesizer calibration.
+   \   000090   A3           INC     DPTR
+   \   000091   742A         MOV     A,#0x2a
+   \   000093   F0           MOVX    @DPTR,A
+    177             FSCAL1    = 0x00;   // Frequency synthesizer calibration.
+   \   000094   A3           INC     DPTR
+   \   000095   E4           CLR     A
+   \   000096   F0           MOVX    @DPTR,A
+    178             FSCAL0    = 0x1F;   // Frequency synthesizer calibration.
+   \   000097   A3           INC     DPTR
+   \   000098   741F         MOV     A,#0x1f
+   \   00009A   F0           MOVX    @DPTR,A
+    179             FSTEST    = 0x59;
+   \   00009B   A3           INC     DPTR
+   \   00009C   7459         MOV     A,#0x59
+   \   00009E   F0           MOVX    @DPTR,A
+    180             TEST2     = 0x88;   // Various test settings.
+   \   00009F   90DF23       MOV     DPTR,#-0x20dd
+   \   0000A2   7488         MOV     A,#-0x78
+   \   0000A4   F0           MOVX    @DPTR,A
+    181             TEST1     = 0x31;   // Various test settings.
+   \   0000A5   A3           INC     DPTR
+   \   0000A6   7431         MOV     A,#0x31
+   \   0000A8   F0           MOVX    @DPTR,A
+    182             TEST0     = 0x09;   // Various test settings.
+   \   0000A9   A3           INC     DPTR
+   \   0000AA   7409         MOV     A,#0x9
+   \   0000AC   F0           MOVX    @DPTR,A
+    183             PTEST     = 0x7F;
+   \   0000AD   90DF21       MOV     DPTR,#-0x20df
+   \   0000B0   747F         MOV     A,#0x7f
+   \   0000B2   F0           MOVX    @DPTR,A
+    184             AGCTEST   = 0x88;
+   \   0000B3   A3           INC     DPTR
+   \   0000B4   7488         MOV     A,#-0x78
+   \   0000B6   F0           MOVX    @DPTR,A
+    185             IOCFG2    = 0x29;
+   \   0000B7   90DF2F       MOV     DPTR,#-0x20d1
+   \   0000BA   7429         MOV     A,#0x29
+   \   0000BC   F0           MOVX    @DPTR,A
+    186             IOCFG1    = 0x1E;
+   \   0000BD   A3           INC     DPTR
+   \   0000BE   741E         MOV     A,#0x1e
+   \   0000C0   F0           MOVX    @DPTR,A
+    187             IOCFG0    = 0x1B;
+   \   0000C1   A3           INC     DPTR
+   \   0000C2   741B         MOV     A,#0x1b
+   \   0000C4   F0           MOVX    @DPTR,A
+    188             
+    189             PKTCTRL1  = 0x06;   // Packet automation control.
+   \   0000C5   90DF03       MOV     DPTR,#-0x20fd
+   \   0000C8   7406         MOV     A,#0x6
+   \   0000CA   F0           MOVX    @DPTR,A
+    190             PKTCTRL0  = 0x45;   // Packet automation control.
+   \   0000CB   A3           INC     DPTR
+   \   0000CC   7445         MOV     A,#0x45
+   \   0000CE   F0           MOVX    @DPTR,A
+    191             ADDR      = WBSL_AP_ADDRESS;   // Device address.
+   \   0000CF   A3           INC     DPTR
+   \   0000D0   74CA         MOV     A,#-0x36
+   \   0000D2   F0           MOVX    @DPTR,A
+    192             PKTLEN    = 0xFE;   // Packet length.
+   \   0000D3   90DF02       MOV     DPTR,#-0x20fe
+   \   0000D6   74FE         MOV     A,#-0x2
+   \   0000D8   F0           MOVX    @DPTR,A
+    193          }
+   \   0000D9   D083         POP     DPH
+   \   0000DB   D082         POP     DPL
+   \   0000DD   22           RET
+   \   0000DE                REQUIRE RFIM
+   \   0000DE                REQUIRE RFIF
+   \   0000DE                REQUIRE CLKCON
+   \   0000DE                REQUIRE WOREVT1
+   \   0000DE                REQUIRE WOREVT0
+   \   0000DE                REQUIRE WORCTRL
+    194          
+    195          // *************************************************************************************************
+    196          // @fn          wbsl_RfIsr
+    197          // @brief       called when the a packet has been received, the actual packet handling is done
+    198          //              by the DMA. In this function we check for RX Overflow and set the corresponding
+    199          //              flags to inform the application a packet is ready on the RxBuffer
+    200          // @param       none
+    201          // @return      none
+    202          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    203          void wbsl_RfIsr(void)
+   \                     wbsl_RfIsr:
+    204          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    205             u8 rfif_reg = RFIF;
+   \   000005   E5E9         MOV     A,0xe9
+   \   000007   F8           MOV     R0,A
+    206            
+    207             // We should only be here in RX mode, not in TX mode, nor if RX mode was turned on during CCA
+    208             if(wbsl_rxtxMode != WBSL_RX_MODE)
+   \   000008   90....       MOV     DPTR,#wbsl_rxtxMode
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   6402         XRL     A,#0x2
+   \   00000E   6005         JZ      ??wbsl_RfIsr_0
+    209             {
+    210                RFIF = 0;
+   \   000010   75E900       MOV     0xe9,#0x0
+    211                return;
+   \   000013   803F         SJMP    ??wbsl_RfIsr_1
+    212             }
+    213          
+    214             // Check for RX Overflow
+    215             if((rfif_reg & IRQ_DONE) && (rfif_reg & IRQ_RXOVF))
+   \                     ??wbsl_RfIsr_0:
+   \   000015   7450         MOV     A,#0x50
+   \   000017   58           ANL     A,R0
+   \   000018   6450         XRL     A,#0x50
+   \   00001A   702C         JNZ     ??wbsl_RfIsr_2
+    216             {
+    217                RFIF &= ~IRQ_DONE;
+   \   00001C   53E9EF       ANL     0xe9,#0xef
+    218                RFIF &= ~IRQ_RXOVF;
+   \   00001F   53E9BF       ANL     0xe9,#0xbf
+    219                S1CON &= ~(0x03); /* Clear MCU interrupt flag */
+   \   000022   539BFC       ANL     0x9b,#0xfc
+    220          
+    221                // Go to IDLE state to get out of overflow
+    222                rxModeOff();
+   \   000025                ; Setup parameters for call to function rxModeOff
+   \   000025   12....       LCALL   rxModeOff
+    223          
+    224                /* clean out buffer to help protect against spurious frames */
+    225                memset(RxBuffer, 0x00, sizeof(RxBuffer));
+   \   000028                ; Setup parameters for call to function memset
+   \   000028   75..FF       MOV     ?V0 + 0,#-0x1
+   \   00002B   75..00       MOV     ?V0 + 1,#0x0
+   \   00002E   78..         MOV     R0,#?V0 + 0
+   \   000030   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000033   7C00         MOV     R4,#0x0
+   \   000035   7D00         MOV     R5,#0x0
+   \   000037   7A..         MOV     R2,#RxBuffer & 0xff
+   \   000039   7B..         MOV     R3,#(RxBuffer >> 8) & 0xff
+   \   00003B   12....       LCALL   memset
+   \   00003E   7402         MOV     A,#0x2
+   \   000040   12....       LCALL   ?DEALLOC_XSTACK8
+    226          
+    227                // Start again RX Mode
+    228                rxModeOn();
+   \   000043                ; Setup parameters for call to function rxModeOn
+   \   000043   12....       LCALL   rxModeOn
+    229          
+    230                return;
+   \   000046   800C         SJMP    ??wbsl_RfIsr_1
+    231             }
+    232          
+    233             RFIF &= IRQ_DONE;  // Clear the RF interrupt
+   \                     ??wbsl_RfIsr_2:
+   \   000048   53E910       ANL     0xe9,#0x10
+    234             S1CON &= ~(0x03); // Clear CPU int flag
+   \   00004B   539BFC       ANL     0x9b,#0xfc
+    235             
+    236             rxtx_flag = WBSL_RXTX_RECEIVED; //Signal the application that a packet is in RxBuffer
+   \   00004E   90....       MOV     DPTR,#rxtx_flag
+   \   000051   7401         MOV     A,#0x1
+   \   000053   F0           MOVX    @DPTR,A
+    237          }
+   \                     ??wbsl_RfIsr_1:
+   \   000054   7F02         MOV     R7,#0x2
+   \   000056   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000059                REQUIRE RFIF
+   \   000059                REQUIRE S1CON
+    238          
+    239          // *************************************************************************************************
+    240          // @fn          resetTimer
+    241          // @brief       resets the timeout table, so that the timer interrupt does not check
+    242          //              the timeout values
+    243          // @param       u8 index        index of the timer in the timeout_table you want to use
+    244          // @return      none
+    245          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    246          void resetTimer(u8 index)
+   \                     resetTimer:
+    247          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    248             // Check that the index doesn't exceed the number of timeouts we have
+    249             if(index >= MAX_TIMEOUT_TABLE_SIZE)
+   \   000004   E9           MOV     A,R1
+   \   000005   700D         JNZ     ??resetTimer_0
+    250                return;
+    251             
+    252             timeout_table[index].counter = 0;    // Reset counter
+   \   000007   90....       MOV     DPTR,#timeout_table
+   \   00000A   E4           CLR     A
+   \   00000B   F0           MOVX    @DPTR,A
+   \   00000C   A3           INC     DPTR
+   \   00000D   F0           MOVX    @DPTR,A
+    253             timeout_table[index].timeout = 0;    // Reset timeout (Disable)
+   \   00000E   A3           INC     DPTR
+   \   00000F   F0           MOVX    @DPTR,A
+   \   000010   A3           INC     DPTR
+   \   000011   F0           MOVX    @DPTR,A
+    254             timeout_table[index].flag = 0;       // Reset Flag
+   \   000012   A3           INC     DPTR
+   \   000013   F0           MOVX    @DPTR,A
+    255          }
+   \                     ??resetTimer_0:
+   \   000014   D083         POP     DPH
+   \   000016   D082         POP     DPL
+   \   000018   22           RET
+    256          
+    257          // *************************************************************************************************
+    258          // @fn          setTimer
+    259          // @brief       sets the timeout table values, so that the timer interrupt checks
+    260          //              these values and sets the timeout flag accordingly
+    261          // @param       u8 index        index of the timer in the timeout_table you want to use
+    262          //              u16 timeout     number of interrupts that have to happen before we set the timeout flag
+    263          // @return      none
+    264          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    265          void setTimer(unsigned char index, unsigned int timeout)
+   \                     setTimer:
+    266          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    267             // Check that the index doesn't exceed the number of timeouts we have
+    268             if(index >= MAX_TIMEOUT_TABLE_SIZE)
+   \   000004   E9           MOV     A,R1
+   \   000005   7013         JNZ     ??setTimer_0
+    269                return;
+    270             
+    271             timeout_table[index].counter = 0;    // Reset counter
+   \   000007   90....       MOV     DPTR,#timeout_table
+   \   00000A   E4           CLR     A
+   \   00000B   F0           MOVX    @DPTR,A
+   \   00000C   A3           INC     DPTR
+   \   00000D   F0           MOVX    @DPTR,A
+    272             timeout_table[index].flag = 0;       // Reset Flag
+   \   00000E   90....       MOV     DPTR,#timeout_table + 4
+   \   000011   F0           MOVX    @DPTR,A
+    273             timeout_table[index].timeout = timeout;   // Set timeout
+   \   000012   90....       MOV     DPTR,#timeout_table + 2
+   \   000015   EA           MOV     A,R2
+   \   000016   F0           MOVX    @DPTR,A
+   \   000017   A3           INC     DPTR
+   \   000018   EB           MOV     A,R3
+   \   000019   F0           MOVX    @DPTR,A
+    274          }
+   \                     ??setTimer_0:
+   \   00001A   D083         POP     DPH
+   \   00001C   D082         POP     DPL
+   \   00001E   22           RET
+    275          
+    276          // *************************************************************************************************
+    277          // @fn          rxModeOn
+    278          // @brief       Puts the radio in RX Mode, sets all the needed values to activate the DMA
+    279          //              and enables the needed interrupts
+    280          // @param       none
+    281          // @return      none
+    282          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    283          void rxModeOn(void)
+   \                     rxModeOn:
+    284          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    285             u8 *dstAdd  = RxBuffer;
+    286             DMA_DESC *dmach;
+    287             dmach = (DMA_DESC *)(&dmachs);
+    288             
+    289             // Configure the DMA to move a packet from the RFD register to the RxBuffer
+    290             SET_WORD(dmach->DESTADDRH, dmach->DESTADDRL, (u16)dstAdd);
+   \   000005   74..         MOV     A,#(RxBuffer >> 8) & 0xff
+   \   000007   90....       MOV     DPTR,#dmachs + 2
+   \   00000A   F0           MOVX    @DPTR,A
+   \   00000B   A3           INC     DPTR
+   \   00000C   74..         MOV     A,#RxBuffer & 0xff
+   \   00000E   F0           MOVX    @DPTR,A
+    291             SET_WORD(dmach->SRCADDRH, dmach->SRCADDRL, (u16)&X_RFD);    // Set the source address to RFD to get Data from the RF
+   \   00000F   90....       MOV     DPTR,#dmachs
+   \   000012   74DF         MOV     A,#-0x21
+   \   000014   F0           MOVX    @DPTR,A
+   \   000015   A3           INC     DPTR
+   \   000016   74D9         MOV     A,#-0x27
+   \   000018   F0           MOVX    @DPTR,A
+    292             SET_WORD(dmach->LENH, dmach->LENL, 0x0100);
+   \   000019   90....       MOV     DPTR,#dmachs + 4
+   \   00001C   E0           MOVX    A,@DPTR
+   \   00001D   54E0         ANL     A,#0xe0
+   \   00001F   4401         ORL     A,#0x1
+   \   000021   F0           MOVX    @DPTR,A
+   \   000022   A3           INC     DPTR
+   \   000023   E4           CLR     A
+   \   000024   F0           MOVX    @DPTR,A
+    293             dmach->VLEN = VLEN_1_P_VALOFFIRST_P_2;                   // Use first byte for transfer count + 2 more status bytes
+   \   000025   90....       MOV     DPTR,#dmachs + 4
+   \   000028   7481         MOV     A,#-0x7f
+   \   00002A   F0           MOVX    @DPTR,A
+    294             dmach->PRIORITY = PRI_HIGH;                              // High Priority.
+    295             dmach->M8 = M8_USE_8_BITS;                               // Transfer all 8 bits in each byte
+    296             dmach->IRQMASK = IRQMASK_DISABLE;                        // Don't generate an interrupt when DMA is done
+    297             dmach->DESTINC = DESTINC_1;                              // Increment the Destination address 1 byte each transfer
+    298             dmach->SRCINC = SRCINC_0;                                // source Address is constant
+   \   00002B   90....       MOV     DPTR,#dmachs + 7
+   \   00002E   7412         MOV     A,#0x12
+   \   000030   F0           MOVX    @DPTR,A
+    299             dmach->TRIG = DMATRIG_RADIO;                             // RF packet byte received/transmit
+    300             dmach->TMODE = TMODE_SINGLE;                              // Transfer block of data (length len) after each DMA trigger
+    301             dmach->WORDSIZE = WORDSIZE_BYTE;                         // Transfer a byte at a time
+   \   000031   90....       MOV     DPTR,#dmachs + 6
+   \   000034   04           INC     A
+   \   000035   F0           MOVX    @DPTR,A
+    302          
+    303             /* abort any DMA transfer that might be in progress */
+    304             DMAARM = DMA_ABORT | BM( WBSL_DMA_CHAN );
+   \   000036   75D681       MOV     0xd6,#-0x7f
+    305          
+    306             /* clean out buffer to help protect against spurious frames */
+    307             memset(RxBuffer, 0x00, sizeof(RxBuffer));
+   \   000039                ; Setup parameters for call to function memset
+   \   000039   75..FF       MOV     ?V0 + 0,#-0x1
+   \   00003C   75..00       MOV     ?V0 + 1,#0x0
+   \   00003F   78..         MOV     R0,#?V0 + 0
+   \   000041   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000044   7C00         MOV     R4,#0x0
+   \   000046   7D00         MOV     R5,#0x0
+   \   000048   7A..         MOV     R2,#RxBuffer & 0xff
+   \   00004A   7B..         MOV     R3,#(RxBuffer >> 8) & 0xff
+   \   00004C   12....       LCALL   memset
+   \   00004F   7402         MOV     A,#0x2
+   \   000051   12....       LCALL   ?DEALLOC_XSTACK8
+    308          
+    309             DMAARM |= BM( WBSL_DMA_CHAN );
+   \   000054   43D601       ORL     0xd6,#0x1
+    310          
+    311             /* Clear interrupts */
+    312             S1CON &= ~(0x03); /* Clear MCU interrupt flag */
+   \   000057   539BFC       ANL     0x9b,#0xfc
+    313             RFIF &= ~IRQ_DONE;           /* Clear the interrupt at the source */
+   \   00005A   53E9EF       ANL     0xe9,#0xef
+    314          
+    315             //Set Mode to RX
+    316             wbsl_rxtxMode = WBSL_RX_MODE;
+   \   00005D   90....       MOV     DPTR,#wbsl_rxtxMode
+   \   000060   7402         MOV     A,#0x2
+   \   000062   F0           MOVX    @DPTR,A
+    317             SRX();  // Strobe RX Mode
+   \   000063   75E102       MOV     0xe1,#0x2
+    318          
+    319             /* enable "receive/transmit done" interrupts */
+    320             RFIM |= IRQ_DONE;
+   \   000066   439110       ORL     0x91,#0x10
+    321          }
+   \   000069   FF           MOV     R7,A
+   \   00006A   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   00006D                REQUIRE DMAARM
+   \   00006D                REQUIRE S1CON
+   \   00006D                REQUIRE RFIF
+   \   00006D                REQUIRE RFST
+   \   00006D                REQUIRE RFIM
+    322          
+    323          // *************************************************************************************************
+    324          // @fn          rxModeOff
+    325          // @brief       Puts the radio in Idle Mode, disables the DMA and RF Interrupts
+    326          // @param       none
+    327          // @return      none
+    328          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    329          void rxModeOff(void)
+   \                     rxModeOff:
+    330          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    331             /*disable RF receive interrupts */
+    332             RFIM &= ~IRQ_DONE;
+   \   000004   5391EF       ANL     0x91,#0xef
+    333          
+    334             //Go to RF Idle mode
+    335             wbsl_rxtxMode = WBSL_IDLE_MODE;
+   \   000007   90....       MOV     DPTR,#wbsl_rxtxMode
+   \   00000A   7401         MOV     A,#0x1
+   \   00000C   F0           MOVX    @DPTR,A
+    336             SIDLE();
+   \   00000D   75E104       MOV     0xe1,#0x4
+    337             while(MARCSTATE != MARC_STATE_IDLE);
+   \                     ??rxModeOff_0:
+   \   000010   90DF3B       MOV     DPTR,#-0x20c5
+   \   000013   E0           MOVX    A,@DPTR
+   \   000014   6401         XRL     A,#0x1
+   \   000016   70F8         JNZ     ??rxModeOff_0
+    338          
+    339             /* Abort any ongoing DMA transfer */
+    340             DMAARM = DMA_ABORT | BM( WBSL_DMA_CHAN );
+   \   000018   75D681       MOV     0xd6,#-0x7f
+    341          
+    342             /* Clear any pending DMA interrupts */
+    343             DMAIRQ &= ~BM(WBSL_DMA_CHAN);
+   \   00001B   53D1FE       ANL     0xd1,#0xfe
+    344          
+    345             /* Clear interrupts */
+    346             S1CON &= ~(0x03);            /* Clear MCU interrupt flag */
+   \   00001E   539BFC       ANL     0x9b,#0xfc
+    347             RFIF &= ~IRQ_DONE;           /* Clear the interrupt at the source */
+   \   000021   53E9EF       ANL     0xe9,#0xef
+    348          }
+   \   000024   D083         POP     DPH
+   \   000026   D082         POP     DPL
+   \   000028   22           RET
+   \   000029                REQUIRE RFIM
+   \   000029                REQUIRE RFST
+   \   000029                REQUIRE DMAARM
+   \   000029                REQUIRE DMAIRQ
+   \   000029                REQUIRE S1CON
+   \   000029                REQUIRE RFIF
+    349          
+    350          // *************************************************************************************************
+    351          // @fn          transmitDMA
+    352          // @brief       Sets all the needed values to activate the DMA transfer and puts the Radio in Tx Mode
+    353          //              to transmit the Buffer received, either in CCA Mode or in Force Mode.
+    354          // @param       u8* src        The Buffer which is going to be sent through RF
+    355          //              u8 size        The size of the buffer received
+    356          // @return      none
+    357          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    358          u8 transmitDMA(u8 *src, u8 size){
+   \                     transmitDMA:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+    359            
+    360             u8 retValue = WBSL_TX_RES_SUCCESS;
+    361          #ifdef CCA_MODE
+    362             u8 ccaRetries;
+    363            // u16 backOffDelay;
+    364          #endif 
+    365             
+    366             DMA_DESC *dmach;
+    367             dmach = (DMA_DESC *)(&dmachs);
+    368            
+    369             /* Turn off reciever. We can ignore/drop incoming packets during transmit. */
+    370             rxModeOff();
+   \   000009                ; Setup parameters for call to function rxModeOff
+   \   000009   12....       LCALL   rxModeOff
+    371             
+    372             // Configure DMA to transfer from the SOURCE to the RFD register
+    373             SET_WORD(dmach->DESTADDRH, dmach->DESTADDRL, (u16)&X_RFD);
+   \   00000C   90....       MOV     DPTR,#dmachs + 2
+   \   00000F   74DF         MOV     A,#-0x21
+   \   000011   F0           MOVX    @DPTR,A
+   \   000012   A3           INC     DPTR
+   \   000013   74D9         MOV     A,#-0x27
+   \   000015   F0           MOVX    @DPTR,A
+    374             SET_WORD(dmach->SRCADDRH, dmach->SRCADDRL, (u16)src);    // Set the source address to TxBuffer for testing
+   \   000016   EF           MOV     A,R7
+   \   000017   90....       MOV     DPTR,#dmachs
+   \   00001A   F0           MOVX    @DPTR,A
+   \   00001B   EE           MOV     A,R6
+   \   00001C   A3           INC     DPTR
+   \   00001D   F0           MOVX    @DPTR,A
+    375             SET_WORD(dmach->LENH, dmach->LENL, 0x0100);
+   \   00001E   90....       MOV     DPTR,#dmachs + 4
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   54E0         ANL     A,#0xe0
+   \   000024   4401         ORL     A,#0x1
+   \   000026   F0           MOVX    @DPTR,A
+   \   000027   A3           INC     DPTR
+   \   000028   E4           CLR     A
+   \   000029   F0           MOVX    @DPTR,A
+    376             dmach->VLEN = VLEN_1_P_VALOFFIRST;                       // Use first byte for transfer count N + 1
+   \   00002A   90....       MOV     DPTR,#dmachs + 4
+   \   00002D   7421         MOV     A,#0x21
+   \   00002F   F0           MOVX    @DPTR,A
+    377             dmach->PRIORITY = PRI_HIGH;                              // High Priority.
+    378             dmach->M8 = M8_USE_8_BITS;                               // Transfer all 8 bits in each byte
+    379             dmach->IRQMASK = IRQMASK_DISABLE;                        // Don't generate an interrupt when DMA is done
+    380             dmach->DESTINC = DESTINC_0;                              // Destination Address is constant
+    381             dmach->SRCINC = SRCINC_1;                                // Increment the source address 1 byte each transfer
+   \   000030   90....       MOV     DPTR,#dmachs + 7
+   \   000033   7442         MOV     A,#0x42
+   \   000035   F0           MOVX    @DPTR,A
+    382             dmach->TRIG = DMATRIG_RADIO;                             // RF packet byte received/transmit
+    383             dmach->TMODE = TMODE_SINGLE;                              // Transfer block of data (length len) after each DMA trigger
+    384             dmach->WORDSIZE = WORDSIZE_BYTE;                         // Transfer a byte at a time
+   \   000036   90....       MOV     DPTR,#dmachs + 6
+   \   000039   7413         MOV     A,#0x13
+   \   00003B   F0           MOVX    @DPTR,A
+    385          
+    386          #ifdef CCA_MODE
+    387             ccaRetries = 4;
+    388            
+    389             /* ===============================================================================
+    390              *    CCA Loop
+    391              *  =============
+    392              */
+    393             while(1)
+    394             {
+    395                // Arm the DMA Channel used for the WBSL
+    396                DMAARM |= BM( WBSL_DMA_CHAN );
+    397                 
+    398                //Strobe RX to sense air for CCA
+    399                SRX();
+    400                  
+    401                /* Wait for radio to enter the RX mode */
+    402                while(MARCSTATE != MARC_STATE_RX);
+    403                  
+    404                /* Check RSSI */
+    405                {
+    406                   u16 delay = 30 * 16 * 12;
+    407                   do{
+    408                      if(PKTSTATUS & (CCA_FLAG | CS_FLAG))
+    409                      {
+    410                         break;
+    411                      }
+    412                      delay -= 16;
+    413                   }while(delay > 0);
+    414                }
+    415                /*End of RSSI Check */
+    416                  
+    417                // Strobe TX to send the message
+    418                STX();
+    419                  
+    420                if(MARCSTATE != MARC_STATE_RX)
+    421                {
+    422                   // Clear Channel Assessment Passed
+    423                   /* wait for transmit to complete */
+    424                   while(!(RFIF & IRQ_DONE));
+    425                      
+    426                   /* Clear the interrupt flag */
+    427                   RFIF &= ~IRQ_DONE;
+    428                      
+    429                   break;
+    430                }
+    431                else
+    432                {
+    433                   // Clear Channel Assessment Failed
+    434                   if(ccaRetries != 0)
+    435                   {
+    436                      // Go to idle during Backoff
+    437                      SIDLE();
+    438                      while(MARCSTATE != MARC_STATE_IDLE);
+    439                        
+    440                      //backOffDelay = 10000;
+    441                      //while(--backOffDelay > 0);
+    442                      // Back off delay
+    443                      setTimer(WBSL_TIMEOUT_INDEX,1);
+    444                      // Wait for either the Timeout or packet received flag
+    445                      while(!timeout_table[WBSL_TIMEOUT_INDEX].flag);
+    446                      // Reset timer so that next time it starts fresh
+    447                      resetTimer(WBSL_TIMEOUT_INDEX);
+    448                        
+    449                      ccaRetries--;         
+    450                   }
+    451                   else /* No CCA retries are left, abort */
+    452                   {
+    453                      /* set return value for failed transmit and break */
+    454                      return;
+    455                   }   
+    456                      
+    457                }
+    458             }
+    459          #else
+    460             // Arm the DMA Channel used for the WBSL
+    461             DMAARM |= BM( WBSL_DMA_CHAN );
+   \   00003C   43D601       ORL     0xd6,#0x1
+    462             //Set Mode to TX
+    463             wbsl_rxtxMode = WBSL_TX_MODE;
+   \   00003F   90....       MOV     DPTR,#wbsl_rxtxMode
+   \   000042   7404         MOV     A,#0x4
+   \   000044   F0           MOVX    @DPTR,A
+    464          
+    465             STX();  // Strobe TX Mode
+   \   000045   75E103       MOV     0xe1,#0x3
+    466          
+    467             /* wait for transmit to complete */
+    468             while(!(RFIF & IRQ_DONE));
+   \                     ??transmitDMA_0:
+   \   000048   E5E9         MOV     A,0xe9
+   \   00004A   A2E4         MOV     C,0xE0 /* A   */.4
+   \   00004C   50FA         JNC     ??transmitDMA_0
+    469          
+    470             /* Clear the interrupt flag */
+    471             RFIF &= ~IRQ_DONE;
+   \   00004E   53E9EF       ANL     0xe9,#0xef
+    472          #endif
+    473             // Go to IDLE
+    474             rxModeOff();
+   \   000051                ; Setup parameters for call to function rxModeOff
+   \   000051   12....       LCALL   rxModeOff
+    475          
+    476             return (retValue);
+   \   000054   7901         MOV     R1,#0x1
+   \   000056   7F01         MOV     R7,#0x1
+   \   000058   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   00005B                REQUIRE DMAARM
+   \   00005B                REQUIRE RFST
+   \   00005B                REQUIRE RFIF
+    477          }
+    478          
+    479          // *************************************************************************************************
+    480          // @fn          wbsl_link
+    481          // @brief       Checks if a discovery packet has been received, checks the integrity of it
+    482          //              and sends the discovery ACK
+    483          // @param       none
+    484          // @return      u8 status
+    485          //              WBSL_LINK_FAIL    No discovery packet was received
+    486          //              WBSL_LINK_SUCC    Discovery packet received and ACK sent
+    487          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    488          u8 wbsl_link(void)
+   \                     wbsl_link:
+    489          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    490             u8 status = WBSL_LINK_FAIL;
+   \   000004   7900         MOV     R1,#0x0
+    491             u8 i = 0;
+    492             u8 validPacket = 0;
+    493             //u32 timeout = 0;
+    494             u8 crcOk = 0;
+    495          
+    496             //Check if packet was received
+    497             if(rxtx_flag == WBSL_RXTX_RECEIVED)
+   \   000006   90....       MOV     DPTR,#rxtx_flag
+   \   000009   E0           MOVX    A,@DPTR
+   \   00000A   6401         XRL     A,#0x1
+   \   00000C   6003         JZ      $+5
+   \   00000E   02....       LJMP    ??wbsl_link_0
+    498             {
+    499                // Clear RX Flag
+    500                rxtx_flag = 0;
+   \   000011   E4           CLR     A
+   \   000012   F0           MOVX    @DPTR,A
+    501          
+    502                // Get CRC Status, which is appended in the last bit of the 2nd byte of the status bytes
+    503                crcOk = RxBuffer[RxBuffer[0] + WBSL_CRC_STATUS_OFFSET] & CRC_STATUS;
+    504          
+    505                //Check that packet was a broadcast packet and that the CRC Status is Ok
+    506                if((RxBuffer[AP_ADDRESS_OFFSET_RX] == 0x0) && crcOk)
+   \   000013   90....       MOV     DPTR,#RxBuffer + 1
+   \   000016   E0           MOVX    A,@DPTR
+   \   000017   6003         JZ      $+5
+   \   000019   02....       LJMP    ??wbsl_link_0
+   \   00001C   90....       MOV     DPTR,#RxBuffer
+   \   00001F   E0           MOVX    A,@DPTR
+   \   000020   FA           MOV     R2,A
+   \   000021   74..         MOV     A,#(RxBuffer + 2) & 0xff
+   \   000023   2A           ADD     A,R2
+   \   000024   F582         MOV     DPL,A
+   \   000026   74..         MOV     A,#((RxBuffer + 2) >> 8) & 0xff
+   \   000028   3400         ADDC    A,#0x0
+   \   00002A   F583         MOV     DPH,A
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00002F   506B         JNC     ??wbsl_link_0
+    507                {
+    508          
+    509                   // Check if packet has the discovery Payload
+    510                   validPacket = 1;
+   \   000031   7D01         MOV     R5,#0x1
+    511                   for (i=0; i<DISCOVERY_PAYLOAD_LENGTH; i++)
+   \   000033   7C00         MOV     R4,#0x0
+   \   000035   8023         SJMP    ??wbsl_link_1
+    512                   {
+    513                      if (RxBuffer[i+4] != discoveryPayload[i+3]) validPacket = 0;
+   \                     ??wbsl_link_2:
+   \   000037   8C82         MOV     DPL,R4
+   \   000039   AA82         MOV     R2,DPL
+   \   00003B   74..         MOV     A,#(RxBuffer + 4) & 0xff
+   \   00003D   2A           ADD     A,R2
+   \   00003E   F582         MOV     DPL,A
+   \   000040   74..         MOV     A,#((RxBuffer + 4) >> 8) & 0xff
+   \   000042   3400         ADDC    A,#0x0
+   \   000044   F583         MOV     DPH,A
+   \   000046   E0           MOVX    A,@DPTR
+   \   000047   F8           MOV     R0,A
+   \   000048   74..         MOV     A,#(discoveryPayload + 3) & 0xff
+   \   00004A   2A           ADD     A,R2
+   \   00004B   F582         MOV     DPL,A
+   \   00004D   74..         MOV     A,#((discoveryPayload + 3) >> 8) & 0xff
+   \   00004F   3400         ADDC    A,#0x0
+   \   000051   F583         MOV     DPH,A
+   \   000053   E0           MOVX    A,@DPTR
+   \   000054   68           XRL     A,R0
+   \   000055   6002         JZ      ??wbsl_link_3
+   \   000057   7D00         MOV     R5,#0x0
+    514                   }
+   \                     ??wbsl_link_3:
+   \   000059   0C           INC     R4
+   \                     ??wbsl_link_1:
+   \   00005A   EC           MOV     A,R4
+   \   00005B   C3           CLR     C
+   \   00005C   9404         SUBB    A,#0x4
+   \   00005E   40D7         JC      ??wbsl_link_2
+    515          
+    516                   //If packet O.K., save device address and send ACK
+    517                   if(validPacket)
+   \   000060   ED           MOV     A,R5
+   \   000061   6039         JZ      ??wbsl_link_0
+    518                   {
+    519                      // Save Watch Address to later direct all packets to this watch
+    520                      ed_address = RxBuffer[ED_ADDRESS_OFFSET_RX];
+   \   000063   90....       MOV     DPTR,#RxBuffer + 2
+   \   000066   E0           MOVX    A,@DPTR
+   \   000067   90....       MOV     DPTR,#ed_address
+   \   00006A   F0           MOVX    @DPTR,A
+    521          
+    522                      // Address the discovery packet to the Watch
+    523                      discoveryAck[ED_ADDRESS_OFFSET_TX] = ed_address;
+   \   00006B   E0           MOVX    A,@DPTR
+   \   00006C   90....       MOV     DPTR,#discoveryAck + 1
+   \   00006F   F0           MOVX    @DPTR,A
+    524          
+    525                      // Positive ACK of the discovery
+    526                      discoveryAck[DISCOVERY_ACK_OFFSET] = WBSL_LINK_SUCC;
+   \   000070   90....       MOV     DPTR,#discoveryAck + 3
+   \   000073   7401         MOV     A,#0x1
+   \   000075   F0           MOVX    @DPTR,A
+    527          
+    528                      //timeout = 10000;
+    529                      //while(timeout-- > 0);  
+    530                      // Give time to watch to be on RX Mode
+    531                      setTimer(WBSL_TIMEOUT_INDEX,1);
+   \   000076                ; Setup parameters for call to function setTimer
+   \   000076   FA           MOV     R2,A
+   \   000077   7B00         MOV     R3,#0x0
+   \   000079   12....       LCALL   setTimer
+    532                      // Wait for either the Timeout or packet received flag
+    533                      while(!timeout_table[WBSL_TIMEOUT_INDEX].flag);
+   \                     ??wbsl_link_4:
+   \   00007C   90....       MOV     DPTR,#timeout_table + 4
+   \   00007F   E0           MOVX    A,@DPTR
+   \   000080   60FA         JZ      ??wbsl_link_4
+    534                      // Reset timer so that next time it starts fresh
+    535                      resetTimer(WBSL_TIMEOUT_INDEX);
+   \   000082                ; Setup parameters for call to function resetTimer
+   \   000082   7900         MOV     R1,#0x0
+   \   000084   12....       LCALL   resetTimer
+    536                      
+    537          
+    538                      LED_ON;
+   \   000087   D290         SETB    0x90.0
+    539                      transmitDMA(discoveryAck, sizeof(discoveryAck)); // Send discovery ACK to Watch
+   \   000089                ; Setup parameters for call to function transmitDMA
+   \   000089   7904         MOV     R1,#0x4
+   \   00008B   7A..         MOV     R2,#discoveryAck & 0xff
+   \   00008D   7B..         MOV     R3,#(discoveryAck >> 8) & 0xff
+   \   00008F   12....       LCALL   transmitDMA
+    540                      LED_OFF;
+   \   000092   C290         CLR     0x90.0
+    541          
+    542                      status = WBSL_LINK_SUCC;
+   \   000094   7901         MOV     R1,#0x1
+    543                      wbsl_flag = WBSL_STATUS_LINKED;
+   \   000096   90....       MOV     DPTR,#wbsl_flag
+   \   000099   7402         MOV     A,#0x2
+   \   00009B   F0           MOVX    @DPTR,A
+    544                   }
+    545                }
+    546             }
+    547          
+    548             return status;
+   \                     ??wbsl_link_0:
+   \   00009C   D083         POP     DPH
+   \   00009E   D082         POP     DPL
+   \   0000A0   22           RET
+   \   0000A1                REQUIRE _A_P1
+    549          }
+    550          
+    551          // *************************************************************************************************
+    552          // @fn          sendInitPacket
+    553          // @brief       Send the Init packet to the Watch, which contains the total packets to be received
+    554          //              during the communication, it also waits for the ACK of the Init packet, if it is not
+    555          //              received this function will be called again by the main process
+    556          // @param       none
+    557          // @return      none
+    558          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    559          void sendInitPacket(void)
+   \                     sendInitPacket:
+    560          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    561             u8 crcOk = 0;
+    562             // Initialize the INIT packet to be sent to the newly paired device
+    563             // initPacket[INIT_TOTAL_PACKETS_OFFSET] = totalPackets;
+    564             initPacket[ED_ADDRESS_OFFSET_TX] = ed_address;
+   \   000004   90....       MOV     DPTR,#ed_address
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   90....       MOV     DPTR,#initPacket + 1
+   \   00000B   F0           MOVX    @DPTR,A
+    565             // Test REMOVE
+    566             initPacket[5] = wbsl_number_of_retries;
+   \   00000C   90....       MOV     DPTR,#wbsl_number_of_retries
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   90....       MOV     DPTR,#initPacket + 5
+   \   000013   F0           MOVX    @DPTR,A
+    567               
+    568             setTimer(WBSL_TIMEOUT_INDEX,TIMEOUT_FOR_ACK);
+   \   000014                ; Setup parameters for call to function setTimer
+   \   000014   7AB8         MOV     R2,#-0x48
+   \   000016   7B01         MOV     R3,#0x1
+   \   000018   7900         MOV     R1,#0x0
+   \   00001A   12....       LCALL   setTimer
+    569             
+    570             //Wait until packet is ready to be sent or timeout
+    571             while(packet_ready_flag != WBSL_PACKET_FULL && !timeout_table[WBSL_TIMEOUT_INDEX].flag );
+   \                     ??sendInitPacket_0:
+   \   00001D   90....       MOV     DPTR,#packet_ready_flag
+   \   000020   E0           MOVX    A,@DPTR
+   \   000021   6404         XRL     A,#0x4
+   \   000023   6006         JZ      ??sendInitPacket_1
+   \   000025   90....       MOV     DPTR,#timeout_table + 4
+   \   000028   E0           MOVX    A,@DPTR
+   \   000029   60F2         JZ      ??sendInitPacket_0
+    572              
+    573             /* Check if the timeout happened before the packet was full,
+    574              * if so, trigger the update to stop, there is an error in communication between 
+    575              * GUI and Dongle has ocurred or a manual stop has been triggered
+    576              */
+    577             if(packet_ready_flag != WBSL_PACKET_FULL)
+   \                     ??sendInitPacket_1:
+   \   00002B   90....       MOV     DPTR,#packet_ready_flag
+   \   00002E   E0           MOVX    A,@DPTR
+   \   00002F   6404         XRL     A,#0x4
+   \   000031   6009         JZ      ??sendInitPacket_2
+    578             {
+    579                setFlag(wbsl_flag, WBSL_TRIGGER_STOP);
+   \   000033   90....       MOV     DPTR,#wbsl_flag
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   D2E5         SETB    0xE0 /* A   */.5
+   \   000039   02....       LJMP    ??sendInitPacket_3
+    580                return;
+    581             }
+    582             // Reset timer so that next time it starts fresh
+    583             resetTimer(WBSL_TIMEOUT_INDEX);
+   \                     ??sendInitPacket_2:
+   \   00003C                ; Setup parameters for call to function resetTimer
+   \   00003C   7900         MOV     R1,#0x0
+   \   00003E   12....       LCALL   resetTimer
+    584               
+    585             LED_ON;                                                  // Mark Initiate Transmit
+   \   000041   D290         SETB    0x90.0
+    586             transmitDMA(initPacket, sizeof( initPacket));
+   \   000043                ; Setup parameters for call to function transmitDMA
+   \   000043   7906         MOV     R1,#0x6
+   \   000045   7A..         MOV     R2,#initPacket & 0xff
+   \   000047   7B..         MOV     R3,#(initPacket >> 8) & 0xff
+   \   000049   12....       LCALL   transmitDMA
+    587             LED_OFF;                                               //Turn off led after packet sent
+   \   00004C   C290         CLR     0x90.0
+    588             rxModeOn();              // Turn on RX Mode to wait for the Discovery ACK package
+   \   00004E                ; Setup parameters for call to function rxModeOn
+   \   00004E   12....       LCALL   rxModeOn
+    589          
+    590             // Set timeout to receive
+    591             setTimer(WBSL_TIMEOUT_INDEX,TIMEOUT_FOR_ACK);
+   \   000051                ; Setup parameters for call to function setTimer
+   \   000051   7AB8         MOV     R2,#-0x48
+   \   000053   7B01         MOV     R3,#0x1
+   \   000055   7900         MOV     R1,#0x0
+   \   000057   12....       LCALL   setTimer
+    592             // Wait for either the Timeout or packet received flag
+    593             while(!timeout_table[WBSL_TIMEOUT_INDEX].flag && rxtx_flag != WBSL_RXTX_RECEIVED);
+   \                     ??sendInitPacket_4:
+   \   00005A   90....       MOV     DPTR,#timeout_table + 4
+   \   00005D   E0           MOVX    A,@DPTR
+   \   00005E   7008         JNZ     ??sendInitPacket_5
+   \   000060   90....       MOV     DPTR,#rxtx_flag
+   \   000063   E0           MOVX    A,@DPTR
+   \   000064   6401         XRL     A,#0x1
+   \   000066   70F2         JNZ     ??sendInitPacket_4
+    594          
+    595             // Reset timer so that next time it starts fresh
+    596             resetTimer(WBSL_TIMEOUT_INDEX);
+   \                     ??sendInitPacket_5:
+   \   000068                ; Setup parameters for call to function resetTimer
+   \   000068   7900         MOV     R1,#0x0
+   \   00006A   12....       LCALL   resetTimer
+    597          
+    598             // Radio off during decoding
+    599             rxModeOff();
+   \   00006D                ; Setup parameters for call to function rxModeOff
+   \   00006D   12....       LCALL   rxModeOff
+    600          
+    601              //Check if packet was received
+    602             if(rxtx_flag == WBSL_RXTX_RECEIVED)
+   \   000070   90....       MOV     DPTR,#rxtx_flag
+   \   000073   E0           MOVX    A,@DPTR
+   \   000074   6401         XRL     A,#0x1
+   \   000076   704A         JNZ     ??sendInitPacket_6
+    603             {
+    604                // Get CRC Status, which is appended in the last bit of the 2nd byte of the status bytes
+    605                crcOk = RxBuffer[RxBuffer[0] + WBSL_CRC_STATUS_OFFSET] & CRC_STATUS;
+   \   000078   90....       MOV     DPTR,#RxBuffer
+   \   00007B   E0           MOVX    A,@DPTR
+   \   00007C   F8           MOV     R0,A
+   \   00007D   74..         MOV     A,#(RxBuffer + 2) & 0xff
+   \   00007F   28           ADD     A,R0
+   \   000080   F582         MOV     DPL,A
+   \   000082   74..         MOV     A,#((RxBuffer + 2) >> 8) & 0xff
+   \   000084   3400         ADDC    A,#0x0
+   \   000086   F583         MOV     DPH,A
+   \   000088   E0           MOVX    A,@DPTR
+   \   000089   5480         ANL     A,#0x80
+   \   00008B   F9           MOV     R1,A
+    606                // Clear RX Flag
+    607                rxtx_flag = 0;
+   \   00008C   90....       MOV     DPTR,#rxtx_flag
+   \   00008F   E4           CLR     A
+   \   000090   F0           MOVX    @DPTR,A
+    608                if(RxBuffer[AP_ADDRESS_OFFSET_RX] == WBSL_AP_ADDRESS &&
+    609                   RxBuffer[ED_ADDRESS_OFFSET_RX] == ed_address &&
+    610                   RxBuffer[ED_ADDRESS_OFFSET_RX + 1] == WBSL_ACK_SUCC &&
+    611                   crcOk)
+   \   000091   90....       MOV     DPTR,#RxBuffer + 1
+   \   000094   E0           MOVX    A,@DPTR
+   \   000095   64CA         XRL     A,#0xca
+   \   000097   7029         JNZ     ??sendInitPacket_6
+   \   000099   A3           INC     DPTR
+   \   00009A   E0           MOVX    A,@DPTR
+   \   00009B   F8           MOV     R0,A
+   \   00009C   90....       MOV     DPTR,#ed_address
+   \   00009F   E0           MOVX    A,@DPTR
+   \   0000A0   68           XRL     A,R0
+   \   0000A1   701F         JNZ     ??sendInitPacket_6
+   \   0000A3   90....       MOV     DPTR,#RxBuffer + 3
+   \   0000A6   E0           MOVX    A,@DPTR
+   \   0000A7   6401         XRL     A,#0x1
+   \   0000A9   7017         JNZ     ??sendInitPacket_6
+   \   0000AB   E9           MOV     A,R1
+   \   0000AC   6014         JZ      ??sendInitPacket_6
+    612                {
+    613                   // Reset the retry counter for ACKs
+    614                   wbsl_number_of_retries = 0;
+   \   0000AE   90....       MOV     DPTR,#wbsl_number_of_retries
+   \   0000B1   E4           CLR     A
+   \   0000B2   F0           MOVX    @DPTR,A
+    615                   initOk = 1;
+   \   0000B3   90....       MOV     DPTR,#initOk
+   \   0000B6   04           INC     A
+   \   0000B7   F0           MOVX    @DPTR,A
+    616                      
+    617                   // Flag that the buffer is ready to be filled again
+    618                   packet_ready_flag = WBSL_PACKET_EMPTY;
+   \   0000B8   90....       MOV     DPTR,#packet_ready_flag
+   \   0000BB   F0           MOVX    @DPTR,A
+    619                   // Trigger GUI to send first data packet
+    620                   wbsl_packet_flag = WBSL_SEND_NEW_DATA_PACKET;
+   \   0000BC   90....       MOV     DPTR,#wbsl_packet_flag
+   \   0000BF   7408         MOV     A,#0x8
+   \                     ??sendInitPacket_3:
+   \   0000C1   F0           MOVX    @DPTR,A
+   \                     ??sendInitPacket_6:
+   \   0000C2   D083         POP     DPH
+   \   0000C4   D082         POP     DPL
+   \   0000C6   22           RET
+   \   0000C7                REQUIRE _A_P1
+    621                }
+    622             }
+    623          }
+    624          
+    625          // *************************************************************************************************
+    626          // @fn          sendDataPacket
+    627          // @brief       Send the next data packet to the watch and waits for the ACK, if received it triggers
+    628          //              the GUI to send the next packet to be sent to the watch, if not, the same packet will
+    629          //              be sent again the next time this function is called
+    630          // @param       none
+    631          // @return      none
+    632          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    633          void sendDataPacket(void)
+   \                     sendDataPacket:
+    634          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    635             u8 crcOk = 0;
+    636             // Change the needed fields for the TX Buffer
+    637             TxBuffer[CURRENT_PACKET_NR_OFFSET] = (currentPacket >> 8) & 0xFF;
+   \   000004   90....       MOV     DPTR,#currentPacket + 1
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   90....       MOV     DPTR,#TxBuffer + 3
+   \   00000B   F0           MOVX    @DPTR,A
+    638             TxBuffer[CURRENT_PACKET_NR_OFFSET + 1] = currentPacket & 0xFF;
+   \   00000C   90....       MOV     DPTR,#currentPacket
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   90....       MOV     DPTR,#TxBuffer + 4
+   \   000013   F0           MOVX    @DPTR,A
+    639              
+    640             // Address the packet to the Watch we're synched to
+    641             TxBuffer[ED_ADDRESS_OFFSET_TX] = ed_address;
+   \   000014   90....       MOV     DPTR,#ed_address
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   90....       MOV     DPTR,#TxBuffer + 1
+   \   00001B   F0           MOVX    @DPTR,A
+    642             
+    643             setTimer(WBSL_TIMEOUT_INDEX,TIMEOUT_FOR_ACK);
+   \   00001C                ; Setup parameters for call to function setTimer
+   \   00001C   7AB8         MOV     R2,#-0x48
+   \   00001E   7B01         MOV     R3,#0x1
+   \   000020   7900         MOV     R1,#0x0
+   \   000022   12....       LCALL   setTimer
+    644              
+    645             //Wait until packet is ready to be sent or timeout
+    646             while(packet_ready_flag != WBSL_PACKET_FULL && !timeout_table[WBSL_TIMEOUT_INDEX].flag );
+   \                     ??sendDataPacket_0:
+   \   000025   90....       MOV     DPTR,#packet_ready_flag
+   \   000028   E0           MOVX    A,@DPTR
+   \   000029   6404         XRL     A,#0x4
+   \   00002B   6006         JZ      ??sendDataPacket_1
+   \   00002D   90....       MOV     DPTR,#timeout_table + 4
+   \   000030   E0           MOVX    A,@DPTR
+   \   000031   60F2         JZ      ??sendDataPacket_0
+    647              
+    648             /* Check if the timeout happened before the packet was full,
+    649              * if so, trigger the update to stop, there is an error in communication between 
+    650              * GUI and Dongle has ocurred or a manual stop has been triggered
+    651              */
+    652             if(packet_ready_flag != WBSL_PACKET_FULL)
+   \                     ??sendDataPacket_1:
+   \   000033   90....       MOV     DPTR,#packet_ready_flag
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   6404         XRL     A,#0x4
+   \   000039   6009         JZ      ??sendDataPacket_2
+    653             {
+    654                setFlag(wbsl_flag, WBSL_TRIGGER_STOP);
+   \   00003B   90....       MOV     DPTR,#wbsl_flag
+   \   00003E   E0           MOVX    A,@DPTR
+   \   00003F   D2E5         SETB    0xE0 /* A   */.5
+   \   000041   02....       LJMP    ??sendDataPacket_3
+    655                return;
+    656             }
+    657             // Reset timer so that next time it starts fresh
+    658             resetTimer(WBSL_TIMEOUT_INDEX);
+   \                     ??sendDataPacket_2:
+   \   000044                ; Setup parameters for call to function resetTimer
+   \   000044   7900         MOV     R1,#0x0
+   \   000046   12....       LCALL   resetTimer
+    659             
+    660             // Send packet to ED
+    661             LED_ON;
+   \   000049   D290         SETB    0x90.0
+    662             transmitDMA(TxBuffer,TxBuffer[0]+1);
+   \   00004B                ; Setup parameters for call to function transmitDMA
+   \   00004B   90....       MOV     DPTR,#TxBuffer
+   \   00004E   E0           MOVX    A,@DPTR
+   \   00004F   04           INC     A
+   \   000050   F9           MOV     R1,A
+   \   000051   7A..         MOV     R2,#TxBuffer & 0xff
+   \   000053   7B..         MOV     R3,#(TxBuffer >> 8) & 0xff
+   \   000055   12....       LCALL   transmitDMA
+    663             LED_OFF;     //Transmit Complete
+   \   000058   C290         CLR     0x90.0
+    664          
+    665             rxModeOn();              // Turn on RX Mode to wait for the ACK package
+   \   00005A                ; Setup parameters for call to function rxModeOn
+   \   00005A   12....       LCALL   rxModeOn
+    666          
+    667             // Set timeout to receive ACK
+    668             setTimer(WBSL_TIMEOUT_INDEX,TIMEOUT_FOR_ACK);
+   \   00005D                ; Setup parameters for call to function setTimer
+   \   00005D   7AB8         MOV     R2,#-0x48
+   \   00005F   7B01         MOV     R3,#0x1
+   \   000061   7900         MOV     R1,#0x0
+   \   000063   12....       LCALL   setTimer
+    669             // Wait for either the Timeout or packet received flag
+    670             while(!timeout_table[WBSL_TIMEOUT_INDEX].flag && rxtx_flag != WBSL_RXTX_RECEIVED);
+   \                     ??sendDataPacket_4:
+   \   000066   90....       MOV     DPTR,#timeout_table + 4
+   \   000069   E0           MOVX    A,@DPTR
+   \   00006A   7008         JNZ     ??sendDataPacket_5
+   \   00006C   90....       MOV     DPTR,#rxtx_flag
+   \   00006F   E0           MOVX    A,@DPTR
+   \   000070   6401         XRL     A,#0x1
+   \   000072   70F2         JNZ     ??sendDataPacket_4
+    671          
+    672             // Radio off during decoding
+    673             rxModeOff();
+   \                     ??sendDataPacket_5:
+   \   000074                ; Setup parameters for call to function rxModeOff
+   \   000074   12....       LCALL   rxModeOff
+    674          
+    675             // Reset timer so that next time it starts fresh
+    676             resetTimer(WBSL_TIMEOUT_INDEX);
+   \   000077                ; Setup parameters for call to function resetTimer
+   \   000077   7900         MOV     R1,#0x0
+   \   000079   12....       LCALL   resetTimer
+    677          
+    678             //Check if packet was received and check for status fields
+    679             if(rxtx_flag == WBSL_RXTX_RECEIVED)
+   \   00007C   90....       MOV     DPTR,#rxtx_flag
+   \   00007F   E0           MOVX    A,@DPTR
+   \   000080   6401         XRL     A,#0x1
+   \   000082   6003         JZ      $+5
+   \   000084   02....       LJMP    ??sendDataPacket_6
+    680             {
+    681                // Get CRC Status, which is appended in the last bit of the 2nd byte of the status bytes
+    682                crcOk = RxBuffer[RxBuffer[0] + WBSL_CRC_STATUS_OFFSET] & CRC_STATUS;
+   \   000087   90....       MOV     DPTR,#RxBuffer
+   \   00008A   E0           MOVX    A,@DPTR
+   \   00008B   F8           MOV     R0,A
+   \   00008C   74..         MOV     A,#(RxBuffer + 2) & 0xff
+   \   00008E   28           ADD     A,R0
+   \   00008F   F582         MOV     DPL,A
+   \   000091   74..         MOV     A,#((RxBuffer + 2) >> 8) & 0xff
+   \   000093   3400         ADDC    A,#0x0
+   \   000095   F583         MOV     DPH,A
+   \   000097   E0           MOVX    A,@DPTR
+   \   000098   5480         ANL     A,#0x80
+   \   00009A   FB           MOV     R3,A
+    683          
+    684                // Clear RX Flag
+    685                rxtx_flag = 0;
+   \   00009B   90....       MOV     DPTR,#rxtx_flag
+   \   00009E   E4           CLR     A
+   \   00009F   F0           MOVX    @DPTR,A
+    686                if(RxBuffer[AP_ADDRESS_OFFSET_RX] == WBSL_AP_ADDRESS &&
+    687                   RxBuffer[ED_ADDRESS_OFFSET_RX] == ed_address &&
+    688                   RxBuffer[ED_ADDRESS_OFFSET_RX + 1] == WBSL_ACK_SUCC &&
+    689                   RxBuffer[ED_ADDRESS_OFFSET_RX + 2] == ((currentPacket >> 8) &  0x7F) &&
+    690                   RxBuffer[ED_ADDRESS_OFFSET_RX + 3] ==  (currentPacket & 0xFF) &&
+    691                   crcOk)
+   \   0000A0   90....       MOV     DPTR,#RxBuffer + 1
+   \   0000A3   E0           MOVX    A,@DPTR
+   \   0000A4   64CA         XRL     A,#0xca
+   \   0000A6   7075         JNZ     ??sendDataPacket_6
+   \   0000A8   A3           INC     DPTR
+   \   0000A9   E0           MOVX    A,@DPTR
+   \   0000AA   F8           MOV     R0,A
+   \   0000AB   90....       MOV     DPTR,#ed_address
+   \   0000AE   E0           MOVX    A,@DPTR
+   \   0000AF   68           XRL     A,R0
+   \   0000B0   706B         JNZ     ??sendDataPacket_6
+   \   0000B2   90....       MOV     DPTR,#RxBuffer + 3
+   \   0000B5   E0           MOVX    A,@DPTR
+   \   0000B6   6401         XRL     A,#0x1
+   \   0000B8   7063         JNZ     ??sendDataPacket_6
+   \   0000BA   A3           INC     DPTR
+   \   0000BB   E0           MOVX    A,@DPTR
+   \   0000BC   FA           MOV     R2,A
+   \   0000BD   90....       MOV     DPTR,#currentPacket + 1
+   \   0000C0   E0           MOVX    A,@DPTR
+   \   0000C1   547F         ANL     A,#0x7f
+   \   0000C3   6A           XRL     A,R2
+   \   0000C4   7057         JNZ     ??sendDataPacket_6
+   \   0000C6   90....       MOV     DPTR,#RxBuffer + 5
+   \   0000C9   E0           MOVX    A,@DPTR
+   \   0000CA   C0E0         PUSH    A
+   \   0000CC   90....       MOV     DPTR,#currentPacket
+   \   0000CF   E0           MOVX    A,@DPTR
+   \   0000D0   F8           MOV     R0,A
+   \   0000D1   D0E0         POP     A
+   \   0000D3   68           XRL     A,R0
+   \   0000D4   7047         JNZ     ??sendDataPacket_6
+   \   0000D6   EB           MOV     A,R3
+   \   0000D7   6044         JZ      ??sendDataPacket_6
+    692                {
+    693                   // Reset the retry counter for ACKs
+    694                   wbsl_number_of_retries = 0;
+   \   0000D9   90....       MOV     DPTR,#wbsl_number_of_retries
+   \   0000DC   E4           CLR     A
+   \   0000DD   F0           MOVX    @DPTR,A
+    695                   currentPacket++;
+   \   0000DE   90....       MOV     DPTR,#currentPacket
+   \   0000E1   E0           MOVX    A,@DPTR
+   \   0000E2   2401         ADD     A,#0x1
+   \   0000E4   F0           MOVX    @DPTR,A
+   \   0000E5   A3           INC     DPTR
+   \   0000E6   E0           MOVX    A,@DPTR
+   \   0000E7   3400         ADDC    A,#0x0
+   \   0000E9   F0           MOVX    @DPTR,A
+    696                   wbsl_status = (currentPacket*100)/total_packets;
+   \   0000EA   90....       MOV     DPTR,#currentPacket
+   \   0000ED   E0           MOVX    A,@DPTR
+   \   0000EE   F8           MOV     R0,A
+   \   0000EF   A3           INC     DPTR
+   \   0000F0   E0           MOVX    A,@DPTR
+   \   0000F1   F9           MOV     R1,A
+   \   0000F2   E8           MOV     A,R0
+   \   0000F3   75F064       MOV     B,#0x64
+   \   0000F6   A4           MUL     AB
+   \   0000F7   F8           MOV     R0,A
+   \   0000F8   AAF0         MOV     R2,B
+   \   0000FA   75F064       MOV     B,#0x64
+   \   0000FD   E9           MOV     A,R1
+   \   0000FE   A4           MUL     AB
+   \   0000FF   2A           ADD     A,R2
+   \   000100   F9           MOV     R1,A
+   \   000101   90....       MOV     DPTR,#total_packets
+   \   000104   E0           MOVX    A,@DPTR
+   \   000105   FA           MOV     R2,A
+   \   000106   A3           INC     DPTR
+   \   000107   E0           MOVX    A,@DPTR
+   \   000108   FB           MOV     R3,A
+   \   000109   12....       LCALL   ?US_DIV_MOD
+   \   00010C   E8           MOV     A,R0
+   \   00010D   90....       MOV     DPTR,#wbsl_status
+   \   000110   F0           MOVX    @DPTR,A
+    697                   // Trigger GUI to send next data packet
+    698                   wbsl_packet_flag = WBSL_SEND_NEW_DATA_PACKET;
+   \   000111   90....       MOV     DPTR,#wbsl_packet_flag
+   \   000114   7408         MOV     A,#0x8
+   \   000116   F0           MOVX    @DPTR,A
+    699          
+    700                   // Flag that the buffer is ready to be filled again
+    701                   packet_ready_flag = WBSL_PACKET_EMPTY;
+   \   000117   90....       MOV     DPTR,#packet_ready_flag
+   \   00011A   7401         MOV     A,#0x1
+   \                     ??sendDataPacket_3:
+   \   00011C   F0           MOVX    @DPTR,A
+   \                     ??sendDataPacket_6:
+   \   00011D   D083         POP     DPH
+   \   00011F   D082         POP     DPL
+   \   000121   22           RET
+   \   000122                REQUIRE _A_P1
+    702                }
+    703             }
+    704          }
+    705          
+    706          // *************************************************************************************************
+    707          // @fn          wbsl_sendPacket
+    708          // @brief       This function handles the sending of the different packets that conform the whole
+    709          //              firmware download, it checks if a packet is ready to be sent and sends it, it also waits
+    710          //              for the ACK of the packet or a timeout, in the latter case when called again, it will send
+    711          //              the same packet.
+    712          // @param       none
+    713          // @return      none
+    714          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    715          void wbsl_sendPacket(void)
+   \                     wbsl_sendPacket:
+    716          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    717             // Increment the number of retries to send a packet
+    718             wbsl_number_of_retries++;
+   \   000004   90....       MOV     DPTR,#wbsl_number_of_retries
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   04           INC     A
+   \   000009   F0           MOVX    @DPTR,A
+    719              
+    720             // Check if too many retries for one packet have been already made
+    721             if(wbsl_number_of_retries > WBSL_MAXIMUM_RETRIES)
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   C3           CLR     C
+   \   00000C   9406         SUBB    A,#0x6
+   \   00000E   400D         JC      ??wbsl_sendPacket_0
+    722             {
+    723                // Trigger the stop of the WBSL Update procedure
+    724                setFlag(wbsl_flag, WBSL_TRIGGER_STOP);
+   \   000010   90....       MOV     DPTR,#wbsl_flag
+   \   000013   E0           MOVX    A,@DPTR
+   \   000014   D2E5         SETB    0xE0 /* A   */.5
+   \   000016   F0           MOVX    @DPTR,A
+    725                setFlag(wbsl_flag, WBSL_STATUS_ERROR);
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   D2E2         SETB    0xE0 /* A   */.2
+   \   00001A   F0           MOVX    @DPTR,A
+    726                return;
+   \   00001B   8029         SJMP    ??wbsl_sendPacket_1
+    727             }
+    728             
+    729             if(!initOk)
+   \                     ??wbsl_sendPacket_0:
+   \   00001D   90....       MOV     DPTR,#initOk
+   \   000020   E0           MOVX    A,@DPTR
+   \   000021   7005         JNZ     ??wbsl_sendPacket_2
+    730             {
+    731                // Send the init packet
+    732                sendInitPacket();
+   \   000023                ; Setup parameters for call to function sendInitPacket
+   \   000023   12....       LCALL   sendInitPacket
+   \   000026   801E         SJMP    ??wbsl_sendPacket_1
+    733             }
+    734             else if(currentPacket < total_packets)
+   \                     ??wbsl_sendPacket_2:
+   \   000028   90....       MOV     DPTR,#currentPacket
+   \   00002B   C082         PUSH    DPL
+   \   00002D   C083         PUSH    DPH
+   \   00002F   90....       MOV     DPTR,#total_packets
+   \   000032   E0           MOVX    A,@DPTR
+   \   000033   F8           MOV     R0,A
+   \   000034   A3           INC     DPTR
+   \   000035   E0           MOVX    A,@DPTR
+   \   000036   F9           MOV     R1,A
+   \   000037   D083         POP     DPH
+   \   000039   D082         POP     DPL
+   \   00003B   C3           CLR     C
+   \   00003C   E0           MOVX    A,@DPTR
+   \   00003D   98           SUBB    A,R0
+   \   00003E   A3           INC     DPTR
+   \   00003F   E0           MOVX    A,@DPTR
+   \   000040   99           SUBB    A,R1
+   \   000041   5003         JNC     ??wbsl_sendPacket_1
+    735             {
+    736                // Send a regular data packet
+    737                sendDataPacket();
+   \   000043                ; Setup parameters for call to function sendDataPacket
+   \   000043   12....       LCALL   sendDataPacket
+   \                     ??wbsl_sendPacket_1:
+   \   000046   D083         POP     DPH
+   \   000048   D082         POP     DPL
+   \   00004A   22           RET
+    738             }
+    739          }
+    740          
+    741          // *************************************************************************************************
+    742          // @fn          wbsl_reset
+    743          // @brief       Reset variables needed for the WBSL
+    744          // @param       none
+    745          // @return      none
+    746          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    747          void wbsl_reset(void)
+   \                     wbsl_reset:
+    748          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    749             wbsl_number_of_retries = 0;
+   \   000004   90....       MOV     DPTR,#wbsl_number_of_retries
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+    750             wbsl_status = 0;
+   \   000009   90....       MOV     DPTR,#wbsl_status
+   \   00000C   F0           MOVX    @DPTR,A
+    751             wbsl_flag = WBSL_STATUS_LINKING;
+   \   00000D   90....       MOV     DPTR,#wbsl_flag
+   \   000010   04           INC     A
+   \   000011   F0           MOVX    @DPTR,A
+    752             // Initialize the packet status flag so that GUI knows when it needs to send next packet
+    753             wbsl_packet_flag = WBSL_DISABLED;  
+   \   000012   90....       MOV     DPTR,#wbsl_packet_flag
+   \   000015   F0           MOVX    @DPTR,A
+    754             currentPacket = 0;
+   \   000016   90....       MOV     DPTR,#currentPacket
+   \   000019   E4           CLR     A
+   \   00001A   F0           MOVX    @DPTR,A
+   \   00001B   A3           INC     DPTR
+   \   00001C   F0           MOVX    @DPTR,A
+    755             total_packets = 0;
+   \   00001D   90....       MOV     DPTR,#total_packets
+   \   000020   F0           MOVX    @DPTR,A
+   \   000021   A3           INC     DPTR
+   \   000022   F0           MOVX    @DPTR,A
+    756             packet_ready_flag = WBSL_PACKET_EMPTY;
+   \   000023   90....       MOV     DPTR,#packet_ready_flag
+   \   000026   04           INC     A
+   \   000027   F0           MOVX    @DPTR,A
+    757             initOk = 0;
+   \   000028   90....       MOV     DPTR,#initOk
+   \   00002B   E4           CLR     A
+   \   00002C   F0           MOVX    @DPTR,A
+    758             //Initialize the RX Flag
+    759             rxtx_flag = 0;
+   \   00002D   90....       MOV     DPTR,#rxtx_flag
+   \   000030   F0           MOVX    @DPTR,A
+    760          }
+   \   000031   D083         POP     DPH
+   \   000033   D082         POP     DPL
+   \   000035   22           RET
+    761          
+    762          // *************************************************************************************************
+    763          // @fn          wbsl_main
+    764          // @brief       This is the main routine, which calls the Link function, if succesfull, it keeps calling
+    765          //              the sendPacket function until all packages has been sent, it also checks for the wbsl_flag
+    766          //              in case the procedure is stopped before completing the download, either manually or due to an 
+    767          //              error
+    768          // @param       none
+    769          // @return      none
+    770          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    771          void wbsl_main(void)
+   \                     wbsl_main:
+    772          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    773             //u32 txDelay;
+    774          
+    775             // Assign DMA Configuration Struct to the DMA Channel 0
+    776             DMA0CFGH = HIBYTE( &dmachs );
+   \   000004   74..         MOV     A,#(dmachs >> 8) & 0xff
+   \   000006   F5D5         MOV     0xd5,A
+    777             DMA0CFGL = LOBYTE( &dmachs );
+                               ^
+Warning[Pe069]: integer conversion resulted in truncation
+   \   000008   75D4..       MOV     0xd4,#dmachs & 0xff
+    778              
+    779             // Initialize used variables
+    780             wbsl_reset();
+   \   00000B                ; Setup parameters for call to function wbsl_reset
+   \   00000B   12....       LCALL   wbsl_reset
+    781              
+    782             //Init TX Buffer
+    783             TxBuffer[0] = sizeof(TxBuffer) - 1;  // Substract the length field (1 byte)
+   \   00000E   90....       MOV     DPTR,#TxBuffer
+   \   000011   74FC         MOV     A,#-0x4
+   \   000013   F0           MOVX    @DPTR,A
+    784             TxBuffer[AP_ADDRESS_OFFSET_TX] = WBSL_AP_ADDRESS; // Include my address in all packets
+   \   000014   90....       MOV     DPTR,#TxBuffer + 2
+   \   000017   74CA         MOV     A,#-0x36
+   \   000019   F0           MOVX    @DPTR,A
+    785          
+    786             //Update WBSL Flag
+    787             wbsl_flag = WBSL_STATUS_LINKING;
+   \   00001A   90....       MOV     DPTR,#wbsl_flag
+   \   00001D   7401         MOV     A,#0x1
+   \   00001F   F0           MOVX    @DPTR,A
+    788          
+    789             //Enable/Disable all the needed RF interrupts
+    790             INT_ENABLE(INUM_RFTXRX, INT_OFF);        // Disable RXTX Interrupt
+   \   000020   C2A8         CLR     0xa8.0
+    791             INT_ENABLE(INUM_RF, INT_ON);            // Enable General RF Interrupt
+   \   000022   439A01       ORL     0x9a,#0x1
+    792          
+    793             LED_OFF;
+   \   000025   C290         CLR     0x90.0
+    794          
+    795             wNumCurrentPeers = 0;
+   \   000027   90....       MOV     DPTR,#wNumCurrentPeers
+   \   00002A   E4           CLR     A
+   \   00002B   F0           MOVX    @DPTR,A
+    796          
+    797             wbsl_status = 0;
+   \   00002C   90....       MOV     DPTR,#wbsl_status
+   \   00002F   F0           MOVX    @DPTR,A
+    798              
+    799             // Make sure radio is in IDLE Mode before starting
+    800             rxModeOff();
+   \   000030                ; Setup parameters for call to function rxModeOff
+   \   000030   12....       LCALL   rxModeOff
+   \   000033   8060         SJMP    ??wbsl_main_0
+    801          
+    802             while(1)
+    803             {
+    804                if(!wNumCurrentPeers)
+    805                {
+    806                   rxModeOn();              // Turn on RX Mode to wait for the Discovery package
+    807                   //First try pairing with an End Device
+    808                   while(1)
+    809                   {
+    810                      // Try to link with an end device
+    811                      if(wbsl_link() == WBSL_LINK_SUCC)
+    812                      {
+    813                         wbsl_flag = WBSL_STATUS_LINKED;
+    814                         //Keep track of how many peers are connected
+    815                         wNumCurrentPeers++;
+    816                         // Trigger GUI to send first info packet (total bytes of file)
+    817                         wbsl_packet_flag = WBSL_SEND_INFO_PACKET;
+    818                         rxModeOff();              // Turn off RX Mode after succesfully linking with ED
+    819                         break;
+    820                      }
+    821          
+    822                      // If GUI has triggered to stop WBSL, do so
+    823                      if(getFlag(wbsl_flag,WBSL_TRIGGER_STOP))
+    824                      {
+    825                         break;
+    826                      }
+    827                   }
+    828                }
+    829                
+    830                // If GUI or Watch has triggered to stop WBSL, do so, but leave everything
+    831                // in a workable state.
+    832                if(getFlag(wbsl_flag,WBSL_TRIGGER_STOP))
+    833                {
+    834                   // Immediately turn off RF interrupts
+    835                   INT_ENABLE(INUM_RFTXRX, INT_OFF);
+    836                   INT_ENABLE(INUM_RF, INT_OFF);
+    837                   RFIM &= ~IRQ_DONE;                       // Disable Packet Received/Transmitted Interrupt
+    838                   RFIF = 0;                               // Clear Interrupts
+    839                   //Put radio in Idle mode
+    840                   rxModeOff();
+    841                    
+    842                   break;
+    843                }
+    844                
+    845                //Keep downloading update image
+    846                if (currentPacket < total_packets || !initOk)
+   \                     ??wbsl_main_1:
+   \   000035   90....       MOV     DPTR,#currentPacket
+   \   000038   C082         PUSH    DPL
+   \   00003A   C083         PUSH    DPH
+   \   00003C   90....       MOV     DPTR,#total_packets
+   \   00003F   E0           MOVX    A,@DPTR
+   \   000040   F8           MOV     R0,A
+   \   000041   A3           INC     DPTR
+   \   000042   E0           MOVX    A,@DPTR
+   \   000043   F9           MOV     R1,A
+   \   000044   D083         POP     DPH
+   \   000046   D082         POP     DPL
+   \   000048   C3           CLR     C
+   \   000049   E0           MOVX    A,@DPTR
+   \   00004A   98           SUBB    A,R0
+   \   00004B   A3           INC     DPTR
+   \   00004C   E0           MOVX    A,@DPTR
+   \   00004D   99           SUBB    A,R1
+   \   00004E   4006         JC      ??wbsl_main_2
+   \   000050   90....       MOV     DPTR,#initOk
+   \   000053   E0           MOVX    A,@DPTR
+   \   000054   7017         JNZ     ??wbsl_main_3
+    847                {  
+    848                  // txDelay = 6000;
+    849                  // while(txDelay-->0);
+    850                   wbsl_sendPacket();    // Send the packet
+   \                     ??wbsl_main_2:
+   \   000056                ; Setup parameters for call to function wbsl_sendPacket
+   \   000056   12....       LCALL   wbsl_sendPacket
+    851                   
+    852                   // Delay to give time to watch to be in RX after sending ACK
+    853                   setTimer(WBSL_TIMEOUT_INDEX,1);
+   \   000059                ; Setup parameters for call to function setTimer
+   \   000059   7A01         MOV     R2,#0x1
+   \   00005B   7B00         MOV     R3,#0x0
+   \   00005D   7900         MOV     R1,#0x0
+   \   00005F   12....       LCALL   setTimer
+    854                   // Wait for either the Timeout or packet received flag
+    855                   while(!timeout_table[WBSL_TIMEOUT_INDEX].flag);
+   \                     ??wbsl_main_4:
+   \   000062   90....       MOV     DPTR,#timeout_table + 4
+   \   000065   E0           MOVX    A,@DPTR
+   \   000066   60FA         JZ      ??wbsl_main_4
+    856                   // Reset timer so that next time it starts fresh
+    857                   resetTimer(WBSL_TIMEOUT_INDEX);  
+   \   000068                ; Setup parameters for call to function resetTimer
+   \   000068   7900         MOV     R1,#0x0
+   \   00006A   12....       LCALL   resetTimer
+    858                }
+    859          
+    860                //If the update has complete, finish the Transmission and turn off WBSL
+    861                if(update_complete || currentPacket >= total_packets)
+   \                     ??wbsl_main_3:
+   \   00006D   90....       MOV     DPTR,#update_complete
+   \   000070   E0           MOVX    A,@DPTR
+   \   000071   701B         JNZ     ??wbsl_main_5
+   \   000073   90....       MOV     DPTR,#currentPacket
+   \   000076   C082         PUSH    DPL
+   \   000078   C083         PUSH    DPH
+   \   00007A   90....       MOV     DPTR,#total_packets
+   \   00007D   E0           MOVX    A,@DPTR
+   \   00007E   F8           MOV     R0,A
+   \   00007F   A3           INC     DPTR
+   \   000080   E0           MOVX    A,@DPTR
+   \   000081   F9           MOV     R1,A
+   \   000082   D083         POP     DPH
+   \   000084   D082         POP     DPL
+   \   000086   C3           CLR     C
+   \   000087   E0           MOVX    A,@DPTR
+   \   000088   98           SUBB    A,R0
+   \   000089   A3           INC     DPTR
+   \   00008A   E0           MOVX    A,@DPTR
+   \   00008B   99           SUBB    A,R1
+   \   00008C   4007         JC      ??wbsl_main_0
+    862                {
+    863                   setFlag(wbsl_flag, WBSL_TRIGGER_STOP);
+   \                     ??wbsl_main_5:
+   \   00008E   90....       MOV     DPTR,#wbsl_flag
+   \   000091   E0           MOVX    A,@DPTR
+   \   000092   D2E5         SETB    0xE0 /* A   */.5
+   \   000094   F0           MOVX    @DPTR,A
+    864                }
+   \                     ??wbsl_main_0:
+   \   000095   90....       MOV     DPTR,#wNumCurrentPeers
+   \   000098   E0           MOVX    A,@DPTR
+   \   000099   7027         JNZ     ??wbsl_main_6
+   \   00009B                ; Setup parameters for call to function rxModeOn
+   \   00009B   12....       LCALL   rxModeOn
+   \                     ??wbsl_main_7:
+   \   00009E                ; Setup parameters for call to function wbsl_link
+   \   00009E   12....       LCALL   wbsl_link
+   \   0000A1   E9           MOV     A,R1
+   \   0000A2   6401         XRL     A,#0x1
+   \   0000A4   90....       MOV     DPTR,#wbsl_flag
+   \   0000A7   7014         JNZ     ??wbsl_main_8
+   \   0000A9   7402         MOV     A,#0x2
+   \   0000AB   F0           MOVX    @DPTR,A
+   \   0000AC   90....       MOV     DPTR,#wNumCurrentPeers
+   \   0000AF   E0           MOVX    A,@DPTR
+   \   0000B0   04           INC     A
+   \   0000B1   F0           MOVX    @DPTR,A
+   \   0000B2   90....       MOV     DPTR,#wbsl_packet_flag
+   \   0000B5   7404         MOV     A,#0x4
+   \   0000B7   F0           MOVX    @DPTR,A
+   \   0000B8                ; Setup parameters for call to function rxModeOff
+   \   0000B8   12....       LCALL   rxModeOff
+   \   0000BB   8005         SJMP    ??wbsl_main_6
+   \                     ??wbsl_main_8:
+   \   0000BD   E0           MOVX    A,@DPTR
+   \   0000BE   A2E5         MOV     C,0xE0 /* A   */.5
+   \   0000C0   50DC         JNC     ??wbsl_main_7
+   \                     ??wbsl_main_6:
+   \   0000C2   90....       MOV     DPTR,#wbsl_flag
+   \   0000C5   E0           MOVX    A,@DPTR
+   \   0000C6   A2E5         MOV     C,0xE0 /* A   */.5
+   \   0000C8   4003         JC      $+5
+   \   0000CA   02....       LJMP    ??wbsl_main_1
+   \   0000CD   C2A8         CLR     0xa8.0
+   \   0000CF   539AFE       ANL     0x9a,#0xfe
+   \   0000D2   5391EF       ANL     0x91,#0xef
+   \   0000D5   75E900       MOV     0xe9,#0x0
+   \   0000D8                ; Setup parameters for call to function rxModeOff
+   \   0000D8   12....       LCALL   rxModeOff
+    865             }
+    866              
+    867             wNumCurrentPeers = 0;
+   \   0000DB   90....       MOV     DPTR,#wNumCurrentPeers
+   \   0000DE   E4           CLR     A
+   \   0000DF   F0           MOVX    @DPTR,A
+    868             // Set timeout to receive ACK
+    869             // This is to allow the GUI to read the last progress status in case it reached 100
+    870             setTimer(WBSL_TIMEOUT_INDEX,300);
+   \   0000E0                ; Setup parameters for call to function setTimer
+   \   0000E0   7A2C         MOV     R2,#0x2c
+   \   0000E2   7B01         MOV     R3,#0x1
+   \   0000E4   F9           MOV     R1,A
+   \   0000E5   12....       LCALL   setTimer
+    871             while(!timeout_table[WBSL_TIMEOUT_INDEX].flag);
+   \                     ??wbsl_main_9:
+   \   0000E8   90....       MOV     DPTR,#timeout_table + 4
+   \   0000EB   E0           MOVX    A,@DPTR
+   \   0000EC   60FA         JZ      ??wbsl_main_9
+    872             // Reset timer before exiting
+    873             resetTimer(WBSL_TIMEOUT_INDEX);
+   \   0000EE                ; Setup parameters for call to function resetTimer
+   \   0000EE   7900         MOV     R1,#0x0
+   \   0000F0   12....       LCALL   resetTimer
+    874          }
+   \   0000F3   D083         POP     DPH
+   \   0000F5   D082         POP     DPL
+   \   0000F7   22           RET
+   \   0000F8                REQUIRE DMA0CFGH
+   \   0000F8                REQUIRE DMA0CFGL
+   \   0000F8                REQUIRE _A_IEN0
+   \   0000F8                REQUIRE IEN2
+   \   0000F8                REQUIRE _A_IEN1
+   \   0000F8                REQUIRE _A_P1
+   \   0000F8                REQUIRE RFIM
+   \   0000F8                REQUIRE RFIF
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for discoveryPayload>`:
+   \   000000   07           DB 7
+   \   000001   00           DB 0
+   \   000002   CA           DB 202
+   \   000003   BA           DB 186
+   \   000004   5E           DB 94
+   \   000005   BA           DB 186
+   \   000006   11           DB 17
+   \   000007   09           DB 9
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for discoveryAck>`:
+   \   000000   03           DB 3
+   \   000001   00           DB 0
+   \   000002   CA           DB 202
+   \   000003   00           DB 0
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for initPacket>`:
+   \   000000   05           DB 5
+   \   000001   00           DB 0
+   \   000002   CA           DB 202
+   \   000003   00           DB 0
+   \   000004   00           DB 0
+   \   000005   00           DB 0
+
+   Maximum stack usage in bytes:
+
+     Function             ISTACK PSTACK XSTACK
+     --------             ------ ------ ------
+     resetTimer               2      0      0
+     rxModeOff                2      0      9
+     rxModeOn                 0      0     20
+       -> memset              0      0     22
+     sendDataPacket           3      0      0
+       -> setTimer            4      0      0
+       -> resetTimer          4      0      0
+       -> transmitDMA         4      0      0
+       -> rxModeOn            4      0      0
+       -> setTimer            4      0      0
+       -> rxModeOff           4      0      0
+       -> resetTimer          4      0      0
+     sendInitPacket           2      0      0
+       -> setTimer            4      0      0
+       -> resetTimer          4      0      0
+       -> transmitDMA         4      0      0
+       -> rxModeOn            4      0      0
+       -> setTimer            4      0      0
+       -> resetTimer          4      0      0
+       -> rxModeOff           4      0      0
+     setTimer                 2      0      0
+     transmitDMA              0      0      8
+       -> rxModeOff           0      0     16
+       -> rxModeOff           0      0     16
+     wbsl_RfIsr               0      0     11
+       -> rxModeOff           0      0     18
+       -> memset              0      0     22
+       -> rxModeOn            0      0     18
+     wbsl_config              2      0      0
+     wbsl_link                2      0      0
+       -> setTimer            4      0      0
+       -> resetTimer          4      0      0
+       -> transmitDMA         4      0      0
+     wbsl_main                4      0      0
+       -> wbsl_reset          4      0      0
+       -> rxModeOff           4      0      0
+       -> wbsl_sendPacket     4      0      0
+       -> setTimer            4      0      0
+       -> resetTimer          4      0      0
+       -> rxModeOn            4      0      0
+       -> wbsl_link           4      0      0
+       -> rxModeOff           4      0      0
+       -> rxModeOff           4      0      0
+       -> setTimer            4      0      0
+       -> resetTimer          4      0      0
+     wbsl_reset               2      0      0
+     wbsl_sendPacket          4      0      0
+       -> sendInitPacket      4      0      0
+       -> sendDataPacket      4      0      0
+
+
+   Segment part sizes:
+
+     Function/Label                      Bytes
+     --------------                      -----
+     _A_P1                                  1
+     RFIM                                   1
+     IEN2                                   1
+     S1CON                                  1
+     WORCTRL                                1
+     WOREVT0                                1
+     WOREVT1                                1
+     _A_IEN0                                1
+     _A_IEN1                                1
+     CLKCON                                 1
+     DMAIRQ                                 1
+     DMA0CFGL                               1
+     DMA0CFGH                               1
+     DMAARM                                 1
+     RFST                                   1
+     RFIF                                   1
+     wNumCurrentPeers                       1
+     wbsl_flag                              1
+     wbsl_packet_flag                       1
+     wbsl_data                            247
+     wbsl_data_length                       1
+     packet_ready_flag                      1
+     TxBuffer                             253
+     total_size_in_bytes                    4
+     timeout_table                          5
+     rxtx_flag                              1
+     wbsl_number_of_retries                 1
+     RxBuffer                             255
+     discoveryPayload                       8
+     discoveryAck                           4
+     initPacket                             6
+     wbsl_status                            1
+     wbsl_rftxif                            1
+     wbsl_irq_done                          1
+     wbsl_txfifo_filled                     1
+     update_complete                        1
+     wbsl_rxtxMode                          1
+     ed_address                             1
+     watchVoltage                           2
+     dmachs                                 8
+     total_packets                          2
+     currentPacket                          2
+     initOk                                 1
+     wbsl_config                          222
+     wbsl_RfIsr                            89
+     resetTimer                            25
+     setTimer                              31
+     rxModeOn                             109
+     rxModeOff                             41
+     transmitDMA                           91
+     wbsl_link                            161
+     sendInitPacket                       199
+     sendDataPacket                       290
+     wbsl_sendPacket                       75
+     wbsl_reset                            54
+     wbsl_main                            248
+     ?<Initializer for discoveryPayload>    8
+     ?<Initializer for discoveryAck>        4
+     ?<Initializer for initPacket>          6
+
+ 
+ 1 635 bytes in segment NEAR_CODE
+    16 bytes in segment SFR_AN
+    18 bytes in segment XDATA_I
+    18 bytes in segment XDATA_ID
+   793 bytes in segment XDATA_Z
+ 
+ 1 653 bytes of CODE  memory
+     0 bytes of DATA  memory (+ 16 bytes shared)
+   811 bytes of XDATA memory
+
+Errors: none
+Warnings: 1

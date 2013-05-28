@@ -1,0 +1,716 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.11.1.40489/W32 for 8051         22/Jun/2012  15:59:11 #
+# Copyright 2004-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\PFC\Proyecto\Server\IAR\flash.c                 #
+#    Command line       =  -f "D:\PFC\Proyecto\Server\IAR\simpliciti\Configur #
+#                          ation\Access Point\smpl_config.dat"                #
+#                          (-DNUM_CONNECTIONS=1 -DSIZE_INFRAME_Q=6            #
+#                          -DSIZE_OUTFRAME_Q=2 "-DTHIS_DEVICE_ADDRESS={0x78,  #
+#                          0x56, 0x34, 0x10}" -DACCESS_POINT                  #
+#                          -DAP_IS_DATA_HUB -DNUM_STORE_AND_FWD_CLIENTS=3     #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f                       #
+#                          D:\PFC\Proyecto\Server\IAR\simpliciti\Configuratio #
+#                          n\smpl_nwk_config.dat (-DMAX_HOPS=3                #
+#                          -DMAX_HOPS_FROM_AP=1 -DMAX_NWK_PAYLOAD=9           #
+#                          -DMAX_APP_PAYLOAD=19 -DDEFAULT_LINK_TOKEN=0x010203 #
+#                          04 -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK  #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) D:\PFC\Proyecto\Server\IAR\flash.c    #
+#                          -D ISM_US -D MCU_H=<ioCC1111.h> -D chip=1111 -D    #
+#                          RF_FREQUENCY=915000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "D:\PFC\Proyecto\Server\IAR\915MHz - Limited IAR   #
+#                          Kickstart (USA)\List\" -o                          #
+#                          "D:\PFC\Proyecto\Server\IAR\915MHz - Limited IAR   #
+#                          Kickstart (USA)\Obj\" -e --no_unroll --no_inline   #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=near               #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          D:\PFC\Proyecto\Server\IAR\bm-br1\ -I              #
+#                          D:\PFC\Proyecto\Server\IAR\HAL\include\ -I         #
+#                          D:\PFC\Proyecto\Server\IAR\HAL\source\ -I          #
+#                          D:\PFC\Proyecto\Server\IAR\wbsl\ -I                #
+#                          D:\PFC\Proyecto\Server\IAR\usb\ -I                 #
+#                          D:\PFC\Proyecto\Server\IAR\usb\class_cdc\ -I       #
+#                          D:\PFC\Proyecto\Server\IAR\usb\library\ -I         #
+#                          D:\PFC\Proyecto\Server\IAR\usb\library\ccxx11\ -I  #
+#                          D:\PFC\Proyecto\Server\IAR\sync\ -I                #
+#                          D:\PFC\Proyecto\Server\IAR\simpliciti\ -I          #
+#                          D:\PFC\Proyecto\Server\IAR\simpliciti\Components\b #
+#                          sp\ -I D:\PFC\Proyecto\Server\IAR\simpliciti\Compo #
+#                          nents\bsp\drivers\ -I D:\PFC\Proyecto\Server\IAR\s #
+#                          impliciti\Components\bsp\boards\RFUSB\ -I          #
+#                          D:\PFC\Proyecto\Server\IAR\simpliciti\Components\m #
+#                          rfi\ -I D:\PFC\Proyecto\Server\IAR\simpliciti\Comp #
+#                          onents\nwk\ -I D:\PFC\Proyecto\Server\IAR\simplici #
+#                          ti\Components\nwk_applications\ -Om                #
+#    List file          =  D:\PFC\Proyecto\Server\IAR\915MHz - Limited IAR    #
+#                          Kickstart (USA)\List\flash.lst                     #
+#    Object file        =  D:\PFC\Proyecto\Server\IAR\915MHz - Limited IAR    #
+#                          Kickstart (USA)\Obj\flash.r51                      #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\PFC\Proyecto\Server\IAR\flash.c
+      1          // *************************************************************************************************
+      2          //
+      3          //	Copyright (C) 2009 Texas Instruments Incorporated - http://www.ti.com/ 
+      4          //	 
+      5          //	 
+      6          //	  Redistribution and use in source and binary forms, with or without 
+      7          //	  modification, are permitted provided that the following conditions 
+      8          //	  are met:
+      9          //	
+     10          //	    Redistributions of source code must retain the above copyright 
+     11          //	    notice, this list of conditions and the following disclaimer.
+     12          //	 
+     13          //	    Redistributions in binary form must reproduce the above copyright
+     14          //	    notice, this list of conditions and the following disclaimer in the 
+     15          //	    documentation and/or other materials provided with the   
+     16          //	    distribution.
+     17          //	 
+     18          //	    Neither the name of Texas Instruments Incorporated nor the names of
+     19          //	    its contributors may be used to endorse or promote products derived
+     20          //	    from this software without specific prior written permission.
+     21          //	
+     22          //	  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+     23          //	  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+     24          //	  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+     25          //	  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+     26          //	  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+     27          //	  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+     28          //	  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     29          //	  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     30          //	  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+     31          //	  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+     32          //	  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     33          //
+     34          // *************************************************************************************************
+     35          // Flash write routines
+     36          // *************************************************************************************************
+     37          
+     38          
+     39          // *************************************************************************************************
+     40          // Include section
+     41          #include "project.h"
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xab
+   \   unsigned char volatile __sfr FWT
+   \                     FWT:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xac
+   \   unsigned char volatile __sfr FADDRL
+   \                     FADDRL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xad
+   \   unsigned char volatile __sfr FADDRH
+   \                     FADDRH:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xae
+   \   unsigned char volatile __sfr FCTL
+   \                     FCTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb8
+   \   union <unnamed> volatile __sfr _A_IEN1
+   \                     _A_IEN1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xc6
+   \   unsigned char volatile __sfr CLKCON
+   \                     CLKCON:
+   \   000000                DS 1
+     42          #include "flash.h"
+     43          
+     44          
+     45          // *************************************************************************************************
+     46          // Defines section
+     47          
+     48          
+     49          
+     50          // *************************************************************************************************
+     51          // Global Variable section
+     52          
+     53          // Reserve XDATA memory for code execution
+
+   \                                 In  segment XDATA_AN, at 0xfc00
+     54          __no_init u8 __xdata flash_write_code[32] @ FLASH_WRITE_XDATA_ADDR;
+   \                     flash_write_code:
+   \   000000                DS 32
+     55          
+     56          // Flash erase / write routines can be called
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     57          u8 flash_update_init = 0;
+   \                     flash_update_init:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     58          
+     59          
+     60          // *************************************************************************************************
+     61          // Static Function prototype section
+     62          
+     63          
+     64          // *************************************************************************************************
+     65          // Implementation
+     66          
+     67          
+     68          
+     69          // *************************************************************************************************
+     70          // Modify MCU registers so that flash erase / write functions can be called
+     71          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     72          void flash_start_update(void)
+   \                     flash_start_update:
+     73          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     74            // stop all IRQ except TIMER4 and USB
+     75            IEN0 &= ~(BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0);
+   \   000004   53A8C0       ANL     0xa8,#0xc0
+     76            IEN1 &= ~(              BIT3 | BIT2 | BIT1 | BIT0);
+   \   000007   53B8F0       ANL     0xb8,#0xf0
+     77            IEN2 &= ~(BIT5 | BIT4 | BIT3 | BIT2 |        BIT0);
+   \   00000A   539AC2       ANL     0x9a,#0xc2
+     78            
+     79            // Set flash write timing
+     80            FWT  = ( 0x22 >> CLKSPD );
+   \   00000D   7422         MOV     A,#0x22
+   \   00000F   C0E0         PUSH    A
+   \   000011   E5C6         MOV     A,0xc6
+   \   000013   5407         ANL     A,#0x7
+   \   000015   F8           MOV     R0,A
+   \   000016   D0E0         POP     A
+   \   000018   B80002       CJNE    R0,#0x0,??flash_start_update_0
+   \   00001B   8004         SJMP    ??flash_start_update_1
+   \                     ??flash_start_update_0:
+   \   00001D   C3           CLR     C
+   \   00001E   13           RRC     A
+   \   00001F   D8FC         DJNZ    R0,??flash_start_update_0
+   \                     ??flash_start_update_1:
+   \   000021   F5AB         MOV     0xab,A
+     81          
+     82            // Copy flash write code to XDATA code
+     83            flash_write_code[0] = 0x75; // MOV FCTL, 0x02
+   \   000023   90FC00       MOV     DPTR,#-0x400
+   \   000026   7475         MOV     A,#0x75
+   \   000028   F0           MOVX    @DPTR,A
+     84            flash_write_code[1] = 0xAE;
+   \   000029   A3           INC     DPTR
+   \   00002A   74AE         MOV     A,#-0x52
+   \   00002C   F0           MOVX    @DPTR,A
+     85            flash_write_code[2] = 0x02;
+   \   00002D   A3           INC     DPTR
+   \   00002E   7402         MOV     A,#0x2
+   \   000030   F0           MOVX    @DPTR,A
+     86          
+     87            flash_write_code[3] = 0x00; // NOP
+   \   000031   A3           INC     DPTR
+   \   000032   E4           CLR     A
+   \   000033   F0           MOVX    @DPTR,A
+     88            flash_write_code[4] = 0x00; // NOP
+   \   000034   A3           INC     DPTR
+   \   000035   F0           MOVX    @DPTR,A
+     89          
+     90            flash_write_code[5] = 0x74; // MOV A, data_lo
+   \   000036   A3           INC     DPTR
+   \   000037   7474         MOV     A,#0x74
+   \   000039   F0           MOVX    @DPTR,A
+     91            flash_write_code[6] = 0xFF;
+   \   00003A   A3           INC     DPTR
+   \   00003B   74FF         MOV     A,#-0x1
+   \   00003D   F0           MOVX    @DPTR,A
+     92            flash_write_code[7] = 0xF5; // MOV FWDATA, A
+   \   00003E   A3           INC     DPTR
+   \   00003F   74F5         MOV     A,#-0xb
+   \   000041   F0           MOVX    @DPTR,A
+     93            flash_write_code[8] = 0xAF;
+   \   000042   A3           INC     DPTR
+   \   000043   74AF         MOV     A,#-0x51
+   \   000045   F0           MOVX    @DPTR,A
+     94          
+     95            flash_write_code[9] = 0x00; // NOP
+   \   000046   A3           INC     DPTR
+   \   000047   E4           CLR     A
+   \   000048   F0           MOVX    @DPTR,A
+     96            flash_write_code[10] = 0x00; // NOP
+   \   000049   A3           INC     DPTR
+   \   00004A   F0           MOVX    @DPTR,A
+     97          
+     98            flash_write_code[11] = 0x74; // MOV A, data_hi
+   \   00004B   A3           INC     DPTR
+   \   00004C   7474         MOV     A,#0x74
+   \   00004E   F0           MOVX    @DPTR,A
+     99            flash_write_code[12] = 0xFF;
+   \   00004F   A3           INC     DPTR
+   \   000050   74FF         MOV     A,#-0x1
+   \   000052   F0           MOVX    @DPTR,A
+    100            flash_write_code[13] = 0xF5; // MOV FWDATA, A
+   \   000053   A3           INC     DPTR
+   \   000054   74F5         MOV     A,#-0xb
+   \   000056   F0           MOVX    @DPTR,A
+    101            flash_write_code[14] = 0xAF;
+   \   000057   A3           INC     DPTR
+   \   000058   74AF         MOV     A,#-0x51
+   \   00005A   F0           MOVX    @DPTR,A
+    102          
+    103            flash_write_code[15] = 0x00; // NOP
+   \   00005B   A3           INC     DPTR
+   \   00005C   E4           CLR     A
+   \   00005D   F0           MOVX    @DPTR,A
+    104            flash_write_code[16] = 0x00; // NOP
+   \   00005E   A3           INC     DPTR
+   \   00005F   F0           MOVX    @DPTR,A
+    105            
+    106            flash_write_code[17] = 0xE5; // MOV A, FCTL
+   \   000060   A3           INC     DPTR
+   \   000061   74E5         MOV     A,#-0x1b
+   \   000063   F0           MOVX    @DPTR,A
+    107            flash_write_code[18] = 0xAE;
+   \   000064   A3           INC     DPTR
+   \   000065   74AE         MOV     A,#-0x52
+   \   000067   F0           MOVX    @DPTR,A
+    108            flash_write_code[19] = 0x54; // loop: ANL A,0x40
+   \   000068   A3           INC     DPTR
+   \   000069   7454         MOV     A,#0x54
+   \   00006B   F0           MOVX    @DPTR,A
+    109            flash_write_code[20] = 0x40; 
+   \   00006C   A3           INC     DPTR
+   \   00006D   7440         MOV     A,#0x40
+   \   00006F   F0           MOVX    @DPTR,A
+    110            flash_write_code[21] = 0x70; // JNZ loop
+   \   000070   A3           INC     DPTR
+   \   000071   7470         MOV     A,#0x70
+   \   000073   F0           MOVX    @DPTR,A
+    111            flash_write_code[22] = 0xFA; 
+   \   000074   A3           INC     DPTR
+   \   000075   74FA         MOV     A,#-0x6
+   \   000077   F0           MOVX    @DPTR,A
+    112          
+    113            flash_write_code[23] = 0x22;  // RET
+   \   000078   A3           INC     DPTR
+   \   000079   7422         MOV     A,#0x22
+   \   00007B   F0           MOVX    @DPTR,A
+    114            
+    115            // Set init flag to prevent normal code execution
+    116            flash_update_init = 1;
+   \   00007C   90....       MOV     DPTR,#flash_update_init
+   \   00007F   7401         MOV     A,#0x1
+   \   000081   F0           MOVX    @DPTR,A
+    117          }
+   \   000082   D083         POP     DPH
+   \   000084   D082         POP     DPL
+   \   000086   22           RET
+   \   000087                REQUIRE _A_IEN0
+   \   000087                REQUIRE _A_IEN1
+   \   000087                REQUIRE IEN2
+   \   000087                REQUIRE FWT
+   \   000087                REQUIRE CLKCON
+   \   000087                REQUIRE flash_write_code
+    118          
+    119          
+    120          // *************************************************************************************************
+    121          // Read 8-bit byte from flash memory
+    122          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    123          u8 flash_byte_read(u16 addr)
+   \                     flash_byte_read:
+    124          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    125            u8 __code * pcode = (u8 __code *) addr;
+    126            u8 data = pcode[0];
+    127            
+    128            return (data);
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   E4           CLR     A
+   \   000009   93           MOVC    A,@A+DPTR
+   \   00000A   F9           MOV     R1,A
+   \   00000B   D083         POP     DPH
+   \   00000D   D082         POP     DPL
+   \   00000F   22           RET
+    129            
+    130          }
+    131          
+    132          
+    133          // *************************************************************************************************
+    134          // Read 16-bit word from flash memory
+    135          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    136          u16 flash_word_read(u16 addr)
+   \                     flash_word_read:
+    137          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    138            u8 __code * pcode = (u8 __code *) addr;
+    139            u16 data = (u16)(pcode[0] << 8);
+    140            data += pcode[1];
+    141          
+    142            return (data);
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   E4           CLR     A
+   \   000009   93           MOVC    A,@A+DPTR
+   \   00000A   F9           MOV     R1,A
+   \   00000B   A3           INC     DPTR
+   \   00000C   E4           CLR     A
+   \   00000D   93           MOVC    A,@A+DPTR
+   \   00000E   FA           MOV     R2,A
+   \   00000F   E9           MOV     A,R1
+   \   000010   FB           MOV     R3,A
+   \   000011   D083         POP     DPH
+   \   000013   D082         POP     DPL
+   \   000015   22           RET
+    143            
+    144          }
+    145          
+    146          
+    147          // *************************************************************************************************
+    148          // Write 16-bit word to flash memory
+    149          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    150          u8 flash_word_write(u16 addr, u16 data, u16 key, u8 verify)
+   \                     flash_word_write:
+    151          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   EC           MOV     A,R4
+   \   000006   FE           MOV     R6,A
+   \   000007   ED           MOV     A,R5
+   \   000008   FF           MOV     R7,A
+   \   000009   89..         MOV     ?V0 + 0,R1
+   \   00000B   740B         MOV     A,#0xb
+   \   00000D   12....       LCALL   ?XSTACK_DISP0_8
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   F8           MOV     R0,A
+   \   000012   A3           INC     DPTR
+   \   000013   E0           MOVX    A,@DPTR
+   \   000014   F9           MOV     R1,A
+    152            u16 readback;
+    153            
+    154            // Return immediately if wrong key was passed
+    155            if (key != FLASH_EW_KEY) return (0);
+   \   000015   7432         MOV     A,#0x32
+   \   000017   68           XRL     A,R0
+   \   000018   7003         JNZ     ??flash_word_write_0
+   \   00001A   7457         MOV     A,#0x57
+   \   00001C   69           XRL     A,R1
+   \                     ??flash_word_write_0:
+   \   00001D   6004         JZ      ??flash_word_write_1
+   \                     ??flash_word_write_2:
+   \   00001F   7900         MOV     R1,#0x0
+   \   000021   8046         SJMP    ??flash_word_write_3
+    156            
+    157            // Disable all interrupts
+    158            INT_GLOBAL_ENABLE(INT_OFF);
+   \                     ??flash_word_write_1:
+   \   000023   C2AF         CLR     0xa8.7
+    159            
+    160            // Wait until flash write/erase busy bit is cleared
+    161            while ((FCTL & BIT7) == BIT7) {}
+   \                     ??flash_word_write_4:
+   \   000025   E5AE         MOV     A,0xae
+   \   000027   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000029   40FA         JC      ??flash_word_write_4
+    162            
+    163            // Set address register to flash address in word units
+    164            FADDRH = (u8) (addr >> 9);
+   \   00002B   8A..         MOV     ?V0 + 2,R2
+   \   00002D   8B..         MOV     ?V0 + 3,R3
+   \   00002F   7409         MOV     A,#0x9
+   \   000031   78..         MOV     R0,#?V0 + 2
+   \   000033   12....       LCALL   ?US_SHR
+   \   000036   E5..         MOV     A,?V0 + 2
+   \   000038   F5AD         MOV     0xad,A
+    165            FADDRL = (u8) (addr >> 1);
+   \   00003A   EA           MOV     A,R2
+   \   00003B   F8           MOV     R0,A
+   \   00003C   EB           MOV     A,R3
+   \   00003D   C3           CLR     C
+   \   00003E   13           RRC     A
+   \   00003F   E8           MOV     A,R0
+   \   000040   13           RRC     A
+   \   000041   F5AC         MOV     0xac,A
+    166            
+    167            // Copy only flash write data to XDATA code
+    168            flash_write_code[6] = (u8) (data >> 8);
+   \   000043   EF           MOV     A,R7
+   \   000044   90FC06       MOV     DPTR,#-0x3fa
+   \   000047   F0           MOVX    @DPTR,A
+    169            flash_write_code[12] = (u8) (data);
+   \   000048   EE           MOV     A,R6
+   \   000049   90FC0C       MOV     DPTR,#-0x3f4
+   \   00004C   F0           MOVX    @DPTR,A
+    170            
+    171            // Branch to XDATA code
+    172            asm("LCALL 0xFC00");
+   \   00004D   12FC00       LCALL 0xFC00
+    173            
+    174            // Enable all interrupts
+    175            INT_GLOBAL_ENABLE(INT_ON);
+   \   000050   D2AF         SETB    0xa8.7
+    176          
+    177            // Verify that word was written
+    178            if (verify)
+   \   000052   E5..         MOV     A,?V0 + 0
+   \   000054   6011         JZ      ??flash_word_write_5
+    179            {
+    180              readback = flash_word_read(addr);
+    181              if (readback != data) return (0);
+   \   000056                ; Setup parameters for call to function flash_word_read
+   \   000056   12....       LCALL   flash_word_read
+   \   000059   8A..         MOV     ?V0 + 2,R2
+   \   00005B   8B..         MOV     ?V0 + 3,R3
+   \   00005D   EE           MOV     A,R6
+   \   00005E   65..         XRL     A,?V0 + 2
+   \   000060   7003         JNZ     ??flash_word_write_6
+   \   000062   EF           MOV     A,R7
+   \   000063   65..         XRL     A,?V0 + 3
+   \                     ??flash_word_write_6:
+   \   000065   70B8         JNZ     ??flash_word_write_2
+    182            }
+    183            
+    184            return(1);
+   \                     ??flash_word_write_5:
+   \   000067   7901         MOV     R1,#0x1
+   \                     ??flash_word_write_3:
+   \   000069   7F04         MOV     R7,#0x4
+   \   00006B   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   00006E                REQUIRE _A_IEN0
+   \   00006E                REQUIRE FCTL
+   \   00006E                REQUIRE FADDRH
+   \   00006E                REQUIRE FADDRL
+   \   00006E                REQUIRE flash_write_code
+    185          }
+    186          
+    187          
+    188          
+    189          // *************************************************************************************************
+    190          // Erase 1kB page
+    191          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    192          u8 page_erase(u8 page, u16 key, u8 verify) 
+   \                     page_erase:
+    193          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   89..         MOV     ?V0 + 3,R1
+    194            u16 i;
+    195            
+    196            // Return immediately if wrong key was passed
+    197            if (key != FLASH_EW_KEY) return (0);
+   \   000007   7432         MOV     A,#0x32
+   \   000009   6A           XRL     A,R2
+   \   00000A   7003         JNZ     ??page_erase_0
+   \   00000C   7457         MOV     A,#0x57
+   \   00000E   6B           XRL     A,R3
+   \                     ??page_erase_0:
+   \   00000F   6004         JZ      ??page_erase_1
+   \                     ??page_erase_2:
+   \   000011   7900         MOV     R1,#0x0
+   \   000013   806E         SJMP    ??page_erase_3
+    198            
+    199            // Check if page address is valid
+    200            if (page < FLASH_RW_PAGE_MIN || page > FLASH_RW_PAGE_MAX) return (0);
+   \                     ??page_erase_1:
+   \   000015   74F8         MOV     A,#-0x8
+   \   000017   25..         ADD     A,?V0 + 3
+   \   000019   C3           CLR     C
+   \   00001A   9417         SUBB    A,#0x17
+   \   00001C   50F3         JNC     ??page_erase_2
+    201            
+    202            // Wait until flash write/erase busy bit is cleared
+    203            while ((FCTL & BIT7) == BIT7) {}
+   \                     ??page_erase_4:
+   \   00001E   E5AE         MOV     A,0xae
+   \   000020   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000022   40FA         JC      ??page_erase_4
+    204          
+    205            // Disable all interrupts
+    206            INT_GLOBAL_ENABLE(INT_OFF);
+   \   000024   C2AF         CLR     0xa8.7
+    207            
+    208            // Store page in address register
+    209            FADDRH = (page) << 1;
+   \   000026   E9           MOV     A,R1
+   \   000027   C3           CLR     C
+   \   000028   33           RLC     A
+   \   000029   F5AD         MOV     0xad,A
+    210            FADDRL = 0x00; 
+   \   00002B   75AC00       MOV     0xac,#0x0
+    211          
+    212            // Set flash write timing
+    213            FWT = ( 0x22 >> CLKSPD );
+   \   00002E   7422         MOV     A,#0x22
+   \   000030   C0E0         PUSH    A
+   \   000032   E5C6         MOV     A,0xc6
+   \   000034   5407         ANL     A,#0x7
+   \   000036   F8           MOV     R0,A
+   \   000037   D0E0         POP     A
+   \   000039   B80002       CJNE    R0,#0x0,??page_erase_5
+   \   00003C   8004         SJMP    ??page_erase_6
+   \                     ??page_erase_5:
+   \   00003E   C3           CLR     C
+   \   00003F   13           RRC     A
+   \   000040   D8FC         DJNZ    R0,??page_erase_5
+   \                     ??page_erase_6:
+   \   000042   F5AB         MOV     0xab,A
+    214            
+    215            // Start page erase
+    216            FCTL = 0x01;        
+   \   000044   75AE01       MOV     0xae,#0x1
+    217            asm("nop");
+   \   000047   00           nop
+    218            
+    219            // Wait until flash write/erase busy bit is cleared
+    220            while ((FCTL & BIT7) == BIT7) {}
+   \                     ??page_erase_7:
+   \   000048   E5AE         MOV     A,0xae
+   \   00004A   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00004C   40FA         JC      ??page_erase_7
+    221          
+    222            // Enable all interrupts
+    223            INT_GLOBAL_ENABLE(INT_ON);
+   \   00004E   D2AF         SETB    0xa8.7
+    224            
+    225            // Verify that page content is all 0xFF
+    226            if (verify)
+   \   000050   EC           MOV     A,R4
+   \   000051   602E         JZ      ??page_erase_8
+    227            {
+    228              for (i=0; i<FLASH_PAGE_SIZE; i++) 
+   \   000053   7E00         MOV     R6,#0x0
+   \   000055   7F00         MOV     R7,#0x0
+   \   000057   8022         SJMP    ??page_erase_9
+    229              {
+    230                if (flash_byte_read(page*FLASH_PAGE_SIZE + i) != 0xFF) return (0);
+   \                     ??page_erase_10:
+   \   000059                ; Setup parameters for call to function flash_byte_read
+   \   000059   85....       MOV     ?V0 + 0,?V0 + 3
+   \   00005C   75..00       MOV     ?V0 + 1,#0x0
+   \   00005F   740A         MOV     A,#0xa
+   \   000061   78..         MOV     R0,#?V0 + 0
+   \   000063   12....       LCALL   ?S_SHL
+   \   000066   2E           ADD     A,R6
+   \   000067   FA           MOV     R2,A
+   \   000068   E5..         MOV     A,?V0 + 1
+   \   00006A   3F           ADDC    A,R7
+   \   00006B   FB           MOV     R3,A
+   \   00006C   12....       LCALL   flash_byte_read
+   \   00006F   E9           MOV     A,R1
+   \   000070   F4           CPL     A
+   \   000071   709E         JNZ     ??page_erase_2
+    231              }
+   \   000073   EE           MOV     A,R6
+   \   000074   2401         ADD     A,#0x1
+   \   000076   0E           INC     R6
+   \   000077   EF           MOV     A,R7
+   \   000078   3400         ADDC    A,#0x0
+   \   00007A   FF           MOV     R7,A
+   \                     ??page_erase_9:
+   \   00007B   C3           CLR     C
+   \   00007C   EF           MOV     A,R7
+   \   00007D   9404         SUBB    A,#0x4
+   \   00007F   40D8         JC      ??page_erase_10
+    232            }
+    233            
+    234            return (1);
+   \                     ??page_erase_8:
+   \   000081   7901         MOV     R1,#0x1
+   \                     ??page_erase_3:
+   \   000083   7F04         MOV     R7,#0x4
+   \   000085   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000088                REQUIRE FCTL
+   \   000088                REQUIRE _A_IEN0
+   \   000088                REQUIRE FADDRH
+   \   000088                REQUIRE FADDRL
+   \   000088                REQUIRE FWT
+   \   000088                REQUIRE CLKCON
+    235          }
+    236          
+    237          
+    238          
+
+   Maximum stack usage in bytes:
+
+     Function             ISTACK PSTACK XSTACK
+     --------             ------ ------ ------
+     flash_byte_read          2      0     11
+     flash_start_update       3      0      0
+     flash_word_read          2      0     11
+     flash_word_write         0      0     13
+       -> flash_word_read     0      0     22
+     page_erase               1      0     11
+       -> flash_byte_read     0      0     22
+
+
+   Segment part sizes:
+
+     Function/Label     Bytes
+     --------------     -----
+     IEN2                  1
+     _A_IEN0               1
+     FWT                   1
+     FADDRL                1
+     FADDRH                1
+     FCTL                  1
+     _A_IEN1               1
+     CLKCON                1
+     flash_write_code     32
+     flash_update_init     1
+     flash_start_update  135
+     flash_byte_read      16
+     flash_word_read      22
+     flash_word_write    110
+     page_erase          136
+
+ 
+ 419 bytes in segment NEAR_CODE
+   8 bytes in segment SFR_AN
+  32 bytes in segment XDATA_AN
+   1 byte  in segment XDATA_Z
+ 
+ 419 bytes of CODE  memory
+   0 bytes of DATA  memory (+  8 bytes shared)
+   1 byte  of XDATA memory (+ 32 bytes shared)
+
+Errors: none
+Warnings: none

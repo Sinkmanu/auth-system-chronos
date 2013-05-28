@@ -1,0 +1,1330 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         11/Sep/2012  09:53:47 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\main.c                       #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\main.c" #
+#                           -D ISM_EU -D MCU_H=<ioCC1111.h> -D chip=1111 -D   #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Limited IAR Kickstart (Europe)\Obj\" -e          #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\main.lst                   #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\Obj\main.r51                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\main.c
+      1          // *************************************************************************************************
+      2          //
+      3          //	Copyright (C) 2009 Texas Instruments Incorporated - http://www.ti.com/ 
+      4          //	 
+      5          //	 
+      6          //	  Redistribution and use in source and binary forms, with or without 
+      7          //	  modification, are permitted provided that the following conditions 
+      8          //	  are met:
+      9          //	
+     10          //	    Redistributions of source code must retain the above copyright 
+     11          //	    notice, this list of conditions and the following disclaimer.
+     12          //	 
+     13          //	    Redistributions in binary form must reproduce the above copyright
+     14          //	    notice, this list of conditions and the following disclaimer in the 
+     15          //	    documentation and/or other materials provided with the   
+     16          //	    distribution.
+     17          //	 
+     18          //	    Neither the name of Texas Instruments Incorporated nor the names of
+     19          //	    its contributors may be used to endorse or promote products derived
+     20          //	    from this software without specific prior written permission.
+     21          //	
+     22          //	  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+     23          //	  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+     24          //	  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+     25          //	  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+     26          //	  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+     27          //	  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+     28          //	  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     29          //	  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     30          //	  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+     31          //	  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+     32          //	  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     33          //
+     34          // *************************************************************************************************
+     35          // Main function
+     36          // *************************************************************************************************
+     37          
+     38          
+     39          // *************************************************************************************************
+     40          // Include section
+     41          #include "project.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa9
+   \   unsigned char volatile __sfr IP0
+   \                     IP0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb8
+   \   union <unnamed> volatile __sfr _A_IEN1
+   \                     _A_IEN1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb9
+   \   unsigned char volatile __sfr IP1
+   \                     IP1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xbe
+   \   unsigned char volatile __sfr SLEEP
+   \                     SLEEP:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xc0
+   \   union <unnamed> volatile __sfr _A_IRCON
+   \                     _A_IRCON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xc6
+   \   unsigned char volatile __sfr CLKCON
+   \                     CLKCON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd8
+   \   union <unnamed> volatile __sfr _A_TIMIF
+   \                     _A_TIMIF:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe4
+   \   unsigned char volatile __sfr T1CTL
+   \                     T1CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xeb
+   \   unsigned char volatile __sfr T4CTL
+   \                     T4CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xec
+   \   unsigned char volatile __sfr T4CCTL0
+   \                     T4CCTL0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xed
+   \   unsigned char volatile __sfr T4CC0
+   \                     T4CC0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfd
+   \   unsigned char volatile __sfr P0DIR
+   \                     P0DIR:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xff
+   \   unsigned char volatile __sfr P2DIR
+   \                     P2DIR:
+   \   000000                DS 1
+     42          #include "timer1.h"
+     43          #include "BM_API.h"
+     44          #include "simpliciti.h"
+     45          #include "flash.h"
+     46          
+     47          #include "hal_types.h"
+     48          #include "usb_uart.h"
+     49          #include "hal_board.h"
+
+  #warning "Macro TRUE already defined"
+   ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\include\hal_defs.h",19  Warning[Pe1105]: 
+          #warning directive: "Macro TRUE already defined"
+
+  #warning "Macro FALSE already defined"
+   ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\include\hal_defs.h",27  Warning[Pe1105]: 
+          #warning directive: "Macro FALSE already defined"
+
+  #warning "Macro NULL already defined"
+   ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\include\hal_defs.h",35  Warning[Pe1105]: 
+          #warning directive: "Macro NULL already defined"
+
+  #define BIT0              0x01
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",21  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT0" (declared at line 113 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT1              0x02
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",22  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT1" (declared at line 114 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT2              0x04
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",23  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT2" (declared at line 115 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT3              0x08
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",24  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT3" (declared at line 116 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT4              0x10
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",25  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT4" (declared at line 117 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT5              0x20
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",26  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT5" (declared at line 118 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT6              0x40
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",27  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT6" (declared at line 119 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT7              0x80
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",28  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT7" (declared at line 120 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+     50          #include "hal_led.h"
+     51          #include "hal_uart.h"
+     52          
+     53          #include "AuthSystem/authentication.h"
+     54          
+     55          
+     56          // *************************************************************************************************
+     57          // Defines section
+     58          
+     59          // Service USB process directly during initial enumeration
+     60          #define ENUMERATION_TIME    (20000u)
+     61          
+     62          
+     63          // *************************************************************************************************
+     64          // Global Variable section
+     65          
+     66          // Normal operation
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     67          unsigned char system_status        = HW_IDLE;
+   \                     system_status:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     68          /* Auth System Protocol */
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     69          unsigned char authentication_on = 0;
+   \                     authentication_on:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     70          unsigned char authentication_start_now = 0;
+   \                     authentication_start_now:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     71          
+     72          // SimpliciTI Sync variables
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     73          u8 simpliciti_sync_buffer[BM_SYNC_DATA_LENGTH];
+   \                     simpliciti_sync_buffer:
+   \   000000                DS 19
+   \   000013                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     74          u8 simpliciti_sync_buffer_status;
+   \                     simpliciti_sync_buffer_status:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     75          
+     76          // Test
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     77          u8  frequoffset    = 0;
+   \                     frequoffset:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     78          
+     79          
+     80          // *************************************************************************************************
+     81          // Extern variable section
+     82          extern u8 rf_tx_over;     // Flag to indicate last byte has been sent
+     83          extern unsigned char usb_buffer[USB_MAX_MESSAGE_LENGTH+2];
+     84          extern unsigned char usb_sendack;
+     85          
+     86          
+     87          // *************************************************************************************************
+     88          // Extern functions section
+     89          
+     90          // SimpliciTI RF ISR
+     91          extern void MRFI_RfIsr(void);
+     92          
+     93          // *************************************************************************************************
+     94          // Function prototype section
+     95          void simpliciti_config(void);
+     96          
+     97          
+     98          
+     99          // *************************************************************************************************
+    100          // Implementation
+    101          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    102          void main(void)
+   \                     main:
+    103          {  
+   \   000000                ; Auto size: 0
+    104           u16 enumeration = 0;
+   \   000000   7E00         MOV     R6,#0x0
+   \   000002   7F00         MOV     R7,#0x0
+    105            u16 i = 0;
+    106           // u8  usb_service_is_disabled = 0;
+    107            u8  cal;
+    108          
+    109          #ifdef CC1111EM
+    110            // P1.1 (LED) to output, default state is on
+    111            P1DIR |= BIT1; 
+    112            LED_ON;
+    113            
+    114            #ifdef DEBUG_OUTPUT  
+    115              // P2.0 to output
+    116              P2DIR |= BIT0; 
+    117              P2_0 &= ~BIT0; 
+    118              
+    119              // P0.5 - P0.0 to output
+    120              P0DIR |= BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0;
+    121              P0_5 &= ~BIT0; 
+    122              P0_4 &= ~BIT0; 
+    123              P0_3 &= ~BIT0; 
+    124              P0_2 &= ~BIT0; 
+    125              P0_1 &= ~BIT0; 
+    126              P0_0 &= ~BIT0; 
+    127            #endif  
+    128          
+    129          #else
+    130            // P1.0 (LED) to output '1'
+    131            P1DIR |= BIT0; 
+   \   000004   43FE01       ORL     0xfe,#0x1
+    132            LED_ON;
+   \   000007   D290         SETB    0x90.0
+    133            // P1.4 (TP) to output '0'
+    134            P1DIR |= BIT4; 
+   \   000009   43FE10       ORL     0xfe,#0x10
+    135            TP_L;
+   \   00000C   C294         CLR     0x90.4
+    136            
+    137            // P0.0 - P0.5 to output (unused)
+    138            P0DIR |= BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0;
+   \   00000E   43FD3F       ORL     0xfd,#0x3f
+    139            // P1.5, P1.6, P1.7 to output (unused)
+    140            P1DIR |= BIT5 | BIT6 | BIT7;
+   \   000011   43FEE0       ORL     0xfe,#0xe0
+    141            // P2.0, P2.3, P2.4 to output (unused)
+    142            P2DIR |= BIT0 | BIT3 | BIT4;
+   \   000014   43FF19       ORL     0xff,#0x19
+    143          #endif
+    144            
+    145            // Clock control
+    146            // Default settings are 0x5C
+    147            SLEEP &= ~(BIT2 | BIT1 | BIT0);   // PM0, both OSC ON   
+   \   000017   53BEF8       ANL     0xbe,#0xf8
+    148            asm("NOP");
+   \   00001A   00           NOP
+    149            while(!(SLEEP & (BIT6 | BIT5)));  // Wait for both OSC to be stable
+   \                     ??main_0:
+   \   00001B   E5BE         MOV     A,0xbe
+   \   00001D   5460         ANL     A,#0x60
+   \   00001F   60FA         JZ      ??main_0
+    150            for (i=0; i<20000; i++);          // Simple delay
+   \   000021   7800         MOV     R0,#0x0
+   \   000023   7900         MOV     R1,#0x0
+   \   000025   8008         SJMP    ??main_1
+   \                     ??main_2:
+   \   000027   E8           MOV     A,R0
+   \   000028   2401         ADD     A,#0x1
+   \   00002A   08           INC     R0
+   \   00002B   E9           MOV     A,R1
+   \   00002C   3400         ADDC    A,#0x0
+   \   00002E   F9           MOV     R1,A
+   \                     ??main_1:
+   \   00002F   C3           CLR     C
+   \   000030   E8           MOV     A,R0
+   \   000031   9420         SUBB    A,#0x20
+   \   000033   E9           MOV     A,R1
+   \   000034   944E         SUBB    A,#0x4e
+   \   000036   40EF         JC      ??main_2
+    151            CLKCON &= ~BIT6;                  // Crystal on 
+   \   000038   53C6BF       ANL     0xc6,#0xbf
+    152            CLKCON &= ~(0x3F);                // clkspd=000, tickspd=000
+   \   00003B   53C6C0       ANL     0xc6,#0xc0
+    153            CLKCON |= BIT3 | BIT4 | BIT5;     // clkspd = 24MHz, tickspd = 24MHz/128=187500Hz
+   \   00003E   43C638       ORL     0xc6,#0x38
+    154            while(!(SLEEP & (BIT6 | BIT5)));  // Wait for both OSC to be stable
+   \                     ??main_3:
+   \   000041   E5BE         MOV     A,0xbe
+   \   000043   5460         ANL     A,#0x60
+   \   000045   60FA         JZ      ??main_3
+    155            for (i=0; i<20000; i++);          // Simple delay  
+   \   000047   7800         MOV     R0,#0x0
+   \   000049   7900         MOV     R1,#0x0
+   \   00004B   8008         SJMP    ??main_4
+   \                     ??main_5:
+   \   00004D   E8           MOV     A,R0
+   \   00004E   2401         ADD     A,#0x1
+   \   000050   08           INC     R0
+   \   000051   E9           MOV     A,R1
+   \   000052   3400         ADDC    A,#0x0
+   \   000054   F9           MOV     R1,A
+   \                     ??main_4:
+   \   000055   C3           CLR     C
+   \   000056   E8           MOV     A,R0
+   \   000057   9420         SUBB    A,#0x20
+   \   000059   E9           MOV     A,R1
+   \   00005A   944E         SUBB    A,#0x4e
+   \   00005C   40EF         JC      ??main_5
+    156            
+    157            // Reset simpliciti_data
+    158            simpliciti_data[0] = 0xFF;
+   \   00005E   90....       MOV     DPTR,#simpliciti_data
+   \   000061   74FF         MOV     A,#-0x1
+   \   000063   F0           MOVX    @DPTR,A
+    159            
+    160            // Get calibration data from memory - range check added to prevent wrong calibration
+    161            cal = flash_byte_read(0x7FF0);
+    162            if (cal == 0x00) frequoffset = flash_byte_read(0x7FF2);
+   \   000064                ; Setup parameters for call to function flash_byte_read
+   \   000064   7AF0         MOV     R2,#-0x10
+   \   000066   7B7F         MOV     R3,#0x7f
+   \   000068   12....       LCALL   flash_byte_read
+   \   00006B   E9           MOV     A,R1
+   \   00006C   700C         JNZ     ??main_6
+   \   00006E                ; Setup parameters for call to function flash_byte_read
+   \   00006E   7AF2         MOV     R2,#-0xe
+   \   000070   7B7F         MOV     R3,#0x7f
+   \   000072   12....       LCALL   flash_byte_read
+   \   000075   E9           MOV     A,R1
+   \   000076   90....       MOV     DPTR,#frequoffset
+   \   000079   F0           MOVX    @DPTR,A
+    163            if ((frequoffset > 30) && (frequoffset < (256-30))) frequoffset = 0;
+   \                     ??main_6:
+   \   00007A   90....       MOV     DPTR,#frequoffset
+   \   00007D   E0           MOVX    A,@DPTR
+   \   00007E   24E1         ADD     A,#-0x1f
+   \   000080   C3           CLR     C
+   \   000081   94C3         SUBB    A,#-0x3d
+   \   000083   5002         JNC     ??main_7
+   \   000085   E4           CLR     A
+   \   000086   F0           MOVX    @DPTR,A
+    164            
+    165            // Priority levels: USB, Timer1 (3) -> RF (3) -> Timer4 (1) -> others (0)
+    166            IP1 |= BIT5 + BIT1 + BIT0 + BIT4;
+   \                     ??main_7:
+   \   000087   43B933       ORL     0xb9,#0x33
+    167            IP0 |= BIT5 + BIT1 + BIT0;
+   \   00008A   43A923       ORL     0xa9,#0x23
+    168          
+    169          #ifdef TX_SIMPLE_TEST
+    170            // TX out only
+    171            test_on=1;
+    172            rftest_radio_init(); 
+    173            start_continuous_tx(); 
+    174            while(1); 
+    175          #endif
+    176          #ifdef TX_MP_TEST
+    177            test_on=1;
+    178            test_step = 1;
+    179            test_step_over = 0;
+    180          #endif
+    181            
+    182            // Init USB driver and enable global IRQ
+    183            usbUartInit(115200);
+   \   00008D                ; Setup parameters for call to function usbUartInit
+   \   00008D   90....       MOV     DPTR,#__Constant_1c200
+   \   000090   12....       LCALL   ?XLOAD_R2345
+   \   000093   12....       LCALL   usbUartInit
+   \   000096   800B         SJMP    ??main_8
+    184            
+    185            // Service USB functions normally during enumeration phase
+    186            while ( enumeration < ENUMERATION_TIME ) 
+    187            {
+    188              usbUartProcess();
+   \                     ??main_9:
+   \   000098                ; Setup parameters for call to function usbUartProcess
+   \   000098   12....       LCALL   usbUartProcess
+    189              enumeration++;
+   \   00009B   EE           MOV     A,R6
+   \   00009C   2401         ADD     A,#0x1
+   \   00009E   0E           INC     R6
+   \   00009F   EF           MOV     A,R7
+   \   0000A0   3400         ADDC    A,#0x0
+   \   0000A2   FF           MOV     R7,A
+    190            }
+   \                     ??main_8:
+   \   0000A3   C3           CLR     C
+   \   0000A4   EE           MOV     A,R6
+   \   0000A5   9420         SUBB    A,#0x20
+   \   0000A7   EF           MOV     A,R7
+   \   0000A8   944E         SUBB    A,#0x4e
+   \   0000AA   40EC         JC      ??main_9
+    191            LED_OFF;
+   \   0000AC   C290         CLR     0x90.0
+    192            
+    193            // After enumeration start Timer4 IRQ to service USB driver from now on
+    194            // f=187500Hz/64/5=3kHz/5 --> 1.7ms / IRQ  
+    195            T4CCTL0 = 0x44;
+   \   0000AE   75EC44       MOV     0xec,#0x44
+    196            T4CC0 = 0x04;
+   \   0000B1   75ED04       MOV     0xed,#0x4
+    197            T4CTL = 0xDE;
+   \   0000B4   75EBDE       MOV     0xeb,#-0x22
+    198            INT_ENABLE(INUM_T4, INT_ON);  
+   \   0000B7   D2BC         SETB    0xb8.4
+    199          
+    200            // Enable interrupts
+    201            INT_GLOBAL_ENABLE(TRUE);  
+   \   0000B9   D2AF         SETB    0xa8.7
+    202            
+    203             // Main control loop
+    204            while(1) 
+    205            { 
+    206             //  For Auth Protocol 
+    207              if (authentication_start_now)
+   \                     ??main_10:
+   \   0000BB   90....       MOV     DPTR,#authentication_start_now
+   \   0000BE   E0           MOVX    A,@DPTR
+   \   0000BF   60FA         JZ      ??main_10
+    208               {
+    209                 authentication_start_now = 0;
+   \   0000C1   E4           CLR     A
+   \   0000C2   F0           MOVX    @DPTR,A
+    210                 authentication_on = 1;
+   \   0000C3   90....       MOV     DPTR,#authentication_on
+   \   0000C6   04           INC     A
+   \   0000C7   F0           MOVX    @DPTR,A
+    211                 system_status = HW_AUTHENTICATION;
+   \   0000C8   90....       MOV     DPTR,#system_status
+   \   0000CB   740E         MOV     A,#0xe
+   \   0000CD   F0           MOVX    @DPTR,A
+    212                 authentication_config();
+   \   0000CE                ; Setup parameters for call to function authentication_config
+   \   0000CE   12....       LCALL   authentication_config
+    213                 authentication_main();
+   \   0000D1                ; Setup parameters for call to function authentication_main
+   \   0000D1   12....       LCALL   authentication_main
+   \   0000D4   80E5         SJMP    ??main_10
+   \   0000D6                REQUIRE P1DIR
+   \   0000D6                REQUIRE _A_P1
+   \   0000D6                REQUIRE P0DIR
+   \   0000D6                REQUIRE P2DIR
+   \   0000D6                REQUIRE SLEEP
+   \   0000D6                REQUIRE CLKCON
+   \   0000D6                REQUIRE IP1
+   \   0000D6                REQUIRE IP0
+   \   0000D6                REQUIRE T4CCTL0
+   \   0000D6                REQUIRE T4CC0
+   \   0000D6                REQUIRE T4CTL
+   \   0000D6                REQUIRE _A_IEN0
+   \   0000D6                REQUIRE IEN2
+   \   0000D6                REQUIRE _A_IEN1
+    214                }
+    215            }
+    216          
+    217          }
+    218          
+    219          
+    220          // *************************************************************************************************
+    221          // Decode received command, extract data and trigger actions.
+    222          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    223          void usb_decode(void)
+   \                     usb_decode:
+    224          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    225            u8 i;
+    226            // Check if start marker is set
+    227            if (usb_buffer[PACKET_BYTE_START] != 0xFF) return;
+   \   000005   90....       MOV     DPTR,#usb_buffer
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   F4           CPL     A
+   \   00000A   6003         JZ      $+5
+   \   00000C   02....       LJMP    ??usb_decode_0
+    228          
+    229            // Check command code
+    230            switch (usb_buffer[PACKET_BYTE_CMD])
+   \   00000F   A3           INC     DPTR
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   6029         JZ      ??usb_decode_1
+   \   000013   24E0         ADD     A,#-0x20
+   \   000015   600C         JZ      ??usb_decode_2
+   \   000017   24AC         ADD     A,#-0x54
+   \   000019   602A         JZ      ??usb_decode_3
+   \   00001B   14           DEC     A
+   \   00001C   6036         JZ      ??usb_decode_4
+   \   00001E   14           DEC     A
+   \   00001F   6055         JZ      ??usb_decode_5
+   \   000021   8062         SJMP    ??usb_decode_6
+    231            {
+    232              // Generic commands
+    233              case BM_GET_PRODUCT_ID:   usb_buffer[PACKET_BYTE_FIRST_DATA+3] = (u8)(PRODUCT_ID>>24);
+   \                     ??usb_decode_2:
+   \   000023   90....       MOV     DPTR,#usb_buffer + 6
+   \   000026   7412         MOV     A,#0x12
+   \   000028   F0           MOVX    @DPTR,A
+    234                                        usb_buffer[PACKET_BYTE_FIRST_DATA+2] = (u8)(PRODUCT_ID>>16);
+   \   000029   90....       MOV     DPTR,#usb_buffer + 5
+   \   00002C   7434         MOV     A,#0x34
+   \   00002E   F0           MOVX    @DPTR,A
+    235                                        usb_buffer[PACKET_BYTE_FIRST_DATA+1] = (u8)(PRODUCT_ID>>8);
+   \   00002F   90....       MOV     DPTR,#usb_buffer + 4
+   \   000032   7456         MOV     A,#0x56
+   \   000034   F0           MOVX    @DPTR,A
+    236                                        usb_buffer[PACKET_BYTE_FIRST_DATA]   = (u8)(PRODUCT_ID); 
+   \   000035   90....       MOV     DPTR,#usb_buffer + 3
+   \   000038   7478         MOV     A,#0x78
+   \   00003A   8048         SJMP    ??usb_decode_7
+    237                                        break;
+    238              case BM_GET_STATUS:       usb_buffer[PACKET_BYTE_FIRST_DATA] = system_status; // + 1; 
+   \                     ??usb_decode_1:
+   \   00003C   90....       MOV     DPTR,#system_status
+   \   00003F   E0           MOVX    A,@DPTR
+   \   000040   90....       MOV     DPTR,#usb_buffer + 3
+   \   000043   803F         SJMP    ??usb_decode_7
+    239                                        break;
+    240              case START_AUTH:          if (!authentication_on) 
+   \                     ??usb_decode_3:
+   \   000045   90....       MOV     DPTR,#authentication_on
+   \   000048   E0           MOVX    A,@DPTR
+   \   000049   703A         JNZ     ??usb_decode_6
+    241          			      {
+    242                                                  LED_ON;
+   \   00004B   D290         SETB    0x90.0
+    243          					authentication_start_now = 1;
+   \   00004D   90....       MOV     DPTR,#authentication_start_now
+   \   000050   7401         MOV     A,#0x1
+   \   000052   8030         SJMP    ??usb_decode_7
+    244          					/*usb_buffer[PACKET_BYTE_FIRST_DATA+5] = 0x05;
+    245          					usb_buffer[PACKET_BYTE_FIRST_DATA+4] = 0x04;
+    246                                         		usb_buffer[PACKET_BYTE_FIRST_DATA+3] = 0x03;
+    247                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+2] = 0x02;
+    248                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+1] = 0x01;
+    249                                          	usb_buffer[PACKET_BYTE_FIRST_DATA]   = 0x00;
+    250          					*/
+    251          			      } 
+    252          			      break;
+    253            case READ_DATA_AUTH:       LED_ON;
+   \                     ??usb_decode_4:
+   \   000054   D290         SETB    0x90.0
+    254                                       /*if (getFlag(auth_flag,AUTH_TRIGGER_RECEIVED_DATA))
+    255                                       {
+    256                                         for (i=25; i>0; i--) usb_buffer[PACKET_BYTE_FIRST_DATA+i] = auth_data[i];
+    257                                         usb_buffer[PACKET_BYTE_FIRST_DATA] = auth_data[0];
+    258                                         clearFlag(auth_flag, AUTH_TRIGGER_RECEIVED_DATA);
+    259                                       } else {
+    260                                         for (i=25; i>0; i--) usb_buffer[PACKET_BYTE_FIRST_DATA+i] = 0xFF;
+    261                                         usb_buffer[PACKET_BYTE_FIRST_DATA] = 0xFF;
+    262                                       }*/			
+    263                                        for (i=12; i>0; i--) usb_buffer[PACKET_BYTE_FIRST_DATA+i] = 0xEE;
+   \   000056   780C         MOV     R0,#0xc
+   \   000058   8012         SJMP    ??usb_decode_8
+   \                     ??usb_decode_9:
+   \   00005A   88..         MOV     ?V0 + 0,R0
+   \   00005C   74..         MOV     A,#(usb_buffer + 3) & 0xff
+   \   00005E   25..         ADD     A,?V0 + 0
+   \   000060   F582         MOV     DPL,A
+   \   000062   74..         MOV     A,#((usb_buffer + 3) >> 8) & 0xff
+   \   000064   3400         ADDC    A,#0x0
+   \   000066   F583         MOV     DPH,A
+   \   000068   74EE         MOV     A,#-0x12
+   \   00006A   F0           MOVX    @DPTR,A
+   \   00006B   18           DEC     R0
+   \                     ??usb_decode_8:
+   \   00006C   E8           MOV     A,R0
+   \   00006D   70EB         JNZ     ??usb_decode_9
+    264                                        usb_buffer[PACKET_BYTE_FIRST_DATA] = 0xEE;
+   \   00006F   90....       MOV     DPTR,#usb_buffer + 3
+   \   000072   74EE         MOV     A,#-0x12
+   \   000074   800E         SJMP    ??usb_decode_7
+    265            			              /*  usb_buffer[PACKET_BYTE_FIRST_DATA+23] = 0xEE;
+    266          					usb_buffer[PACKET_BYTE_FIRST_DATA+22] = 0xEE;
+    267                                         		usb_buffer[PACKET_BYTE_FIRST_DATA+21] = 0xEE;
+    268                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+20] = 0xEE;
+    269                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+19] = 0xEE;
+    270                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+18] = 0xEE;
+    271                                                  usb_buffer[PACKET_BYTE_FIRST_DATA+17] = 0xEE;
+    272          					usb_buffer[PACKET_BYTE_FIRST_DATA+16] = 0xEE;
+    273                                         		usb_buffer[PACKET_BYTE_FIRST_DATA+15] = 0xEE;
+    274                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+14] = 0xEE;
+    275                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+13] = 0xEE;
+    276                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+12] = 0xEE;
+    277            					usb_buffer[PACKET_BYTE_FIRST_DATA+11] = 0xEE;
+    278          					usb_buffer[PACKET_BYTE_FIRST_DATA+10] = 0xEE;
+    279                                         		usb_buffer[PACKET_BYTE_FIRST_DATA+9] = 0xEE;
+    280                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+8] = 0xEE;
+    281                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+7] = 0xEE;
+    282                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+6] = 0xEE;
+    283                                                  usb_buffer[PACKET_BYTE_FIRST_DATA+5] = 0xEE;
+    284          					usb_buffer[PACKET_BYTE_FIRST_DATA+4] = 0xEE;
+    285                                         		usb_buffer[PACKET_BYTE_FIRST_DATA+3] = 0xEE;
+    286                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+2] = 0xEE;
+    287                                          	usb_buffer[PACKET_BYTE_FIRST_DATA+1] = 0xEE;
+    288                                          	usb_buffer[PACKET_BYTE_FIRST_DATA]   = 0xEE;*/
+    289                                        
+    290                                        break;
+    291            case STOP_AUTH:	     /* if (authentication_on)
+    292                                        {
+    293                                          LED_OFF;
+    294                                          authentication_on = 0;
+    295          				authentication_start_now = 0;
+    296                                          setFlag(auth_flag, AUTH_TRIGGER_STOP);
+    297                                          system_status = HW_IDLE;
+    298          			        break;
+    299                                        }*/
+    300                                        LED_OFF;
+   \                     ??usb_decode_5:
+   \   000076   C290         CLR     0x90.0
+    301                                        authentication_on = 0;
+   \   000078   90....       MOV     DPTR,#authentication_on
+   \   00007B   E4           CLR     A
+   \   00007C   F0           MOVX    @DPTR,A
+    302                                        authentication_start_now = 0;
+   \   00007D   90....       MOV     DPTR,#authentication_start_now
+   \   000080   F0           MOVX    @DPTR,A
+    303                                        system_status = HW_IDLE;
+   \   000081   90....       MOV     DPTR,#system_status
+   \                     ??usb_decode_7:
+   \   000084   F0           MOVX    @DPTR,A
+    304                                        break;
+    305            }
+    306            
+    307            // Return packet with original data, but modified command byte (acknowledge)
+    308            usb_sendack = 1;
+   \                     ??usb_decode_6:
+   \   000085   90....       MOV     DPTR,#usb_sendack
+   \   000088   7401         MOV     A,#0x1
+   \   00008A   F0           MOVX    @DPTR,A
+    309            usb_buffer[PACKET_BYTE_CMD] = HW_NO_ERROR;
+   \   00008B   90....       MOV     DPTR,#usb_buffer + 1
+   \   00008E   7406         MOV     A,#0x6
+   \   000090   F0           MOVX    @DPTR,A
+    310          }
+   \                     ??usb_decode_0:
+   \   000091   7F02         MOV     R7,#0x2
+   \   000093   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000096                REQUIRE _A_P1
+    311          
+    312          // *************************************************************************************************
+    313          // Forward RF IRQ to right handler 
+    314          // *************************************************************************************************
+    315          #pragma vector=RF_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    316          __interrupt void rf_ISR(void)
+   \                     rf_ISR:
+    317          {
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+    318            LED_ON;
+   \   000007   D290         SETB    0x90.0
+    319            if (authentication_on)
+   \   000009   90....       MOV     DPTR,#authentication_on
+   \   00000C   E0           MOVX    A,@DPTR
+   \   00000D   6003         JZ      ??rf_ISR_0
+    320            {
+    321              radio_rf_ISR();  
+   \   00000F                ; Setup parameters for call to function radio_rf_ISR
+   \   00000F   12....       LCALL   radio_rf_ISR
+    322            }
+    323          }
+   \                     ??rf_ISR_0:
+   \   000012   7F01         MOV     R7,#0x1
+   \   000014   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+   \   000017                REQUIRE _A_P1
+    324          
+    325          // *************************************************************************************************
+    326          // Forward RF TX/RX IRQ to right handler 
+    327          // *************************************************************************************************
+    328          #pragma vector=RFTXRX_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    329          __interrupt void ISR_RFTXRX(void)
+   \                     ISR_RFTXRX:
+    330          {
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+    331            if (authentication_on)
+   \   000007   90....       MOV     DPTR,#authentication_on
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   6003         JZ      ??ISR_RFTXRX_0
+    332            {
+    333              radio_rftxrx();    
+   \   00000D                ; Setup parameters for call to function radio_rftxrx
+   \   00000D   12....       LCALL   radio_rftxrx
+    334            }
+    335          }
+   \                     ??ISR_RFTXRX_0:
+   \   000010   7F01         MOV     R7,#0x1
+   \   000012   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    336          
+    337          
+    338          // *************************************************************************************************
+    339          // Timer1 ISR
+    340          // *************************************************************************************************
+    341          #pragma vector=T1_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    342          __interrupt void t1Timer_ISR(void)
+   \                     t1Timer_ISR:
+    343          {
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+    344            // Clear IRCON.T1IF
+    345            IRCON &= ~0x02;
+   \   000007   C2C1         CLR     0xc0.1
+    346          
+    347            // Clear Timer 1 Channel 0-2 + overflow interrupt flag
+    348            T1CTL &= ~0xF0;
+   \   000009   53E40F       ANL     0xe4,#0xf
+    349          
+    350            // Return immediately if timer not enabled
+    351            if (!sTimer1.enable) return;
+   \   00000C   90....       MOV     DPTR,#sTimer1
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   6013         JZ      ??t1Timer_ISR_0
+    352          
+    353            // Return immediately if s/w int flag not reset
+    354            if (sTimer1.iflag) return;
+   \   000012   A3           INC     DPTR
+   \   000013   E0           MOVX    A,@DPTR
+   \   000014   700F         JNZ     ??t1Timer_ISR_0
+    355            
+    356            // Set timer cycles, and call s/w int handler if no more cycles to set
+    357            if (!set_timer1_cycles()) 
+   \   000016                ; Setup parameters for call to function set_timer1_cycles
+   \   000016   12....       LCALL   set_timer1_cycles
+   \   000019   E9           MOV     A,R1
+   \   00001A   7003         JNZ     ??t1Timer_ISR_1
+    358            {
+    359              // Call BlueRobin TX function
+    360              sTimer1.iflag = 1;  
+   \   00001C   7401         MOV     A,#0x1
+   \   00001E   F0           MOVX    @DPTR,A
+    361            }
+    362            
+    363            // Increase global cycle count
+    364            sTimer1.cycles++;
+   \                     ??t1Timer_ISR_1:
+   \   00001F   90....       MOV     DPTR,#sTimer1 + 8
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   04           INC     A
+   \   000024   F0           MOVX    @DPTR,A
+    365          }
+   \                     ??t1Timer_ISR_0:
+   \   000025   7F01         MOV     R7,#0x1
+   \   000027   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+   \   00002A                REQUIRE _A_IRCON
+   \   00002A                REQUIRE T1CTL
+    366          
+    367          
+    368          // *************************************************************************************************
+    369          // Timer4 ISR
+    370          // *************************************************************************************************
+    371          #pragma vector=T4_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    372          __interrupt void timer4_ISR(void)
+   \                     timer4_ISR:
+    373          {
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+    374            
+    375            // Clear IRQ flag
+    376            TIMIF &= ~BIT3;
+   \   000007   C2DB         CLR     0xd8.3
+    377            
+    378            // Service USB functions
+    379            usbUartProcess();
+   \   000009                ; Setup parameters for call to function usbUartProcess
+   \   000009   12....       LCALL   usbUartProcess
+    380          }
+   \   00000C   7F01         MOV     R7,#0x1
+   \   00000E   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+   \   000011                REQUIRE _A_TIMIF
+    381          
+    382          
+    383          // *************************************************************************************************
+    384          // Assign all unused IRQ
+    385          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    386          void catch_stray_irq(void)
+   \                     catch_stray_irq:
+    387          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    388            asm("nop");
+   \   000000   00           nop
+    389          }
+   \   000001   22           RET
+    390          #pragma vector=ADC_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    391          __interrupt void adc_ISR(void) { catch_stray_irq(); }
+   \                     adc_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    392          #pragma vector=URX0_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    393          __interrupt void urx0_ISR(void) { catch_stray_irq(); }
+   \                     urx0_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    394          #pragma vector=URX1_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    395          __interrupt void urx1_ISR(void) { catch_stray_irq(); }
+   \                     urx1_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    396          #pragma vector=ENC_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    397          __interrupt void enc_ISR(void) { catch_stray_irq(); }
+   \                     enc_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    398          #pragma vector=ST_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    399          __interrupt void st_ISR(void) { catch_stray_irq(); }
+   \                     st_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    400          #pragma vector=UTX0_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    401          __interrupt void utx0_ISR(void) { catch_stray_irq(); }
+   \                     utx0_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    402          #pragma vector=DMA_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    403          __interrupt void dma_ISR(void) { catch_stray_irq(); }
+   \                     dma_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    404          #pragma vector=T2_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    405          __interrupt void t2_ISR(void) { catch_stray_irq(); }
+   \                     t2_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    406          #pragma vector=UTX1_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    407          __interrupt void utx1_ISR(void) { catch_stray_irq(); }
+   \                     utx1_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    408          #pragma vector=P1INT_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    409          __interrupt void p1_ISR(void) { catch_stray_irq(); }
+   \                     p1_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+    410          #pragma vector=WDT_VECTOR
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    411          __interrupt void wdt_ISR(void) { catch_stray_irq(); }
+   \                     wdt_ISR:
+   \   000000   C0E0         PUSH    A
+   \   000002   74F2         MOV     A,#-0xe
+   \   000004   12....       LCALL   ?INTERRUPT_ENTER_XSP
+   \   000007                ; Saved register size: 14
+   \   000007                ; Auto size: 0
+   \   000007                ; Setup parameters for call to function catch_stray_irq
+   \   000007   12....       LCALL   catch_stray_irq
+   \   00000A   7F01         MOV     R7,#0x1
+   \   00000C   02....       LJMP    ?INTERRUPT_LEAVE_XSP
+
+   \                                 In  segment INTVEC, offset 0x3, root
+   \                     `??ISR_RFTXRX??INTVEC 3`:
+   \   000003   02....       LJMP       (ISR_RFTXRX)
+
+   \                                 In  segment INTVEC, offset 0xb, root
+   \                     `??adc_ISR??INTVEC 11`:
+   \   00000B   02....       LJMP       (adc_ISR)
+
+   \                                 In  segment INTVEC, offset 0x13, root
+   \                     `??urx0_ISR??INTVEC 19`:
+   \   000013   02....       LJMP       (urx0_ISR)
+
+   \                                 In  segment INTVEC, offset 0x1b, root
+   \                     `??urx1_ISR??INTVEC 27`:
+   \   00001B   02....       LJMP       (urx1_ISR)
+
+   \                                 In  segment INTVEC, offset 0x23, root
+   \                     `??enc_ISR??INTVEC 35`:
+   \   000023   02....       LJMP       (enc_ISR)
+
+   \                                 In  segment INTVEC, offset 0x2b, root
+   \                     `??st_ISR??INTVEC 43`:
+   \   00002B   02....       LJMP       (st_ISR)
+
+   \                                 In  segment INTVEC, offset 0x3b, root
+   \                     `??utx0_ISR??INTVEC 59`:
+   \   00003B   02....       LJMP       (utx0_ISR)
+
+   \                                 In  segment INTVEC, offset 0x43, root
+   \                     `??dma_ISR??INTVEC 67`:
+   \   000043   02....       LJMP       (dma_ISR)
+
+   \                                 In  segment INTVEC, offset 0x4b, root
+   \                     `??t1Timer_ISR??INTVEC 75`:
+   \   00004B   02....       LJMP       (t1Timer_ISR)
+
+   \                                 In  segment INTVEC, offset 0x53, root
+   \                     `??t2_ISR??INTVEC 83`:
+   \   000053   02....       LJMP       (t2_ISR)
+
+   \                                 In  segment INTVEC, offset 0x63, root
+   \                     `??timer4_ISR??INTVEC 99`:
+   \   000063   02....       LJMP       (timer4_ISR)
+
+   \                                 In  segment INTVEC, offset 0x73, root
+   \                     `??utx1_ISR??INTVEC 115`:
+   \   000073   02....       LJMP       (utx1_ISR)
+
+   \                                 In  segment INTVEC, offset 0x7b, root
+   \                     `??p1_ISR??INTVEC 123`:
+   \   00007B   02....       LJMP       (p1_ISR)
+
+   \                                 In  segment INTVEC, offset 0x83, root
+   \                     `??rf_ISR??INTVEC 131`:
+   \   000083   02....       LJMP       (rf_ISR)
+
+   \                                 In  segment INTVEC, offset 0x8b, root
+   \                     `??wdt_ISR??INTVEC 139`:
+   \   00008B   02....       LJMP       (wdt_ISR)
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_1c200:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_1c200>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_1c200>`:
+   \   000000   00C20100     DD 115200
+
+   Maximum stack usage in bytes:
+
+     Function                   ISTACK PSTACK XSTACK
+     --------                   ------ ------ ------
+     ISR_RFTXRX                     0      0     14
+       -> radio_rftxrx              0      0     28
+     adc_ISR                        0      0     14
+       -> catch_stray_irq           0      0     28
+     catch_stray_irq                0      0     14
+     dma_ISR                        0      0     14
+       -> catch_stray_irq           0      0     28
+     enc_ISR                        0      0     14
+       -> catch_stray_irq           0      0     28
+     main                           0      0      0
+       -> flash_byte_read           0      0      0
+       -> flash_byte_read           0      0      0
+       -> usbUartInit               0      0      0
+       -> usbUartProcess            0      0      0
+       -> authentication_config     0      0      0
+       -> authentication_main       0      0      0
+     p1_ISR                         0      0     14
+       -> catch_stray_irq           0      0     28
+     rf_ISR                         0      0     14
+       -> radio_rf_ISR              0      0     28
+     st_ISR                         0      0     14
+       -> catch_stray_irq           0      0     28
+     t1Timer_ISR                    0      0     14
+       -> set_timer1_cycles         0      0     28
+     t2_ISR                         0      0     14
+       -> catch_stray_irq           0      0     28
+     timer4_ISR                     0      0     14
+       -> usbUartProcess            0      0     28
+     urx0_ISR                       0      0     14
+       -> catch_stray_irq           0      0     28
+     urx1_ISR                       0      0     14
+       -> catch_stray_irq           0      0     28
+     usb_decode                     0      0      9
+     utx0_ISR                       0      0     14
+       -> catch_stray_irq           0      0     28
+     utx1_ISR                       0      0     14
+       -> catch_stray_irq           0      0     28
+     wdt_ISR                        0      0     14
+       -> catch_stray_irq           0      0     28
+
+
+   Segment part sizes:
+
+     Function/Label                      Bytes
+     --------------                      -----
+     _A_P1                                  1
+     IEN2                                   1
+     _A_IEN0                                1
+     IP0                                    1
+     _A_IEN1                                1
+     IP1                                    1
+     SLEEP                                  1
+     _A_IRCON                               1
+     CLKCON                                 1
+     _A_TIMIF                               1
+     T1CTL                                  1
+     T4CTL                                  1
+     T4CCTL0                                1
+     T4CC0                                  1
+     P0DIR                                  1
+     P1DIR                                  1
+     P2DIR                                  1
+     system_status                          1
+     authentication_on                      1
+     authentication_start_now               1
+     simpliciti_sync_buffer                19
+     simpliciti_sync_buffer_status          1
+     frequoffset                            1
+     main                                 214
+     usb_decode                           150
+     rf_ISR                                23
+     ISR_RFTXRX                            21
+     t1Timer_ISR                           42
+     timer4_ISR                            17
+     catch_stray_irq                        2
+     adc_ISR                               15
+     urx0_ISR                              15
+     urx1_ISR                              15
+     enc_ISR                               15
+     st_ISR                                15
+     utx0_ISR                              15
+     dma_ISR                               15
+     t2_ISR                                15
+     utx1_ISR                              15
+     p1_ISR                                15
+     wdt_ISR                               15
+     ??ISR_RFTXRX??INTVEC 3                 3
+     ??adc_ISR??INTVEC 11                   3
+     ??urx0_ISR??INTVEC 19                  3
+     ??urx1_ISR??INTVEC 27                  3
+     ??enc_ISR??INTVEC 35                   3
+     ??st_ISR??INTVEC 43                    3
+     ??utx0_ISR??INTVEC 59                  3
+     ??dma_ISR??INTVEC 67                   3
+     ??t1Timer_ISR??INTVEC 75               3
+     ??t2_ISR??INTVEC 83                    3
+     ??timer4_ISR??INTVEC 99                3
+     ??utx1_ISR??INTVEC 115                 3
+     ??p1_ISR??INTVEC 123                   3
+     ??rf_ISR??INTVEC 131                   3
+     ??wdt_ISR??INTVEC 139                  3
+     __Constant_1c200                       4
+     ?<Initializer for __Constant_1c200>    4
+
+ 
+  45 bytes in segment INTVEC
+ 634 bytes in segment NEAR_CODE
+  17 bytes in segment SFR_AN
+   4 bytes in segment XDATA_I
+   4 bytes in segment XDATA_ID
+  24 bytes in segment XDATA_Z
+ 
+ 634 bytes of CODE  memory (+ 49 bytes shared)
+   0 bytes of DATA  memory (+ 17 bytes shared)
+  24 bytes of XDATA memory (+  4 bytes shared)
+
+Errors: none
+Warnings: 11

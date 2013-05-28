@@ -1,0 +1,512 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Jun/2012  09:07:49 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\usb\library\ccxx11\usb_suspe #
+#                          nd.c                                               #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\lib #
+#                          rary\ccxx11\usb_suspend.c" -D ISM_EU -D            #
+#                          MCU_H=<ioCC1111.h> -D chip=1111 -D                 #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Limited IAR Kickstart (Europe)\Obj\" -e          #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\usb_suspend.lst            #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\Obj\usb_suspend.r51             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\usb\library\ccxx11\usb_suspend.c
+      1          /***********************************************************************************
+      2          
+      3              Filename:     usb_framework.c
+      4          
+      5              Description:  USB library common functionality.
+      6          
+      7          ***********************************************************************************/
+      8          
+      9          /// \addtogroup module_usb_suspend
+     10          /// @{
+     11          #include "usb_firmware_library_headers.h"
+     12          #include "hal_int.h"
+     13          #include "hal_mcu.h"
+     14          #include "hal_board.h"
+
+   \                                 In  segment SFR_AN, at 0x89
+   \   unsigned char volatile __sfr P0IFG
+   \                     P0IFG:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb8
+   \   union <unnamed> volatile __sfr _A_IEN1
+   \                     _A_IEN1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xc0
+   \   union <unnamed> volatile __sfr _A_IRCON
+   \                     _A_IRCON:
+   \   000000                DS 1
+     15          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     16          static __xdata uint8 usbsuspEnterXdata[14];
+   \                     usbsuspEnterXdata:
+   \   000000                DS 14
+   \   00000E                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     17          static __xdata VFPTR pUsbsuspEnterXdata = NULL;
+   \                     pUsbsuspEnterXdata:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+     18          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     19          __xdata VFPTR pFnSuspendEnterHook=  NULL;
+   \                     pFnSuspendEnterHook:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     20          __xdata VFPTR pFnSuspendExitHook=   NULL;
+   \                     pFnSuspendExitHook:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+     21          
+     22          
+     23          
+     24          /** \brief Puts the chip into power mode 1 during USB suspend.
+     25           *
+     26           * This function must be called from main (i.e. not from interrupt context) upon the reception of a
+     27           * \ref USBIRQ_EVENT_SUSPEND event. To comply with the USB specification, this must happen within 10 ms
+     28           * after the event occurs. The chip will stay in power mode 1 until a USB resume or USB reset is detected
+     29           * on the USB bus, or remote wakeup is used. During this period, the MCU can only run code from
+     30           * interrupt context.
+     31           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     32          void usbsuspEnter(void)
+   \                     usbsuspEnter:
+     33          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     34             if (pFnSuspendEnterHook!=NULL)
+   \   000004   90....       MOV     DPTR,#pFnSuspendEnterHook
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F8           MOV     R0,A
+   \   000009   A3           INC     DPTR
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   F9           MOV     R1,A
+   \   00000C   E8           MOV     A,R0
+   \   00000D   49           ORL     A,R1
+   \   00000E   600E         JZ      ??usbsuspEnter_0
+     35                 pFnSuspendEnterHook();
+   \   000010                ; Setup parameters for indirect call
+   \   000010   90....       MOV     DPTR,#pFnSuspendEnterHook
+   \   000013   E0           MOVX    A,@DPTR
+   \   000014   F8           MOV     R0,A
+   \   000015   A3           INC     DPTR
+   \   000016   E0           MOVX    A,@DPTR
+   \   000017   F583         MOV     DPH,A
+   \   000019   8882         MOV     DPL,R0
+   \   00001B   12....       LCALL   ?CALL_IND
+     36          
+     37             // SLEEP &= ~0x03;     / ANL SLEEP, #0xFC
+     38             usbsuspEnterXdata[0] = 0x53;
+   \                     ??usbsuspEnter_0:
+   \   00001E   90....       MOV     DPTR,#usbsuspEnterXdata
+   \   000021   7453         MOV     A,#0x53
+   \   000023   F0           MOVX    @DPTR,A
+     39             usbsuspEnterXdata[1] = 0xBE;
+   \   000024   A3           INC     DPTR
+   \   000025   74BE         MOV     A,#-0x42
+   \   000027   F0           MOVX    @DPTR,A
+     40             usbsuspEnterXdata[2] = 0xFC;
+   \   000028   A3           INC     DPTR
+   \   000029   74FC         MOV     A,#-0x4
+   \   00002B   F0           MOVX    @DPTR,A
+     41          
+     42             // SLEEP |= 0x01;      / ORL SLEEP, #0x01
+     43             usbsuspEnterXdata[3] = 0x43;
+   \   00002C   A3           INC     DPTR
+   \   00002D   7443         MOV     A,#0x43
+   \   00002F   F0           MOVX    @DPTR,A
+     44             usbsuspEnterXdata[4] = 0xBE;
+   \   000030   A3           INC     DPTR
+   \   000031   74BE         MOV     A,#-0x42
+   \   000033   F0           MOVX    @DPTR,A
+     45             usbsuspEnterXdata[5] = 0x01;
+   \   000034   A3           INC     DPTR
+   \   000035   7401         MOV     A,#0x1
+   \   000037   F0           MOVX    @DPTR,A
+     46          
+     47             // PCON = 0x01;        / MOV PCON, #0x01
+     48             usbsuspEnterXdata[6] = 0x75;
+   \   000038   A3           INC     DPTR
+   \   000039   7475         MOV     A,#0x75
+   \   00003B   F0           MOVX    @DPTR,A
+     49             usbsuspEnterXdata[7] = 0x87;
+   \   00003C   A3           INC     DPTR
+   \   00003D   7487         MOV     A,#-0x79
+   \   00003F   F0           MOVX    @DPTR,A
+     50             usbsuspEnterXdata[8] = 0x01;
+   \   000040   A3           INC     DPTR
+   \   000041   7401         MOV     A,#0x1
+   \   000043   F0           MOVX    @DPTR,A
+     51          
+     52             // The CPU will be halted here while suspended (in PM1).
+     53          
+     54             // while (inSuspend);  / MOV A, inSuspend
+     55             usbsuspEnterXdata[9] = 0xE5;
+   \   000044   A3           INC     DPTR
+   \   000045   74E5         MOV     A,#-0x1b
+   \   000047   F0           MOVX    @DPTR,A
+     56             usbsuspEnterXdata[10] = (uint8) ((__data uint8 *) &usbirqData.inSuspend);
+   \   000048   74..         MOV     A,#usbirqData
+   \   00004A   2402         ADD     A,#0x2
+   \   00004C   A3           INC     DPTR
+   \   00004D   F0           MOVX    @DPTR,A
+     57          
+     58             // ... Restart ...     / JNZ -12
+     59             usbsuspEnterXdata[11] = 0x70;
+   \   00004E   A3           INC     DPTR
+   \   00004F   7470         MOV     A,#0x70
+   \   000051   F0           MOVX    @DPTR,A
+     60             usbsuspEnterXdata[12] = 0xF3;
+   \   000052   A3           INC     DPTR
+   \   000053   74F3         MOV     A,#-0xd
+   \   000055   F0           MOVX    @DPTR,A
+     61          
+     62             // return;             / RET
+     63             usbsuspEnterXdata[13] = 0x22;
+   \   000056   A3           INC     DPTR
+   \   000057   7422         MOV     A,#0x22
+   \   000059   F0           MOVX    @DPTR,A
+     64          
+     65             // Enable the resume and reset detection interrupt
+     66             HAL_USB_RESUME_INT_CLEAR();
+   \   00005A   758900       MOV     0x89,#0x0
+   \   00005D   C2C5         CLR     0xc0.5
+     67             HAL_USB_RESUME_INT_ENABLE();
+   \   00005F   D2BD         SETB    0xb8.5
+     68          
+     69             // Call the suspend loop routine from XDATA
+     70             // The routine is in XDATA so that usbsuspExit() wipe out the power-down instruction in the loop (by
+     71             // replacing "MOV PCON, #0x01" with three NOP instructions).
+     72             pUsbsuspEnterXdata = (VFPTR) ((uint16) usbsuspEnterXdata);
+   \   000061   78..         MOV     R0,#usbsuspEnterXdata & 0xff
+   \   000063   79..         MOV     R1,#(usbsuspEnterXdata >> 8) & 0xff
+   \   000065   90....       MOV     DPTR,#pUsbsuspEnterXdata
+   \   000068   E8           MOV     A,R0
+   \   000069   F0           MOVX    @DPTR,A
+   \   00006A   A3           INC     DPTR
+   \   00006B   E9           MOV     A,R1
+   \   00006C   F0           MOVX    @DPTR,A
+     73             pUsbsuspEnterXdata();
+   \   00006D                ; Setup parameters for indirect call
+   \   00006D   8882         MOV     DPL,R0
+   \   00006F   8983         MOV     DPH,R1
+   \   000071   12....       LCALL   ?CALL_IND
+     74          
+     75             if (pFnSuspendExitHook!=NULL)
+   \   000074   90....       MOV     DPTR,#pFnSuspendExitHook
+   \   000077   E0           MOVX    A,@DPTR
+   \   000078   F8           MOV     R0,A
+   \   000079   A3           INC     DPTR
+   \   00007A   E0           MOVX    A,@DPTR
+   \   00007B   F9           MOV     R1,A
+   \   00007C   E8           MOV     A,R0
+   \   00007D   49           ORL     A,R1
+   \   00007E   600E         JZ      ??usbsuspEnter_1
+     76                 pFnSuspendExitHook();
+   \   000080                ; Setup parameters for indirect call
+   \   000080   90....       MOV     DPTR,#pFnSuspendExitHook
+   \   000083   E0           MOVX    A,@DPTR
+   \   000084   F8           MOV     R0,A
+   \   000085   A3           INC     DPTR
+   \   000086   E0           MOVX    A,@DPTR
+   \   000087   F583         MOV     DPH,A
+   \   000089   8882         MOV     DPL,R0
+   \   00008B   12....       LCALL   ?CALL_IND
+     77          
+     78          } // usbsuspEnter
+   \                     ??usbsuspEnter_1:
+   \   00008E   D083         POP     DPH
+   \   000090   D082         POP     DPL
+   \   000092   22           RET
+   \   000093                REQUIRE P0IFG
+   \   000093                REQUIRE _A_IRCON
+   \   000093                REQUIRE _A_IEN1
+     79          
+     80          
+     81          
+     82          
+     83          /** \brief Attempts USB remote wakeup.
+     84           *
+     85           * This function can be called from interrupt context while the USB device is suspend mode. If the device
+     86           * is privileged to do so (see \c usbfwData.remoteWakeup and the \ref USBSR_EVENT_REMOTE_WAKEUP_ENABLED
+     87           * and \ref USBSR_EVENT_REMOTE_WAKEUP_DISABLED events), remote wakeup will be performed. Note that this
+     88           * function will block for 10 ms while the resume signal is set on the bus. Note: This function can only
+     89           * be called when the 48 MHz XOSC is stable.
+     90           *
+     91           * \return
+     92           *     \c TRUE if the remote wakeup was performed (the privilege had been granted), otherwise \c FALSE
+     93           *     (the device is still in suspend mode).
+     94           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     95          uint8 usbsuspDoRemoteWakeup(void)
+   \                     usbsuspDoRemoteWakeup:
+     96          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     97          
+     98             // Make sure that it's OK
+     99             if (!usbfwData.remoteWakeup) return FALSE;
+   \   000004   90....       MOV     DPTR,#usbfwData + 18
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   7004         JNZ     ??usbsuspDoRemoteWakeup_0
+   \   00000A   7900         MOV     R1,#0x0
+   \   00000C   8027         SJMP    ??usbsuspDoRemoteWakeup_1
+    100          
+    101             halIntOff();
+   \                     ??usbsuspDoRemoteWakeup_0:
+   \   00000E                ; Setup parameters for call to function halIntOff
+   \   00000E   12....       LCALL   halIntOff
+    102          
+    103             // Make sure that the suspend loop does not power down the chip again
+    104             usbsuspStopPm1();
+   \   000011                ; Setup parameters for call to function usbsuspStopPm1
+   \   000011   12....       LCALL   usbsuspStopPm1
+    105             usbirqData.inSuspend = FALSE;
+   \   000014   75..00       MOV     usbirqData + 2,#0x0
+    106          
+    107             // Perform remote wakeup by holding the USB resume signal for 10 ms
+    108             USBPOW |= 0x04;
+   \   000017   90DE01       MOV     DPTR,#-0x21ff
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   D2E2         SETB    0xE0 /* A   */.2
+   \   00001D   F0           MOVX    @DPTR,A
+    109             halMcuWaitMs(10); // ms
+   \   00001E                ; Setup parameters for call to function halMcuWaitMs
+   \   00001E   7A0A         MOV     R2,#0xa
+   \   000020   7B00         MOV     R3,#0x0
+   \   000022   12....       LCALL   halMcuWaitMs
+    110             USBPOW &= ~0x04;
+   \   000025   E0           MOVX    A,@DPTR
+   \   000026   C2E2         CLR     0xE0 /* A   */.2
+   \   000028   F0           MOVX    @DPTR,A
+    111          
+    112             // Clear and disable the interrupt flag
+    113             HAL_USB_RESUME_INT_DISABLE();
+   \   000029   C2BD         CLR     0xb8.5
+    114             HAL_USB_RESUME_INT_CLEAR();
+   \   00002B   758900       MOV     0x89,#0x0
+   \   00002E   C2C5         CLR     0xc0.5
+    115          
+    116             halIntOn();
+   \   000030                ; Setup parameters for call to function halIntOn
+   \   000030   12....       LCALL   halIntOn
+    117          
+    118             return TRUE;
+   \   000033   7901         MOV     R1,#0x1
+   \                     ??usbsuspDoRemoteWakeup_1:
+   \   000035   D083         POP     DPH
+   \   000037   D082         POP     DPL
+   \   000039   22           RET
+   \   00003A                REQUIRE _A_IEN1
+   \   00003A                REQUIRE P0IFG
+   \   00003A                REQUIRE _A_IRCON
+    119          
+    120          } // usbsuspDoRemoteWakeup
+    121          
+    122          
+    123          
+    124          
+    125          /** \brief Internal function, do not call from application..
+    126           *
+    127           * This internal function is called by the P0 "USB resume and reset" detection interrupt, and by
+    128           * \ref usbsuspDoRemoteWakeup() to prevent \ref usbsuspEnter() from putting the device back in power
+    129           * mode 1. \ref usbsuspEnter() will, however, not break out of the suspend loop until the resume event
+    130           * has been received.
+    131           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    132          void usbsuspStopPm1(void)
+   \                     usbsuspStopPm1:
+    133          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    134          
+    135             // Disable the "ORL SLEEP, #0x01" instruction to make sure we avoid having
+    136             // SLEEP.MODE != 0 after MCU has resumed to active mode. Otherwise all port
+    137             // and sleep timer interrupts will be blocked.
+    138             usbsuspEnterXdata[5] = 0x00; // Change it to: "ORL SLEEP, #0x00" (no effect)
+   \   000004   90....       MOV     DPTR,#usbsuspEnterXdata + 5
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+    139          
+    140             // Remove the "MOV PCON, #0x01" instruction (which puts MCU into power mode 1) from the suspend
+    141             // loop
+    142             usbsuspEnterXdata[6] = 0x00; // NOP
+   \   000009   A3           INC     DPTR
+   \   00000A   F0           MOVX    @DPTR,A
+    143             usbsuspEnterXdata[7] = 0x00; // NOP
+   \   00000B   A3           INC     DPTR
+   \   00000C   F0           MOVX    @DPTR,A
+    144             usbsuspEnterXdata[8] = 0x00; // NOP
+   \   00000D   A3           INC     DPTR
+   \   00000E   F0           MOVX    @DPTR,A
+    145          
+    146          } // usbsuspStopPm1
+   \   00000F   D083         POP     DPH
+   \   000011   D082         POP     DPL
+   \   000013   22           RET
+    147          
+    148          //@}
+    149          /*
+    150          +------------------------------------------------------------------------------
+    151          |  Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+    152          |
+    153          |  IMPORTANT: Your use of this Software is limited to those specific rights
+    154          |  granted under the terms of a software license agreement between the user who
+    155          |  downloaded the software, his/her employer (which must be your employer) and
+    156          |  Texas Instruments Incorporated (the "License"). You may not use this Software
+    157          |  unless you agree to abide by the terms of the License. The License limits
+    158          |  your use, and you acknowledge, that the Software may not be modified, copied
+    159          |  or distributed unless embedded on a Texas Instruments microcontroller or used
+    160          |  solely and exclusively in conjunction with a Texas Instruments radio
+    161          |  frequency transceiver, which is integrated into your product. Other than for
+    162          |  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+    163          |  works of, modify, distribute, perform, display or sell this Software and/or
+    164          |  its documentation for any purpose.
+    165          |
+    166          |  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+    167          |  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+    168          |  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+    169          |  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+    170          |  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+    171          |  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+    172          |  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING
+    173          |  BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+    174          |  CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+    175          |  SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+    176          |  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+    177          |
+    178          |  Should you have any questions regarding your right to use this Software,
+    179          |  contact Texas Instruments Incorporated at www.TI.com.
+    180          |
+    181          +------------------------------------------------------------------------------
+    182          */
+
+   Maximum stack usage in bytes:
+
+     Function              ISTACK PSTACK XSTACK
+     --------              ------ ------ ------
+     usbsuspDoRemoteWakeup     2      0      0
+       -> halIntOff            4      0      0
+       -> usbsuspStopPm1       4      0      0
+       -> halMcuWaitMs         4      0      0
+       -> halIntOn             4      0      0
+     usbsuspEnter              2      0      0
+     usbsuspStopPm1            2      0      0
+
+
+   Segment part sizes:
+
+     Function/Label        Bytes
+     --------------        -----
+     P0IFG                    1
+     _A_IEN1                  1
+     _A_IRCON                 1
+     usbsuspEnterXdata       14
+     pUsbsuspEnterXdata       2
+     pFnSuspendEnterHook      2
+     pFnSuspendExitHook       2
+     usbsuspEnter           147
+     usbsuspDoRemoteWakeup   58
+     usbsuspStopPm1          20
+
+ 
+ 225 bytes in segment NEAR_CODE
+   3 bytes in segment SFR_AN
+  20 bytes in segment XDATA_Z
+ 
+ 225 bytes of CODE  memory
+   0 bytes of DATA  memory (+ 3 bytes shared)
+  20 bytes of XDATA memory
+
+Errors: none
+Warnings: none

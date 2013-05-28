@@ -1,0 +1,760 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:38 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\nwk_ap #
+#                          plications\nwk_ping.c                              #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\nwk_ping.c" -D     #
+#                          CC1111EM -D ISM_EU -D MCU_H=<ioCC1111.h> -D        #
+#                          chip=1111 -D RF_FREQUENCY=868000 -D MRFI_CC1111    #
+#                          -D NDEBUG -lC "C:\Documents and                    #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\List\" -o    #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\" -e --no_unroll            #
+#                          --no_inline --no_tbaa --debug --core=plain         #
+#                          --dptr=16,1 --data_model=large --code_model=near   #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\nwk_ping.lst               #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\nwk_ping.r51                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\nwk_applications\nwk_ping.c
+      1          /**************************************************************************************************
+      2            Filename:       nwk_ping.c
+      3            Revised:        $Date: 2009-01-18 16:01:08 -0800 (Sun, 18 Jan 2009) $
+      4            Revision:       $Revision: 18796 $
+      5            Author:         $Author: lfriedman $
+      6          
+      7            Description:    This file supports the SimpliciTI Ping network application.
+      8          
+      9            Copyright 2007-2009 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+     12            the terms of a software license agreement between the user who downloaded the software,
+     13            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     14            "License"). You may not use this Software unless you agree to abide by the terms of the
+     15            License. The License limits your use, and you acknowledge, that the Software may not be
+     16            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     17            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     18            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     19            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     20            perform, display or sell this Software and/or its documentation for any purpose.
+     21          
+     22            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     23            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     24            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     25            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     26            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     27            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     28            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     29            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     30            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     31          
+     32            Should you have any questions regarding your right to use this Software,
+     33            contact Texas Instruments Incorporated at www.TI.com.
+     34          **************************************************************************************************/
+     35          
+     36          
+     37          /******************************************************************************
+     38           * INCLUDES
+     39           */
+     40          #include <string.h>
+     41          #include "bsp.h"
+     42          #include "mrfi.h"
+     43          #include "nwk_types.h"
+     44          #include "nwk_frame.h"
+     45          #include "nwk.h"
+     46          #include "nwk_ping.h"
+     47          #include "nwk_globals.h"
+     48          #include "nwk_api.h"
+     49          #include "nwk_freq.h"
+     50          #include "nwk_security.h"
+     51          
+     52          /******************************************************************************
+     53           * MACROS
+     54           */
+     55          
+     56          /******************************************************************************
+     57           * CONSTANTS AND DEFINES
+     58           */
+     59          
+     60          /******************************************************************************
+     61           * TYPEDEFS
+     62           */
+     63          
+     64          /******************************************************************************
+     65           * LOCAL VARIABLES
+     66           */
+     67          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     68          static volatile uint8_t sTid = 0;
+   \                     sTid:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     69          
+     70          /******************************************************************************
+     71           * LOCAL FUNCTIONS
+     72           */
+     73          static void smpl_send_ping_reply(mrfiPacket_t *);
+     74          static void handlePingRequest(mrfiPacket_t *);
+     75          
+     76          /******************************************************************************
+     77           * GLOBAL VARIABLES
+     78           */
+     79          
+     80          /******************************************************************************
+     81           * GLOBAL FUNCTIONS
+     82           */
+     83          
+     84          /******************************************************************************
+     85           * @fn          nwk_pingInit
+     86           *
+     87           * @brief       Initialize Ping application.
+     88           *
+     89           * input parameters
+     90           *
+     91           * output parameters
+     92           *
+     93           * @return   void
+     94           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     95          void nwk_pingInit(void)
+   \                     nwk_pingInit:
+     96          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     97            sTid = MRFI_RandomByte();
+   \   000004                ; Setup parameters for call to function MRFI_RandomByte
+   \   000004   12....       LCALL   MRFI_RandomByte
+   \   000007   E9           MOV     A,R1
+   \   000008   90....       MOV     DPTR,#sTid
+   \   00000B   F0           MOVX    @DPTR,A
+     98          
+     99            return;
+   \   00000C   D083         POP     DPH
+   \   00000E   D082         POP     DPL
+   \   000010   22           RET
+    100          }
+    101          
+    102          /******************************************************************************
+    103           * @fn          nwk_ping
+    104           *
+    105           * @brief       Called from the application level to ping a peer. A small
+    106           *              payload is sent that includes a tid to detect correct reply.
+    107           *              Caller does not supply payload.
+    108           *
+    109           * input parameters
+    110           * @param   lid     - Link ID representing peer to ping
+    111           *
+    112           * output parameters
+    113           *
+    114           * @return   SMPL_SUCCESS   valid reply received
+    115           *           SMPL_TIMEOUT   no valid reply received
+    116           *           SMPL_NO_CHANNEL  no channels returned on a scan
+    117           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    118          smplStatus_t nwk_ping(linkID_t lid)
+   \                     nwk_ping:
+    119          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 9
+   \   000005   74F7         MOV     A,#-0x9
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   89..         MOV     ?V0 + 0,R1
+    120            connInfo_t  *pCInfo   = nwk_getConnInfo(lid);
+   \   00000C                ; Setup parameters for call to function nwk_getConnInfo
+   \   00000C   12....       LCALL   nwk_getConnInfo
+   \   00000F   8A..         MOV     ?V0 + 2,R2
+   \   000011   8B..         MOV     ?V0 + 3,R3
+   \   000013   AE..         MOV     R6,?V0 + 2
+   \   000015   AF..         MOV     R7,?V0 + 3
+    121            smplStatus_t rc       = SMPL_BAD_PARAM;
+    122            uint8_t      done     = 0;
+   \   000017   75..00       MOV     ?V0 + 1,#0x0
+    123            uint8_t      repeatIt = 2;
+    124            uint8_t      msg[MAX_PING_APP_FRAME];
+    125            uint8_t      radioState = MRFI_GetRadioState();
+   \   00001A                ; Setup parameters for call to function MRFI_GetRadioState
+   \   00001A   12....       LCALL   MRFI_GetRadioState
+   \   00001D   E9           MOV     A,R1
+   \   00001E   F5..         MOV     ?V0 + 2,A
+    126            union
+    127            {
+    128              ioctlRawSend_t    send;
+    129              ioctlRawReceive_t recv;
+    130            } ioctl_info;
+    131          
+    132            if (!pCInfo || (SMPL_LINKID_USER_UUD == lid))
+   \   000020   EE           MOV     A,R6
+   \   000021   4F           ORL     A,R7
+   \   000022   6006         JZ      ??nwk_ping_0
+   \   000024   74FF         MOV     A,#-0x1
+   \   000026   65..         XRL     A,?V0 + 0
+   \   000028   7005         JNZ     ??nwk_ping_1
+    133            {
+    134              /* either link ID bogus or tried to ping the unconnected user datagram link ID. */
+    135              return rc;
+   \                     ??nwk_ping_0:
+   \   00002A   7902         MOV     R1,#0x2
+   \   00002C   02....       LJMP    ??nwk_ping_2
+    136            }
+    137          
+    138            do
+    139            {
+    140          #if defined(FREQUENCY_AGILITY) && !defined(ACCESS_POINT)
+    141              uint8_t     i, numChan;
+    142              freqEntry_t channels[NWK_FREQ_TBL_SIZE];
+    143          
+    144              if (repeatIt == 2)
+    145              {
+    146                /* If FA enabled, first time through set up so that the 'for'
+    147                 * loop checks the current channel. This saves time (no scan)
+    148                 * and is very likely to succeed. Populate the proper strucure.
+    149                 */
+    150                SMPL_Ioctl(IOCTL_OBJ_FREQ, IOCTL_ACT_GET, channels);
+    151                numChan = 1;
+    152              }
+    153              else
+    154              {
+    155                /* If we get here we must scan for the channel we're now on */
+    156                if (!(numChan=nwk_scanForChannels(channels)))
+    157                {
+    158                  return SMPL_NO_CHANNEL;
+    159                }
+    160              }
+    161              /* Either we scan next time through or we're done */
+    162              repeatIt--;
+    163          
+    164              /* this loop Pings on each channel (probably only 1) looking
+    165               * for peer.
+    166               */
+    167              for (i=0; i<numChan && !done; ++i)
+    168              {
+    169                nwk_setChannel(&channels[i]);
+    170          #else
+    171              {
+    172                repeatIt = 0;
+    173          #endif  /* defined(FREQUENCY_AGILITY) && !defined(ACCESS_POINT) */
+    174          
+    175                ioctl_info.send.addr = (addr_t *)pCInfo->peerAddr;
+   \                     ??nwk_ping_1:
+   \   00002F   EE           MOV     A,R6
+   \   000030   2403         ADD     A,#0x3
+   \   000032   F8           MOV     R0,A
+   \   000033   EF           MOV     A,R7
+   \   000034   3400         ADDC    A,#0x0
+   \   000036   F9           MOV     R1,A
+   \   000037   7402         MOV     A,#0x2
+   \   000039   12....       LCALL   ?XSTACK_DISP0_8
+   \   00003C   E8           MOV     A,R0
+   \   00003D   F0           MOVX    @DPTR,A
+   \   00003E   A3           INC     DPTR
+   \   00003F   E9           MOV     A,R1
+   \   000040   F0           MOVX    @DPTR,A
+    176                ioctl_info.send.msg  = msg;
+   \   000041   85..82       MOV     DPL,?XSP + 0
+   \   000044   85..83       MOV     DPH,?XSP + 1
+   \   000047   A882         MOV     R0,DPL
+   \   000049   A983         MOV     R1,DPH
+   \   00004B   7404         MOV     A,#0x4
+   \   00004D   12....       LCALL   ?XSTACK_DISP0_8
+   \   000050   E8           MOV     A,R0
+   \   000051   F0           MOVX    @DPTR,A
+   \   000052   A3           INC     DPTR
+   \   000053   E9           MOV     A,R1
+   \   000054   F0           MOVX    @DPTR,A
+    177                ioctl_info.send.len  = sizeof(msg);
+   \   000055   7406         MOV     A,#0x6
+   \   000057   12....       LCALL   ?XSTACK_DISP0_8
+   \   00005A   7402         MOV     A,#0x2
+   \   00005C   F0           MOVX    @DPTR,A
+    178                ioctl_info.send.port = SMPL_PORT_PING;
+   \   00005D   7407         MOV     A,#0x7
+   \   00005F   12....       LCALL   ?XSTACK_DISP0_8
+   \   000062   7401         MOV     A,#0x1
+   \   000064   F0           MOVX    @DPTR,A
+    179          
+    180                /* fill in msg */
+    181                msg[PB_REQ_OS] = PING_REQ_PING;
+   \   000065   85..82       MOV     DPL,?XSP + 0
+   \   000068   85..83       MOV     DPH,?XSP + 1
+   \   00006B   F0           MOVX    @DPTR,A
+    182                msg[PB_TID_OS] = sTid;
+   \   00006C   90....       MOV     DPTR,#sTid
+   \   00006F   E0           MOVX    A,@DPTR
+   \   000070   C0E0         PUSH    A
+   \   000072   7401         MOV     A,#0x1
+   \   000074   12....       LCALL   ?XSTACK_DISP0_8
+   \   000077   D0E0         POP     A
+   \   000079   F0           MOVX    @DPTR,A
+    183          
+    184                SMPL_Ioctl(IOCTL_OBJ_RAW_IO, IOCTL_ACT_WRITE, &ioctl_info.send);
+   \   00007A                ; Setup parameters for call to function SMPL_Ioctl
+   \   00007A   7402         MOV     A,#0x2
+   \   00007C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00007F   AC82         MOV     R4,DPL
+   \   000081   AD83         MOV     R5,DPH
+   \   000083   7A03         MOV     R2,#0x3
+   \   000085   7902         MOV     R1,#0x2
+   \   000087   12....       LCALL   SMPL_Ioctl
+    185          
+    186                ioctl_info.recv.port = SMPL_PORT_PING;
+   \   00008A   7407         MOV     A,#0x7
+   \   00008C   12....       LCALL   ?XSTACK_DISP0_8
+   \   00008F   7401         MOV     A,#0x1
+   \   000091   F0           MOVX    @DPTR,A
+    187                ioctl_info.recv.msg  = msg;
+   \   000092   85..82       MOV     DPL,?XSP + 0
+   \   000095   85..83       MOV     DPH,?XSP + 1
+   \   000098   A882         MOV     R0,DPL
+   \   00009A   A983         MOV     R1,DPH
+   \   00009C   7404         MOV     A,#0x4
+   \   00009E   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000A1   E8           MOV     A,R0
+   \   0000A2   F0           MOVX    @DPTR,A
+   \   0000A3   A3           INC     DPTR
+   \   0000A4   E9           MOV     A,R1
+   \   0000A5   F0           MOVX    @DPTR,A
+    188                ioctl_info.recv.addr = 0;
+   \   0000A6   7402         MOV     A,#0x2
+   \   0000A8   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000AB   E4           CLR     A
+   \   0000AC   F0           MOVX    @DPTR,A
+   \   0000AD   A3           INC     DPTR
+   \   0000AE   F0           MOVX    @DPTR,A
+    189          
+    190                NWK_CHECK_FOR_SETRX(radioState);
+   \   0000AF   7403         MOV     A,#0x3
+   \   0000B1   65..         XRL     A,?V0 + 2
+   \   0000B3   600C         JZ      ??nwk_ping_3
+   \   0000B5   7401         MOV     A,#0x1
+   \   0000B7   65..         XRL     A,?V0 + 2
+   \   0000B9   7003         JNZ     ??nwk_ping_4
+   \   0000BB                ; Setup parameters for call to function MRFI_WakeUp
+   \   0000BB   12....       LCALL   MRFI_WakeUp
+   \                     ??nwk_ping_4:
+   \   0000BE                ; Setup parameters for call to function MRFI_RxOn
+   \   0000BE   12....       LCALL   MRFI_RxOn
+    191                NWK_REPLY_DELAY();
+   \                     ??nwk_ping_3:
+   \   0000C1                ; Setup parameters for call to function MRFI_ReplyDelay
+   \   0000C1   12....       LCALL   MRFI_ReplyDelay
+    192                NWK_CHECK_FOR_RESTORE_STATE(radioState);
+   \   0000C4   7403         MOV     A,#0x3
+   \   0000C6   65..         XRL     A,?V0 + 2
+   \   0000C8   600E         JZ      ??nwk_ping_5
+   \   0000CA   7401         MOV     A,#0x1
+   \   0000CC   65..         XRL     A,?V0 + 2
+   \   0000CE   7005         JNZ     ??nwk_ping_6
+   \   0000D0                ; Setup parameters for call to function MRFI_Sleep
+   \   0000D0   12....       LCALL   MRFI_Sleep
+   \   0000D3   8003         SJMP    ??nwk_ping_5
+   \                     ??nwk_ping_6:
+   \   0000D5                ; Setup parameters for call to function MRFI_RxIdle
+   \   0000D5   12....       LCALL   MRFI_RxIdle
+    193          
+    194                if (SMPL_SUCCESS == SMPL_Ioctl(IOCTL_OBJ_RAW_IO, IOCTL_ACT_READ, &ioctl_info.recv))
+   \                     ??nwk_ping_5:
+   \   0000D8                ; Setup parameters for call to function SMPL_Ioctl
+   \   0000D8   7402         MOV     A,#0x2
+   \   0000DA   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000DD   AC82         MOV     R4,DPL
+   \   0000DF   AD83         MOV     R5,DPH
+   \   0000E1   7A02         MOV     R2,#0x2
+   \   0000E3   7902         MOV     R1,#0x2
+   \   0000E5   12....       LCALL   SMPL_Ioctl
+   \   0000E8   E9           MOV     A,R1
+   \   0000E9   7009         JNZ     ??nwk_ping_7
+    195                {
+    196                  repeatIt = 0;
+    197                  done     = 1;
+   \   0000EB   75..01       MOV     ?V0 + 1,#0x1
+    198                  sTid++;   /* guard against duplicates */
+   \   0000EE   90....       MOV     DPTR,#sTid
+   \   0000F1   E0           MOVX    A,@DPTR
+   \   0000F2   04           INC     A
+   \   0000F3   F0           MOVX    @DPTR,A
+    199                }
+    200              }
+    201            } while (repeatIt);
+    202          
+    203            return done ? SMPL_SUCCESS : SMPL_TIMEOUT;
+   \                     ??nwk_ping_7:
+   \   0000F4   E5..         MOV     A,?V0 + 1
+   \   0000F6   6004         JZ      ??nwk_ping_8
+   \   0000F8   7900         MOV     R1,#0x0
+   \   0000FA   8002         SJMP    ??nwk_ping_2
+   \                     ??nwk_ping_8:
+   \   0000FC   7901         MOV     R1,#0x1
+   \                     ??nwk_ping_2:
+   \   0000FE   7409         MOV     A,#0x9
+   \   000100   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000103   7F04         MOV     R7,#0x4
+   \   000105   02....       LJMP    ?FUNC_LEAVE_XDATA
+    204          
+    205          }
+    206          
+    207          /******************************************************************************
+    208           * @fn          smpl_send_ping_reply
+    209           *
+    210           * @brief       Send a reply to a ping request.
+    211           *
+    212           * input parameters
+    213           * @param   frame     - pointer to frame containing request
+    214           *
+    215           * output parameters
+    216           *
+    217           * @return   void
+    218           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    219          static void smpl_send_ping_reply(mrfiPacket_t *frame)
+   \                     smpl_send_ping_reply:
+    220          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+    221            frameInfo_t *pOutFrame;
+    222          
+    223            /* Build the reply frame. The application payload is the one included in the
+    224             * received frame payload.
+    225             */
+    226            if (pOutFrame = nwk_buildFrame(SMPL_PORT_PING, MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS, MRFI_GET_PAYLOAD_LEN(frame)-F_APP_PAYLOAD_OS, MAX_HOPS))
+   \   000009                ; Setup parameters for call to function nwk_buildFrame
+   \   000009   7D03         MOV     R5,#0x3
+   \   00000B   8E82         MOV     DPL,R6
+   \   00000D   8F83         MOV     DPH,R7
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   24F5         ADD     A,#-0xb
+   \   000012   FC           MOV     R4,A
+   \   000013   EE           MOV     A,R6
+   \   000014   240C         ADD     A,#0xc
+   \   000016   FA           MOV     R2,A
+   \   000017   EF           MOV     A,R7
+   \   000018   3400         ADDC    A,#0x0
+   \   00001A   FB           MOV     R3,A
+   \   00001B   7901         MOV     R1,#0x1
+   \   00001D   12....       LCALL   nwk_buildFrame
+   \   000020   8A..         MOV     ?V0 + 0,R2
+   \   000022   8B..         MOV     ?V0 + 1,R3
+   \   000024   A9..         MOV     R1,?V0 + 1
+   \   000026   EA           MOV     A,R2
+   \   000027   49           ORL     A,R1
+   \   000028   603E         JZ      ??smpl_send_ping_reply_0
+    227            {
+    228              /* destination address is the source adddress of the received frame. */
+    229              memcpy(MRFI_P_DST_ADDR(&pOutFrame->mrfiPkt), MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE);
+   \   00002A                ; Setup parameters for call to function memcpy
+   \   00002A   75..04       MOV     ?V0 + 2,#0x4
+   \   00002D   75..00       MOV     ?V0 + 3,#0x0
+   \   000030   78..         MOV     R0,#?V0 + 2
+   \   000032   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000035   EE           MOV     A,R6
+   \   000036   2405         ADD     A,#0x5
+   \   000038   FC           MOV     R4,A
+   \   000039   EF           MOV     A,R7
+   \   00003A   3400         ADDC    A,#0x0
+   \   00003C   FD           MOV     R5,A
+   \   00003D   EA           MOV     A,R2
+   \   00003E   2403         ADD     A,#0x3
+   \   000040   0A           INC     R2
+   \   000041   0A           INC     R2
+   \   000042   0A           INC     R2
+   \   000043   E9           MOV     A,R1
+   \   000044   3400         ADDC    A,#0x0
+   \   000046   FB           MOV     R3,A
+   \   000047   12....       LCALL   memcpy
+   \   00004A   7402         MOV     A,#0x2
+   \   00004C   12....       LCALL   ?DEALLOC_XSTACK8
+    230          
+    231              /* turn on the reply bit in the application payload */
+    232              *(MRFI_P_PAYLOAD(&pOutFrame->mrfiPkt)+F_APP_PAYLOAD_OS+PB_REQ_OS) |= NWK_APP_REPLY_BIT;
+   \   00004F   E5..         MOV     A,?V0 + 0
+   \   000051   240E         ADD     A,#0xe
+   \   000053   F582         MOV     DPL,A
+   \   000055   E5..         MOV     A,?V0 + 1
+   \   000057   3400         ADDC    A,#0x0
+   \   000059   F583         MOV     DPH,A
+   \   00005B   E0           MOVX    A,@DPTR
+   \   00005C   D2E7         SETB    0xE0 /* A   */.7
+   \   00005E   F0           MOVX    @DPTR,A
+    233          #ifdef SMPL_SECURE
+    234              nwk_setSecureFrame(&pOutFrame->mrfiPkt, MRFI_GET_PAYLOAD_LEN(frame)-F_APP_PAYLOAD_OS, 0);
+    235          #endif  /* SMPL_SECURE */
+    236              nwk_sendFrame(pOutFrame, MRFI_TX_TYPE_FORCED);
+   \   00005F                ; Setup parameters for call to function nwk_sendFrame
+   \   00005F   7900         MOV     R1,#0x0
+   \   000061   AA..         MOV     R2,?V0 + 0
+   \   000063   AB..         MOV     R3,?V0 + 1
+   \   000065   12....       LCALL   nwk_sendFrame
+    237            }
+    238          }
+   \                     ??smpl_send_ping_reply_0:
+   \   000068   7F04         MOV     R7,#0x4
+   \   00006A   02....       LJMP    ?FUNC_LEAVE_XDATA
+    239          
+    240          /******************************************************************************
+    241           * @fn          nwk_processPing
+    242           *
+    243           * @brief       Ping network application frame handler.
+    244           *
+    245           * input parameters
+    246           * @param   frame   - pointer to frame in question
+    247           *
+    248           * output parameters
+    249           *
+    250           * @return    Keep frame for application, release frame, or replay frame.
+    251           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    252          fhStatus_t nwk_processPing(mrfiPacket_t *frame)
+   \                     nwk_processPing:
+    253          {
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+    254            fhStatus_t   rc;
+    255            uint8_t      replyType;
+    256          
+    257            /* If we sent this then this is the reply. Validate the
+    258             * packet for reception by client app. If we didn't send
+    259             * it then we are the target. Send the reply.
+    260             */
+    261            replyType = nwk_isValidReply(frame, sTid, PB_REQ_OS, PB_TID_OS);
+   \   000009                ; Setup parameters for call to function nwk_isValidReply
+   \   000009   7D01         MOV     R5,#0x1
+   \   00000B   7C00         MOV     R4,#0x0
+   \   00000D   90....       MOV     DPTR,#sTid
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   F9           MOV     R1,A
+   \   000012   12....       LCALL   nwk_isValidReply
+   \   000015   E9           MOV     A,R1
+   \   000016   F8           MOV     R0,A
+    262            if (SMPL_MY_REPLY == replyType)
+   \   000017   7007         JNZ     ??nwk_processPing_0
+    263            {
+    264              /* It's a match and it's a reply. Validate the received packet by
+    265               * returning a 1 so it can be received by the client app.
+    266               */
+    267              MRFI_PostKillSem();
+   \   000019                ; Setup parameters for call to function MRFI_PostKillSem
+   \   000019   12....       LCALL   MRFI_PostKillSem
+    268              rc = FHS_KEEP;
+   \   00001C   7901         MOV     R1,#0x1
+   \   00001E   8012         SJMP    ??nwk_processPing_1
+    269            }
+    270          #if !defined( END_DEVICE )
+    271            else if (SMPL_A_REPLY == replyType)
+   \                     ??nwk_processPing_0:
+   \   000020   7401         MOV     A,#0x1
+   \   000022   68           XRL     A,R0
+   \   000023   7004         JNZ     ??nwk_processPing_2
+    272            {
+    273              /* no match. If I'm not an ED this is a reply that should be passed on. */
+    274              rc = FHS_REPLAY;
+   \   000025   7902         MOV     R1,#0x2
+   \   000027   8009         SJMP    ??nwk_processPing_1
+    275            }
+    276          #endif  /* !END_DEVICE */
+    277            else
+    278            {
+    279              /* No, we didn't send it. Send reply assuming it's a Ping intended for us. */
+    280              handlePingRequest(frame);
+   \                     ??nwk_processPing_2:
+   \   000029                ; Setup parameters for call to function handlePingRequest
+   \   000029   EE           MOV     A,R6
+   \   00002A   FA           MOV     R2,A
+   \   00002B   EF           MOV     A,R7
+   \   00002C   FB           MOV     R3,A
+   \   00002D   12....       LCALL   handlePingRequest
+    281          
+    282              rc = FHS_RELEASE;
+   \   000030   7900         MOV     R1,#0x0
+    283            }
+    284          
+    285            return rc;
+   \                     ??nwk_processPing_1:
+   \   000032   7F01         MOV     R7,#0x1
+   \   000034   02....       LJMP    ?FUNC_LEAVE_XDATA
+    286          }
+    287          
+    288          /******************************************************************************
+    289           * @fn          handlePingRequest
+    290           *
+    291           * @brief       Dispatches handler for specfic Ping request
+    292           *
+    293           * input parameters
+    294           *
+    295           * @param   frame - Ping frame received
+    296           *
+    297           * output parameters
+    298           *
+    299           * @return   void
+    300           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    301          static void handlePingRequest(mrfiPacket_t *frame)
+   \                     handlePingRequest:
+    302          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    303            switch (*(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS))
+   \   000004   EA           MOV     A,R2
+   \   000005   240C         ADD     A,#0xc
+   \   000007   F582         MOV     DPL,A
+   \   000009   EB           MOV     A,R3
+   \   00000A   3400         ADDC    A,#0x0
+   \   00000C   F583         MOV     DPH,A
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   6401         XRL     A,#0x1
+   \   000011   7003         JNZ     ??handlePingRequest_0
+    304            {
+    305              case PING_REQ_PING:
+    306                smpl_send_ping_reply(frame);
+   \   000013                ; Setup parameters for call to function smpl_send_ping_reply
+   \   000013   12....       LCALL   smpl_send_ping_reply
+    307                break;
+    308          
+    309              default:
+    310                break;
+    311            }
+    312          
+    313            return;
+   \                     ??handlePingRequest_0:
+   \   000016   D083         POP     DPH
+   \   000018   D082         POP     DPL
+   \   00001A   22           RET
+    314          }
+
+   Maximum stack usage in bytes:
+
+     Function                  ISTACK PSTACK XSTACK
+     --------                  ------ ------ ------
+     handlePingRequest             2      0      8
+       -> smpl_send_ping_reply     4      0      0
+     nwk_ping                      1      0     20
+       -> nwk_getConnInfo          0      0     40
+       -> MRFI_GetRadioState       0      0     40
+       -> SMPL_Ioctl               0      0     40
+       -> MRFI_WakeUp              0      0     40
+       -> MRFI_RxOn                0      0     40
+       -> MRFI_ReplyDelay          0      0     40
+       -> MRFI_Sleep               0      0     40
+       -> MRFI_RxIdle              0      0     40
+       -> SMPL_Ioctl               0      0     40
+     nwk_pingInit                  2      0      0
+       -> MRFI_RandomByte          4      0      0
+     nwk_processPing               0      0      8
+       -> nwk_isValidReply         0      0     16
+       -> MRFI_PostKillSem         0      0     16
+       -> handlePingRequest        0      0     16
+     smpl_send_ping_reply          0      0     13
+       -> nwk_buildFrame           0      0     22
+       -> memcpy                   0      0     26
+       -> nwk_sendFrame            0      0     22
+
+
+   Segment part sizes:
+
+     Function/Label       Bytes
+     --------------       -----
+     sTid                    1
+     nwk_pingInit           17
+     nwk_ping              264
+     smpl_send_ping_reply  109
+     nwk_processPing        55
+     handlePingRequest      27
+
+ 
+ 472 bytes in segment NEAR_CODE
+   1 byte  in segment XDATA_Z
+ 
+ 472 bytes of CODE  memory
+   1 byte  of XDATA memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,671 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:38 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\nwk_ap #
+#                          plications\nwk_security.c                          #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\nwk_security.c"    #
+#                          -D CC1111EM -D ISM_EU -D MCU_H=<ioCC1111.h> -D     #
+#                          chip=1111 -D RF_FREQUENCY=868000 -D MRFI_CC1111    #
+#                          -D NDEBUG -lC "C:\Documents and                    #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\List\" -o    #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\" -e --no_unroll            #
+#                          --no_inline --no_tbaa --debug --core=plain         #
+#                          --dptr=16,1 --data_model=large --code_model=near   #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\nwk_security.lst           #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\nwk_security.r51            #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\nwk_applications\nwk_security.c
+      1          /**************************************************************************************************
+      2            Filename:       nwk_security.c
+      3            Revised:        $Date: 2009-01-20 14:05:46 -0800 (Tue, 20 Jan 2009) $
+      4            Revision:       $Revision: 18816 $
+      5            Author:         $Author: lfriedman $
+      6          
+      7            Description:    This file supports the SimpliciTI Security network application.
+      8          
+      9            Copyright 2008-2009 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+     12            the terms of a software license agreement between the user who downloaded the software,
+     13            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     14            "License"). You may not use this Software unless you agree to abide by the terms of the
+     15            License. The License limits your use, and you acknowledge, that the Software may not be
+     16            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     17            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     18            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     19            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     20            perform, display or sell this Software and/or its documentation for any purpose.
+     21          
+     22            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     23            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     24            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     25            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     26            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     27            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     28            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     29            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     30            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     31          
+     32            Should you have any questions regarding your right to use this Software,
+     33            contact Texas Instruments Incorporated at www.TI.com.
+     34          **************************************************************************************************/
+     35          
+     36          /******************************************************************************
+     37           * INCLUDES
+     38           */
+     39          
+     40          #include <string.h>     /* needed for NULL */
+     41          #include "mrfi.h"
+     42          #include "nwk_types.h"
+     43          #include "nwk_security.h"
+     44          #include "nwk_frame.h"
+     45          #include "nwk.h"
+     46          
+     47          #ifdef SMPL_SECURE
+     48          
+     49          /*                   *** GENERAL SECURITY OUTLINE ***
+     50           *
+     51           * We are using XTEA (eXtended Tiny Encryption Algorithm) with a fixed
+     52           * number of rounds (32). We have removed the parameters from the API
+     53           * we harvested from the public domain.
+     54           *
+     55           * We are using a CTR-like mode. We use the 64-bit block cipher function of the
+     56           * XTEA code to encipher a concatenation of the 32-bit initialization vector and
+     57           * a 32-bit counter that increments each block. We encrypt using a fixed 128-bit
+     58           * key. The resulting 64-bit output is XOR'ed with the message. If the message is
+     59           * longer than 64 bits we encipher the next block (incrementing the counter) and
+     60           * continue until the message is exhausted. If the last cipher block is longer
+     61           * than the message we simply discard the remaining cipher block.
+     62           */
+     63          
+     64          
+     65          /******************************************************************************
+     66           * MACROS
+     67           */
+     68          
+     69          /******************************************************************************
+     70           * CONSTANTS AND DEFINES
+     71           */
+     72          
+     73          /* The counter can be off by quite a bit because the number of cipher
+     74           * blocks can easily be more than 1 per frame. Value limited to a
+     75           * maximum of 255.
+     76           */
+     77          #define CTR_WINDOW  255
+     78          
+     79          #if (CTR_WINDOW > 255) || (CTR_WINDOW < 0)
+     80          #error ERROR: 0 <= CTR_WINDOW < 256
+     81          #endif
+     82          
+     83          /* Number of rounds for XTEA algorithm. A parameter in the public domain code
+     84           * but we fix it here at 32.
+     85           */
+     86          #define NUM_ROUNDS  32
+     87          
+     88          /* Key and cipher block size constants */
+     89          #define SMPL_KEYSIZE_BYTES    16
+     90          #define SMPL_KEYSIZE_LONGS     4
+     91          
+     92          /******************************************************************************
+     93           * TYPEDEFS
+     94           */
+     95          /* Union used to access key as both a string and as unsigned longs */
+     96          typedef union
+     97          {
+     98            uint8_t  keyS[SMPL_KEYSIZE_BYTES];
+     99            uint32_t keyL[SMPL_KEYSIZE_LONGS];
+    100          } key_t;
+    101          
+    102          
+    103          /******************************************************************************
+    104           * LOCAL VARIABLES
+    105           */
+    106          /* 32-bit Initialization vector */
+    107          static uint32_t const sIV = 0x87654321;
+    108          
+    109          /* 128-bit (16 byte) key. Initialized as string but fetched and used in XTEA
+    110           * encryption as 4 unsigned longs. Endianess could count if the peers are on
+    111           * two different MCUs. Endianess is rectified in initialization code.
+    112           *
+    113           * Initialization _MUST_ be done as a string (or character array). Though it
+    114           * won't matter how the initialization is done if both peers are the same
+    115           * endianness, good prectice will initialize these as a string (or character
+    116           * array) so that the endianess reconciliation works properly for all cases.
+    117           */
+    118          static key_t sKey = {"SimpliciTI's Key"};
+    119          
+    120          /* Constant set as an authentication code. Note that since it is a
+    121           * fixed value as opposed to a hash of the message it does not provide
+    122           * an integrity check. It will only differentiate two message encryptions
+    123           * with the same LSB but different MSB components. Thus it helps guard
+    124           * against replays.
+    125           */
+    126          static secMAC_t const sMAC = 0xA5;
+    127          
+    128          /* This is the 64-bit cipher block target. It is this 64-bit block that
+    129           * is XOR'ed with the actual message to be encrypted.
+    130           */
+    131          static uint32_t sMsg[2] = {0, 0};
+    132          
+    133          /******************************************************************************
+    134           * LOCAL FUNCTIONS
+    135           */
+    136          static secFCS_t calcFCS(uint8_t *, uint8_t);
+    137          static void     msg_encipher(uint8_t *, uint8_t, uint32_t *);
+    138          static void     msg_decipher(uint8_t *, uint8_t, uint32_t *);
+    139          static void     xtea_encipher(void);
+    140          
+    141          #endif  /* SMPL_SECURE */
+    142          
+    143          /******************************************************************************
+    144           * @fn          nwk_securityInit
+    145           *
+    146           * @brief       Initialize Security network application.
+    147           *
+    148           * input parameters
+    149           *
+    150           * output parameters
+    151           *
+    152           * @return      void
+    153           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    154          void nwk_securityInit(void)
+   \                     nwk_securityInit:
+    155          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    156          #ifdef SMPL_SECURE
+    157            uint8_t  i;
+    158          
+    159            /* The key is set as a string. But the XTEA routines operate on 32-bit
+    160             * unsigned longs. Endianess should be taken into account and we do that
+    161             * here by treating the key as being an array of unsigned longs in
+    162             * network order.
+    163             */
+    164            for (i=0; i<sizeof(sKey.keyL)/sizeof(uint32_t); ++i)
+    165            {
+    166              sKey.keyL[i] = ntohl(sKey.keyL[i]);
+    167            }
+    168          
+    169          #endif  /* SMPL_SECURE */
+    170            return;
+   \   000000   22           RET
+    171          }
+    172          
+    173          /******************************************************************************
+    174           * @fn          nwk_processSecurity
+    175           *
+    176           * @brief       Security network application frame handler.
+    177           *
+    178           * input parameters
+    179           * @param   frame   - pointer to frame in question
+    180           *
+    181           * output parameters
+    182           *
+    183           * @return    Keep frame for application, release frame, or replay frame.
+    184           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    185          fhStatus_t nwk_processSecurity(mrfiPacket_t *frame)
+   \                     nwk_processSecurity:
+    186          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    187            return FHS_RELEASE;
+   \   000000   7900         MOV     R1,#0x0
+   \   000002   22           RET
+    188          }
+    189          
+    190          /******************************************************************************
+    191           * @fn          msg_encipher
+    192           *
+    193           * @brief       Encipher a message using the XTEA algorithm and the modified
+    194           *              CTR mode method.
+    195           *
+    196           * input parameters
+    197           * @param   msg      - pointer to message to encipher
+    198           * @param   len      - length of message
+    199           * @param   cntStart - pointer to the counter used in the cipher block.
+    200           *
+    201           * output parameters
+    202           * @param   cntStart - counter is updated during encryption.
+    203           *
+    204           * @return      void
+    205           */
+    206          #ifdef SMPL_SECURE
+    207          static void msg_encipher(uint8_t *msg, uint8_t len, uint32_t *cntStart)
+    208          {
+    209            uint8_t  i, idx, done;
+    210            uint8_t *mptr = (uint8_t *)&sMsg[0];
+    211            uint32_t ctr;
+    212          
+    213            if ((NULL == msg) || !len)
+    214            {
+    215              return;
+    216            }
+    217          
+    218            /* set local counter from input */
+    219            ctr = *cntStart;
+    220          
+    221            idx  = 0;
+    222            done = 0;
+    223            do
+    224            {
+    225              /* Set block to be enciphered. 1st 32 bits are the IV. The second
+    226               * 32 bits are the current CTR value.
+    227               */
+    228              sMsg[0] = sIV;
+    229              sMsg[1] = ctr;
+    230              /* encrypt */
+    231              xtea_encipher();
+    232              /* increment counter for next time. */
+    233              ctr++;
+    234              /* XOR ciphered block with message to be sent. Only operate
+    235               * up to and including the last message byte which may not
+    236               * be on a cipher block boundary (64 bits == 8 bytes).
+    237               */
+    238              for (i=0; i<sizeof(sMsg) && idx<len; ++i, ++idx)
+    239              {
+    240                msg[idx] ^= mptr[i];
+    241              }
+    242          
+    243              if (idx >= len)
+    244              {
+    245                /* we're done */
+    246                done = 1;
+    247              }
+    248            } while (!done);
+    249          
+    250            /* return counter value start for next time */
+    251            *cntStart = ctr;
+    252          
+    253            return;
+    254          }
+    255          
+    256          /******************************************************************************
+    257           * @fn          msg_decipher
+    258           *
+    259           * @brief       Decipher a message using the XTEA algorithm and the modified
+    260           *              CTR mode method.
+    261           *
+    262           * input parameters
+    263           * @param   msg      - pointer to message to decipher
+    264           * @param   len      - length of message
+    265           * @param   cntStart - pointer to the counter used in the cipher block.
+    266           *
+    267           * output parameters
+    268           * @param   cntStart - counter is updated during decryption.
+    269           *
+    270           * @return      void
+    271           */
+    272          static void msg_decipher(uint8_t *msg, uint8_t len, uint32_t *cntStart)
+    273          {
+    274            msg_encipher(msg, len, cntStart);
+    275          
+    276            return;
+    277          }
+    278          
+    279          /******************************************************************************
+    280           * @fn          xtea_encipher
+    281           *
+    282           * @brief       XTEA encipher algorithm. Calling arguments removed from public
+    283           *              domain code and static-scope values used instead.
+    284           *
+    285           * input parameters
+    286           *
+    287           * output parameters
+    288           *
+    289           * @return      void
+    290           */
+    291          void xtea_encipher(void)
+    292          {
+    293            uint32_t v0=sMsg[0], v1=sMsg[1];
+    294            uint16_t i;
+    295            uint32_t sum=0, delta=0x9E3779B9;
+    296          
+    297            for(i=0; i<NUM_ROUNDS; i++)
+    298            {
+    299              v0  += (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + sKey.keyL[sum & 3]);
+    300              sum += delta;
+    301              v1  += (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + sKey.keyL[(sum>>11) & 3]);
+    302            }
+    303          
+    304            sMsg[0]=v0;
+    305            sMsg[1]=v1;
+    306          }
+    307          
+    308          /******************************************************************************
+    309           * @fn          nwk_setSecureFrame
+    310           *
+    311           * @brief       Called from NWK to secure a frame.
+    312           *
+    313           * input parameters
+    314           * @param   frame   - pointer to frame to secure
+    315           * @param   msglen  - length of message
+    316           * @param   ctr     - pointer to the counter used in the cipher block. This will
+    317           *                    be NULL if a network application is sending a frame. Since
+    318           *                    these are not connection-based there is no counter sync
+    319           *                    issue but we still need a counter value. A random value
+    320           *                    is used.
+    321           *
+    322           * output parameters
+    323           * @param   cntStart - counter is updated during encryption.
+    324           *
+    325           * @return      void
+    326           */
+    327          void nwk_setSecureFrame(mrfiPacket_t *frame, uint8_t msglen, uint32_t *ctr)
+    328          {
+    329            uint32_t locCnt;
+    330          
+    331            /* If an encrypted frame is to be sent to a non-connection based port use a
+    332             * random number as the lsb counter value. In this case only the lsb is used
+    333             * for a counter value during decryption. Not as secure but there are still
+    334             * the 32 bits in the IV.
+    335             */
+    336            locCnt = ctr ? *ctr : MRFI_RandomByte();
+    337          
+    338            /* place counter value into frame */
+    339            PUT_INTO_FRAME(MRFI_P_PAYLOAD(frame), F_SEC_CTR_OS, (uint8_t)(locCnt & 0xFF));
+    340          
+    341            /* Put MAC value in */
+    342            nwk_putNumObjectIntoMsg((void *)&sMAC, (void *)(MRFI_P_PAYLOAD(frame)+F_SEC_MAC_OS), sizeof(secMAC_t));
+    343          
+    344            /* Put FCS value in */
+    345            {
+    346              secFCS_t fcs = calcFCS(MRFI_P_PAYLOAD(frame)+F_SEC_MAC_OS, msglen+sizeof(secMAC_t));
+    347          
+    348              nwk_putNumObjectIntoMsg((void *)&fcs, (void *)(MRFI_P_PAYLOAD(frame)+F_SEC_ICHK_OS), sizeof(secFCS_t));
+    349            }
+    350          
+    351            /* Encrypt frame */
+    352            msg_encipher(MRFI_P_PAYLOAD(frame)+F_SEC_ICHK_OS, msglen+sizeof(secMAC_t)+sizeof(secFCS_t), &locCnt);
+    353          
+    354            /* Set the Encryption bit */
+    355            PUT_INTO_FRAME(MRFI_P_PAYLOAD(frame), F_ENCRYPT_OS, F_ENCRYPT_OS_MSK);
+    356          
+    357            /* Update the counter if it was a "real" counter. */
+    358            if (ctr)
+    359            {
+    360              *ctr = locCnt;
+    361            }
+    362          
+    363            return;
+    364          }
+    365          
+    366          /******************************************************************************
+    367           * @fn          calcFCS
+    368           *
+    369           * @brief       Calculate the frame check sequence. Currently it's just a
+    370           *              cumulative XOR of each byte starting with the MAC byte. The
+    371           *              FCS is placed in front of the MAC after the counter hint and is
+    372           *              included in the encryption.
+    373           *
+    374           * input parameters
+    375           * @param   msg      - pointer to message
+    376           * @param   len      - length of message
+    377           *
+    378           * output parameters
+    379           *
+    380           * @return      Returns the FCS using the typedef.
+    381           */
+    382          static secFCS_t calcFCS(uint8_t *msg, uint8_t len)
+    383          {
+    384            uint8_t  i;
+    385            secFCS_t result = 0;
+    386          
+    387            for (i=0; i<len; ++i)
+    388            {
+    389              result ^= *(msg+i);
+    390            }
+    391          
+    392            return result;
+    393          }
+    394          
+    395          /******************************************************************************
+    396           * @fn          nwk_getSecureFrame
+    397           *
+    398           * @brief       Called from NWK to get a secure a frame and decrypt.
+    399           *
+    400           * input parameters
+    401           * @param   frame    - pointer to frame containing encrypted message
+    402           * @param   msglen   - length of message
+    403           * @param   ctr      - pointer to the counter used in the cipher block. This will
+    404           *                     be NULL if a network applicaiton is getting a frame. Since
+    405           *                     these are not connection-nbased there is no counter sync
+    406           *                     issue but we still need a counter value.
+    407           *
+    408           * output parameters
+    409           * @param   cntStart - counter is updated during decryption. If decryption fails
+    410           *                     this value is not changed.
+    411           *
+    412           * @return      Returns non-zero if frame decryption is valid, otherwise returns 0.
+    413           */
+    414          uint8_t nwk_getSecureFrame(mrfiPacket_t *frame, uint8_t msglen, uint32_t *ctr)
+    415          {
+    416            uint8_t  rc = 1;
+    417            uint8_t  done = 0;
+    418            uint8_t  cntHint = GET_FROM_FRAME(MRFI_P_PAYLOAD(frame), F_SEC_CTR_OS);
+    419            uint32_t locCnt, frameCnt;
+    420          
+    421            /* Construct proposed CTR values */
+    422          
+    423            /* Just like encryption, we may be talking to a non-connection based
+    424             * peer in which case the counter value is represented by the lsb byte
+    425             * conveyed in the frame.
+    426             */
+    427            locCnt = ctr ? *ctr : cntHint;
+    428          
+    429            frameCnt = (locCnt & 0xFFFFFF00) + cntHint;
+    430          
+    431            do
+    432            {
+    433              /* See if counters match */
+    434              if (locCnt == frameCnt)
+    435              {
+    436                /* When the counters appear to match is the only time we actually decipher
+    437                 * the message. It is the only time we can do so since out-of-sync lsb counter
+    438                 * values guarantees that something is wrong somewhere. Decryption is successful
+    439                 * only if the MAC and FCS values match. The message is left as-is after the
+    440                 * decipher attempt. Either it appears valid or is doesn't and is discarded.
+    441                 * There is no recovery attempt if the counters match but the MAC or FCS do
+    442                 * not. It is considered a rogue message.
+    443                 */
+    444                msg_decipher(MRFI_P_PAYLOAD(frame)+F_SEC_ICHK_OS, msglen-1, &locCnt);
+    445          
+    446                /* Get MAC and make sure it matches. A failure can occur if a replayed frame happens
+    447                 * to have the correct counter sync value but was encoded with the wrong complete
+    448                 * counter value. Otherwise the MAC values must match when the counter values are equal.
+    449                 */
+    450                {
+    451                  secMAC_t mac;
+    452          
+    453                  nwk_getNumObjectFromMsg((void *)(MRFI_P_PAYLOAD(frame)+F_SEC_MAC_OS), (void *)&mac, sizeof(secMAC_t));
+    454                  if (mac != sMAC)
+    455                  {
+    456                    rc = 0;
+    457                  }
+    458                }
+    459          
+    460                /* FCS check... */
+    461                {
+    462                  secFCS_t fcs;
+    463          
+    464                  nwk_getNumObjectFromMsg((void *)(MRFI_P_PAYLOAD(frame)+F_SEC_ICHK_OS), (void *)&fcs, sizeof(secFCS_t));
+    465                  if (fcs != calcFCS(MRFI_P_PAYLOAD(frame)+F_SEC_MAC_OS, msglen-1-sizeof(secMAC_t)))
+    466                  {
+    467                    rc = 0;
+    468                  }
+    469                }
+    470          
+    471                /* we're done. */
+    472                done = 1;
+    473              }
+    474              else
+    475              {
+    476                /* Uh oh. Counters don't match. Try and resync. We need to distinguish among
+    477                 * missed frames, duplicates and rogues plus account for counter wrap.
+    478                 */
+    479                if (frameCnt > locCnt)
+    480                {
+    481                  /* frameCnt is bigger. Second part of test below takes care of
+    482                   * the unlikely case of a complete counter wrap (msb's all 0) in
+    483                   * which case the test will incorrectly fail when the count is
+    484                   * actually within the (wrapped) window. #ifdef'ed to avoid compiler
+    485                   * warning in case user sets CNT_WINDOW to 0 (pointless comparison of
+    486                   * unsigned value).
+    487                   */
+    488                  if (((frameCnt-CTR_WINDOW) <= locCnt)
+    489          #if CTR_WINDOW > 0
+    490                      || (frameCnt < CTR_WINDOW)
+    491          #endif
+    492                     )
+    493                  {
+    494                    /* Value within window. We probably missed something. Adjust and decipher.
+    495                     * If locCnt is less because it wrapped and frameCnt didn't it means that
+    496                     * it's a duplicate or late frame. In that case the following will lead to
+    497                     * a decryption that fails sanity checks which is OK because the frame will
+    498                     * be correctly rejected.
+    499                     */
+    500                    locCnt = frameCnt;
+    501                  }
+    502                  else
+    503                  {
+    504                    /* It's either a rogue or a really old duplicate packet. In either case
+    505                     * we dismiss the frame.
+    506                     */
+    507                    rc   = 0;
+    508                    done = 1;
+    509                  }
+    510                }
+    511                else
+    512                {
+    513                  /* locCnt is bigger. The only way the frame can be valid is if the
+    514                   * counter wrapped causing frameCnt to appear to be smaller. Wrap the
+    515                   * counter and decrypt. If the frame isn't valid, i.e., it's late,
+    516                   * a duplicate, or a rogue, the decryption will fail sanity checks and
+    517                   * the frame will be correctly rejected. The following arithmetic works
+    518                   * correctly without a special test for the complete counter wrap case.
+    519                   */
+    520                  frameCnt += 0x100;   /* wrap the hint-based counter */
+    521                  if (((frameCnt-CTR_WINDOW) <= locCnt))
+    522                  {
+    523                    /* An lsb wrap but still within window. We probably missed something.
+    524                     * Adjust (with wrap) and decrypt.
+    525                     */
+    526                    locCnt = frameCnt;
+    527                  }
+    528                  else
+    529                  {
+    530                    /* rogue frame */
+    531                    rc   = 0;
+    532                    done = 1;
+    533                  }
+    534                }
+    535              }
+    536            } while (!done);
+    537          
+    538            if (ctr && rc)
+    539            {
+    540              /* Only update the counter if the count was a "real" one and the
+    541               * decryption succeeded.
+    542               */
+    543              *ctr = locCnt;
+    544            }
+    545          
+    546            return rc;
+    547          }
+    548          
+    549          #endif  /* SMPL_SECURE */
+
+   Maximum stack usage in bytes:
+
+     Function            ISTACK PSTACK XSTACK
+     --------            ------ ------ ------
+     nwk_processSecurity     0      0      0
+     nwk_securityInit        0      0      0
+
+
+   Segment part sizes:
+
+     Function/Label      Bytes
+     --------------      -----
+     nwk_securityInit       1
+     nwk_processSecurity    3
+
+ 
+ 4 bytes in segment NEAR_CODE
+ 
+ 4 bytes of CODE memory
+
+Errors: none
+Warnings: none

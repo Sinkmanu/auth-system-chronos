@@ -1,0 +1,739 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:34 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Applications\main #
+#                          _AP_BM.c                                           #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Applications\main_AP_BM.c" -D CC1111EM -D      #
+#                          ISM_EU -D MCU_H=<ioCC1111.h> -D chip=1111 -D       #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\main_AP_BM.lst             #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\main_AP_BM.r51              #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Applications\main_AP_BM.c
+      1          /**********************************************************************************************
+      2            Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+      3          
+      4            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+      5            the terms of a software license agreement between the user who downloaded the software,
+      6            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+      7            "License"). You may not use this Software unless you agree to abide by the terms of the
+      8            License. The License limits your use, and you acknowledge, that the Software may not be
+      9            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     10            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     11            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     12            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     13            perform, display or sell this Software and/or its documentation for any purpose.
+     14          
+     15            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     16            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     17            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     18            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     19            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     20            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     21            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     22            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     23            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     24          
+     25            Should you have any questions regarding your right to use this Software,
+     26            contact Texas Instruments Incorporated at www.TI.com.
+     27          **************************************************************************************************/
+     28          
+     29          
+     30          // *************************************************************************************************
+     31          // Include section
+     32          #include <string.h>
+     33          #include "bsp.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x91
+   \   unsigned char volatile __sfr RFIM
+   \                     RFIM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe9
+   \   unsigned char volatile __sfr RFIF
+   \                     RFIF:
+   \   000000                DS 1
+     34          #include "mrfi.h"
+     35          #include "bsp_leds.h"
+     36          #include "bsp_buttons.h"
+     37          #include "nwk_types.h"
+     38          #include "nwk_api.h"
+     39          #include "nwk_frame.h"
+     40          #include "nwk.h"
+     41          #include "app_remap_led.h"
+     42          #include "simpliciti.h"
+     43          
+     44          
+     45          // *************************************************************************************************
+     46          // Defines section
+     47          #define BIT0                   (0x0001)
+     48          #define BIT1                   (0x0002)
+     49          #define BIT2                   (0x0004)
+     50          #define BIT3                   (0x0008)
+     51          #define BIT4                   (0x0010)
+     52          #define BIT5                   (0x0020)
+     53          #define BIT6                   (0x0040)
+     54          #define BIT7                   (0x0080)
+     55          #define BIT8                   (0x0100)
+     56          #define BIT9                   (0x0200)
+     57          #define BITA                   (0x0400)
+     58          #define BITB                   (0x0800)
+     59          #define BITC                   (0x1000)
+     60          #define BITD                   (0x2000)
+     61          #define BITE                   (0x4000)
+     62          #define BITF                   (0x8000)
+     63          
+     64          // *************************************************************************************************
+     65          // Prototypes section
+     66          
+     67          /* callback handler */
+     68          uint8_t sCB(linkID_t);
+     69          
+     70          
+     71          // *************************************************************************************************
+     72          // Extern section
+     73          extern uint8_t sInit_done;
+     74          
+     75          
+     76          // *************************************************************************************************
+     77          // Global Variable section
+     78          
+     79          /* reserve space for the maximum possible peer Link IDs */
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     80          static linkID_t linkID0;
+   \                     linkID0:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     81          static uint8_t  sNumCurrentPeers;
+   \                     sNumCurrentPeers:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     82          
+     83          /* work loop semaphores */
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     84          static volatile uint8_t sPeerFrameSem;
+   \                     sPeerFrameSem:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     85          static volatile uint8_t sJoinSem;
+   \                     sJoinSem:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     86          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     87          volatile unsigned char simpliciti_flag;
+   \                     simpliciti_flag:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     88          unsigned char simpliciti_data[SIMPLICITI_MAX_PAYLOAD_LENGTH];
+   \                     simpliciti_data:
+   \   000000                DS 32
+   \   000020                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     89          unsigned char ed_data[SIMPLICITI_MAX_PAYLOAD_LENGTH];
+   \                     ed_data:
+   \   000000                DS 32
+   \   000020                REQUIRE __INIT_XDATA_Z
+     90          
+     91          // AP main routine
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     92          void simpliciti_main(void)
+   \                     simpliciti_main:
+     93          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 2
+   \   000005   74FE         MOV     A,#-0x2
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+     94            bspIState_t intState;
+     95            uint8_t j;
+     96            uint8_t len;
+     97            uint32_t led_toggle = 0;
+   \   00000A   90....       MOV     DPTR,#__Constant_0
+   \   00000D   78..         MOV     R0,#?V0 + 0
+   \   00000F   12....       LCALL   ?L_MOV_X
+     98            uint8_t   pwr;
+     99          
+    100            // Init variables  
+    101            simpliciti_flag = SIMPLICITI_STATUS_LINKING;
+   \   000012   90....       MOV     DPTR,#simpliciti_flag
+   \   000015   7401         MOV     A,#0x1
+   \   000017   F0           MOVX    @DPTR,A
+    102          
+    103            // Init SimpliciTI
+    104            SMPL_Init(sCB);
+   \   000018                ; Setup parameters for call to function SMPL_Init
+   \   000018   7A..         MOV     R2,#sCB & 0xff
+   \   00001A   7B..         MOV     R3,#(sCB >> 8) & 0xff
+   \   00001C   12....       LCALL   SMPL_Init
+    105            
+    106            // Set output power to +1.1dBm (868MHz) / +1.3dBm (915MHz)
+    107            pwr = IOCTL_LEVEL_2;
+   \   00001F   7401         MOV     A,#0x1
+   \   000021   12....       LCALL   ?XSTACK_DISP0_8
+   \   000024   7402         MOV     A,#0x2
+   \   000026   F0           MOVX    @DPTR,A
+    108            SMPL_Ioctl(IOCTL_OBJ_RADIO, IOCTL_ACT_RADIO_SETPWR, &pwr);
+   \   000027                ; Setup parameters for call to function SMPL_Ioctl
+   \   000027   AC82         MOV     R4,DPL
+   \   000029   AD83         MOV     R5,DPH
+   \   00002B   7A0A         MOV     R2,#0xa
+   \   00002D   7903         MOV     R1,#0x3
+   \   00002F   12....       LCALL   SMPL_Ioctl
+    109            
+    110             // LED off
+    111            BSP_TURN_OFF_LED1();
+   \   000032   C291         CLR     0x90.1
+   \   000034   802F         SJMP    ??simpliciti_main_0
+    112              
+    113            /* main work loop */
+    114            while (1)
+    115            {
+    116              // Wait for the Join semaphore to be set by the receipt of a Join frame from a
+    117              //device that supports an End Device.
+    118              if (sJoinSem && !sNumCurrentPeers)
+    119              {
+    120                /* listen for a new connection */
+    121                while (1)
+    122                {
+    123                  if (SMPL_SUCCESS == SMPL_LinkListen(&linkID0))
+    124                  {
+    125                    // We have a connection
+    126                    simpliciti_flag = SIMPLICITI_STATUS_LINKED;
+    127                    BSP_TURN_ON_LED1();
+    128                    break;
+    129                  }
+    130                  /* Implement fail-to-link policy here. otherwise, listen again. */
+    131                }
+    132          
+    133                sNumCurrentPeers++;
+    134          
+    135                BSP_ENTER_CRITICAL_SECTION(intState);
+    136                sJoinSem--;
+    137                BSP_EXIT_CRITICAL_SECTION(intState);
+    138              }
+    139          
+    140              /* Have we received a frame on one of the ED connections?
+    141               * No critical section -- it doesn't really matter much if we miss a poll
+    142               */
+    143              if (sPeerFrameSem)
+    144              {
+    145                // Continuously try to receive end device packets
+    146                if (SMPL_SUCCESS == SMPL_Receive(linkID0, ed_data, &len))
+    147                {
+    148                  // Acceleration / ppt data packets are 4 byte long
+    149                  if (len == 4)
+    150                  {
+    151                    BSP_TOGGLE_LED1();
+    152                    memcpy(simpliciti_data, ed_data, 4);
+    153                    setFlag(simpliciti_flag, SIMPLICITI_TRIGGER_RECEIVED_DATA);
+    154                  }        
+    155                  // Sync packets are either R2R (2 byte) or data (19 byte) long
+    156                  else if ((len == 2) || (len == 19))
+    157                  {
+    158                    // Indicate received packet
+    159                    BSP_TOGGLE_LED1();
+    160          
+    161                    // Decode end device packet
+    162                    switch (ed_data[0])
+    163                    {
+    164                        case SYNC_ED_TYPE_R2R: 
+    165                                              // Send reply
+    166                                              if (getFlag(simpliciti_flag, SIMPLICITI_TRIGGER_SEND_CMD))
+    167                                              {
+    168                                                // Clear flag
+    169                                                clearFlag(simpliciti_flag, SIMPLICITI_TRIGGER_SEND_CMD);
+    170                                                // Command data was set by USB buffer previously
+    171                                                len = BM_SYNC_DATA_LENGTH;
+    172                                              }
+    173                                              else // No command currently available
+    174                                              {
+    175                                                simpliciti_data[0] = SYNC_AP_CMD_NOP;
+    176                                                simpliciti_data[1] = 0x55;
+    177                                                len = 2;
+    178                                              }
+    179                          
+    180                                              // Send reply packet to end device
+    181                                              SMPL_Send(linkID0, simpliciti_data, len);
+    182                                              break;
+    183                                           
+    184                      case SYNC_ED_TYPE_MEMORY: 
+    185                      case SYNC_ED_TYPE_STATUS:
+    186                                              // If buffer is empty, copy received end device data to intermediate buffer
+    187                                              if (!simpliciti_sync_buffer_status)
+    188                                              {
+    189                                                for (j=0; j<BM_SYNC_DATA_LENGTH; j++) simpliciti_data[j] = ed_data[j];
+    190                                                simpliciti_sync_buffer_status = 1;
+    191                                              }
+    192                                              // Set buffer status to full
+    193                                              break;
+    194          
+    195                    }
+    196                  }
+    197                }
+    198              }
+    199              
+    200              // Exit function if SIMPLICITI_TRIGGER_STOP flag bit is set in USB driver    
+    201              if (getFlag(simpliciti_flag, SIMPLICITI_TRIGGER_STOP)) 
+    202              {
+    203                // Immediately turn off RF interrupt
+    204                IEN2 &= ~BIT0;
+    205                RFIM = 0;
+    206                RFIF = 0;
+    207                // Clean up after SimpliciTI and enable restarting the stack
+    208                linkID0 = 0;
+    209                sNumCurrentPeers = 0;
+    210                sJoinSem = 0;
+    211                sPeerFrameSem = 0;
+    212                sInit_done = 0;
+    213                // LED off
+    214                BSP_TURN_OFF_LED1();
+    215                return;
+    216              }
+    217              
+    218              // Blink slowly to indicate that access point is on
+    219              if (!sNumCurrentPeers)
+   \                     ??simpliciti_main_1:
+   \   000036   90....       MOV     DPTR,#sNumCurrentPeers
+   \   000039   E0           MOVX    A,@DPTR
+   \   00003A   7029         JNZ     ??simpliciti_main_0
+    220              {
+    221                if (led_toggle++>150000)
+   \   00003C   85....       MOV     ?V0 + 4,?V0 + 0
+   \   00003F   85....       MOV     ?V0 + 5,?V0 + 1
+   \   000042   85....       MOV     ?V0 + 6,?V0 + 2
+   \   000045   85....       MOV     ?V0 + 7,?V0 + 3
+   \   000048   90....       MOV     DPTR,#__Constant_1
+   \   00004B   78..         MOV     R0,#?V0 + 0
+   \   00004D   12....       LCALL   ?L_ADD_X
+   \   000050   90....       MOV     DPTR,#__Constant_249f1
+   \   000053   78..         MOV     R0,#?V0 + 4
+   \   000055   12....       LCALL   ?UL_GE_X
+   \   000058   500B         JNC     ??simpliciti_main_0
+    222                {
+    223                  BSP_TOGGLE_LED1();
+   \   00005A   639002       XRL     0x90,#0x2
+    224                  led_toggle = 0;
+   \   00005D   90....       MOV     DPTR,#__Constant_0
+   \   000060   78..         MOV     R0,#?V0 + 0
+   \   000062   12....       LCALL   ?L_MOV_X
+    225                }
+    226              }
+   \                     ??simpliciti_main_0:
+   \   000065   90....       MOV     DPTR,#sJoinSem
+   \   000068   E0           MOVX    A,@DPTR
+   \   000069   6030         JZ      ??simpliciti_main_2
+   \   00006B   90....       MOV     DPTR,#sNumCurrentPeers
+   \   00006E   E0           MOVX    A,@DPTR
+   \   00006F   702A         JNZ     ??simpliciti_main_2
+   \                     ??simpliciti_main_3:
+   \   000071                ; Setup parameters for call to function SMPL_LinkListen
+   \   000071   7A..         MOV     R2,#linkID0 & 0xff
+   \   000073   7B..         MOV     R3,#(linkID0 >> 8) & 0xff
+   \   000075   12....       LCALL   SMPL_LinkListen
+   \   000078   E9           MOV     A,R1
+   \   000079   70F6         JNZ     ??simpliciti_main_3
+   \   00007B   90....       MOV     DPTR,#simpliciti_flag
+   \   00007E   7402         MOV     A,#0x2
+   \   000080   F0           MOVX    @DPTR,A
+   \   000081   D291         SETB    0x90.1
+   \   000083   90....       MOV     DPTR,#sNumCurrentPeers
+   \   000086   E0           MOVX    A,@DPTR
+   \   000087   04           INC     A
+   \   000088   F0           MOVX    @DPTR,A
+   \   000089   A2AF         MOV     C,0xa8.7
+   \   00008B   E4           CLR     A
+   \   00008C   33           RLC     A
+   \   00008D   F8           MOV     R0,A
+   \   00008E   C2AF         CLR     0xa8.7
+   \   000090   90....       MOV     DPTR,#sJoinSem
+   \   000093   E0           MOVX    A,@DPTR
+   \   000094   14           DEC     A
+   \   000095   F0           MOVX    @DPTR,A
+   \   000096   E8           MOV     A,R0
+   \   000097   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000099   92AF         MOV     0xa8.7,C
+   \                     ??simpliciti_main_2:
+   \   00009B   90....       MOV     DPTR,#sPeerFrameSem
+   \   00009E   E0           MOVX    A,@DPTR
+   \   00009F   7003         JNZ     $+5
+   \   0000A1   02....       LJMP    ??simpliciti_main_4
+   \   0000A4                ; Setup parameters for call to function SMPL_Receive
+   \   0000A4   85..82       MOV     DPL,?XSP + 0
+   \   0000A7   85..83       MOV     DPH,?XSP + 1
+   \   0000AA   AC82         MOV     R4,DPL
+   \   0000AC   AD83         MOV     R5,DPH
+   \   0000AE   7A..         MOV     R2,#ed_data & 0xff
+   \   0000B0   7B..         MOV     R3,#(ed_data >> 8) & 0xff
+   \   0000B2   90....       MOV     DPTR,#linkID0
+   \   0000B5   E0           MOVX    A,@DPTR
+   \   0000B6   F9           MOV     R1,A
+   \   0000B7   12....       LCALL   SMPL_Receive
+   \   0000BA   E9           MOV     A,R1
+   \   0000BB   6003         JZ      $+5
+   \   0000BD   02....       LJMP    ??simpliciti_main_4
+   \   0000C0   85..82       MOV     DPL,?XSP + 0
+   \   0000C3   85..83       MOV     DPH,?XSP + 1
+   \   0000C6   E0           MOVX    A,@DPTR
+   \   0000C7   6404         XRL     A,#0x4
+   \   0000C9   7027         JNZ     ??simpliciti_main_5
+   \   0000CB   639002       XRL     0x90,#0x2
+   \   0000CE                ; Setup parameters for call to function memcpy
+   \   0000CE   75..04       MOV     ?V0 + 4,#0x4
+   \   0000D1   75..00       MOV     ?V0 + 5,#0x0
+   \   0000D4   78..         MOV     R0,#?V0 + 4
+   \   0000D6   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0000D9   7C..         MOV     R4,#ed_data & 0xff
+   \   0000DB   7D..         MOV     R5,#(ed_data >> 8) & 0xff
+   \   0000DD   7A..         MOV     R2,#simpliciti_data & 0xff
+   \   0000DF   7B..         MOV     R3,#(simpliciti_data >> 8) & 0xff
+   \   0000E1   12....       LCALL   memcpy
+   \   0000E4   7402         MOV     A,#0x2
+   \   0000E6   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000E9   90....       MOV     DPTR,#simpliciti_flag
+   \   0000EC   E0           MOVX    A,@DPTR
+   \   0000ED   D2E4         SETB    0xE0 /* A   */.4
+   \   0000EF   02....       LJMP    ??simpliciti_main_6
+   \                     ??simpliciti_main_5:
+   \   0000F2   E0           MOVX    A,@DPTR
+   \   0000F3   6402         XRL     A,#0x2
+   \   0000F5   6008         JZ      ??simpliciti_main_7
+   \   0000F7   E0           MOVX    A,@DPTR
+   \   0000F8   6413         XRL     A,#0x13
+   \   0000FA   6003         JZ      $+5
+   \   0000FC   02....       LJMP    ??simpliciti_main_4
+   \                     ??simpliciti_main_7:
+   \   0000FF   639002       XRL     0x90,#0x2
+   \   000102   90....       MOV     DPTR,#ed_data
+   \   000105   E0           MOVX    A,@DPTR
+   \   000106   14           DEC     A
+   \   000107   6008         JZ      ??simpliciti_main_8
+   \   000109   14           DEC     A
+   \   00010A   603E         JZ      ??simpliciti_main_9
+   \   00010C   14           DEC     A
+   \   00010D   603B         JZ      ??simpliciti_main_9
+   \   00010F   8070         SJMP    ??simpliciti_main_4
+   \                     ??simpliciti_main_8:
+   \   000111   90....       MOV     DPTR,#simpliciti_flag
+   \   000114   E0           MOVX    A,@DPTR
+   \   000115   A2E6         MOV     C,0xE0 /* A   */.6
+   \   000117   500E         JNC     ??simpliciti_main_10
+   \   000119   E0           MOVX    A,@DPTR
+   \   00011A   C2E6         CLR     0xE0 /* A   */.6
+   \   00011C   F0           MOVX    @DPTR,A
+   \   00011D   85..82       MOV     DPL,?XSP + 0
+   \   000120   85..83       MOV     DPH,?XSP + 1
+   \   000123   7413         MOV     A,#0x13
+   \   000125   8012         SJMP    ??simpliciti_main_11
+   \                     ??simpliciti_main_10:
+   \   000127   90....       MOV     DPTR,#simpliciti_data
+   \   00012A   7401         MOV     A,#0x1
+   \   00012C   F0           MOVX    @DPTR,A
+   \   00012D   A3           INC     DPTR
+   \   00012E   7455         MOV     A,#0x55
+   \   000130   F0           MOVX    @DPTR,A
+   \   000131   85..82       MOV     DPL,?XSP + 0
+   \   000134   85..83       MOV     DPH,?XSP + 1
+   \   000137   7402         MOV     A,#0x2
+   \                     ??simpliciti_main_11:
+   \   000139   F0           MOVX    @DPTR,A
+   \   00013A                ; Setup parameters for call to function SMPL_Send
+   \   00013A   E0           MOVX    A,@DPTR
+   \   00013B   FC           MOV     R4,A
+   \   00013C   7A..         MOV     R2,#simpliciti_data & 0xff
+   \   00013E   7B..         MOV     R3,#(simpliciti_data >> 8) & 0xff
+   \   000140   90....       MOV     DPTR,#linkID0
+   \   000143   E0           MOVX    A,@DPTR
+   \   000144   F9           MOV     R1,A
+   \   000145   12....       LCALL   SMPL_Send
+   \   000148   8037         SJMP    ??simpliciti_main_4
+   \                     ??simpliciti_main_9:
+   \   00014A   90....       MOV     DPTR,#simpliciti_sync_buffer_status
+   \   00014D   E0           MOVX    A,@DPTR
+   \   00014E   7031         JNZ     ??simpliciti_main_4
+   \   000150   7A00         MOV     R2,#0x0
+   \   000152   8021         SJMP    ??simpliciti_main_12
+   \                     ??simpliciti_main_13:
+   \   000154   8A82         MOV     DPL,R2
+   \   000156   A882         MOV     R0,DPL
+   \   000158   74..         MOV     A,#ed_data & 0xff
+   \   00015A   28           ADD     A,R0
+   \   00015B   F582         MOV     DPL,A
+   \   00015D   74..         MOV     A,#(ed_data >> 8) & 0xff
+   \   00015F   3400         ADDC    A,#0x0
+   \   000161   F583         MOV     DPH,A
+   \   000163   E0           MOVX    A,@DPTR
+   \   000164   C0E0         PUSH    A
+   \   000166   74..         MOV     A,#simpliciti_data & 0xff
+   \   000168   28           ADD     A,R0
+   \   000169   F582         MOV     DPL,A
+   \   00016B   74..         MOV     A,#(simpliciti_data >> 8) & 0xff
+   \   00016D   3400         ADDC    A,#0x0
+   \   00016F   F583         MOV     DPH,A
+   \   000171   D0E0         POP     A
+   \   000173   F0           MOVX    @DPTR,A
+   \   000174   0A           INC     R2
+   \                     ??simpliciti_main_12:
+   \   000175   EA           MOV     A,R2
+   \   000176   C3           CLR     C
+   \   000177   9413         SUBB    A,#0x13
+   \   000179   40D9         JC      ??simpliciti_main_13
+   \   00017B   90....       MOV     DPTR,#simpliciti_sync_buffer_status
+   \   00017E   7401         MOV     A,#0x1
+   \                     ??simpliciti_main_6:
+   \   000180   F0           MOVX    @DPTR,A
+   \                     ??simpliciti_main_4:
+   \   000181   90....       MOV     DPTR,#simpliciti_flag
+   \   000184   E0           MOVX    A,@DPTR
+   \   000185   A2E5         MOV     C,0xE0 /* A   */.5
+   \   000187   4003         JC      $+5
+   \   000189   02....       LJMP    ??simpliciti_main_1
+   \   00018C   539AFE       ANL     0x9a,#0xfe
+   \   00018F   759100       MOV     0x91,#0x0
+   \   000192   75E900       MOV     0xe9,#0x0
+   \   000195   90....       MOV     DPTR,#linkID0
+   \   000198   E4           CLR     A
+   \   000199   F0           MOVX    @DPTR,A
+   \   00019A   90....       MOV     DPTR,#sNumCurrentPeers
+   \   00019D   F0           MOVX    @DPTR,A
+   \   00019E   90....       MOV     DPTR,#sJoinSem
+   \   0001A1   F0           MOVX    @DPTR,A
+   \   0001A2   90....       MOV     DPTR,#sPeerFrameSem
+   \   0001A5   F0           MOVX    @DPTR,A
+   \   0001A6   90....       MOV     DPTR,#sInit_done
+   \   0001A9   F0           MOVX    @DPTR,A
+   \   0001AA   C291         CLR     0x90.1
+   \   0001AC   7402         MOV     A,#0x2
+   \   0001AE   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0001B1   7F08         MOV     R7,#0x8
+   \   0001B3   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   0001B6                REQUIRE _A_P1
+   \   0001B6                REQUIRE _A_IEN0
+   \   0001B6                REQUIRE IEN2
+   \   0001B6                REQUIRE RFIM
+   \   0001B6                REQUIRE RFIF
+    227            }
+    228          }
+    229          
+    230          
+    231          
+    232          /* Runs in ISR context. Reading the frame should be done in the */
+    233          /* application thread not in the ISR thread. */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    234          uint8_t sCB(linkID_t lid)
+   \                     sCB:
+    235          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   E9           MOV     A,R1
+    236            if (lid)
+   \   000005   6005         JZ      ??sCB_0
+    237            {
+    238              sPeerFrameSem++;
+   \   000007   90....       MOV     DPTR,#sPeerFrameSem
+   \   00000A   8003         SJMP    ??sCB_1
+    239            }
+    240            else
+    241            {
+    242              sJoinSem++;
+   \                     ??sCB_0:
+   \   00000C   90....       MOV     DPTR,#sJoinSem
+   \                     ??sCB_1:
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   04           INC     A
+   \   000011   F0           MOVX    @DPTR,A
+    243            }
+    244          
+    245            /* leave frame to be read by application. */
+    246            return 0;
+   \   000012   7900         MOV     R1,#0x0
+   \   000014   D083         POP     DPH
+   \   000016   D082         POP     DPL
+   \   000018   22           RET
+    247          }
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_0:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_0>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_0>`:
+   \   000000   00000000     DD 0
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_1:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_1>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_1>`:
+   \   000000   01000000     DD 1
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_249f1:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_249f1>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_249f1>`:
+   \   000000   F1490200     DD 150001
+
+   Maximum stack usage in bytes:
+
+     Function             ISTACK PSTACK XSTACK
+     --------             ------ ------ ------
+     sCB                      2      0      0
+     simpliciti_main          1      0     19
+       -> SMPL_Init           0      0     34
+       -> SMPL_Ioctl          0      0     34
+       -> SMPL_LinkListen     0      0     34
+       -> SMPL_Receive        0      0     34
+       -> memcpy              0      0     38
+       -> SMPL_Send           0      0     34
+
+
+   Segment part sizes:
+
+     Function/Label                      Bytes
+     --------------                      -----
+     _A_P1                                  1
+     RFIM                                   1
+     IEN2                                   1
+     _A_IEN0                                1
+     RFIF                                   1
+     linkID0                                1
+     sNumCurrentPeers                       1
+     sPeerFrameSem                          1
+     sJoinSem                               1
+     simpliciti_flag                        1
+     simpliciti_data                       32
+     ed_data                               32
+     simpliciti_main                      438
+     sCB                                   25
+     __Constant_0                           4
+     ?<Initializer for __Constant_0>        4
+     __Constant_1                           4
+     ?<Initializer for __Constant_1>        4
+     __Constant_249f1                       4
+     ?<Initializer for __Constant_249f1>    4
+
+ 
+ 463 bytes in segment NEAR_CODE
+   5 bytes in segment SFR_AN
+  12 bytes in segment XDATA_I
+  12 bytes in segment XDATA_ID
+  69 bytes in segment XDATA_Z
+ 
+ 463 bytes of CODE  memory (+ 12 bytes shared)
+   0 bytes of DATA  memory (+  5 bytes shared)
+  69 bytes of XDATA memory (+ 12 bytes shared)
+
+Errors: none
+Warnings: none

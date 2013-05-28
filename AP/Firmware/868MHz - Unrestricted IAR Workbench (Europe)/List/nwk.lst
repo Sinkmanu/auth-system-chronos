@@ -1,0 +1,2685 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:35 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\nwk\nw #
+#                          k.c                                                #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\nwk.c" -D CC1111EM -D ISM_EU    #
+#                          -D MCU_H=<ioCC1111.h> -D chip=1111 -D              #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\nwk.lst                    #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\nwk.r51                     #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\nwk\nwk.c
+      1          /**************************************************************************************************
+      2            Filename:       nwk.c
+      3            Revised:        $Date: 2009-03-11 15:29:07 -0700 (Wed, 11 Mar 2009) $
+      4            Revision:       $Revision: 19382 $
+      5            Author          $Author: lfriedman $
+      6          
+      7            Description:    This file supports the SimpliciTI network layer.
+      8          
+      9            Copyright 2007-2009 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+     12            the terms of a software license agreement between the user who downloaded the software,
+     13            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     14            "License"). You may not use this Software unless you agree to abide by the terms of the
+     15            License. The License limits your use, and you acknowledge, that the Software may not be
+     16            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     17            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     18            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     19            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     20            perform, display or sell this Software and/or its documentation for any purpose.
+     21          
+     22            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     23            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     24            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     25            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     26            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     27            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     28            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     29            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     30            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     31          
+     32            Should you have any questions regarding your right to use this Software,
+     33            contact Texas Instruments Incorporated at www.TI.com.
+     34          **************************************************************************************************/
+     35          
+     36          /******************************************************************************
+     37           * INCLUDES
+     38           */
+     39          #include <string.h>
+     40          #include "bsp.h"
+     41          #include "mrfi.h"
+     42          #include "nwk_types.h"
+     43          #include "nwk_frame.h"
+     44          #include "nwk.h"
+     45          #include "nwk_app.h"
+     46          #include "nwk_globals.h"
+     47          #include "nwk_QMgmt.h"
+     48          
+     49          /******************************************************************************
+     50           * MACROS
+     51           */
+     52          /************************* NETWORK MANIFEST CONSTANT SANITY CHECKS ****************************/
+     53          #if !defined(ACCESS_POINT) && !defined(RANGE_EXTENDER) && !defined(END_DEVICE)
+     54          #error ERROR: No SimpliciTI device type defined
+     55          #endif
+     56          
+     57          #if defined(END_DEVICE) && !defined(RX_POLLS)
+     58          #define RX_USER
+     59          #endif
+     60          
+     61          #ifndef MAX_HOPS
+     62          #define MAX_HOPS  3
+     63          #elif MAX_HOPS > 4
+     64          #error ERROR: MAX_HOPS must be 4 or fewer
+     65          #endif
+     66          
+     67          #ifndef MAX_APP_PAYLOAD
+     68          #error ERROR: MAX_APP_PAYLOAD must be defined
+     69          #endif
+     70          
+     71          #if ( MAX_PAYLOAD < MAX_FREQ_APP_FRAME )
+     72          #error ERROR: Application payload size too small for Frequency frame
+     73          #endif
+     74          
+     75          #if ( MAX_PAYLOAD < MAX_JOIN_APP_FRAME )
+     76          #error ERROR: Application payload size too small for Join frame
+     77          #endif
+     78          
+     79          #if ( MAX_PAYLOAD < MAX_LINK_APP_FRAME )
+     80          #error ERROR: Application payload size too small for Link frame
+     81          #endif
+     82          
+     83          #if ( MAX_PAYLOAD < MAX_MGMT_APP_FRAME )
+     84          #error ERROR: Application payload size too small for Management frame
+     85          #endif
+     86          
+     87          #if ( MAX_PAYLOAD < MAX_SEC_APP_FRAME )
+     88          #error ERROR: Application payload size too small for Security frame
+     89          #endif
+     90          
+     91          #if ( MAX_PAYLOAD < MAX_PING_APP_FRAME )
+     92          #error ERROR: Application payload size too small for Ping frame
+     93          #endif
+     94          
+     95          #if NWK_FREQ_TBL_SIZE < 1
+     96          #error ERROR: NWK_FREQ_TBL_SIZE must be > 0
+     97          #endif
+     98          
+     99          /************************* END NETWORK MANIFEST CONSTANT SANITY CHECKS ************************/
+    100          
+    101          /******************************************************************************
+    102           * CONSTANTS AND DEFINES
+    103           */
+    104          #define SYS_NUM_CONNECTIONS   (NUM_CONNECTIONS+1)
+    105          
+    106          /* Increment this if the persistentContext_t structure is changed. It will help
+    107           * detect the upgrade context: any saved values will have a version with a
+    108           * lower number.
+    109           */
+    110          #define  CONNTABLEINFO_STRUCTURE_VERSION   1
+    111          
+    112          #define  SIZEOF_NV_OBJ   sizeof(sPersistInfo)
+    113          
+    114          /******************************************************************************
+    115           * TYPEDEFS
+    116           */
+    117          /* This structure aggregates eveything necessary to save if we want to restore
+    118           * the connection information later.
+    119           */
+    120          typedef struct
+    121          {
+    122            const uint8_t    structureVersion; /* to dectect upgrades... */
+    123                  uint8_t    numConnections;   /* count includes the UUD port/link ID */
+    124          /* The next two are used to detect overlapping port assignments. When _sending_ a
+    125           * link frame the local port is assigned from the top down. When sending a _reply_
+    126           * the assignment is bottom up. Overlapping assignments are rejected. That said it
+    127           * is extremely unlikely that this will ever happen. If it does the test implemented
+    128           * here is overly cautious (it will reject assignments when it needn't). But we leave
+    129           * it that way on the assumption that it will never happen anyway.
+    130           */
+    131                  uint8_t    curNextLinkPort;
+    132                  uint8_t    curMaxReplyPort;
+    133                  linkID_t   nextLinkID;
+    134          #ifdef ACCESS_POINT
+    135                  sfInfo_t   sSandFContext;
+    136          #endif
+    137          /* Connection table entries last... */
+    138                  connInfo_t connStruct[SYS_NUM_CONNECTIONS];
+    139          } persistentContext_t;
+    140          
+    141          /******************************************************************************
+    142           * LOCAL VARIABLES
+    143           */
+    144          
+    145          /* This will be overwritten if we restore the structure from NV for example.
+    146           * Note that restoring will not permit overwriting the version element as it
+    147           * is declared 'const'.
+    148           */
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    149          static persistentContext_t sPersistInfo = {CONNTABLEINFO_STRUCTURE_VERSION};
+   \                     sPersistInfo:
+   \   000000                DS 45
+   \   00002D                REQUIRE `?<Initializer for sPersistInfo>`
+   \   00002D                REQUIRE __INIT_XDATA_I
+    150          
+    151          /******************************************************************************
+    152           * LOCAL FUNCTIONS
+    153           */
+    154          static uint8_t map_lid2idx(linkID_t, uint8_t *);
+    155          static void    initializeConnection(connInfo_t *);
+    156          
+    157          /******************************************************************************
+    158           * GLOBAL VARIABLES
+    159           */
+    160          
+    161          /******************************************************************************
+    162           * GLOBAL FUNCTIONS
+    163           */
+    164          
+    165          /******************************************************************************
+    166           * @fn          nwk_nwkInit
+    167           *
+    168           * @brief       Initialize NWK conext.
+    169           *
+    170           * input parameters
+    171           *
+    172           * output parameters
+    173           *
+    174           * @return   Status of operation.
+    175           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    176          smplStatus_t nwk_nwkInit(uint8_t (*f)(linkID_t))
+   \                     nwk_nwkInit:
+    177          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+    178            /* Truly ugly initialization because CCE won't initialize properly. Must
+    179             * skip first const element. Yuk.
+    180             */
+    181            memset((((uint8_t *)&sPersistInfo)+1), 0x0, (sizeof(sPersistInfo)-1));
+   \   000009                ; Setup parameters for call to function memset
+   \   000009   75..2C       MOV     ?V0 + 0,#0x2c
+   \   00000C   75..00       MOV     ?V0 + 1,#0x0
+   \   00000F   78..         MOV     R0,#?V0 + 0
+   \   000011   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000014   7C00         MOV     R4,#0x0
+   \   000016   7D00         MOV     R5,#0x0
+   \   000018   7A..         MOV     R2,#(sPersistInfo + 1) & 0xff
+   \   00001A   7B..         MOV     R3,#((sPersistInfo + 1) >> 8) & 0xff
+   \   00001C   12....       LCALL   memset
+   \   00001F   7402         MOV     A,#0x2
+   \   000021   12....       LCALL   ?DEALLOC_XSTACK8
+    182            /* OK. The zeroed elements are set. Now go back and do fixups...  */
+    183          
+    184            sPersistInfo.numConnections   = SYS_NUM_CONNECTIONS;
+   \   000024   90....       MOV     DPTR,#sPersistInfo + 1
+   \   000027   7402         MOV     A,#0x2
+   \   000029   F0           MOVX    @DPTR,A
+    185            sPersistInfo.curNextLinkPort  = SMPL_PORT_USER_MAX;
+   \   00002A   A3           INC     DPTR
+   \   00002B   743D         MOV     A,#0x3d
+   \   00002D   F0           MOVX    @DPTR,A
+    186            sPersistInfo.curMaxReplyPort  = PORT_BASE_NUMBER;
+   \   00002E   A3           INC     DPTR
+   \   00002F   7420         MOV     A,#0x20
+   \   000031   F0           MOVX    @DPTR,A
+    187            sPersistInfo.nextLinkID       = 1;
+   \   000032   A3           INC     DPTR
+   \   000033   7401         MOV     A,#0x1
+   \   000035   F0           MOVX    @DPTR,A
+    188          
+    189            /* initialize globals */
+    190            nwk_globalsInit();
+   \   000036                ; Setup parameters for call to function nwk_globalsInit
+   \   000036   12....       LCALL   nwk_globalsInit
+    191          
+    192            /* initialize frame processing */
+    193            nwk_frameInit(f);
+   \   000039                ; Setup parameters for call to function nwk_frameInit
+   \   000039   EE           MOV     A,R6
+   \   00003A   FA           MOV     R2,A
+   \   00003B   EF           MOV     A,R7
+   \   00003C   FB           MOV     R3,A
+   \   00003D   12....       LCALL   nwk_frameInit
+    194          
+    195            /* initialize queue manager */
+    196            nwk_QInit();
+   \   000040                ; Setup parameters for call to function nwk_QInit
+   \   000040   12....       LCALL   nwk_QInit
+    197          	
+    198            /* initialize each network application. */
+    199            nwk_freqInit();
+   \   000043                ; Setup parameters for call to function nwk_freqInit
+   \   000043   12....       LCALL   nwk_freqInit
+    200            nwk_pingInit();
+   \   000046                ; Setup parameters for call to function nwk_pingInit
+   \   000046   12....       LCALL   nwk_pingInit
+    201            nwk_joinInit(f);
+   \   000049                ; Setup parameters for call to function nwk_joinInit
+   \   000049   EE           MOV     A,R6
+   \   00004A   FA           MOV     R2,A
+   \   00004B   EF           MOV     A,R7
+   \   00004C   FB           MOV     R3,A
+   \   00004D   12....       LCALL   nwk_joinInit
+    202            nwk_mgmtInit();
+   \   000050                ; Setup parameters for call to function nwk_mgmtInit
+   \   000050   12....       LCALL   nwk_mgmtInit
+    203            nwk_linkInit();
+   \   000053                ; Setup parameters for call to function nwk_linkInit
+   \   000053   12....       LCALL   nwk_linkInit
+    204            nwk_securityInit();
+   \   000056                ; Setup parameters for call to function nwk_securityInit
+   \   000056   12....       LCALL   nwk_securityInit
+    205          
+    206            /* set up the last connection as the broadcast port mapped to the broadcast Link ID */
+    207            if (CONNSTATE_FREE == sPersistInfo.connStruct[NUM_CONNECTIONS].connState)
+   \   000059   90....       MOV     DPTR,#sPersistInfo + 33
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   702D         JNZ     ??nwk_nwkInit_0
+    208            {
+    209              sPersistInfo.connStruct[NUM_CONNECTIONS].connState   = CONNSTATE_CONNECTED;
+   \   00005F   7402         MOV     A,#0x2
+   \   000061   F0           MOVX    @DPTR,A
+    210              sPersistInfo.connStruct[NUM_CONNECTIONS].hops2target = MAX_HOPS;
+   \   000062   A3           INC     DPTR
+   \   000063   04           INC     A
+   \   000064   F0           MOVX    @DPTR,A
+    211              sPersistInfo.connStruct[NUM_CONNECTIONS].portRx      = SMPL_PORT_USER_BCAST;
+   \   000065   90....       MOV     DPTR,#sPersistInfo + 42
+   \   000068   743F         MOV     A,#0x3f
+   \   00006A   F0           MOVX    @DPTR,A
+    212              sPersistInfo.connStruct[NUM_CONNECTIONS].portTx      = SMPL_PORT_USER_BCAST;
+   \   00006B   A3           INC     DPTR
+   \   00006C   F0           MOVX    @DPTR,A
+    213              sPersistInfo.connStruct[NUM_CONNECTIONS].thisLinkID  = SMPL_LINKID_USER_UUD;
+   \   00006D   A3           INC     DPTR
+   \   00006E   74FF         MOV     A,#-0x1
+   \   000070   F0           MOVX    @DPTR,A
+    214              /* set peer address to broadcast so it is used when Application sends to the broadcast Link ID */
+    215              memcpy(sPersistInfo.connStruct[NUM_CONNECTIONS].peerAddr, nwk_getBCastAddress(), NET_ADDR_SIZE);
+   \   000071                ; Setup parameters for call to function memcpy
+   \   000071   75..04       MOV     ?V0 + 0,#0x4
+   \   000074   78..         MOV     R0,#?V0 + 0
+   \   000076   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000079                ; Setup parameters for call to function nwk_getBCastAddress
+   \   000079   12....       LCALL   nwk_getBCastAddress
+   \   00007C   EA           MOV     A,R2
+   \   00007D   FC           MOV     R4,A
+   \   00007E   EB           MOV     A,R3
+   \   00007F   FD           MOV     R5,A
+   \   000080   7A..         MOV     R2,#(sPersistInfo + 36) & 0xff
+   \   000082   7B..         MOV     R3,#((sPersistInfo + 36) >> 8) & 0xff
+   \   000084   12....       LCALL   memcpy
+   \   000087   7402         MOV     A,#0x2
+   \   000089   12....       LCALL   ?DEALLOC_XSTACK8
+    216            }
+    217          
+    218            return SMPL_SUCCESS;
+   \                     ??nwk_nwkInit_0:
+   \   00008C   7900         MOV     R1,#0x0
+   \   00008E   7F02         MOV     R7,#0x2
+   \   000090   02....       LJMP    ?FUNC_LEAVE_XDATA
+    219          }
+    220          
+    221          /******************************************************************************
+    222           * @fn          nwk_getNextConnection
+    223           *
+    224           * @brief       Return the next free connection structure if on is available.
+    225           *
+    226           * input parameters
+    227           *
+    228           * output parameters
+    229           *      The returned structure has the Rx port number populated based on the
+    230           *      free strucure found. This is the port queried when the app wants to
+    231           *      do a receive.
+    232           *
+    233           * @return   pointer to the new connInfo_t structure. NULL if there is
+    234           *           no room in connection structure array.
+    235           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    236          connInfo_t *nwk_getNextConnection()
+   \                     nwk_getNextConnection:
+    237          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    238            uint8_t  i;
+    239          
+    240            for (i=0; i<SYS_NUM_CONNECTIONS; ++i)
+   \   000004   7B00         MOV     R3,#0x0
+   \   000006   8001         SJMP    ??nwk_getNextConnection_0
+    241            {
+    242              if (sPersistInfo.connStruct[i].connState == CONNSTATE_CONNECTED)
+    243              {
+    244                continue;
+   \                     ??nwk_getNextConnection_1:
+   \   000008   0B           INC     R3
+   \                     ??nwk_getNextConnection_0:
+   \   000009   EB           MOV     A,R3
+   \   00000A   C3           CLR     C
+   \   00000B   9402         SUBB    A,#0x2
+   \   00000D   5017         JNC     ??nwk_getNextConnection_2
+   \   00000F   EB           MOV     A,R3
+   \   000010   75F00C       MOV     B,#0xc
+   \   000013   A4           MUL     AB
+   \   000014   F8           MOV     R0,A
+   \   000015   A9F0         MOV     R1,B
+   \   000017   74..         MOV     A,#(sPersistInfo + 21) & 0xff
+   \   000019   28           ADD     A,R0
+   \   00001A   F582         MOV     DPL,A
+   \   00001C   74..         MOV     A,#((sPersistInfo + 21) >> 8) & 0xff
+   \   00001E   39           ADDC    A,R1
+   \   00001F   F583         MOV     DPH,A
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   6402         XRL     A,#0x2
+   \   000024   60E2         JZ      ??nwk_getNextConnection_1
+    245              }
+    246              break;
+    247            }
+    248          
+    249            if (SYS_NUM_CONNECTIONS == i)
+   \                     ??nwk_getNextConnection_2:
+   \   000026   7402         MOV     A,#0x2
+   \   000028   6B           XRL     A,R3
+   \   000029   7006         JNZ     ??nwk_getNextConnection_3
+    250            {
+    251              return (connInfo_t *)0;
+   \   00002B   7A00         MOV     R2,#0x0
+   \   00002D   7B00         MOV     R3,#0x0
+   \   00002F   801D         SJMP    ??nwk_getNextConnection_4
+    252            }
+    253          
+    254            initializeConnection(&sPersistInfo.connStruct[i]);
+   \                     ??nwk_getNextConnection_3:
+   \   000031   EB           MOV     A,R3
+   \   000032   75F00C       MOV     B,#0xc
+   \   000035   A4           MUL     AB
+   \   000036   F8           MOV     R0,A
+   \   000037   A9F0         MOV     R1,B
+   \   000039   74..         MOV     A,#(sPersistInfo + 21) & 0xff
+   \   00003B   28           ADD     A,R0
+   \   00003C   F582         MOV     DPL,A
+   \   00003E   74..         MOV     A,#((sPersistInfo + 21) >> 8) & 0xff
+   \   000040   39           ADDC    A,R1
+   \   000041   F583         MOV     DPH,A
+   \   000043                ; Setup parameters for call to function initializeConnection
+   \   000043   AA82         MOV     R2,DPL
+   \   000045   AB83         MOV     R3,DPH
+   \   000047   12....       LCALL   initializeConnection
+    255          
+    256            return &sPersistInfo.connStruct[i];
+   \   00004A   AA82         MOV     R2,DPL
+   \   00004C   AB83         MOV     R3,DPH
+   \                     ??nwk_getNextConnection_4:
+   \   00004E   D083         POP     DPH
+   \   000050   D082         POP     DPL
+   \   000052   22           RET
+    257          }
+    258          
+    259          /************************************************************************************
+    260           * @fn          initializeConnection
+    261           *
+    262           * @brief       Initialize some elements of a Connection table entry.
+    263           *
+    264           * input parameters
+    265           * @param   pCInfo  - pointer to Connection Table entry to initialize. The file
+    266           *                    scope variable holding the next link ID value is also updated.
+    267           *
+    268           * output parameters
+    269           * @param   pCInfo  - certain elements are set to specific values.
+    270           *
+    271           *
+    272           * @return   void
+    273           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    274          static void initializeConnection(connInfo_t *pCInfo)
+   \                     initializeConnection:
+    275          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 1
+   \   000004   74FF         MOV     A,#-0x1
+   \   000006   12....       LCALL   ?ALLOC_XSTACK8
+    276            linkID_t *locLID = &sPersistInfo.nextLinkID;
+    277            uint8_t   tmp;
+    278          
+    279              /* this element will be populated during the exchange with the peer. */
+    280            pCInfo->portTx = 0;
+   \   000009   8A82         MOV     DPL,R2
+   \   00000B   8B83         MOV     DPH,R3
+   \   00000D   A3           INC     DPTR
+   \   00000E   A3           INC     DPTR
+   \   00000F   A3           INC     DPTR
+   \   000010   A3           INC     DPTR
+   \   000011   A3           INC     DPTR
+   \   000012   A3           INC     DPTR
+   \   000013   A3           INC     DPTR
+   \   000014   A3           INC     DPTR
+   \   000015   A3           INC     DPTR
+   \   000016   A3           INC     DPTR
+   \   000017   E4           CLR     A
+   \   000018   F0           MOVX    @DPTR,A
+    281          
+    282            pCInfo->connState  =  CONNSTATE_CONNECTED;
+   \   000019   8A82         MOV     DPL,R2
+   \   00001B   8B83         MOV     DPH,R3
+   \   00001D   7402         MOV     A,#0x2
+   \   00001F   F0           MOVX    @DPTR,A
+    283            pCInfo->thisLinkID = *locLID;
+   \   000020   90....       MOV     DPTR,#sPersistInfo + 4
+   \   000023   E0           MOVX    A,@DPTR
+   \   000024   C0E0         PUSH    A
+   \   000026   EA           MOV     A,R2
+   \   000027   240B         ADD     A,#0xb
+   \   000029   F582         MOV     DPL,A
+   \   00002B   EB           MOV     A,R3
+   \   00002C   3400         ADDC    A,#0x0
+   \   00002E   F583         MOV     DPH,A
+   \   000030   D0E0         POP     A
+   \   000032   F0           MOVX    @DPTR,A
+    284          
+    285            /* Generate the next Link ID. This isn't foolproof. If the count wraps
+    286             * we can end up with confusing duplicates. We can protect aginst using
+    287             * one that is already in use but we can't protect against a stale Link ID
+    288             * remembered by an application that doesn't know its connection has been
+    289             * torn down. The test for 0 will hopefully never be true (indicating a wrap).
+    290             */
+    291            (*locLID)++;
+    292          
+    293            while (!*locLID || (*locLID == SMPL_LINKID_USER_UUD) || map_lid2idx(*locLID, &tmp))
+    294            {
+    295              (*locLID)++;
+   \                     ??initializeConnection_0:
+   \   000033   90....       MOV     DPTR,#sPersistInfo + 4
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   04           INC     A
+   \   000038   F0           MOVX    @DPTR,A
+    296            }
+   \   000039   E0           MOVX    A,@DPTR
+   \   00003A   F9           MOV     R1,A
+   \   00003B   60F6         JZ      ??initializeConnection_0
+   \   00003D   74FF         MOV     A,#-0x1
+   \   00003F   69           XRL     A,R1
+   \   000040   60F1         JZ      ??initializeConnection_0
+   \   000042                ; Setup parameters for call to function map_lid2idx
+   \   000042   85..82       MOV     DPL,?XSP + 0
+   \   000045   85..83       MOV     DPH,?XSP + 1
+   \   000048   AA82         MOV     R2,DPL
+   \   00004A   AB83         MOV     R3,DPH
+   \   00004C   12....       LCALL   map_lid2idx
+   \   00004F   E9           MOV     A,R1
+   \   000050   70E1         JNZ     ??initializeConnection_0
+    297          
+    298            return;
+   \   000052   7401         MOV     A,#0x1
+   \   000054   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000057   D083         POP     DPH
+   \   000059   D082         POP     DPL
+   \   00005B   22           RET
+    299          }
+    300          
+    301          
+    302          /******************************************************************************
+    303           * @fn          nwk_freeConnection
+    304           *
+    305           * @brief       Return the connection structure to the free pool. Currently
+    306           *              this routine is only called when a link freame is sent and
+    307           *              no reply is received so the freeing steps are pretty simple.
+    308           *              But eventually this will be more complex so this place-holder
+    309           *              is introduced.
+    310           *
+    311           * input parameters
+    312           * @param   pCInfo    - pointer to entry to be freed
+    313           *
+    314           * output parameters
+    315           *
+    316           * @return   None.
+    317           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    318          void nwk_freeConnection(connInfo_t *pCInfo)
+   \                     nwk_freeConnection:
+    319          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    320          #if NUM_CONNECTIONS > 0
+    321            pCInfo->connState = CONNSTATE_FREE;
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   E4           CLR     A
+   \   000009   F0           MOVX    @DPTR,A
+    322          #endif
+    323          }
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+    324          
+    325          /******************************************************************************
+    326           * @fn          nwk_getConnInfo
+    327           *
+    328           * @brief       Return the connection info structure to which the input Link ID maps.
+    329           *
+    330           * input parameters
+    331           * @param   port    - port for which mapping desired
+    332           *
+    333           * output parameters
+    334           *
+    335           * @return   pointer to connInfo_t structure found. NULL if no mapping
+    336           *           found or entry not valid.
+    337           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    338          connInfo_t *nwk_getConnInfo(linkID_t linkID)
+   \                     nwk_getConnInfo:
+    339          {
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 1
+   \   000005   74FF         MOV     A,#-0x1
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    340            uint8_t idx, rc;
+    341          
+    342            rc = map_lid2idx(linkID, &idx);
+    343          
+    344            return (rc && (CONNSTATE_CONNECTED == sPersistInfo.connStruct[idx].connState)) ? &sPersistInfo.connStruct[idx] : (connInfo_t *)0;
+   \   00000A                ; Setup parameters for call to function map_lid2idx
+   \   00000A   85..82       MOV     DPL,?XSP + 0
+   \   00000D   85..83       MOV     DPH,?XSP + 1
+   \   000010   AA82         MOV     R2,DPL
+   \   000012   AB83         MOV     R3,DPH
+   \   000014   12....       LCALL   map_lid2idx
+   \   000017   E9           MOV     A,R1
+   \   000018   6017         JZ      ??nwk_getConnInfo_0
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   75F00C       MOV     B,#0xc
+   \   00001E   A4           MUL     AB
+   \   00001F   F8           MOV     R0,A
+   \   000020   A9F0         MOV     R1,B
+   \   000022   74..         MOV     A,#(sPersistInfo + 21) & 0xff
+   \   000024   28           ADD     A,R0
+   \   000025   F582         MOV     DPL,A
+   \   000027   74..         MOV     A,#((sPersistInfo + 21) >> 8) & 0xff
+   \   000029   39           ADDC    A,R1
+   \   00002A   F583         MOV     DPH,A
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   6402         XRL     A,#0x2
+   \   00002F   6006         JZ      ??nwk_getConnInfo_1
+   \                     ??nwk_getConnInfo_0:
+   \   000031   758200       MOV     DPL,#0x0
+   \   000034   758300       MOV     DPH,#0x0
+   \                     ??nwk_getConnInfo_1:
+   \   000037   AA82         MOV     R2,DPL
+   \   000039   AB83         MOV     R3,DPH
+   \   00003B   7401         MOV     A,#0x1
+   \   00003D   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000040   7F01         MOV     R7,#0x1
+   \   000042   02....       LJMP    ?FUNC_LEAVE_XDATA
+    345          }
+    346          
+    347          /******************************************************************************
+    348           * @fn          nwk_isLinkDuplicate
+    349           *
+    350           * @brief       Help determine if the link has already been established.. Defense
+    351           *              against duplicate link frames. This file owns the data structure
+    352           *              so the comparison is done here.
+    353           *
+    354           * input parameters
+    355           * @param   addr       - pointer to address of linker in question
+    356           * @param   remotePort - remote port number provided by linker
+    357           *
+    358           * output parameters
+    359           *
+    360           * @return   Returns pointer to connection entry if the address and remote Port
+    361           *           match an existing entry, otherwise 0.
+    362           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    363          connInfo_t *nwk_isLinkDuplicate(uint8_t *addr, uint8_t remotePort)
+   \                     nwk_isLinkDuplicate:
+    364          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+   \   000009   89..         MOV     ?V0 + 2,R1
+    365          #if NUM_CONNECTIONS > 0
+    366            uint8_t       i;
+    367            connInfo_t   *ptr = sPersistInfo.connStruct;
+   \   00000B   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   00000D   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    368          
+    369            for (i=0; i<NUM_CONNECTIONS; ++i,++ptr)
+   \   00000F   7800         MOV     R0,#0x0
+   \   000011   800A         SJMP    ??nwk_isLinkDuplicate_0
+   \                     ??nwk_isLinkDuplicate_1:
+   \   000013   7801         MOV     R0,#0x1
+   \   000015   EE           MOV     A,R6
+   \   000016   240C         ADD     A,#0xc
+   \   000018   FE           MOV     R6,A
+   \   000019   EF           MOV     A,R7
+   \   00001A   3400         ADDC    A,#0x0
+   \   00001C   FF           MOV     R7,A
+   \                     ??nwk_isLinkDuplicate_0:
+   \   00001D   E8           MOV     A,R0
+   \   00001E   7048         JNZ     ??nwk_isLinkDuplicate_2
+    370            {
+    371              if (CONNSTATE_CONNECTED == ptr->connState)
+   \   000020   8E82         MOV     DPL,R6
+   \   000022   8F83         MOV     DPH,R7
+   \   000024   E0           MOVX    A,@DPTR
+   \   000025   6402         XRL     A,#0x2
+   \   000027   70EA         JNZ     ??nwk_isLinkDuplicate_1
+    372              {
+    373                if (!(memcmp(ptr->peerAddr, addr, NET_ADDR_SIZE)) &&
+    374                    (ptr->portTx == remotePort))
+   \   000029                ; Setup parameters for call to function memcmp
+   \   000029   75..04       MOV     ?V0 + 4,#0x4
+   \   00002C   75..00       MOV     ?V0 + 5,#0x0
+   \   00002F   78..         MOV     R0,#?V0 + 4
+   \   000031   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000034   AC..         MOV     R4,?V0 + 0
+   \   000036   AD..         MOV     R5,?V0 + 1
+   \   000038   EE           MOV     A,R6
+   \   000039   2403         ADD     A,#0x3
+   \   00003B   FA           MOV     R2,A
+   \   00003C   EF           MOV     A,R7
+   \   00003D   3400         ADDC    A,#0x0
+   \   00003F   FB           MOV     R3,A
+   \   000040   12....       LCALL   memcmp
+   \   000043   7402         MOV     A,#0x2
+   \   000045   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000048   8B..         MOV     ?V0 + 5,R3
+   \   00004A   EA           MOV     A,R2
+   \   00004B   45..         ORL     A,?V0 + 5
+   \   00004D   70C4         JNZ     ??nwk_isLinkDuplicate_1
+   \   00004F   8E82         MOV     DPL,R6
+   \   000051   8F83         MOV     DPH,R7
+   \   000053   A3           INC     DPTR
+   \   000054   A3           INC     DPTR
+   \   000055   A3           INC     DPTR
+   \   000056   A3           INC     DPTR
+   \   000057   A3           INC     DPTR
+   \   000058   A3           INC     DPTR
+   \   000059   A3           INC     DPTR
+   \   00005A   A3           INC     DPTR
+   \   00005B   A3           INC     DPTR
+   \   00005C   A3           INC     DPTR
+   \   00005D   E0           MOVX    A,@DPTR
+   \   00005E   65..         XRL     A,?V0 + 2
+   \   000060   70B1         JNZ     ??nwk_isLinkDuplicate_1
+    375                {
+    376                  return ptr;
+   \   000062   EE           MOV     A,R6
+   \   000063   FA           MOV     R2,A
+   \   000064   EF           MOV     A,R7
+   \   000065   FB           MOV     R3,A
+   \   000066   8004         SJMP    ??nwk_isLinkDuplicate_3
+    377                }
+    378              }
+    379            }
+    380          #endif
+    381          
+    382            return (connInfo_t *)NULL;
+   \                     ??nwk_isLinkDuplicate_2:
+   \   000068   7A00         MOV     R2,#0x0
+   \   00006A   7B00         MOV     R3,#0x0
+   \                     ??nwk_isLinkDuplicate_3:
+   \   00006C   7F06         MOV     R7,#0x6
+   \   00006E   02....       LJMP    ?FUNC_LEAVE_XDATA
+    383          }
+    384          
+    385          /******************************************************************************
+    386           * @fn          nwk_findAddressMatch
+    387           *
+    388           * @brief       Used to look for an address match in the Connection table.
+    389           *              Match is based on source address in frame.
+    390           *
+    391           * input parameters
+    392           * @param   frame    - pointer to frame in question
+    393           *
+    394           * output parameters
+    395           *
+    396           * @return   Returns non-zero if a match is found, otherwise 0.
+    397           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    398          uint8_t nwk_findAddressMatch(mrfiPacket_t *frame)
+   \                     nwk_findAddressMatch:
+    399          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+    400          #if NUM_CONNECTIONS > 0
+    401            uint8_t       i;
+    402            connInfo_t   *ptr = sPersistInfo.connStruct;
+   \   000009   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   00000B   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    403          
+    404            for (i=0; i<NUM_CONNECTIONS; ++i,++ptr)
+   \   00000D   7800         MOV     R0,#0x0
+   \   00000F   800A         SJMP    ??nwk_findAddressMatch_0
+   \                     ??nwk_findAddressMatch_1:
+   \   000011   7801         MOV     R0,#0x1
+   \   000013   EE           MOV     A,R6
+   \   000014   240C         ADD     A,#0xc
+   \   000016   FE           MOV     R6,A
+   \   000017   EF           MOV     A,R7
+   \   000018   3400         ADDC    A,#0x0
+   \   00001A   FF           MOV     R7,A
+   \                     ??nwk_findAddressMatch_0:
+   \   00001B   E8           MOV     A,R0
+   \   00001C   7039         JNZ     ??nwk_findAddressMatch_2
+    405            {
+    406          
+    407              if (CONNSTATE_CONNECTED == ptr->connState)
+   \   00001E   8E82         MOV     DPL,R6
+   \   000020   8F83         MOV     DPH,R7
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   6402         XRL     A,#0x2
+   \   000025   70EA         JNZ     ??nwk_findAddressMatch_1
+    408              {
+    409                if (!(memcmp(ptr->peerAddr, MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE)))
+   \   000027                ; Setup parameters for call to function memcmp
+   \   000027   75..04       MOV     ?V0 + 2,#0x4
+   \   00002A   75..00       MOV     ?V0 + 3,#0x0
+   \   00002D   78..         MOV     R0,#?V0 + 2
+   \   00002F   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000032   E5..         MOV     A,?V0 + 0
+   \   000034   2405         ADD     A,#0x5
+   \   000036   FC           MOV     R4,A
+   \   000037   E5..         MOV     A,?V0 + 1
+   \   000039   3400         ADDC    A,#0x0
+   \   00003B   FD           MOV     R5,A
+   \   00003C   EE           MOV     A,R6
+   \   00003D   2403         ADD     A,#0x3
+   \   00003F   FA           MOV     R2,A
+   \   000040   EF           MOV     A,R7
+   \   000041   3400         ADDC    A,#0x0
+   \   000043   FB           MOV     R3,A
+   \   000044   12....       LCALL   memcmp
+   \   000047   7402         MOV     A,#0x2
+   \   000049   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00004C   8B..         MOV     ?V0 + 3,R3
+   \   00004E   EA           MOV     A,R2
+   \   00004F   45..         ORL     A,?V0 + 3
+   \   000051   70BE         JNZ     ??nwk_findAddressMatch_1
+    410                {
+    411                  return 1;
+   \   000053   7901         MOV     R1,#0x1
+   \   000055   8002         SJMP    ??nwk_findAddressMatch_3
+    412                }
+    413              }
+    414            }
+    415          #endif
+    416          
+    417            return 0;
+   \                     ??nwk_findAddressMatch_2:
+   \   000057   7900         MOV     R1,#0x0
+   \                     ??nwk_findAddressMatch_3:
+   \   000059   7F04         MOV     R7,#0x4
+   \   00005B   02....       LJMP    ?FUNC_LEAVE_XDATA
+    418          }
+    419          
+    420          #ifdef ACCESS_POINT
+    421          /******************************************************************************
+    422           * @fn          nwk_getSFInfoPtr
+    423           *
+    424           * @brief       Get pointer to store-and-forward information object kept in the
+    425           *              NV object aggregate.
+    426           *
+    427           * input parameters
+    428           *
+    429           * output parameters
+    430           *
+    431           * @return   Returns pointer to the store-nad-forward object.
+    432           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    433          sfInfo_t *nwk_getSFInfoPtr(void)
+   \                     nwk_getSFInfoPtr:
+    434          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    435            return &sPersistInfo.sSandFContext;
+   \   000000   7A..         MOV     R2,#(sPersistInfo + 5) & 0xff
+   \   000002   7B..         MOV     R3,#((sPersistInfo + 5) >> 8) & 0xff
+   \   000004   22           RET
+    436          }
+    437          
+    438          #if defined(AP_IS_DATA_HUB)
+    439          /***************************************************************************************
+    440           * @fn          nwk_saveJoinedDevice
+    441           *
+    442           * @brief       Save the address of a joining device on the Connection Table expecting
+    443           *              a Link frame to follow. Only for when AP is a data hub. We want to
+    444           *              use the space already allocated for a connection able entry instead
+    445           *              of having redundant arrays for alread-joined devices in the data hub
+    446           *              case.
+    447           *
+    448           * input parameters
+    449           * @param   frame  - pointer to frame containing address or joining device.
+    450           *
+    451           * output parameters
+    452           *
+    453           * @return   Returns non-zero if this is a new device and it is saved. Returns
+    454           *           0 if device already there or there is no room in the Connection
+    455           *           Table.
+    456           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    457          uint8_t nwk_saveJoinedDevice(mrfiPacket_t *frame)
+   \                     nwk_saveJoinedDevice:
+    458          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 2,R2
+   \   000007   8B..         MOV     ?V0 + 3,R3
+    459            uint8_t     i;
+    460            connInfo_t *avail = 0;
+   \   000009   75..00       MOV     ?V0 + 0,#0x0
+   \   00000C   75..00       MOV     ?V0 + 1,#0x0
+    461            connInfo_t *ptr   = sPersistInfo.connStruct;
+   \   00000F   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   000011   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    462          
+    463            for (i=0; i<NUM_CONNECTIONS; ++i, ++ptr)
+   \   000013   7800         MOV     R0,#0x0
+   \   000015   800E         SJMP    ??nwk_saveJoinedDevice_0
+    464            {
+    465              if ((ptr->connState == CONNSTATE_CONNECTED) || (ptr->connState == CONNSTATE_JOINED))
+    466              {
+    467                if (!memcmp(ptr->peerAddr, MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE))
+    468                {
+    469                  return 0;
+    470                }
+    471              }
+    472              else
+    473              {
+    474                avail = ptr;
+   \                     ??nwk_saveJoinedDevice_1:
+   \   000017   8E..         MOV     ?V0 + 0,R6
+   \   000019   8F..         MOV     ?V0 + 1,R7
+    475              }
+   \                     ??nwk_saveJoinedDevice_2:
+   \   00001B   7801         MOV     R0,#0x1
+   \   00001D   EE           MOV     A,R6
+   \   00001E   240C         ADD     A,#0xc
+   \   000020   FE           MOV     R6,A
+   \   000021   EF           MOV     A,R7
+   \   000022   3400         ADDC    A,#0x0
+   \   000024   FF           MOV     R7,A
+   \                     ??nwk_saveJoinedDevice_0:
+   \   000025   E8           MOV     A,R0
+   \   000026   703E         JNZ     ??nwk_saveJoinedDevice_3
+   \   000028   8E82         MOV     DPL,R6
+   \   00002A   8F83         MOV     DPH,R7
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   6402         XRL     A,#0x2
+   \   00002F   6005         JZ      ??nwk_saveJoinedDevice_4
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   6401         XRL     A,#0x1
+   \   000034   70E1         JNZ     ??nwk_saveJoinedDevice_1
+   \                     ??nwk_saveJoinedDevice_4:
+   \   000036                ; Setup parameters for call to function memcmp
+   \   000036   75..04       MOV     ?V0 + 4,#0x4
+   \   000039   75..00       MOV     ?V0 + 5,#0x0
+   \   00003C   78..         MOV     R0,#?V0 + 4
+   \   00003E   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000041   E5..         MOV     A,?V0 + 2
+   \   000043   2405         ADD     A,#0x5
+   \   000045   FC           MOV     R4,A
+   \   000046   E5..         MOV     A,?V0 + 3
+   \   000048   3400         ADDC    A,#0x0
+   \   00004A   FD           MOV     R5,A
+   \   00004B   EE           MOV     A,R6
+   \   00004C   2403         ADD     A,#0x3
+   \   00004E   FA           MOV     R2,A
+   \   00004F   EF           MOV     A,R7
+   \   000050   3400         ADDC    A,#0x0
+   \   000052   FB           MOV     R3,A
+   \   000053   12....       LCALL   memcmp
+   \   000056   7402         MOV     A,#0x2
+   \   000058   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00005B   8B..         MOV     ?V0 + 5,R3
+   \   00005D   EA           MOV     A,R2
+   \   00005E   45..         ORL     A,?V0 + 5
+   \   000060   70B9         JNZ     ??nwk_saveJoinedDevice_2
+   \                     ??nwk_saveJoinedDevice_5:
+   \   000062   7900         MOV     R1,#0x0
+   \   000064   8038         SJMP    ??nwk_saveJoinedDevice_6
+    476            }
+    477          
+    478            if (!avail)
+   \                     ??nwk_saveJoinedDevice_3:
+   \   000066   E5..         MOV     A,?V0 + 0
+   \   000068   45..         ORL     A,?V0 + 1
+   \   00006A   60F6         JZ      ??nwk_saveJoinedDevice_5
+    479            {
+    480              return 0;
+    481            }
+    482          
+    483            avail->connState = CONNSTATE_JOINED;
+   \   00006C   85..82       MOV     DPL,?V0 + 0
+   \   00006F   85..83       MOV     DPH,?V0 + 1
+   \   000072   7401         MOV     A,#0x1
+   \   000074   F0           MOVX    @DPTR,A
+    484            memcpy(avail->peerAddr, MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE);
+   \   000075                ; Setup parameters for call to function memcpy
+   \   000075   75..04       MOV     ?V0 + 4,#0x4
+   \   000078   75..00       MOV     ?V0 + 5,#0x0
+   \   00007B   78..         MOV     R0,#?V0 + 4
+   \   00007D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000080   E5..         MOV     A,?V0 + 2
+   \   000082   2405         ADD     A,#0x5
+   \   000084   FC           MOV     R4,A
+   \   000085   E5..         MOV     A,?V0 + 3
+   \   000087   3400         ADDC    A,#0x0
+   \   000089   FD           MOV     R5,A
+   \   00008A   E5..         MOV     A,?V0 + 0
+   \   00008C   2403         ADD     A,#0x3
+   \   00008E   FA           MOV     R2,A
+   \   00008F   E5..         MOV     A,?V0 + 1
+   \   000091   3400         ADDC    A,#0x0
+   \   000093   FB           MOV     R3,A
+   \   000094   12....       LCALL   memcpy
+   \   000097   7402         MOV     A,#0x2
+   \   000099   12....       LCALL   ?DEALLOC_XSTACK8
+    485          
+    486            return 1;
+   \   00009C   7901         MOV     R1,#0x1
+   \                     ??nwk_saveJoinedDevice_6:
+   \   00009E   7F06         MOV     R7,#0x6
+   \   0000A0   02....       LJMP    ?FUNC_LEAVE_XDATA
+    487          }
+    488          
+    489          /***********************************************************************************
+    490           * @fn          nwk_findAlreadyJoined
+    491           *
+    492           * @brief       Used when AP is a data hub to look for an address match in the
+    493           *              Connection table for a device that is already enterd in the joined
+    494           *              state. This means that the Connection Table resource is already
+    495           *              allocated so the link-listen doesn't have to do it again. Match is
+    496           *              based on source address in frame. Thsi shoudl only be called from
+    497           *              the Link-listen context during the link frame reply.
+    498           *
+    499           *              If found the Connection Table entry is initialized as if it were
+    500           *              found using the nwk_getNextConnection() method.
+    501           *
+    502           * input parameters
+    503           * @param   frame    - pointer to frame in question
+    504           *
+    505           * output parameters
+    506           *
+    507           * @return   Returns pointer to Connection Table entry if match is found, otherwise
+    508           *           0. This call will only fail if the Connection Table was full when the
+    509           *           device tried to join initially.
+    510           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    511          connInfo_t *nwk_findAlreadyJoined(mrfiPacket_t *frame)
+   \                     nwk_findAlreadyJoined:
+    512          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+    513            uint8_t     i;
+    514            connInfo_t *ptr = sPersistInfo.connStruct;
+   \   000009   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   00000B   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    515          
+    516            for (i=0; i<NUM_CONNECTIONS; ++i,++ptr)
+   \   00000D   7800         MOV     R0,#0x0
+   \   00000F   800A         SJMP    ??nwk_findAlreadyJoined_0
+   \                     ??nwk_findAlreadyJoined_1:
+   \   000011   7801         MOV     R0,#0x1
+   \   000013   EE           MOV     A,R6
+   \   000014   240C         ADD     A,#0xc
+   \   000016   FE           MOV     R6,A
+   \   000017   EF           MOV     A,R7
+   \   000018   3400         ADDC    A,#0x0
+   \   00001A   FF           MOV     R7,A
+   \                     ??nwk_findAlreadyJoined_0:
+   \   00001B   E8           MOV     A,R0
+   \   00001C   7042         JNZ     ??nwk_findAlreadyJoined_2
+    517            {
+    518              /* Look for an entry in the JOINED state */
+    519              if (CONNSTATE_JOINED == ptr->connState)
+   \   00001E   8E82         MOV     DPL,R6
+   \   000020   8F83         MOV     DPH,R7
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   6401         XRL     A,#0x1
+   \   000025   70EA         JNZ     ??nwk_findAlreadyJoined_1
+    520              {
+    521                /* Is this it? */
+    522                if (!(memcmp(&ptr->peerAddr, MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE)))
+   \   000027                ; Setup parameters for call to function memcmp
+   \   000027   75..04       MOV     ?V0 + 2,#0x4
+   \   00002A   75..00       MOV     ?V0 + 3,#0x0
+   \   00002D   78..         MOV     R0,#?V0 + 2
+   \   00002F   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000032   E5..         MOV     A,?V0 + 0
+   \   000034   2405         ADD     A,#0x5
+   \   000036   FC           MOV     R4,A
+   \   000037   E5..         MOV     A,?V0 + 1
+   \   000039   3400         ADDC    A,#0x0
+   \   00003B   FD           MOV     R5,A
+   \   00003C   EE           MOV     A,R6
+   \   00003D   2403         ADD     A,#0x3
+   \   00003F   FA           MOV     R2,A
+   \   000040   EF           MOV     A,R7
+   \   000041   3400         ADDC    A,#0x0
+   \   000043   FB           MOV     R3,A
+   \   000044   12....       LCALL   memcmp
+   \   000047   7402         MOV     A,#0x2
+   \   000049   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00004C   8B..         MOV     ?V0 + 3,R3
+   \   00004E   EA           MOV     A,R2
+   \   00004F   45..         ORL     A,?V0 + 3
+   \   000051   70BE         JNZ     ??nwk_findAlreadyJoined_1
+    523                {
+    524                  /* Yes. Initilize tabel entry and return the pointer. */
+    525                  initializeConnection(ptr);
+   \   000053                ; Setup parameters for call to function initializeConnection
+   \   000053   EE           MOV     A,R6
+   \   000054   FA           MOV     R2,A
+   \   000055   EF           MOV     A,R7
+   \   000056   FB           MOV     R3,A
+   \   000057   12....       LCALL   initializeConnection
+    526                  return ptr;
+   \   00005A   EE           MOV     A,R6
+   \   00005B   FA           MOV     R2,A
+   \   00005C   EF           MOV     A,R7
+   \   00005D   FB           MOV     R3,A
+   \   00005E   8004         SJMP    ??nwk_findAlreadyJoined_3
+    527                }
+    528              }
+    529            }
+    530          
+    531            /* Nothing found... */
+    532            return (connInfo_t *)NULL;
+   \                     ??nwk_findAlreadyJoined_2:
+   \   000060   7A00         MOV     R2,#0x0
+   \   000062   7B00         MOV     R3,#0x0
+   \                     ??nwk_findAlreadyJoined_3:
+   \   000064   7F04         MOV     R7,#0x4
+   \   000066   02....       LJMP    ?FUNC_LEAVE_XDATA
+    533          }
+    534          #endif  /* AP_IS_DATA_HUB */
+    535          #endif  /* ACCESS_POINT */
+    536          
+    537          /******************************************************************************
+    538           * @fn          nwk_checkConnInfo
+    539           *
+    540           * @brief       Do a sanity/validity check on the connection info
+    541           *
+    542           * input parameters
+    543           * @param   ptr     - pointer to a valid connection info structure to validate
+    544           * @param   which   - Tx or Rx port checked
+    545           *
+    546           * output parameters
+    547           *
+    548           * @return   Status of operation.
+    549           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    550          smplStatus_t nwk_checkConnInfo(connInfo_t *ptr, uint8_t which)
+   \                     nwk_checkConnInfo:
+    551          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   E9           MOV     A,R1
+    552            uint8_t  port;
+    553          
+    554            /* make sure port isn't null and that the entry is active */
+    555            port = (CHK_RX == which) ? ptr->portRx : ptr->portTx;
+   \   000005   8A82         MOV     DPL,R2
+   \   000007   8B83         MOV     DPH,R3
+   \   000009   6001         JZ      ??nwk_checkConnInfo_0
+   \   00000B   A3           INC     DPTR
+   \                     ??nwk_checkConnInfo_0:
+   \   00000C   A3           INC     DPTR
+   \   00000D   A3           INC     DPTR
+   \   00000E   A3           INC     DPTR
+   \   00000F   A3           INC     DPTR
+   \   000010   A3           INC     DPTR
+   \   000011   A3           INC     DPTR
+   \   000012   A3           INC     DPTR
+   \   000013   A3           INC     DPTR
+   \   000014   A3           INC     DPTR
+   \   000015   E0           MOVX    A,@DPTR
+   \   000016   F9           MOV     R1,A
+    556            if (!port || (CONNSTATE_FREE == ptr->connState))
+   \   000017   E9           MOV     A,R1
+   \   000018   6007         JZ      ??nwk_checkConnInfo_1
+   \   00001A   8A82         MOV     DPL,R2
+   \   00001C   8B83         MOV     DPH,R3
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   7004         JNZ     ??nwk_checkConnInfo_2
+    557            {
+    558              return SMPL_BAD_PARAM;
+   \                     ??nwk_checkConnInfo_1:
+   \   000021   7902         MOV     R1,#0x2
+   \   000023   8008         SJMP    ??nwk_checkConnInfo_3
+    559            }
+    560          
+    561            /* validate port number */
+    562            if (port < PORT_BASE_NUMBER)
+   \                     ??nwk_checkConnInfo_2:
+   \   000025   E9           MOV     A,R1
+   \   000026   C3           CLR     C
+   \   000027   9420         SUBB    A,#0x20
+   \   000029   40F6         JC      ??nwk_checkConnInfo_1
+    563            {
+    564              return SMPL_BAD_PARAM;
+    565            }
+    566          
+    567            return SMPL_SUCCESS;
+   \   00002B   7900         MOV     R1,#0x0
+   \                     ??nwk_checkConnInfo_3:
+   \   00002D   D083         POP     DPH
+   \   00002F   D082         POP     DPL
+   \   000031   22           RET
+    568          }
+    569          
+    570          /******************************************************************************
+    571           * @fn          nwk_isConnectionValid
+    572           *
+    573           * @brief       Do a sanity/validity check on the frame target address by
+    574           *              validating frame against connection info
+    575           *
+    576           * input parameters
+    577           * @param   frame   - pointer to frame in question
+    578           *
+    579           * output parameters
+    580           * @param   lid   - link ID of found connection
+    581           *
+    582           * @return   0 if connection specified in frame is not valid, otherwise non-zero.
+    583           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    584          uint8_t nwk_isConnectionValid(mrfiPacket_t *frame, linkID_t *lid)
+   \                     nwk_isConnectionValid:
+    585          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 2,R2
+   \   000007   8B..         MOV     ?V0 + 3,R3
+   \   000009   8C..         MOV     ?V0 + 6,R4
+   \   00000B   8D..         MOV     ?V0 + 7,R5
+    586            uint8_t       i;
+    587            connInfo_t   *ptr  = sPersistInfo.connStruct;
+   \   00000D   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   00000F   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    588            uint8_t       port = GET_FROM_FRAME(MRFI_P_PAYLOAD(frame), F_PORT_OS);
+   \   000011   8A82         MOV     DPL,R2
+   \   000013   8B83         MOV     DPH,R3
+   \   000015   A3           INC     DPTR
+   \   000016   A3           INC     DPTR
+   \   000017   A3           INC     DPTR
+   \   000018   A3           INC     DPTR
+   \   000019   A3           INC     DPTR
+   \   00001A   A3           INC     DPTR
+   \   00001B   A3           INC     DPTR
+   \   00001C   A3           INC     DPTR
+   \   00001D   A3           INC     DPTR
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   543F         ANL     A,#0x3f
+   \   000021   F5..         MOV     ?V0 + 1,A
+    589          
+    590            for (i=0; i<SYS_NUM_CONNECTIONS; ++i,++ptr)
+   \   000023   75..00       MOV     ?V0 + 0,#0x0
+   \   000026   800A         SJMP    ??nwk_isConnectionValid_0
+   \                     ??nwk_isConnectionValid_1:
+   \   000028   05..         INC     ?V0 + 0
+   \   00002A   EE           MOV     A,R6
+   \   00002B   240C         ADD     A,#0xc
+   \   00002D   FE           MOV     R6,A
+   \   00002E   EF           MOV     A,R7
+   \   00002F   3400         ADDC    A,#0x0
+   \   000031   FF           MOV     R7,A
+   \                     ??nwk_isConnectionValid_0:
+   \   000032   E5..         MOV     A,?V0 + 0
+   \   000034   C3           CLR     C
+   \   000035   9402         SUBB    A,#0x2
+   \   000037   4003         JC      $+5
+   \   000039   02....       LJMP    ??nwk_isConnectionValid_2
+    591            {
+    592              if (CONNSTATE_CONNECTED == ptr->connState)
+   \   00003C   8E82         MOV     DPL,R6
+   \   00003E   8F83         MOV     DPH,R7
+   \   000040   E0           MOVX    A,@DPTR
+   \   000041   6402         XRL     A,#0x2
+   \   000043   70E3         JNZ     ??nwk_isConnectionValid_1
+    593              {
+    594                /* check port first since we're done if the port is the user bcast port. */
+    595                if (port == ptr->portRx)
+   \   000045   A3           INC     DPTR
+   \   000046   A3           INC     DPTR
+   \   000047   A3           INC     DPTR
+   \   000048   A3           INC     DPTR
+   \   000049   A3           INC     DPTR
+   \   00004A   A3           INC     DPTR
+   \   00004B   A3           INC     DPTR
+   \   00004C   A3           INC     DPTR
+   \   00004D   A3           INC     DPTR
+   \   00004E   E0           MOVX    A,@DPTR
+   \   00004F   65..         XRL     A,?V0 + 1
+   \   000051   70D5         JNZ     ??nwk_isConnectionValid_1
+    596                {
+    597                  /* yep...ports match. */
+    598                  if ((SMPL_PORT_USER_BCAST == port) || !(memcmp(ptr->peerAddr, MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE)))
+   \   000053   743F         MOV     A,#0x3f
+   \   000055   65..         XRL     A,?V0 + 1
+   \   000057   602C         JZ      ??nwk_isConnectionValid_3
+   \   000059                ; Setup parameters for call to function memcmp
+   \   000059   75..04       MOV     ?V0 + 4,#0x4
+   \   00005C   75..00       MOV     ?V0 + 5,#0x0
+   \   00005F   78..         MOV     R0,#?V0 + 4
+   \   000061   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000064   E5..         MOV     A,?V0 + 2
+   \   000066   2405         ADD     A,#0x5
+   \   000068   FC           MOV     R4,A
+   \   000069   E5..         MOV     A,?V0 + 3
+   \   00006B   3400         ADDC    A,#0x0
+   \   00006D   FD           MOV     R5,A
+   \   00006E   EE           MOV     A,R6
+   \   00006F   2403         ADD     A,#0x3
+   \   000071   FA           MOV     R2,A
+   \   000072   EF           MOV     A,R7
+   \   000073   3400         ADDC    A,#0x0
+   \   000075   FB           MOV     R3,A
+   \   000076   12....       LCALL   memcmp
+   \   000079   7402         MOV     A,#0x2
+   \   00007B   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00007E   8B..         MOV     ?V0 + 5,R3
+   \   000080   EA           MOV     A,R2
+   \   000081   45..         ORL     A,?V0 + 5
+   \   000083   70A3         JNZ     ??nwk_isConnectionValid_1
+    599                  {
+    600                    uint8_t rc = 1;
+   \                     ??nwk_isConnectionValid_3:
+   \   000085   75..01       MOV     ?V0 + 0,#0x1
+    601          
+    602                    /* we're done. */
+    603                    *lid = ptr->thisLinkID;
+   \   000088   EE           MOV     A,R6
+   \   000089   240B         ADD     A,#0xb
+   \   00008B   F582         MOV     DPL,A
+   \   00008D   EF           MOV     A,R7
+   \   00008E   3400         ADDC    A,#0x0
+   \   000090   F583         MOV     DPH,A
+   \   000092   E0           MOVX    A,@DPTR
+   \   000093   85..82       MOV     DPL,?V0 + 6
+   \   000096   85..83       MOV     DPH,?V0 + 7
+   \   000099   F0           MOVX    @DPTR,A
+    604          #ifdef APP_AUTO_ACK
+    605                    /* can't ack the broadcast port... */
+    606                    if (!(SMPL_PORT_USER_BCAST == port))
+   \   00009A   743F         MOV     A,#0x3f
+   \   00009C   65..         XRL     A,?V0 + 1
+   \   00009E   6056         JZ      ??nwk_isConnectionValid_4
+    607                    {
+    608                      if (GET_FROM_FRAME(MRFI_P_PAYLOAD(frame), F_ACK_REQ))
+   \   0000A0   E5..         MOV     A,?V0 + 2
+   \   0000A2   240A         ADD     A,#0xa
+   \   0000A4   F582         MOV     DPL,A
+   \   0000A6   E5..         MOV     A,?V0 + 3
+   \   0000A8   3400         ADDC    A,#0x0
+   \   0000AA   F583         MOV     DPH,A
+   \   0000AC   E0           MOVX    A,@DPTR
+   \   0000AD   A2E7         MOV     C,0xE0 /* A   */.7
+   \   0000AF   5019         JNC     ??nwk_isConnectionValid_5
+    609                      {
+    610                        /* Ack requested. Send ack now */
+    611                        nwk_sendAckReply(frame, ptr->portTx);
+   \   0000B1                ; Setup parameters for call to function nwk_sendAckReply
+   \   0000B1   8E82         MOV     DPL,R6
+   \   0000B3   8F83         MOV     DPH,R7
+   \   0000B5   A3           INC     DPTR
+   \   0000B6   A3           INC     DPTR
+   \   0000B7   A3           INC     DPTR
+   \   0000B8   A3           INC     DPTR
+   \   0000B9   A3           INC     DPTR
+   \   0000BA   A3           INC     DPTR
+   \   0000BB   A3           INC     DPTR
+   \   0000BC   A3           INC     DPTR
+   \   0000BD   A3           INC     DPTR
+   \   0000BE   A3           INC     DPTR
+   \   0000BF   E0           MOVX    A,@DPTR
+   \   0000C0   F9           MOV     R1,A
+   \   0000C1   AA..         MOV     R2,?V0 + 2
+   \   0000C3   AB..         MOV     R3,?V0 + 3
+   \   0000C5   12....       LCALL   nwk_sendAckReply
+   \   0000C8   802C         SJMP    ??nwk_isConnectionValid_4
+    612                      }
+    613                      else if (GET_FROM_FRAME(MRFI_P_PAYLOAD(frame), F_ACK_RPLY))
+   \                     ??nwk_isConnectionValid_5:
+   \   0000CA   E0           MOVX    A,@DPTR
+   \   0000CB   A2E3         MOV     C,0xE0 /* A   */.3
+   \   0000CD   5027         JNC     ??nwk_isConnectionValid_4
+    614                      {
+    615                        /* This is a reply. Signal that it was received by resetting the
+    616                         * saved transaction ID in the connection object if they match. The
+    617                         * main thread is polling this value. The setting here is in the
+    618                         * Rx ISR thread.
+    619                         */
+    620                        if (ptr->ackTID == GET_FROM_FRAME(MRFI_P_PAYLOAD(frame), F_TRACTID_OS))
+   \   0000CF   EE           MOV     A,R6
+   \   0000D0   2402         ADD     A,#0x2
+   \   0000D2   F8           MOV     R0,A
+   \   0000D3   EF           MOV     A,R7
+   \   0000D4   3400         ADDC    A,#0x0
+   \   0000D6   F9           MOV     R1,A
+   \   0000D7   8882         MOV     DPL,R0
+   \   0000D9   8983         MOV     DPH,R1
+   \   0000DB   E0           MOVX    A,@DPTR
+   \   0000DC   FA           MOV     R2,A
+   \   0000DD   E5..         MOV     A,?V0 + 2
+   \   0000DF   240B         ADD     A,#0xb
+   \   0000E1   F582         MOV     DPL,A
+   \   0000E3   E5..         MOV     A,?V0 + 3
+   \   0000E5   3400         ADDC    A,#0x0
+   \   0000E7   F583         MOV     DPH,A
+   \   0000E9   E0           MOVX    A,@DPTR
+   \   0000EA   6A           XRL     A,R2
+   \   0000EB   7006         JNZ     ??nwk_isConnectionValid_6
+    621                        {
+    622                          ptr->ackTID = 0;
+   \   0000ED   8882         MOV     DPL,R0
+   \   0000EF   8983         MOV     DPH,R1
+   \   0000F1   E4           CLR     A
+   \   0000F2   F0           MOVX    @DPTR,A
+    623                        }
+    624                        /* This causes the frame to be dropped. All ack frames are
+    625                         * dropped.
+    626                         */
+    627                        rc = 0;
+   \                     ??nwk_isConnectionValid_6:
+   \   0000F3   75..00       MOV     ?V0 + 0,#0x0
+    628                      }
+    629                    }
+    630          #endif  /* APP_AUTO_ACK */
+    631                    /* Unconditionally kill the reply delay semaphore. This used to be done
+    632                     * unconditionally in the calling routine.
+    633                     */
+    634                    MRFI_PostKillSem();
+   \                     ??nwk_isConnectionValid_4:
+   \   0000F6                ; Setup parameters for call to function MRFI_PostKillSem
+   \   0000F6   12....       LCALL   MRFI_PostKillSem
+    635                    return rc;
+   \   0000F9   A9..         MOV     R1,?V0 + 0
+   \   0000FB   8002         SJMP    ??nwk_isConnectionValid_7
+    636                  }
+    637                }
+    638              }
+    639            }
+    640          
+    641            /* no matches */
+    642            return 0;
+   \                     ??nwk_isConnectionValid_2:
+   \   0000FD   7900         MOV     R1,#0x0
+   \                     ??nwk_isConnectionValid_7:
+   \   0000FF   7F08         MOV     R7,#0x8
+   \   000101   02....       LJMP    ?FUNC_LEAVE_XDATA
+    643          }
+    644          
+    645          /******************************************************************************
+    646           * @fn          nwk_allocateLocalRxPort
+    647           *
+    648           * @brief       Allocate a local port on which to receive frames from a peer.
+    649           *
+    650           *              Allocation differs depending on whether the allocation is for
+    651           *              a link reply frame or a link frame. In the former case we
+    652           *              know the address of the peer so we can ensure allocating a
+    653           *              unique port number for that address. The same port number can be
+    654           *              used mulitple times for distinct peers. Allocations are done from
+    655           *              the bottom of the namespace upward.
+    656           *
+    657           *              If allocation is for a link frame we do not yet know the peer
+    658           *              address so we must ensure the port number is unique now.
+    659           *              Allocations are done from the top of the namespace downward.
+    660           *
+    661           *              The two allocation methods track the extreme values used in each
+    662           *              case to detect overlap, i.e., exhausted namespace. This can only
+    663           *              happen if the number of connections supported is greater than the
+    664           *              total namespace available.
+    665           *
+    666           * input parameters
+    667           * @param   which   - Sending a link frame or a link reply frame
+    668           * @param   newPtr  - pointer to connection info structure to be populated
+    669           *
+    670           * output parameters
+    671           * @param   newPtr->portRx  - element is populated with port number.
+    672           *
+    673           * @return   Non-zero if port number assigned. 0 if no port available.
+    674           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    675          uint8_t nwk_allocateLocalRxPort(uint8_t which, connInfo_t *newPtr)
+   \                     nwk_allocateLocalRxPort:
+    676          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 1
+   \   000005   74FF         MOV     A,#-0x1
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   89..         MOV     ?V0 + 0,R1
+   \   00000C   8A..         MOV     ?V0 + 6,R2
+   \   00000E   8B..         MOV     ?V0 + 7,R3
+    677          #if NUM_CONNECTIONS > 0
+    678            uint8_t     num, i;
+    679            uint8_t     marker[NUM_CONNECTIONS];
+    680            connInfo_t *ptr = sPersistInfo.connStruct;
+   \   000010   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   000012   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    681          
+    682            memset(&marker, 0x0, sizeof(marker));
+   \   000014                ; Setup parameters for call to function memset
+   \   000014   75..01       MOV     ?V0 + 2,#0x1
+   \   000017   75..00       MOV     ?V0 + 3,#0x0
+   \   00001A   78..         MOV     R0,#?V0 + 2
+   \   00001C   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00001F   7C00         MOV     R4,#0x0
+   \   000021   7D00         MOV     R5,#0x0
+   \   000023   7402         MOV     A,#0x2
+   \   000025   12....       LCALL   ?XSTACK_DISP0_8
+   \   000028   AA82         MOV     R2,DPL
+   \   00002A   AB83         MOV     R3,DPH
+   \   00002C   12....       LCALL   memset
+   \   00002F   7402         MOV     A,#0x2
+   \   000031   12....       LCALL   ?DEALLOC_XSTACK8
+    683          
+    684            for (i=0; i<NUM_CONNECTIONS; ++i,++ptr)
+   \   000034   7800         MOV     R0,#0x0
+   \   000036   805A         SJMP    ??nwk_allocateLocalRxPort_0
+    685            {
+    686              /* Mark the port number as used unless it's a statically allocated port */
+    687              if ((ptr != newPtr) && (CONNSTATE_CONNECTED == ptr->connState) && (ptr->portRx <= SMPL_PORT_USER_MAX))
+    688              {
+    689                if (LINK_SEND == which)
+    690                {
+    691                  if (ptr->portRx > sPersistInfo.curNextLinkPort)
+    692                  {
+    693                    marker[SMPL_PORT_USER_MAX - ptr->portRx] = 1;
+    694                  }
+    695                }
+    696                else if (!memcmp(ptr->peerAddr, newPtr->peerAddr, NET_ADDR_SIZE))
+   \                     ??nwk_allocateLocalRxPort_1:
+   \   000038                ; Setup parameters for call to function memcmp
+   \   000038   75..04       MOV     ?V0 + 4,#0x4
+   \   00003B   75..00       MOV     ?V0 + 5,#0x0
+   \   00003E   78..         MOV     R0,#?V0 + 4
+   \   000040   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000043   E5..         MOV     A,?V0 + 6
+   \   000045   2403         ADD     A,#0x3
+   \   000047   FC           MOV     R4,A
+   \   000048   E5..         MOV     A,?V0 + 7
+   \   00004A   3400         ADDC    A,#0x0
+   \   00004C   FD           MOV     R5,A
+   \   00004D   EE           MOV     A,R6
+   \   00004E   2403         ADD     A,#0x3
+   \   000050   FA           MOV     R2,A
+   \   000051   EF           MOV     A,R7
+   \   000052   3400         ADDC    A,#0x0
+   \   000054   FB           MOV     R3,A
+   \   000055   12....       LCALL   memcmp
+   \   000058   7402         MOV     A,#0x2
+   \   00005A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00005D   8B..         MOV     ?V0 + 5,R3
+   \   00005F   EA           MOV     A,R2
+   \   000060   45..         ORL     A,?V0 + 5
+   \   000062   7024         JNZ     ??nwk_allocateLocalRxPort_2
+    697                {
+    698                    marker[ptr->portRx - PORT_BASE_NUMBER] = 1;
+   \   000064   85..82       MOV     DPL,?V0 + 2
+   \   000067   85..83       MOV     DPH,?V0 + 3
+   \   00006A   E0           MOVX    A,@DPTR
+   \   00006B   F8           MOV     R0,A
+   \   00006C   85..82       MOV     DPL,?XSP + 0
+   \   00006F   85..83       MOV     DPH,?XSP + 1
+   \   000072   E582         MOV     A,DPL
+   \   000074   28           ADD     A,R0
+   \   000075   F8           MOV     R0,A
+   \   000076   E583         MOV     A,DPH
+   \   000078   3400         ADDC    A,#0x0
+   \   00007A   F9           MOV     R1,A
+   \   00007B   E8           MOV     A,R0
+   \   00007C   24E0         ADD     A,#-0x20
+   \   00007E   F582         MOV     DPL,A
+   \   000080   E9           MOV     A,R1
+   \   000081   34FF         ADDC    A,#-0x1
+   \                     ??nwk_allocateLocalRxPort_3:
+   \   000083   F583         MOV     DPH,A
+   \   000085   7401         MOV     A,#0x1
+   \   000087   F0           MOVX    @DPTR,A
+    699                }
+   \                     ??nwk_allocateLocalRxPort_2:
+   \   000088   7801         MOV     R0,#0x1
+   \   00008A   EE           MOV     A,R6
+   \   00008B   240C         ADD     A,#0xc
+   \   00008D   FE           MOV     R6,A
+   \   00008E   EF           MOV     A,R7
+   \   00008F   3400         ADDC    A,#0x0
+   \   000091   FF           MOV     R7,A
+   \                     ??nwk_allocateLocalRxPort_0:
+   \   000092   E8           MOV     A,R0
+   \   000093   7062         JNZ     ??nwk_allocateLocalRxPort_4
+   \   000095   E5..         MOV     A,?V0 + 6
+   \   000097   6E           XRL     A,R6
+   \   000098   7003         JNZ     ??nwk_allocateLocalRxPort_5
+   \   00009A   E5..         MOV     A,?V0 + 7
+   \   00009C   6F           XRL     A,R7
+   \                     ??nwk_allocateLocalRxPort_5:
+   \   00009D   60E9         JZ      ??nwk_allocateLocalRxPort_2
+   \   00009F   8E82         MOV     DPL,R6
+   \   0000A1   8F83         MOV     DPH,R7
+   \   0000A3   E0           MOVX    A,@DPTR
+   \   0000A4   6402         XRL     A,#0x2
+   \   0000A6   70E0         JNZ     ??nwk_allocateLocalRxPort_2
+   \   0000A8   EE           MOV     A,R6
+   \   0000A9   2409         ADD     A,#0x9
+   \   0000AB   F5..         MOV     ?V0 + 2,A
+   \   0000AD   EF           MOV     A,R7
+   \   0000AE   3400         ADDC    A,#0x0
+   \   0000B0   F5..         MOV     ?V0 + 3,A
+   \   0000B2   85..82       MOV     DPL,?V0 + 2
+   \   0000B5   F583         MOV     DPH,A
+   \   0000B7   E0           MOVX    A,@DPTR
+   \   0000B8   C3           CLR     C
+   \   0000B9   943E         SUBB    A,#0x3e
+   \   0000BB   50CB         JNC     ??nwk_allocateLocalRxPort_2
+   \   0000BD   7401         MOV     A,#0x1
+   \   0000BF   65..         XRL     A,?V0 + 0
+   \   0000C1   6003         JZ      $+5
+   \   0000C3   02....       LJMP    ??nwk_allocateLocalRxPort_1
+   \   0000C6   E0           MOVX    A,@DPTR
+   \   0000C7   F8           MOV     R0,A
+   \   0000C8   90....       MOV     DPTR,#sPersistInfo + 2
+   \   0000CB   E0           MOVX    A,@DPTR
+   \   0000CC   C3           CLR     C
+   \   0000CD   98           SUBB    A,R0
+   \   0000CE   50B8         JNC     ??nwk_allocateLocalRxPort_2
+   \   0000D0   85..82       MOV     DPL,?V0 + 2
+   \   0000D3   85..83       MOV     DPH,?V0 + 3
+   \   0000D6   E0           MOVX    A,@DPTR
+   \   0000D7   F8           MOV     R0,A
+   \   0000D8   C3           CLR     C
+   \   0000D9   E4           CLR     A
+   \   0000DA   98           SUBB    A,R0
+   \   0000DB   F8           MOV     R0,A
+   \   0000DC   95E0         SUBB    A,0xE0 /* A   */
+   \   0000DE   F9           MOV     R1,A
+   \   0000DF   85..82       MOV     DPL,?XSP + 0
+   \   0000E2   85..83       MOV     DPH,?XSP + 1
+   \   0000E5   E582         MOV     A,DPL
+   \   0000E7   28           ADD     A,R0
+   \   0000E8   F8           MOV     R0,A
+   \   0000E9   E583         MOV     A,DPH
+   \   0000EB   39           ADDC    A,R1
+   \   0000EC   F9           MOV     R1,A
+   \   0000ED   E8           MOV     A,R0
+   \   0000EE   243D         ADD     A,#0x3d
+   \   0000F0   F582         MOV     DPL,A
+   \   0000F2   E9           MOV     A,R1
+   \   0000F3   3400         ADDC    A,#0x0
+   \   0000F5   808C         SJMP    ??nwk_allocateLocalRxPort_3
+    700              }
+    701            }
+    702          
+    703            num = 0;
+   \                     ??nwk_allocateLocalRxPort_4:
+   \   0000F7   7900         MOV     R1,#0x0
+    704            for (i=0; i<NUM_CONNECTIONS; ++i)
+   \   0000F9   7800         MOV     R0,#0x0
+   \   0000FB   8002         SJMP    ??nwk_allocateLocalRxPort_6
+   \                     ??nwk_allocateLocalRxPort_7:
+   \   0000FD   7801         MOV     R0,#0x1
+   \                     ??nwk_allocateLocalRxPort_6:
+   \   0000FF   E8           MOV     A,R0
+   \   000100   7015         JNZ     ??nwk_allocateLocalRxPort_8
+    705            {
+    706              if (!marker[i])
+   \   000102   85..82       MOV     DPL,?XSP + 0
+   \   000105   85..83       MOV     DPH,?XSP + 1
+   \   000108   E0           MOVX    A,@DPTR
+   \   000109   70F2         JNZ     ??nwk_allocateLocalRxPort_7
+    707              {
+    708                if (LINK_REPLY == which)
+   \   00010B   7402         MOV     A,#0x2
+   \   00010D   65..         XRL     A,?V0 + 0
+   \   00010F   7004         JNZ     ??nwk_allocateLocalRxPort_9
+    709                {
+    710                  num = PORT_BASE_NUMBER + i;
+   \   000111   7920         MOV     R1,#0x20
+   \   000113   8002         SJMP    ??nwk_allocateLocalRxPort_8
+    711                }
+    712                else
+    713                {
+    714                  num = SMPL_PORT_USER_MAX - i;
+   \                     ??nwk_allocateLocalRxPort_9:
+   \   000115   793D         MOV     R1,#0x3d
+    715                }
+    716                break;
+    717              }
+    718            }
+    719          
+    720            if (LINK_REPLY == which)
+   \                     ??nwk_allocateLocalRxPort_8:
+   \   000117   7402         MOV     A,#0x2
+   \   000119   65..         XRL     A,?V0 + 0
+   \   00011B   7015         JNZ     ??nwk_allocateLocalRxPort_10
+    721            {
+    722              /* if the number we have doesn't overlap the assignment of ports used
+    723               * for sending link frames, use it.
+    724               */
+    725              if (num <= sPersistInfo.curNextLinkPort)
+   \   00011D   90....       MOV     DPTR,#sPersistInfo + 2
+   \   000120   E0           MOVX    A,@DPTR
+   \   000121   C3           CLR     C
+   \   000122   99           SUBB    A,R1
+   \   000123   4009         JC      ??nwk_allocateLocalRxPort_11
+    726              {
+    727                if (num > sPersistInfo.curMaxReplyPort)
+   \   000125   A3           INC     DPTR
+   \   000126   E0           MOVX    A,@DPTR
+   \   000127   C3           CLR     C
+   \   000128   99           SUBB    A,R1
+   \   000129   501B         JNC     ??nwk_allocateLocalRxPort_12
+    728                {
+    729                  /* remember maximum port number used */
+    730                  sPersistInfo.curMaxReplyPort = num;
+   \   00012B   E9           MOV     A,R1
+   \   00012C   8017         SJMP    ??nwk_allocateLocalRxPort_13
+    731                }
+    732              }
+    733              else
+    734              {
+    735                /* the port number we need has already been used in the other context. It may or
+    736                 * may not have been used for the same address but we don't bother to check...we
+    737                 * just reject the asignment. This is the overly cautious part but is extermely
+    738                 * unlikely to ever occur.
+    739                 */
+    740                num = 0;
+   \                     ??nwk_allocateLocalRxPort_11:
+   \   00012E   7900         MOV     R1,#0x0
+   \   000130   8014         SJMP    ??nwk_allocateLocalRxPort_12
+    741              }
+    742            }
+    743            else
+    744            {
+    745              /* if the number we have doesn't overlap the assignment of ports used
+    746               * for sending link frame replies, use it.
+    747               */
+    748              if (num >= sPersistInfo.curMaxReplyPort)
+   \                     ??nwk_allocateLocalRxPort_10:
+   \   000132   90....       MOV     DPTR,#sPersistInfo + 3
+   \   000135   E0           MOVX    A,@DPTR
+   \   000136   F8           MOV     R0,A
+   \   000137   E9           MOV     A,R1
+   \   000138   C3           CLR     C
+   \   000139   98           SUBB    A,R0
+   \   00013A   40F2         JC      ??nwk_allocateLocalRxPort_11
+    749              {
+    750                if (num == sPersistInfo.curNextLinkPort)
+   \   00013C   90....       MOV     DPTR,#sPersistInfo + 2
+   \   00013F   E0           MOVX    A,@DPTR
+   \   000140   69           XRL     A,R1
+   \   000141   7003         JNZ     ??nwk_allocateLocalRxPort_12
+    751                {
+    752                  sPersistInfo.curNextLinkPort--;
+   \   000143   E0           MOVX    A,@DPTR
+   \   000144   14           DEC     A
+   \                     ??nwk_allocateLocalRxPort_13:
+   \   000145   F0           MOVX    @DPTR,A
+    753                }
+    754              }
+    755              else
+    756              {
+    757                /* the port number we need has already been used in the other context. It may or
+    758                 * may not have been used for the same address but we don't bother to check...we
+    759                 * just reject the asignment. This is the overly cautious part but is extermely
+    760                 * unlikely to ever occur.
+    761                 */
+    762                num = 0;
+    763              }
+    764            }
+    765          
+    766            newPtr->portRx = num;
+   \                     ??nwk_allocateLocalRxPort_12:
+   \   000146   E9           MOV     A,R1
+   \   000147   85..82       MOV     DPL,?V0 + 6
+   \   00014A   85..83       MOV     DPH,?V0 + 7
+   \   00014D   A3           INC     DPTR
+   \   00014E   A3           INC     DPTR
+   \   00014F   A3           INC     DPTR
+   \   000150   A3           INC     DPTR
+   \   000151   A3           INC     DPTR
+   \   000152   A3           INC     DPTR
+   \   000153   A3           INC     DPTR
+   \   000154   A3           INC     DPTR
+   \   000155   A3           INC     DPTR
+   \   000156   F0           MOVX    @DPTR,A
+    767          
+    768            return num;
+   \   000157   7401         MOV     A,#0x1
+   \   000159   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00015C   7F08         MOV     R7,#0x8
+   \   00015E   02....       LJMP    ?FUNC_LEAVE_XDATA
+    769          #else
+    770            return 0;
+    771          #endif  /* NUM_CONNECTIONS > 0 */
+    772          
+    773          }
+    774          
+    775          /*******************************************************************************
+    776           * @fn          nwk_isValidReply
+    777           *
+    778           * @brief       Examine a frame to see if it is a valid reply when compared with
+    779           *              expected parameters.
+    780           *
+    781           * input parameters
+    782           * @param   frame      - pointer to frmae being examined
+    783           * @param   tid        - expected transaction ID in application payload
+    784           * @param   infoOffset - offset to payload information containing reply hint
+    785           * @param   tidOffset  - offset to transaction ID in payload
+    786           *
+    787           * output parameters
+    788           *
+    789           * @return   reply category:
+    790           *               SMPL_NOT_REPLY: not a reply
+    791           *               SMPL_MY_REPLY : a reply that matches input parameters
+    792           *               SMPL_A_REPLY  : a reply but does not match input parameters
+    793           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    794          uint8_t nwk_isValidReply(mrfiPacket_t *frame, uint8_t tid, uint8_t infoOffset, uint8_t tidOffset)
+   \                     nwk_isValidReply:
+    795          {
+   \   000000   74F4         MOV     A,#-0xc
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 12
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+   \   000009   89..         MOV     ?V0 + 4,R1
+    796            uint8_t rc = SMPL_NOT_REPLY;
+   \   00000B   7902         MOV     R1,#0x2
+    797          
+    798            if ((*(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS+infoOffset) & NWK_APP_REPLY_BIT))
+   \   00000D   8C..         MOV     ?V0 + 2,R4
+   \   00000F   EE           MOV     A,R6
+   \   000010   25..         ADD     A,?V0 + 2
+   \   000012   FA           MOV     R2,A
+   \   000013   EF           MOV     A,R7
+   \   000014   3400         ADDC    A,#0x0
+   \   000016   FB           MOV     R3,A
+   \   000017   EA           MOV     A,R2
+   \   000018   240C         ADD     A,#0xc
+   \   00001A   F582         MOV     DPL,A
+   \   00001C   EB           MOV     A,R3
+   \   00001D   3400         ADDC    A,#0x0
+   \   00001F   F583         MOV     DPH,A
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000024   5049         JNC     ??nwk_isValidReply_0
+    799            {
+    800              if ((*(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS+tidOffset) == tid) &&
+    801                  !memcmp(MRFI_P_DST_ADDR(frame), nwk_getMyAddress(), NET_ADDR_SIZE))
+   \   000026   8D..         MOV     ?V0 + 2,R5
+   \   000028   EE           MOV     A,R6
+   \   000029   25..         ADD     A,?V0 + 2
+   \   00002B   F8           MOV     R0,A
+   \   00002C   EF           MOV     A,R7
+   \   00002D   3400         ADDC    A,#0x0
+   \   00002F   F9           MOV     R1,A
+   \   000030   E8           MOV     A,R0
+   \   000031   240C         ADD     A,#0xc
+   \   000033   F582         MOV     DPL,A
+   \   000035   E9           MOV     A,R1
+   \   000036   3400         ADDC    A,#0x0
+   \   000038   F583         MOV     DPH,A
+   \   00003A   E0           MOVX    A,@DPTR
+   \   00003B   65..         XRL     A,?V0 + 4
+   \   00003D   702E         JNZ     ??nwk_isValidReply_1
+   \   00003F                ; Setup parameters for call to function memcmp
+   \   00003F   75..04       MOV     ?V0 + 2,#0x4
+   \   000042   75..00       MOV     ?V0 + 3,#0x0
+   \   000045   78..         MOV     R0,#?V0 + 2
+   \   000047   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00004A                ; Setup parameters for call to function nwk_getMyAddress
+   \   00004A   12....       LCALL   nwk_getMyAddress
+   \   00004D   EA           MOV     A,R2
+   \   00004E   FC           MOV     R4,A
+   \   00004F   EB           MOV     A,R3
+   \   000050   FD           MOV     R5,A
+   \   000051   8E82         MOV     DPL,R6
+   \   000053   8F83         MOV     DPH,R7
+   \   000055   A3           INC     DPTR
+   \   000056   AA82         MOV     R2,DPL
+   \   000058   AB83         MOV     R3,DPH
+   \   00005A   12....       LCALL   memcmp
+   \   00005D   7402         MOV     A,#0x2
+   \   00005F   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000062   8B..         MOV     ?V0 + 3,R3
+   \   000064   EA           MOV     A,R2
+   \   000065   45..         ORL     A,?V0 + 3
+   \   000067   7004         JNZ     ??nwk_isValidReply_1
+    802              {
+    803                rc = SMPL_MY_REPLY;
+   \   000069   7900         MOV     R1,#0x0
+   \   00006B   8002         SJMP    ??nwk_isValidReply_0
+    804              }
+    805              else
+    806              {
+    807                rc = SMPL_A_REPLY;
+   \                     ??nwk_isValidReply_1:
+   \   00006D   7901         MOV     R1,#0x1
+    808              }
+    809            }
+    810          
+    811            return rc;
+   \                     ??nwk_isValidReply_0:
+   \   00006F   7F05         MOV     R7,#0x5
+   \   000071   02....       LJMP    ?FUNC_LEAVE_XDATA
+    812          }
+    813          
+    814          /******************************************************************************
+    815           * @fn          map_lid2idx
+    816           *
+    817           * @brief       Map link ID to index into connection table.
+    818           *
+    819           * input parameters
+    820           * @param   lid   - Link ID to be matched
+    821           *
+    822           * output parameters
+    823           * @param   idx   - populated with index into connection table
+    824           *
+    825           * @return   Non-zero if Link ID found and output is valid else 0.
+    826           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    827          static uint8_t map_lid2idx(linkID_t lid, uint8_t *idx)
+   \                     map_lid2idx:
+    828          {
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FD           MOV     R5,A
+    829            uint8_t     i;
+    830            connInfo_t *ptr = sPersistInfo.connStruct;
+   \   000007   78..         MOV     R0,#(sPersistInfo + 21) & 0xff
+   \   000009   79..         MOV     R1,#((sPersistInfo + 21) >> 8) & 0xff
+    831          
+    832            for (i=0; i<SYS_NUM_CONNECTIONS; ++i, ++ptr)
+   \   00000B   7C00         MOV     R4,#0x0
+   \   00000D   8009         SJMP    ??map_lid2idx_0
+   \                     ??map_lid2idx_1:
+   \   00000F   0C           INC     R4
+   \   000010   E8           MOV     A,R0
+   \   000011   240C         ADD     A,#0xc
+   \   000013   F8           MOV     R0,A
+   \   000014   E9           MOV     A,R1
+   \   000015   3400         ADDC    A,#0x0
+   \   000017   F9           MOV     R1,A
+   \                     ??map_lid2idx_0:
+   \   000018   EC           MOV     A,R4
+   \   000019   C3           CLR     C
+   \   00001A   9402         SUBB    A,#0x2
+   \   00001C   5021         JNC     ??map_lid2idx_2
+    833            {
+    834              if ((CONNSTATE_CONNECTED == ptr->connState) && (ptr->thisLinkID == lid))
+   \   00001E   8882         MOV     DPL,R0
+   \   000020   8983         MOV     DPH,R1
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   6402         XRL     A,#0x2
+   \   000025   70E8         JNZ     ??map_lid2idx_1
+   \   000027   E8           MOV     A,R0
+   \   000028   240B         ADD     A,#0xb
+   \   00002A   F582         MOV     DPL,A
+   \   00002C   E9           MOV     A,R1
+   \   00002D   3400         ADDC    A,#0x0
+   \   00002F   F583         MOV     DPH,A
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   6D           XRL     A,R5
+   \   000033   70DA         JNZ     ??map_lid2idx_1
+    835              {
+    836                *idx = i;
+   \   000035   EC           MOV     A,R4
+   \   000036   8A82         MOV     DPL,R2
+   \   000038   8B83         MOV     DPH,R3
+   \   00003A   F0           MOVX    @DPTR,A
+    837                return 1;
+   \   00003B   7901         MOV     R1,#0x1
+   \   00003D   8002         SJMP    ??map_lid2idx_3
+    838              }
+    839            }
+    840          
+    841            return 0;
+   \                     ??map_lid2idx_2:
+   \   00003F   7900         MOV     R1,#0x0
+   \                     ??map_lid2idx_3:
+   \   000041   7F01         MOV     R7,#0x1
+   \   000043   02....       LJMP    ?FUNC_LEAVE_XDATA
+    842          }
+    843          
+    844          /******************************************************************************
+    845           * @fn          nwk_findPeer
+    846           *
+    847           * @brief       Find connection entry for a peer
+    848           *
+    849           * input parameters
+    850           * @param   peerAddr   - address of peer
+    851           * @param   peerPort   - port on which this device was sending to peer.
+    852           *
+    853           * output parameters
+    854           *
+    855           * @return   Pointer to matching connection table entry else 0.
+    856           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    857          connInfo_t *nwk_findPeer(addr_t *peerAddr, uint8_t peerPort)
+   \                     nwk_findPeer:
+    858          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 4,R2
+   \   000007   8B..         MOV     ?V0 + 5,R3
+   \   000009   89..         MOV     ?V0 + 1,R1
+    859            uint8_t     i;
+    860            connInfo_t *ptr = sPersistInfo.connStruct;
+   \   00000B   7E..         MOV     R6,#(sPersistInfo + 21) & 0xff
+   \   00000D   7F..         MOV     R7,#((sPersistInfo + 21) >> 8) & 0xff
+    861          
+    862            for (i=0; i<SYS_NUM_CONNECTIONS; ++i, ++ptr)
+   \   00000F   75..00       MOV     ?V0 + 0,#0x0
+   \   000012   800A         SJMP    ??nwk_findPeer_0
+   \                     ??nwk_findPeer_1:
+   \   000014   05..         INC     ?V0 + 0
+   \   000016   EE           MOV     A,R6
+   \   000017   240C         ADD     A,#0xc
+   \   000019   FE           MOV     R6,A
+   \   00001A   EF           MOV     A,R7
+   \   00001B   3400         ADDC    A,#0x0
+   \   00001D   FF           MOV     R7,A
+   \                     ??nwk_findPeer_0:
+   \   00001E   E5..         MOV     A,?V0 + 0
+   \   000020   C3           CLR     C
+   \   000021   9402         SUBB    A,#0x2
+   \   000023   5048         JNC     ??nwk_findPeer_2
+    863            {
+    864              if (CONNSTATE_CONNECTED == ptr->connState)
+   \   000025   8E82         MOV     DPL,R6
+   \   000027   8F83         MOV     DPH,R7
+   \   000029   E0           MOVX    A,@DPTR
+   \   00002A   6402         XRL     A,#0x2
+   \   00002C   70E6         JNZ     ??nwk_findPeer_1
+    865              {
+    866                if (!memcmp(peerAddr, ptr->peerAddr, NET_ADDR_SIZE))
+   \   00002E                ; Setup parameters for call to function memcmp
+   \   00002E   75..04       MOV     ?V0 + 2,#0x4
+   \   000031   75..00       MOV     ?V0 + 3,#0x0
+   \   000034   78..         MOV     R0,#?V0 + 2
+   \   000036   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000039   EE           MOV     A,R6
+   \   00003A   2403         ADD     A,#0x3
+   \   00003C   FC           MOV     R4,A
+   \   00003D   EF           MOV     A,R7
+   \   00003E   3400         ADDC    A,#0x0
+   \   000040   FD           MOV     R5,A
+   \   000041   AA..         MOV     R2,?V0 + 4
+   \   000043   AB..         MOV     R3,?V0 + 5
+   \   000045   12....       LCALL   memcmp
+   \   000048   7402         MOV     A,#0x2
+   \   00004A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00004D   8B..         MOV     ?V0 + 3,R3
+   \   00004F   EA           MOV     A,R2
+   \   000050   45..         ORL     A,?V0 + 3
+   \   000052   70C0         JNZ     ??nwk_findPeer_1
+    867                {
+    868                  if (peerPort == ptr->portTx)
+   \   000054   8E82         MOV     DPL,R6
+   \   000056   8F83         MOV     DPH,R7
+   \   000058   A3           INC     DPTR
+   \   000059   A3           INC     DPTR
+   \   00005A   A3           INC     DPTR
+   \   00005B   A3           INC     DPTR
+   \   00005C   A3           INC     DPTR
+   \   00005D   A3           INC     DPTR
+   \   00005E   A3           INC     DPTR
+   \   00005F   A3           INC     DPTR
+   \   000060   A3           INC     DPTR
+   \   000061   A3           INC     DPTR
+   \   000062   E0           MOVX    A,@DPTR
+   \   000063   65..         XRL     A,?V0 + 1
+   \   000065   70AD         JNZ     ??nwk_findPeer_1
+    869                  {
+    870                    return ptr;
+   \   000067   EE           MOV     A,R6
+   \   000068   FA           MOV     R2,A
+   \   000069   EF           MOV     A,R7
+   \   00006A   FB           MOV     R3,A
+   \   00006B   8004         SJMP    ??nwk_findPeer_3
+    871                  }
+    872                }
+    873              }
+    874            }
+    875          
+    876            return (connInfo_t *)NULL;
+   \                     ??nwk_findPeer_2:
+   \   00006D   7A00         MOV     R2,#0x0
+   \   00006F   7B00         MOV     R3,#0x0
+   \                     ??nwk_findPeer_3:
+   \   000071   7F06         MOV     R7,#0x6
+   \   000073   02....       LJMP    ?FUNC_LEAVE_XDATA
+    877          }
+    878          
+    879          /******************************************************************************
+    880           * @fn          nwk_checkAppMsgTID
+    881           *
+    882           * @brief       Compare received TID to last-seen TID to decide whether the
+    883           *              received message is a duplicate or we missed some.
+    884           *
+    885           * input parameters
+    886           * @param   lastTID   - last-seen TID
+    887           * @param   appMsgTID - TID from current application payload.
+    888           *
+    889           * output parameters
+    890           *
+    891           * @return   Returns zero if message with supplied TID should be discarded.
+    892           *           Otherwise returns non-zero. In this case the message should be
+    893           *           processed. The last-seen TID should be updated with the current
+    894           *           application payload TID.
+    895           *
+    896           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    897          uint8_t nwk_checkAppMsgTID(appPTid_t lastTID, appPTid_t appMsgTID)
+   \                     nwk_checkAppMsgTID:
+    898          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   E9           MOV     A,R1
+   \   000001   F8           MOV     R0,A
+    899            uint8_t rc = 0;
+   \   000002   7900         MOV     R1,#0x0
+    900          
+    901            /* If the values are equal this is a duplicate. We're done. */
+    902            if (lastTID != appMsgTID)
+   \   000004   EA           MOV     A,R2
+   \   000005   68           XRL     A,R0
+   \   000006   601F         JZ      ??nwk_checkAppMsgTID_0
+    903            {
+    904              /* Is the new TID bigger? */
+    905              if (appMsgTID > lastTID)
+   \   000008   E8           MOV     A,R0
+   \   000009   C3           CLR     C
+   \   00000A   9A           SUBB    A,R2
+   \   00000B   500E         JNC     ??nwk_checkAppMsgTID_1
+    906              {
+    907                /* In this case the current payload is OK unless we've received a late
+    908                 * (duplicate) message that occurred just before the TID wrapped. This is
+    909                 * considered a duplicate and we should discard it.
+    910                 */
+    911                if (!(DUP_TID_AFTER_WRAP(lastTID, appMsgTID)))
+   \   00000D   EA           MOV     A,R2
+   \   00000E   C3           CLR     C
+   \   00000F   94FD         SUBB    A,#-0x3
+   \   000011   4006         JC      ??nwk_checkAppMsgTID_2
+   \   000013   E8           MOV     A,R0
+   \   000014   C3           CLR     C
+   \   000015   9403         SUBB    A,#0x3
+   \   000017   400E         JC      ??nwk_checkAppMsgTID_0
+    912                {
+    913                  rc = 1;
+   \                     ??nwk_checkAppMsgTID_2:
+   \   000019   09           INC     R1
+   \   00001A   22           RET
+    914                }
+    915              }
+    916              else
+    917              {
+    918                /* New TID is smaller. Accept the payload if this is the wrap case or we missed
+    919                 * the specific wrap frame but are still within the range in which we assume
+    920                 * we missed it. Otherwise is a genuine late frame so we should ignore it.
+    921                 */
+    922                if (CHECK_TID_WRAP(lastTID, appMsgTID))
+   \                     ??nwk_checkAppMsgTID_1:
+   \   00001B   E8           MOV     A,R0
+   \   00001C   C3           CLR     C
+   \   00001D   94FD         SUBB    A,#-0x3
+   \   00001F   4006         JC      ??nwk_checkAppMsgTID_0
+   \   000021   EA           MOV     A,R2
+   \   000022   C3           CLR     C
+   \   000023   9403         SUBB    A,#0x3
+   \   000025   40F2         JC      ??nwk_checkAppMsgTID_2
+    923                {
+    924                  rc = 1;
+    925                }
+    926              }
+    927            }
+    928          
+    929            return rc;
+   \                     ??nwk_checkAppMsgTID_0:
+   \   000027   22           RET
+    930          }
+    931          
+    932          /******************************************************************************
+    933           * @fn          nwk_getNumObjectFromMsg
+    934           *
+    935           * @brief       Get a numeric object from a message buffer. Take care of
+    936           *              alignment and endianess issues.
+    937           *
+    938           * input parameters
+    939           * @param   src     - pointer to object location in message buffer
+    940           * @param   objSize - size of numeric object
+    941           *
+    942           * output parameters
+    943           * @param   dest - pointer to numeric type variable receiving the object
+    944           *                 contains aligned number in correct endian order on return.
+    945           *
+    946           * @return   void. There is no warning if there is no case for the supplied
+    947           *                 object size. A simple copy is then done. Alignment is
+    948           *                 guaranteed only for object size cases defined (and
+    949           *                 vacuously size 1).
+    950           *
+    951           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    952          void nwk_getNumObjectFromMsg(void *src, void *dest, uint8_t objSize)
+   \                     nwk_getNumObjectFromMsg:
+    953          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   EC           MOV     A,R4
+   \   000006   FE           MOV     R6,A
+   \   000007   ED           MOV     A,R5
+   \   000008   FF           MOV     R7,A
+   \   000009   89..         MOV     ?V0 + 0,R1
+    954            /* Take care of alignment */
+    955            memmove(dest, src, objSize);
+   \   00000B                ; Setup parameters for call to function memmove
+   \   00000B   89..         MOV     ?V0 + 2,R1
+   \   00000D   75..00       MOV     ?V0 + 3,#0x0
+   \   000010   78..         MOV     R0,#?V0 + 2
+   \   000012   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000015   EA           MOV     A,R2
+   \   000016   FC           MOV     R4,A
+   \   000017   EB           MOV     A,R3
+   \   000018   FD           MOV     R5,A
+   \   000019   EE           MOV     A,R6
+   \   00001A   FA           MOV     R2,A
+   \   00001B   EF           MOV     A,R7
+   \   00001C   FB           MOV     R3,A
+   \   00001D   12....       LCALL   memmove
+   \   000020   7402         MOV     A,#0x2
+   \   000022   12....       LCALL   ?DEALLOC_XSTACK8
+    956          
+    957            /* Take care of endianess */
+    958            switch(objSize)
+   \   000025   E5..         MOV     A,?V0 + 0
+   \   000027   24FE         ADD     A,#-0x2
+   \   000029   6006         JZ      ??nwk_getNumObjectFromMsg_0
+   \   00002B   24FE         ADD     A,#-0x2
+   \   00002D   6016         JZ      ??nwk_getNumObjectFromMsg_1
+   \   00002F   8022         SJMP    ??nwk_getNumObjectFromMsg_2
+    959            {
+    960              case 2:
+    961                *((uint16_t *)dest) = ntohs(*((uint16_t *)dest));
+   \                     ??nwk_getNumObjectFromMsg_0:
+   \   000031   8E82         MOV     DPL,R6
+   \   000033   8F83         MOV     DPH,R7
+   \   000035   E0           MOVX    A,@DPTR
+   \   000036   F8           MOV     R0,A
+   \   000037   A3           INC     DPTR
+   \   000038   E0           MOVX    A,@DPTR
+   \   000039   F9           MOV     R1,A
+   \   00003A   8E82         MOV     DPL,R6
+   \   00003C   8F83         MOV     DPH,R7
+   \   00003E   E8           MOV     A,R0
+   \   00003F   F0           MOVX    @DPTR,A
+   \   000040   A3           INC     DPTR
+   \   000041   E9           MOV     A,R1
+   \   000042   F0           MOVX    @DPTR,A
+    962                break;
+   \   000043   800E         SJMP    ??nwk_getNumObjectFromMsg_2
+    963          
+    964              case 4:
+    965                *((uint32_t *)dest) = ntohl(*((uint32_t *)dest));
+   \                     ??nwk_getNumObjectFromMsg_1:
+   \   000045   8E82         MOV     DPL,R6
+   \   000047   8F83         MOV     DPH,R7
+   \   000049   12....       LCALL   ?XLOAD_R2345
+   \   00004C   8E82         MOV     DPL,R6
+   \   00004E   8F83         MOV     DPH,R7
+   \   000050   12....       LCALL   ?XSTORE_R2345
+    966                break;
+    967            }
+    968          
+    969            return;
+   \                     ??nwk_getNumObjectFromMsg_2:
+   \   000053   7F04         MOV     R7,#0x4
+   \   000055   02....       LJMP    ?FUNC_LEAVE_XDATA
+    970          }
+    971          
+    972          /******************************************************************************
+    973           * @fn          nwk_putNumObjectIntoMsg
+    974           *
+    975           * @brief       Put a numeric object into a message buffer. Take care of
+    976           *              alignment and endianess issues.
+    977           *
+    978           * input parameters
+    979           * @param   src     - pointer to numeric type variable providing the object
+    980           * @param   objSize - size of numeric object. Fuction works for object size 1.
+    981           *
+    982           * output parameters
+    983           * @param   dest - pointer to object location in message buffer where the
+    984           *                 correct endian order representation will be placed.
+    985           *
+    986           * @return   void. There is no warning if there is no case for the supplied
+    987           *                 object size. A simple copy is then done.
+    988           *
+    989           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    990          void nwk_putNumObjectIntoMsg(void *src, void *dest, uint8_t objSize)
+   \                     nwk_putNumObjectIntoMsg:
+    991          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 6
+   \   000005   74FA         MOV     A,#-0x6
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   8A82         MOV     DPL,R2
+   \   00000C   8B83         MOV     DPH,R3
+   \   00000E   8C..         MOV     ?V0 + 0,R4
+   \   000010   8D..         MOV     ?V0 + 1,R5
+   \   000012   E9           MOV     A,R1
+   \   000013   FE           MOV     R6,A
+    992          
+    993            uint8_t *ptr;
+    994            uint16_t u16;
+    995            uint32_t u32;
+    996          
+    997            /* Take care of endianess */
+    998            switch(objSize)
+   \   000014   24FE         ADD     A,#-0x2
+   \   000016   6006         JZ      ??nwk_putNumObjectIntoMsg_0
+   \   000018   24FE         ADD     A,#-0x2
+   \   00001A   601A         JZ      ??nwk_putNumObjectIntoMsg_1
+    999            {
+   1000              case 1:
+   1001                ptr = (uint8_t *)src;
+   \   00001C   8028         SJMP    ??nwk_putNumObjectIntoMsg_2
+   1002                break;
+   1003          
+   1004              case 2:
+   1005                u16 = htons(*((uint16_t *)src));
+   \                     ??nwk_putNumObjectIntoMsg_0:
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   F8           MOV     R0,A
+   \   000020   A3           INC     DPTR
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   F9           MOV     R1,A
+   \   000023   85..82       MOV     DPL,?XSP + 0
+   \   000026   85..83       MOV     DPH,?XSP + 1
+   \   000029   E8           MOV     A,R0
+   \   00002A   F0           MOVX    @DPTR,A
+   \   00002B   A3           INC     DPTR
+   \   00002C   E9           MOV     A,R1
+   \   00002D   F0           MOVX    @DPTR,A
+   1006                ptr = (uint8_t *)&u16;
+   \   00002E   85..82       MOV     DPL,?XSP + 0
+   \   000031   85..83       MOV     DPH,?XSP + 1
+   \   000034   8010         SJMP    ??nwk_putNumObjectIntoMsg_2
+   1007                break;
+   1008          
+   1009              case 4:
+   1010                u32 = htonl(*((uint32_t *)src));
+   \                     ??nwk_putNumObjectIntoMsg_1:
+   \   000036   12....       LCALL   ?XLOAD_R2345
+   \   000039   7402         MOV     A,#0x2
+   \   00003B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00003E   12....       LCALL   ?XSTORE_R2345
+   1011                ptr = (uint8_t *)&u32;
+   \   000041   7402         MOV     A,#0x2
+   \   000043   12....       LCALL   ?XSTACK_DISP0_8
+   \                     ??nwk_putNumObjectIntoMsg_2:
+   \   000046   AC82         MOV     R4,DPL
+   \   000048   AD83         MOV     R5,DPH
+   1012                break;
+   1013          
+   1014              default:
+   1015                ptr = (uint8_t *)src;
+   1016                break;
+   1017            }
+   1018          
+   1019            /* Take care of alignment */
+   1020            memmove(dest, ptr, objSize);
+   \   00004A                ; Setup parameters for call to function memmove
+   \   00004A   8E..         MOV     ?V0 + 2,R6
+   \   00004C   75..00       MOV     ?V0 + 3,#0x0
+   \   00004F   78..         MOV     R0,#?V0 + 2
+   \   000051   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000054   AA..         MOV     R2,?V0 + 0
+   \   000056   AB..         MOV     R3,?V0 + 1
+   \   000058   12....       LCALL   memmove
+   \   00005B   7402         MOV     A,#0x2
+   \   00005D   12....       LCALL   ?DEALLOC_XSTACK8
+   1021          
+   1022            return;
+   \   000060   7406         MOV     A,#0x6
+   \   000062   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000065   7F04         MOV     R7,#0x4
+   \   000067   02....       LJMP    ?FUNC_LEAVE_XDATA
+   1023          }
+   1024          /******************************************************************************
+   1025           * @fn          nwk_NVObj
+   1026           *
+   1027           * @brief       GET and SET support for NV object (connection context).
+   1028           *
+   1029           * input parameters
+   1030           * @param   action  - GET or SET
+   1031           * @param   val     - (GET/SET) pointer to NV IOCTL object.
+   1032           *                    (SET) NV length and version values to be used for sanity
+   1033           *                    checks.
+   1034           *
+   1035           * output parameters
+   1036           * @param   val     - (GET) Version number of NV object, size of NV object and
+   1037           *                          pointer to the connection context memory.
+   1038           *                  - (SET) Pointer to the connection context memory.
+   1039           *
+   1040           * @return   SMPL_SUCCESS
+   1041           *           SMPL_BAD_PARAM   Object version or size do not conform on a SET call
+   1042           *                            or illegal action specified.
+   1043           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   1044          smplStatus_t nwk_NVObj(ioctlAction_t action, ioctlNVObj_t *val)
+   \                     nwk_NVObj:
+   1045          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   1046          #ifdef NVOBJECT_SUPPORT
+   1047            smplStatus_t rc = SMPL_SUCCESS;
+   1048          
+   1049            if (IOCTL_ACT_GET == action)
+   1050            {
+   1051              /* Populate helper objects */
+   1052              val->objLen     = SIZEOF_NV_OBJ;
+   1053              val->objVersion = sPersistInfo.structureVersion;
+   1054              /* Set pointer to connection context if address of pointer is not null */
+   1055              if (val->objPtr)
+   1056              {
+   1057                *(val->objPtr) = (uint8_t *)&sPersistInfo;
+   1058              }
+   1059            }
+   1060            else
+   1061            {
+   1062              rc = SMPL_BAD_PARAM;
+   1063            }
+   1064          
+   1065            return rc;
+   1066          #else  /* NVOBJECT_SUPPORT */
+   1067            return SMPL_BAD_PARAM;
+   \   000000   7902         MOV     R1,#0x2
+   \   000002   22           RET
+   1068          #endif
+   1069          }
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for sPersistInfo>`:
+   \   000000   01           DB 1
+   \   000001   00           DB 0
+   \   000002   00           DB 0
+   \   000003   00           DB 0
+   \   000004   00           DB 0
+   \   000005   00           DB 0
+   \   000006   00           DB 0
+   \   000007   00           DB 0
+   \   000008   00           DB 0
+   \   000009   00           DB 0
+   \   00000A   00           DB 0
+   \   00000B   00           DB 0
+   \   00000C   00           DB 0
+   \   00000D   00           DB 0
+   \   00000E   00           DB 0
+   \   00000F   00           DB 0
+   \   000010   00           DB 0
+   \   000011   00           DB 0
+   \   000012   00           DB 0
+   \   000013   00           DB 0
+   \   000014   00           DB 0
+   \   000015   00           DB 0
+   \   000016   00           DB 0
+   \   000017   00           DB 0
+   \   000018   00           DB 0
+   \   000019   00           DB 0
+   \   00001A   00           DB 0
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   00           DB 0
+   \   00001F   00           DB 0
+   \   000020   00           DB 0
+   \   000021   00           DB 0
+   \   000022   00           DB 0
+   \   000023   00           DB 0
+   \   000024   00           DB 0
+   \   000025   00           DB 0
+   \   000026   00           DB 0
+   \   000027   00           DB 0
+   \   000028   00           DB 0
+   \   000029   00           DB 0
+   \   00002A   00           DB 0
+   \   00002B   00           DB 0
+   \   00002C   00           DB 0
+
+   Maximum stack usage in bytes:
+
+     Function                  ISTACK PSTACK XSTACK
+     --------                  ------ ------ ------
+     initializeConnection          3      0     12
+       -> map_lid2idx              4      0      2
+     map_lid2idx                   1      0     17
+     nwk_NVObj                     0      0      0
+     nwk_allocateLocalRxPort       1      0     18
+       -> memset                   0      0     36
+       -> memcmp                   0      0     36
+     nwk_checkAppMsgTID            0      0      0
+     nwk_checkConnInfo             2      0      0
+     nwk_findAddressMatch          0      0     13
+       -> memcmp                   0      0     26
+     nwk_findAlreadyJoined         0      0     13
+       -> memcmp                   0      0     26
+       -> initializeConnection     0      0     22
+     nwk_findPeer                  0      0     15
+       -> memcmp                   0      0     30
+     nwk_freeConnection            2      0      0
+     nwk_getConnInfo               0      0      9
+       -> map_lid2idx              0      0     18
+     nwk_getNextConnection         2      0      0
+       -> initializeConnection     4      0      0
+     nwk_getNumObjectFromMsg       0      0     13
+       -> memmove                  0      0     26
+     nwk_getSFInfoPtr              0      0      0
+     nwk_isConnectionValid         1      0     17
+       -> memcmp                   0      0     34
+       -> nwk_sendAckReply         0      0     30
+       -> MRFI_PostKillSem         0      0     30
+     nwk_isLinkDuplicate           0      0     15
+       -> memcmp                   0      0     30
+     nwk_isValidReply              0      0     14
+       -> nwk_getMyAddress         0      0     28
+       -> memcmp                   0      0     28
+     nwk_nwkInit                   0      0     11
+       -> memset                   0      0     22
+       -> nwk_globalsInit          0      0     18
+       -> nwk_frameInit            0      0     18
+       -> nwk_QInit                0      0     18
+       -> nwk_freqInit             0      0     18
+       -> nwk_pingInit             0      0     18
+       -> nwk_joinInit             0      0     18
+       -> nwk_mgmtInit             0      0     18
+       -> nwk_linkInit             0      0     18
+       -> nwk_securityInit         0      0     18
+       -> nwk_getBCastAddress      0      0     22
+       -> memcpy                   0      0     22
+     nwk_putNumObjectIntoMsg       0      0     19
+       -> memmove                  0      0     38
+     nwk_saveJoinedDevice          0      0     15
+       -> memcmp                   0      0     30
+       -> memcpy                   0      0     30
+
+
+   Segment part sizes:
+
+     Function/Label                  Bytes
+     --------------                  -----
+     sPersistInfo                      45
+     nwk_nwkInit                      147
+     nwk_getNextConnection             83
+     initializeConnection              92
+     nwk_freeConnection                15
+     nwk_getConnInfo                   69
+     nwk_isLinkDuplicate              113
+     nwk_findAddressMatch              94
+     nwk_getSFInfoPtr                   5
+     nwk_saveJoinedDevice             163
+     nwk_findAlreadyJoined            105
+     nwk_checkConnInfo                 50
+     nwk_isConnectionValid            260
+     nwk_allocateLocalRxPort          353
+     nwk_isValidReply                 116
+     map_lid2idx                       70
+     nwk_findPeer                     118
+     nwk_checkAppMsgTID                40
+     nwk_getNumObjectFromMsg           88
+     nwk_putNumObjectIntoMsg          106
+     nwk_NVObj                          3
+     ?<Initializer for sPersistInfo>   45
+
+ 
+ 2 090 bytes in segment NEAR_CODE
+    45 bytes in segment XDATA_I
+    45 bytes in segment XDATA_ID
+ 
+ 2 135 bytes of CODE  memory
+    45 bytes of XDATA memory
+
+Errors: none
+Warnings: none

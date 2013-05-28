@@ -1,0 +1,623 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:37 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\nwk\nw #
+#                          k_globals.c                                        #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\nwk_globals.c" -D CC1111EM -D   #
+#                          ISM_EU -D MCU_H=<ioCC1111.h> -D chip=1111 -D       #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\nwk_globals.lst            #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\nwk_globals.r51             #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\nwk\nwk_globals.c
+      1          /**************************************************************************************************
+      2            Filename:       nwk_globals.c
+      3            Revised:        $Date: 2009-10-27 20:48:11 -0700 (Tue, 27 Oct 2009) $
+      4            Revision:       $Revision: 20995 $
+      5          
+      6            Description:    This file manages global NWK data.
+      7          
+      8            Copyright 2007-2009 Texas Instruments Incorporated. All rights reserved.
+      9          
+     10            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+     11            the terms of a software license agreement between the user who downloaded the software,
+     12            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     13            "License"). You may not use this Software unless you agree to abide by the terms of the
+     14            License. The License limits your use, and you acknowledge, that the Software may not be
+     15            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     16            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     17            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     18            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     19            perform, display or sell this Software and/or its documentation for any purpose.
+     20          
+     21            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     22            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     23            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     24            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     25            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     26            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     27            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     28            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     29            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     30          
+     31            Should you have any questions regarding your right to use this Software,
+     32            contact Texas Instruments Incorporated at www.TI.com.
+     33          **************************************************************************************************/
+     34          
+     35          
+     36          /******************************************************************************
+     37           * INCLUDES
+     38           */
+     39          #include <string.h>
+     40          #include "bsp.h"
+     41          #include "mrfi.h"
+     42          #include "nwk_types.h"
+     43          #include "nwk_globals.h"
+     44          
+     45          /******************************************************************************
+     46           * MACROS
+     47           */
+     48          
+     49          /******************************************************************************
+     50           * CONSTANTS AND DEFINES
+     51           */
+     52          
+     53          /******************************************************************************
+     54           * TYPEDEFS
+     55           */
+     56          
+     57          /******************************************************************************
+     58           * LOCAL VARIABLES
+     59           */
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     60          static const addr_t   sMyROMAddress = THIS_DEVICE_ADDRESS;
+   \                     sMyROMAddress:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for sMyROMAddress>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     61          static addr_t         sAPAddress;
+   \                     sAPAddress:
+   \   000000                DS 4
+   \   000004                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     62          static addr_t         sMyRAMAddress;
+   \                     sMyRAMAddress:
+   \   000000                DS 4
+   \   000004                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     63          static uint8_t        sRAMAddressIsSet = 0;
+   \                     sRAMAddressIsSet:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     64          
+     65          /* Version number set as a 4 byte quantity. Each byte is a revision number
+     66           * in the form w.x.y.z. The subfields are each limited to values 0x0-0xFF.
+     67           */
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     68          static const smplVersionInfo_t sVersionInfo = {
+   \                     sVersionInfo:
+   \   000000                DS 5
+   \   000005                REQUIRE `?<Initializer for sVersionInfo>`
+   \   000005                REQUIRE __INIT_XDATA_I
+     69                                                          0x02,  /* protocol version */
+     70                                                          0x01,  /* major revision number */
+     71                                                          0x01,  /* minor revision number */
+     72                                                          0x01,  /* maintenance release number */
+     73                                                          0x00   /* special release */
+     74                                                         };
+     75          
+     76          /******************************************************************************
+     77           * LOCAL FUNCTIONS
+     78           */
+     79          
+     80          /******************************************************************************
+     81           * GLOBAL VARIABLES
+     82           */
+     83          
+     84          /******************************************************************************
+     85           * GLOBAL FUNCTIONS
+     86           */
+     87          
+     88          /******************************************************************************
+     89           * @fn          nwk_globalsInit
+     90           *
+     91           * @brief       Initialization of global symbols
+     92           *
+     93           * input parameters
+     94           *
+     95           * output parameters
+     96           *
+     97           * @return   void
+     98           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     99          void nwk_globalsInit(void)
+   \                     nwk_globalsInit:
+    100          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    101          
+    102            memset(&sAPAddress, 0x00, sizeof(addr_t));
+   \   000005                ; Setup parameters for call to function memset
+   \   000005   75..04       MOV     ?V0 + 0,#0x4
+   \   000008   75..00       MOV     ?V0 + 1,#0x0
+   \   00000B   78..         MOV     R0,#?V0 + 0
+   \   00000D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000010   7C00         MOV     R4,#0x0
+   \   000012   7D00         MOV     R5,#0x0
+   \   000014   7A..         MOV     R2,#sAPAddress & 0xff
+   \   000016   7B..         MOV     R3,#(sAPAddress >> 8) & 0xff
+   \   000018   12....       LCALL   memset
+   \   00001B   7402         MOV     A,#0x2
+   \   00001D   12....       LCALL   ?DEALLOC_XSTACK8
+    103          
+    104            /* populate RAM address from ROM default if it hasn't laready been set
+    105             * using the IOCTL interface.
+    106             */
+    107            if (!sRAMAddressIsSet)
+   \   000020   90....       MOV     DPTR,#sRAMAddressIsSet
+   \   000023   E0           MOVX    A,@DPTR
+   \   000024   701B         JNZ     ??nwk_globalsInit_0
+    108            {
+    109              memcpy(&sMyRAMAddress, &sMyROMAddress, sizeof(addr_t));
+   \   000026                ; Setup parameters for call to function memcpy
+   \   000026   78..         MOV     R0,#?V0 + 0
+   \   000028   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00002B   7C..         MOV     R4,#sMyROMAddress & 0xff
+   \   00002D   7D..         MOV     R5,#(sMyROMAddress >> 8) & 0xff
+   \   00002F   7A..         MOV     R2,#sMyRAMAddress & 0xff
+   \   000031   7B..         MOV     R3,#(sMyRAMAddress >> 8) & 0xff
+   \   000033   12....       LCALL   memcpy
+   \   000036   7402         MOV     A,#0x2
+   \   000038   12....       LCALL   ?DEALLOC_XSTACK8
+    110              sRAMAddressIsSet = 1;  /* RAM address is now valid */
+   \   00003B   90....       MOV     DPTR,#sRAMAddressIsSet
+   \   00003E   7401         MOV     A,#0x1
+   \   000040   F0           MOVX    @DPTR,A
+    111            }
+    112          
+    113            return;
+   \                     ??nwk_globalsInit_0:
+   \   000041   7F02         MOV     R7,#0x2
+   \   000043   02....       LJMP    ?FUNC_LEAVE_XDATA
+    114          }
+    115          
+    116          /******************************************************************************
+    117           * @fn          nwk_getMyAddress
+    118           *
+    119           * @brief       Return a pointer to my address. It comes either from ROM as
+    120           *              set in the configuration file or it was set using the IOCTL
+    121           *              interface -- probably from random bytes.
+    122           *
+    123           * input parameters
+    124           *
+    125           * output parameters
+    126           *
+    127           * @return   pointer to a constant address type object.
+    128           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    129          addr_t const *nwk_getMyAddress(void)
+   \                     nwk_getMyAddress:
+    130          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    131            /* This call supports returning a valid pointer before either the
+    132             * initialization or external setting of the address. But caller needs
+    133             * to be careful -- if this routine is called immediately it will return
+    134             * the ROM address. If the application then sets the address using the
+    135             * IOCTL before doing the SMPL_Init() the original pointer is no longer
+    136             * valid as it points to the wrong address.
+    137             */
+    138            return sRAMAddressIsSet ? &sMyRAMAddress : &sMyROMAddress;
+   \   000004   90....       MOV     DPTR,#sRAMAddressIsSet
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   6006         JZ      ??nwk_getMyAddress_0
+   \   00000A   7A..         MOV     R2,#sMyRAMAddress & 0xff
+   \   00000C   7B..         MOV     R3,#(sMyRAMAddress >> 8) & 0xff
+   \   00000E   8004         SJMP    ??nwk_getMyAddress_1
+   \                     ??nwk_getMyAddress_0:
+   \   000010   7A..         MOV     R2,#sMyROMAddress & 0xff
+   \   000012   7B..         MOV     R3,#(sMyROMAddress >> 8) & 0xff
+   \                     ??nwk_getMyAddress_1:
+   \   000014   D083         POP     DPH
+   \   000016   D082         POP     DPL
+   \   000018   22           RET
+    139          }
+    140          
+    141          /******************************************************************************
+    142           * @fn          nwk_getFWVersion
+    143           *
+    144           * @brief       Return a pointer to the current firmware version string.
+    145           *
+    146           * input parameters
+    147           *
+    148           * output parameters
+    149           *
+    150           * @return   pointer to a constant uint16_t object.
+    151           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    152          uint8_t const *nwk_getFWVersion()
+   \                     nwk_getFWVersion:
+    153          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    154            return sVersionInfo.fwVerString;
+   \   000000   7A..         MOV     R2,#(sVersionInfo + 1) & 0xff
+   \   000002   7B..         MOV     R3,#((sVersionInfo + 1) >> 8) & 0xff
+   \   000004   22           RET
+    155          }
+    156          
+    157          /******************************************************************************
+    158           * @fn          nwk_getProtocolVersion
+    159           *
+    160           * @brief       Return the current protocol version.
+    161           *
+    162           * input parameters
+    163           *
+    164           * output parameters
+    165           *
+    166           * @return   Protocol version.
+    167           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    168          uint8_t nwk_getProtocolVersion(void)
+   \                     nwk_getProtocolVersion:
+    169          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    170            return sVersionInfo.protocolVersion;
+   \   000000   7902         MOV     R1,#0x2
+   \   000002   22           RET
+    171          }
+    172          
+    173          /******************************************************************************
+    174           * @fn          nwk_setMyAddress
+    175           *
+    176           * @brief       Set my address object if it hasn't already been set. This call
+    177           *              is referenced by the IOCTL support used to change the device
+    178           *              address. It is effective only if the address has not already
+    179           *              been set.
+    180           *
+    181           * input parameters
+    182           *
+    183           * @param   addr  - pointer to the address object to be used to set my address.
+    184           *
+    185           * output parameters
+    186           *
+    187           * @return   Returns non-zero if request is respected, otherwise returns 0.
+    188           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    189          uint8_t nwk_setMyAddress(addr_t *addr)
+   \                     nwk_setMyAddress:
+    190          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    191            uint8_t rc = 0;
+   \   000005   7900         MOV     R1,#0x0
+    192          
+    193            if (!sRAMAddressIsSet)
+   \   000007   90....       MOV     DPTR,#sRAMAddressIsSet
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   7021         JNZ     ??nwk_setMyAddress_0
+    194            {
+    195              memcpy(&sMyRAMAddress, addr, sizeof(addr_t));
+   \   00000D                ; Setup parameters for call to function memcpy
+   \   00000D   75..04       MOV     ?V0 + 0,#0x4
+   \   000010   89..         MOV     ?V0 + 1,R1
+   \   000012   78..         MOV     R0,#?V0 + 0
+   \   000014   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000017   EA           MOV     A,R2
+   \   000018   FC           MOV     R4,A
+   \   000019   EB           MOV     A,R3
+   \   00001A   FD           MOV     R5,A
+   \   00001B   7A..         MOV     R2,#sMyRAMAddress & 0xff
+   \   00001D   7B..         MOV     R3,#(sMyRAMAddress >> 8) & 0xff
+   \   00001F   12....       LCALL   memcpy
+   \   000022   7402         MOV     A,#0x2
+   \   000024   12....       LCALL   ?DEALLOC_XSTACK8
+    196              sRAMAddressIsSet = 1;  /* RAM address is now valid */
+   \   000027   90....       MOV     DPTR,#sRAMAddressIsSet
+   \   00002A   7401         MOV     A,#0x1
+   \   00002C   F0           MOVX    @DPTR,A
+    197              rc = 1;
+   \   00002D   F9           MOV     R1,A
+    198            }
+    199          
+    200            return rc;
+   \                     ??nwk_setMyAddress_0:
+   \   00002E   7F02         MOV     R7,#0x2
+   \   000030   02....       LJMP    ?FUNC_LEAVE_XDATA
+    201          }
+    202          
+    203          /******************************************************************************
+    204           * @fn          nwk_setAPAddress
+    205           *
+    206           * @brief       Set the AP's address. Called after the AP address is gleaned
+    207           *              from the Join reply.
+    208           *
+    209           * input parameters
+    210           *
+    211           * output parameters
+    212           *
+    213           * @return   void
+    214           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    215          void nwk_setAPAddress(addr_t *addr)
+   \                     nwk_setAPAddress:
+    216          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    217          
+    218            memcpy((void *)&sAPAddress, (void *)addr, NET_ADDR_SIZE);
+   \   000005                ; Setup parameters for call to function memcpy
+   \   000005   75..04       MOV     ?V0 + 0,#0x4
+   \   000008   75..00       MOV     ?V0 + 1,#0x0
+   \   00000B   78..         MOV     R0,#?V0 + 0
+   \   00000D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000010   EA           MOV     A,R2
+   \   000011   FC           MOV     R4,A
+   \   000012   EB           MOV     A,R3
+   \   000013   FD           MOV     R5,A
+   \   000014   7A..         MOV     R2,#sAPAddress & 0xff
+   \   000016   7B..         MOV     R3,#(sAPAddress >> 8) & 0xff
+   \   000018   12....       LCALL   memcpy
+   \   00001B   7402         MOV     A,#0x2
+   \   00001D   12....       LCALL   ?DEALLOC_XSTACK8
+    219          
+    220            return;
+   \   000020   7F02         MOV     R7,#0x2
+   \   000022   02....       LJMP    ?FUNC_LEAVE_XDATA
+    221          }
+    222          
+    223          /******************************************************************************
+    224           * @fn          nwk_getAPAddress
+    225           *
+    226           * @brief       Get the AP's address.
+    227           *
+    228           * input parameters
+    229           *
+    230           * output parameters
+    231           *
+    232           * @return   Pointer to a constant address object or null if the address has not
+    233           *           yet been set.
+    234           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    235          addr_t const *nwk_getAPAddress(void)
+   \                     nwk_getAPAddress:
+    236          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 4
+   \   000005   74FC         MOV     A,#-0x4
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    237            addr_t addr;
+    238          
+    239            memset(&addr, 0x0, sizeof(addr));
+   \   00000A                ; Setup parameters for call to function memset
+   \   00000A   75..04       MOV     ?V0 + 0,#0x4
+   \   00000D   75..00       MOV     ?V0 + 1,#0x0
+   \   000010   78..         MOV     R0,#?V0 + 0
+   \   000012   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000015   7C00         MOV     R4,#0x0
+   \   000017   7D00         MOV     R5,#0x0
+   \   000019   7402         MOV     A,#0x2
+   \   00001B   12....       LCALL   ?XSTACK_DISP0_8
+   \   00001E   AA82         MOV     R2,DPL
+   \   000020   AB83         MOV     R3,DPH
+   \   000022   12....       LCALL   memset
+   \   000025   7402         MOV     A,#0x2
+   \   000027   12....       LCALL   ?DEALLOC_XSTACK8
+    240          
+    241            return !memcmp(&sAPAddress, &addr, NET_ADDR_SIZE) ? 0 : &sAPAddress;
+   \   00002A                ; Setup parameters for call to function memcmp
+   \   00002A   78..         MOV     R0,#?V0 + 0
+   \   00002C   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00002F   7402         MOV     A,#0x2
+   \   000031   12....       LCALL   ?XSTACK_DISP0_8
+   \   000034   AC82         MOV     R4,DPL
+   \   000036   AD83         MOV     R5,DPH
+   \   000038   7A..         MOV     R2,#sAPAddress & 0xff
+   \   00003A   7B..         MOV     R3,#(sAPAddress >> 8) & 0xff
+   \   00003C   12....       LCALL   memcmp
+   \   00003F   7402         MOV     A,#0x2
+   \   000041   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000044   8B..         MOV     ?V0 + 1,R3
+   \   000046   EA           MOV     A,R2
+   \   000047   45..         ORL     A,?V0 + 1
+   \   000049   7006         JNZ     ??nwk_getAPAddress_0
+   \   00004B   7A00         MOV     R2,#0x0
+   \   00004D   7B00         MOV     R3,#0x0
+   \   00004F   8004         SJMP    ??nwk_getAPAddress_1
+   \                     ??nwk_getAPAddress_0:
+   \   000051   7A..         MOV     R2,#sAPAddress & 0xff
+   \   000053   7B..         MOV     R3,#(sAPAddress >> 8) & 0xff
+   \                     ??nwk_getAPAddress_1:
+   \   000055   7404         MOV     A,#0x4
+   \   000057   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00005A   7F02         MOV     R7,#0x2
+   \   00005C   02....       LJMP    ?FUNC_LEAVE_XDATA
+    242          }
+    243          
+    244          /******************************************************************************
+    245           * @fn          nwk_getBCastAddress
+    246           *
+    247           * @brief       Get the network broadcast address.
+    248           *
+    249           * input parameters
+    250           *
+    251           * output parameters
+    252           *
+    253           * @return   Pointer to a constant address object.
+    254           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    255          addr_t const *nwk_getBCastAddress(void)
+   \                     nwk_getBCastAddress:
+    256          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    257            return (addr_t const *)mrfiBroadcastAddr;
+   \   000000   7A..         MOV     R2,#mrfiBroadcastAddr & 0xff
+   \   000002   7B..         MOV     R3,#(mrfiBroadcastAddr >> 8) & 0xff
+   \   000004   22           RET
+    258          }
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for sMyROMAddress>`:
+   \   000000   78           DB 120
+   \   000001   56           DB 86
+   \   000002   34           DB 52
+   \   000003   10           DB 16
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for sVersionInfo>`:
+   \   000000   02           DB 2
+   \   000001   01           DB 1
+   \   000002   01           DB 1
+   \   000003   01           DB 1
+   \   000004   00           DB 0
+
+   Maximum stack usage in bytes:
+
+     Function               ISTACK PSTACK XSTACK
+     --------               ------ ------ ------
+     nwk_getAPAddress           0      0     15
+       -> memset                0      0     30
+       -> memcmp                0      0     30
+     nwk_getBCastAddress        0      0      0
+     nwk_getFWVersion           0      0      0
+     nwk_getMyAddress           2      0      0
+     nwk_getProtocolVersion     0      0      0
+     nwk_globalsInit            0      0     11
+       -> memset                0      0     22
+       -> memcpy                0      0     22
+     nwk_setAPAddress           0      0     11
+       -> memcpy                0      0     22
+     nwk_setMyAddress           0      0     11
+       -> memcpy                0      0     22
+
+
+   Segment part sizes:
+
+     Function/Label                   Bytes
+     --------------                   -----
+     sMyROMAddress                       4
+     sAPAddress                          4
+     sMyRAMAddress                       4
+     sRAMAddressIsSet                    1
+     sVersionInfo                        5
+     nwk_globalsInit                    70
+     nwk_getMyAddress                   25
+     nwk_getFWVersion                    5
+     nwk_getProtocolVersion              3
+     nwk_setMyAddress                   51
+     nwk_setAPAddress                   37
+     nwk_getAPAddress                   95
+     nwk_getBCastAddress                 5
+     ?<Initializer for sMyROMAddress>    4
+     ?<Initializer for sVersionInfo>     5
+
+ 
+ 291 bytes in segment NEAR_CODE
+   9 bytes in segment XDATA_I
+   9 bytes in segment XDATA_ID
+   9 bytes in segment XDATA_Z
+ 
+ 300 bytes of CODE  memory
+  18 bytes of XDATA memory
+
+Errors: none
+Warnings: none

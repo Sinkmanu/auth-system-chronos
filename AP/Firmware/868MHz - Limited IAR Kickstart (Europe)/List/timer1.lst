@@ -1,0 +1,670 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Jun/2012  09:07:48 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\timer1.c                     #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\timer1. #
+#                          c" -D ISM_EU -D MCU_H=<ioCC1111.h> -D chip=1111    #
+#                          -D RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG    #
+#                          -lC "C:\Documents and Settings\usuario\Mis         #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Limited IAR Kickstart (Europe)\Obj\" -e          #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\timer1.lst                 #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\Obj\timer1.r51                  #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\timer1.c
+      1          // *************************************************************************************************
+      2          //
+      3          //	Copyright (C) 2009 Texas Instruments Incorporated - http://www.ti.com/ 
+      4          //	 
+      5          //	 
+      6          //	  Redistribution and use in source and binary forms, with or without 
+      7          //	  modification, are permitted provided that the following conditions 
+      8          //	  are met:
+      9          //	
+     10          //	    Redistributions of source code must retain the above copyright 
+     11          //	    notice, this list of conditions and the following disclaimer.
+     12          //	 
+     13          //	    Redistributions in binary form must reproduce the above copyright
+     14          //	    notice, this list of conditions and the following disclaimer in the 
+     15          //	    documentation and/or other materials provided with the   
+     16          //	    distribution.
+     17          //	 
+     18          //	    Neither the name of Texas Instruments Incorporated nor the names of
+     19          //	    its contributors may be used to endorse or promote products derived
+     20          //	    from this software without specific prior written permission.
+     21          //	
+     22          //	  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+     23          //	  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+     24          //	  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+     25          //	  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+     26          //	  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+     27          //	  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+     28          //	  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     29          //	  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     30          //	  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+     31          //	  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+     32          //	  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     33          //
+     34          // *************************************************************************************************
+     35          // Timer1 driver
+     36          // *************************************************************************************************
+     37          
+     38          
+     39          // *************************************************************************************************
+     40          // Include section
+     41          #include "timer1.h"
+
+   \                                 In  segment SFR_AN, at 0xda
+   \   unsigned char volatile __sfr T1CC0L
+   \                     T1CC0L:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xdb
+   \   unsigned char volatile __sfr T1CC0H
+   \                     T1CC0H:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe4
+   \   unsigned char volatile __sfr T1CTL
+   \                     T1CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe5
+   \   unsigned char volatile __sfr T1CCTL0
+   \                     T1CCTL0:
+   \   000000                DS 1
+     42          
+     43          
+     44          // *************************************************************************************************
+     45          // Defines section
+     46          #define ACLK_SPEED_HZ         32768u
+     47          #define TCLK_SPEED_HZ         187500u
+     48          #define ACLK_PER_FULL_CYCLE   11453u // (32768*65536/187500=11453,25) - round up for later correction
+     49          
+     50          
+     51          // *************************************************************************************************
+     52          // Global Variable section
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     53          struct timer1 sTimer1;
+   \                     sTimer1:
+   \   000000                DS 9
+   \   000009                REQUIRE __INIT_XDATA_Z
+     54          
+     55          
+     56          
+     57          // *************************************************************************************************
+     58          // Implementation
+     59          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     60          void reset_timer1(void)
+   \                     reset_timer1:
+     61          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     62            sTimer1.enable = 0;
+   \   000004   90....       MOV     DPTR,#sTimer1
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+     63            sTimer1.iflag = 0;
+   \   000009   A3           INC     DPTR
+   \   00000A   F0           MOVX    @DPTR,A
+     64            sTimer1.aclk = 0;
+   \   00000B   A3           INC     DPTR
+   \   00000C   F0           MOVX    @DPTR,A
+   \   00000D   A3           INC     DPTR
+   \   00000E   F0           MOVX    @DPTR,A
+     65            sTimer1.nb_full_cycles = 0;
+   \   00000F   A3           INC     DPTR
+   \   000010   F0           MOVX    @DPTR,A
+     66            sTimer1.last_cycle_count = 0;
+   \   000011   A3           INC     DPTR
+   \   000012   F0           MOVX    @DPTR,A
+   \   000013   A3           INC     DPTR
+   \   000014   F0           MOVX    @DPTR,A
+     67            sTimer1.usb_service_disable = 0;
+   \   000015   A3           INC     DPTR
+   \   000016   F0           MOVX    @DPTR,A
+     68            sTimer1.cycles = 0;
+   \   000017   A3           INC     DPTR
+   \   000018   F0           MOVX    @DPTR,A
+     69          }
+   \   000019   D083         POP     DPH
+   \   00001B   D082         POP     DPL
+   \   00001D   22           RET
+     70          
+     71          
+     72          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     73          u8 set_timer1_cycles(void)
+   \                     set_timer1_cycles:
+     74          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     75            int t1cc0;
+     76            char repeat = 0;
+   \   000005   7C00         MOV     R4,#0x0
+     77          
+     78            if (sTimer1.nb_full_cycles > 0)
+   \   000007   90....       MOV     DPTR,#sTimer1 + 4
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   603C         JZ      ??set_timer1_cycles_0
+     79            {
+     80              // Disable IM during timer set
+     81              T1CCTL0 &= ~BIT6;
+   \   00000D   53E5BF       ANL     0xe5,#0xbf
+     82            
+     83              // Set compare value to 0xFFFF (wait 1 full cycle)
+     84              SET_WORD(T1CC0H, T1CC0L, 0xFFFF);
+   \   000010   75DBFF       MOV     0xdb,#-0x1
+   \   000013   75DAFF       MOV     0xda,#-0x1
+     85              // Make sure compare value is written correctly
+     86              GET_WORD(T1CC0H, T1CC0L, t1cc0);
+   \   000016   E5DB         MOV     A,0xdb
+   \   000018   F9           MOV     R1,A
+   \   000019   E5DA         MOV     A,0xda
+   \   00001B   F8           MOV     R0,A
+     87              while (t1cc0 != 0xFFFF) 
+   \                     ??set_timer1_cycles_1:
+   \   00001C   74FF         MOV     A,#-0x1
+   \   00001E   68           XRL     A,R0
+   \   00001F   7003         JNZ     ??set_timer1_cycles_2
+   \   000021   74FF         MOV     A,#-0x1
+   \   000023   69           XRL     A,R1
+   \                     ??set_timer1_cycles_2:
+   \   000024   6013         JZ      ??set_timer1_cycles_3
+     88              {
+     89                SET_WORD(T1CC0H, T1CC0L, 0xFFFF);
+   \   000026   75DBFF       MOV     0xdb,#-0x1
+   \   000029   75DAFF       MOV     0xda,#-0x1
+     90                GET_WORD(T1CC0H, T1CC0L, t1cc0);
+   \   00002C   E5DB         MOV     A,0xdb
+   \   00002E   F9           MOV     R1,A
+   \   00002F   E5DA         MOV     A,0xda
+   \   000031   F8           MOV     R0,A
+     91                if (repeat++ > 10) break;
+   \   000032   EC           MOV     A,R4
+   \   000033   0C           INC     R4
+   \   000034   C3           CLR     C
+   \   000035   940B         SUBB    A,#0xb
+   \   000037   40E3         JC      ??set_timer1_cycles_1
+     92              }
+     93              // Decrease full cycle count
+     94              sTimer1.nb_full_cycles--;
+   \                     ??set_timer1_cycles_3:
+   \   000039   E0           MOVX    A,@DPTR
+   \   00003A   14           DEC     A
+   \                     ??set_timer1_cycles_4:
+   \   00003B   F0           MOVX    @DPTR,A
+     95              
+     96              // Clear Timer 1 Channel 0-2 + overflow interrupt flag
+     97              T1CTL &= ~0xF0;
+   \   00003C   53E40F       ANL     0xe4,#0xf
+     98              // Enable IM after timer set
+     99              T1CCTL0 |= BIT6;
+   \   00003F   43E540       ORL     0xe5,#0x40
+    100            }
+    101            else if (sTimer1.last_cycle_count > 5) //1) // Skip last 5 TCLK (~ 1 ACLK) - too close for IRQ
+    102            {
+    103              // Disable IM during timer set
+    104              T1CCTL0 &= ~BIT6;
+    105          
+    106              // Set compare value to last period lenght - 1
+    107              SET_WORD(T1CC0H, T1CC0L, sTimer1.last_cycle_count-1);
+    108              // Make sure compare value is written correctly
+    109              GET_WORD(T1CC0H, T1CC0L, t1cc0);
+    110              while (t1cc0 != sTimer1.last_cycle_count-1) 
+    111              {
+    112                SET_WORD(T1CC0H, T1CC0L, sTimer1.last_cycle_count-1);
+    113                GET_WORD(T1CC0H, T1CC0L, t1cc0);
+    114                if (repeat++ > 10) break;
+    115              }
+    116              // Clear last cycle count - next IRQ calls s/w handler
+    117              sTimer1.last_cycle_count = 0;
+    118          
+    119              // Suspend USB service via Timer4 until TX is over
+    120              sTimer1.usb_service_disable = 1;
+    121              
+    122              // Clear Timer 1 Channel 0-2 + overflow interrupt flag
+    123              T1CTL &= ~0xF0;
+    124              // Enable IM after timer set
+    125              T1CCTL0 |= BIT6;
+    126            }  
+    127            else return (0); // no cycles could be set
+    128            
+    129            return (1); // cycles successfully set
+   \   000042   7901         MOV     R1,#0x1
+   \                     ??set_timer1_cycles_5:
+   \   000044   7F02         MOV     R7,#0x2
+   \   000046   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \                     ??set_timer1_cycles_0:
+   \   000049   A3           INC     DPTR
+   \   00004A   C3           CLR     C
+   \   00004B   E0           MOVX    A,@DPTR
+   \   00004C   9406         SUBB    A,#0x6
+   \   00004E   A3           INC     DPTR
+   \   00004F   E0           MOVX    A,@DPTR
+   \   000050   9400         SUBB    A,#0x0
+   \   000052   404F         JC      ??set_timer1_cycles_6
+   \   000054   53E5BF       ANL     0xe5,#0xbf
+   \   000057   90....       MOV     DPTR,#sTimer1 + 5
+   \   00005A   E0           MOVX    A,@DPTR
+   \   00005B   24FF         ADD     A,#-0x1
+   \   00005D   A3           INC     DPTR
+   \   00005E   E0           MOVX    A,@DPTR
+   \   00005F   34FF         ADDC    A,#-0x1
+   \   000061   F5DB         MOV     0xdb,A
+   \   000063   90....       MOV     DPTR,#sTimer1 + 5
+   \   000066   E0           MOVX    A,@DPTR
+   \   000067   14           DEC     A
+   \   000068   F5DA         MOV     0xda,A
+   \   00006A   E5DB         MOV     A,0xdb
+   \   00006C   F9           MOV     R1,A
+   \   00006D   E5DA         MOV     A,0xda
+   \   00006F   F8           MOV     R0,A
+   \                     ??set_timer1_cycles_7:
+   \   000070   E0           MOVX    A,@DPTR
+   \   000071   24FF         ADD     A,#-0x1
+   \   000073   FA           MOV     R2,A
+   \   000074   A3           INC     DPTR
+   \   000075   E0           MOVX    A,@DPTR
+   \   000076   34FF         ADDC    A,#-0x1
+   \   000078   FB           MOV     R3,A
+   \   000079   EA           MOV     A,R2
+   \   00007A   68           XRL     A,R0
+   \   00007B   7002         JNZ     ??set_timer1_cycles_8
+   \   00007D   EB           MOV     A,R3
+   \   00007E   69           XRL     A,R1
+   \                     ??set_timer1_cycles_8:
+   \   00007F   6017         JZ      ??set_timer1_cycles_9
+   \   000081   EB           MOV     A,R3
+   \   000082   F5DB         MOV     0xdb,A
+   \   000084   90....       MOV     DPTR,#sTimer1 + 5
+   \   000087   E0           MOVX    A,@DPTR
+   \   000088   14           DEC     A
+   \   000089   F5DA         MOV     0xda,A
+   \   00008B   E5DB         MOV     A,0xdb
+   \   00008D   F9           MOV     R1,A
+   \   00008E   E5DA         MOV     A,0xda
+   \   000090   F8           MOV     R0,A
+   \   000091   EC           MOV     A,R4
+   \   000092   0C           INC     R4
+   \   000093   C3           CLR     C
+   \   000094   940B         SUBB    A,#0xb
+   \   000096   40D8         JC      ??set_timer1_cycles_7
+   \                     ??set_timer1_cycles_9:
+   \   000098   90....       MOV     DPTR,#sTimer1 + 5
+   \   00009B   E4           CLR     A
+   \   00009C   F0           MOVX    @DPTR,A
+   \   00009D   A3           INC     DPTR
+   \   00009E   F0           MOVX    @DPTR,A
+   \   00009F   A3           INC     DPTR
+   \   0000A0   04           INC     A
+   \   0000A1   8098         SJMP    ??set_timer1_cycles_4
+   \                     ??set_timer1_cycles_6:
+   \   0000A3   7900         MOV     R1,#0x0
+   \   0000A5   809D         SJMP    ??set_timer1_cycles_5
+   \   0000A7                REQUIRE T1CCTL0
+   \   0000A7                REQUIRE T1CC0H
+   \   0000A7                REQUIRE T1CC0L
+   \   0000A7                REQUIRE T1CTL
+    130            
+    131          }
+    132          
+    133          
+    134          // Set up Timer1 in compare mode to emulate 32kHz timer
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    135          void set_timer1(u16 aclk)
+   \                     set_timer1:
+    136          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 0
+    137            //u32 total_ticks;
+    138            
+    139            // Disable IM during timer set
+    140            T1CCTL0 &= ~BIT6;
+   \   000005   53E5BF       ANL     0xe5,#0xbf
+    141            
+    142            // Disable s/w timer int
+    143            sTimer1.enable = 0;
+   \   000008   90....       MOV     DPTR,#sTimer1
+   \   00000B   E4           CLR     A
+   \   00000C   F0           MOVX    @DPTR,A
+    144            
+    145            // Calculate number of full cycles  
+    146            sTimer1.nb_full_cycles = 0;
+   \   00000D   90....       MOV     DPTR,#sTimer1 + 4
+   \   000010   800A         SJMP    ??set_timer1_0
+    147            while(aclk >= ACLK_PER_FULL_CYCLE)
+    148            {
+    149              aclk -= ACLK_PER_FULL_CYCLE;
+   \                     ??set_timer1_1:
+   \   000012   EA           MOV     A,R2
+   \   000013   2443         ADD     A,#0x43
+   \   000015   FA           MOV     R2,A
+   \   000016   EB           MOV     A,R3
+   \   000017   34D3         ADDC    A,#-0x2d
+   \   000019   FB           MOV     R3,A
+    150              sTimer1.nb_full_cycles++;
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   04           INC     A
+   \                     ??set_timer1_0:
+   \   00001C   F0           MOVX    @DPTR,A
+    151            }
+   \   00001D   C3           CLR     C
+   \   00001E   EA           MOV     A,R2
+   \   00001F   94BD         SUBB    A,#-0x43
+   \   000021   EB           MOV     A,R3
+   \   000022   942C         SUBB    A,#0x2c
+   \   000024   50EC         JNC     ??set_timer1_1
+    152          
+    153            // remainder is last timer period
+    154            sTimer1.last_cycle_count = (aclk * TCLK_SPEED_HZ) / ACLK_SPEED_HZ;
+   \   000026   8A..         MOV     ?V0 + 0,R2
+   \   000028   8B..         MOV     ?V0 + 1,R3
+   \   00002A   E4           CLR     A
+   \   00002B   F5..         MOV     ?V0 + 2,A
+   \   00002D   F5..         MOV     ?V0 + 3,A
+   \   00002F   90....       MOV     DPTR,#__Constant_2dc6c
+   \   000032   78..         MOV     R0,#?V0 + 4
+   \   000034   12....       LCALL   ?L_MOV_X
+   \   000037   78..         MOV     R0,#?V0 + 0
+   \   000039   79..         MOV     R1,#?V0 + 4
+   \   00003B   12....       LCALL   ?L_MUL
+   \   00003E   740F         MOV     A,#0xf
+   \   000040   78..         MOV     R0,#?V0 + 0
+   \   000042   12....       LCALL   ?UL_SHR
+   \   000045   90....       MOV     DPTR,#sTimer1 + 5
+   \   000048   E5..         MOV     A,?V0 + 0
+   \   00004A   F0           MOVX    @DPTR,A
+   \   00004B   A3           INC     DPTR
+   \   00004C   E5..         MOV     A,?V0 + 1
+   \   00004E   F0           MOVX    @DPTR,A
+    155          
+    156            // Set Timer1 registers
+    157            set_timer1_cycles();
+   \   00004F                ; Setup parameters for call to function set_timer1_cycles
+   \   00004F   12....       LCALL   set_timer1_cycles
+    158            
+    159            // Clear Timer 1 Channel 0-2 + overflow interrupt flag
+    160            T1CTL &= ~0xF0;
+   \   000052   53E40F       ANL     0xe4,#0xf
+    161            // Enable IM after timer set
+    162            T1CCTL0 |= BIT6;
+   \   000055   43E540       ORL     0xe5,#0x40
+    163          
+    164            // Enable s/w timer int
+    165            sTimer1.enable = 1;
+   \   000058   90....       MOV     DPTR,#sTimer1
+   \   00005B   7401         MOV     A,#0x1
+   \   00005D   F0           MOVX    @DPTR,A
+    166          }
+   \   00005E   7F08         MOV     R7,#0x8
+   \   000060   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000063                REQUIRE T1CCTL0
+   \   000063                REQUIRE T1CTL
+    167          
+    168          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    169          void set_timer1_abs(u16 aclk)
+   \                     set_timer1_abs:
+    170          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    171            u16 timediff;
+    172            
+    173            // Calculate time distance between last compare time and next compare time
+    174            if (aclk > sTimer1.aclk) 
+   \   000004   90....       MOV     DPTR,#sTimer1 + 2
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F8           MOV     R0,A
+   \   000009   A3           INC     DPTR
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   F9           MOV     R1,A
+   \   00000C   C3           CLR     C
+   \   00000D   E8           MOV     A,R0
+   \   00000E   9A           SUBB    A,R2
+   \   00000F   E9           MOV     A,R1
+   \   000010   9B           SUBB    A,R3
+   \   000011   5009         JNC     ??set_timer1_abs_0
+    175              timediff = aclk - sTimer1.aclk;
+   \                     ??set_timer1_abs_1:
+   \   000013   EA           MOV     A,R2
+   \   000014   C3           CLR     C
+   \   000015   98           SUBB    A,R0
+   \   000016   F8           MOV     R0,A
+   \   000017   EB           MOV     A,R3
+   \   000018   99           SUBB    A,R1
+   \   000019   F9           MOV     R1,A
+   \   00001A   800C         SJMP    ??set_timer1_abs_2
+    176            else if (aclk == sTimer1.aclk) 
+   \                     ??set_timer1_abs_0:
+   \   00001C   E8           MOV     A,R0
+   \   00001D   6A           XRL     A,R2
+   \   00001E   7002         JNZ     ??set_timer1_abs_3
+   \   000020   E9           MOV     A,R1
+   \   000021   6B           XRL     A,R3
+   \                     ??set_timer1_abs_3:
+   \   000022   70EF         JNZ     ??set_timer1_abs_1
+    177              timediff = 0xFFFF;
+   \   000024   78FF         MOV     R0,#-0x1
+   \   000026   79FF         MOV     R1,#-0x1
+    178            else
+    179              timediff = (65536 - sTimer1.aclk) + aclk;
+    180          
+    181            // Keep current value for next delta calculation  
+    182            sTimer1.aclk = aclk;
+   \                     ??set_timer1_abs_2:
+   \   000028   90....       MOV     DPTR,#sTimer1 + 2
+   \   00002B   EA           MOV     A,R2
+   \   00002C   F0           MOVX    @DPTR,A
+   \   00002D   A3           INC     DPTR
+   \   00002E   EB           MOV     A,R3
+   \   00002F   F0           MOVX    @DPTR,A
+    183          
+    184            // Set timer1 relative to current time  
+    185            set_timer1(timediff);
+   \   000030                ; Setup parameters for call to function set_timer1
+   \   000030   E8           MOV     A,R0
+   \   000031   FA           MOV     R2,A
+   \   000032   E9           MOV     A,R1
+   \   000033   FB           MOV     R3,A
+   \   000034   12....       LCALL   set_timer1
+    186          }
+   \   000037   D083         POP     DPH
+   \   000039   D082         POP     DPL
+   \   00003B   22           RET
+    187          
+    188          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    189          void enable_timer1_irq(void)
+   \                     enable_timer1_irq:
+    190          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    191            sTimer1.enable = 1;
+   \   000004   90....       MOV     DPTR,#sTimer1
+   \   000007   7401         MOV     A,#0x1
+   \   000009   F0           MOVX    @DPTR,A
+    192          }
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+    193          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    194          void disable_timer1_irq(void)
+   \                     disable_timer1_irq:
+    195          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    196            sTimer1.enable = 0;
+   \   000004   90....       MOV     DPTR,#sTimer1
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+    197          }
+   \   000009   D083         POP     DPH
+   \   00000B   D082         POP     DPL
+   \   00000D   22           RET
+    198          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    199          void clear_timer1_irq(void)
+   \                     clear_timer1_irq:
+    200          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    201            sTimer1.iflag = 0;
+   \   000004   90....       MOV     DPTR,#sTimer1 + 1
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+    202          }
+   \   000009   D083         POP     DPH
+   \   00000B   D082         POP     DPL
+   \   00000D   22           RET
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_2dc6c:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_2dc6c>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_2dc6c>`:
+   \   000000   6CDC0200     DD 187500
+
+   Maximum stack usage in bytes:
+
+     Function               ISTACK PSTACK XSTACK
+     --------               ------ ------ ------
+     clear_timer1_irq           2      0      0
+     disable_timer1_irq         2      0      0
+     enable_timer1_irq          2      0      0
+     reset_timer1               2      0      0
+     set_timer1                 0      0     15
+       -> set_timer1_cycles     0      0     30
+     set_timer1_abs             2      0      0
+       -> set_timer1            4      0      0
+     set_timer1_cycles          0      0     24
+
+
+   Segment part sizes:
+
+     Function/Label                      Bytes
+     --------------                      -----
+     T1CC0L                                 1
+     T1CC0H                                 1
+     T1CTL                                  1
+     T1CCTL0                                1
+     sTimer1                                9
+     reset_timer1                          30
+     set_timer1_cycles                    167
+     set_timer1                            99
+     set_timer1_abs                        60
+     enable_timer1_irq                     15
+     disable_timer1_irq                    14
+     clear_timer1_irq                      14
+     __Constant_2dc6c                       4
+     ?<Initializer for __Constant_2dc6c>    4
+
+ 
+ 399 bytes in segment NEAR_CODE
+   4 bytes in segment SFR_AN
+   4 bytes in segment XDATA_I
+   4 bytes in segment XDATA_ID
+   9 bytes in segment XDATA_Z
+ 
+ 399 bytes of CODE  memory (+ 4 bytes shared)
+   0 bytes of DATA  memory (+ 4 bytes shared)
+   9 bytes of XDATA memory (+ 4 bytes shared)
+
+Errors: none
+Warnings: none

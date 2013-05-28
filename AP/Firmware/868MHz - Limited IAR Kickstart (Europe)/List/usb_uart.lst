@@ -1,0 +1,879 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         11/Sep/2012  09:53:48 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\usb\class_cdc\usb_uart.c     #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\cla #
+#                          ss_cdc\usb_uart.c" -D ISM_EU -D                    #
+#                          MCU_H=<ioCC1111.h> -D chip=1111 -D                 #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Limited IAR Kickstart (Europe)\Obj\" -e          #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\usb_uart.lst               #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\Obj\usb_uart.r51                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\usb\class_cdc\usb_uart.c
+      1          /***********************************************************************************
+      2          
+      3              Filename:     usb_uart.h
+      4          
+      5              Description:  USB Virtual UART implementation.
+      6          
+      7          ***********************************************************************************/
+      8          
+      9          
+     10          /***********************************************************************************
+     11           * INCLUDES
+     12           */
+     13          #include "hal_types.h"
+     14          #include "hal_board.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xf4
+   \   unsigned char volatile __sfr P1SEL
+   \                     P1SEL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     15          #include "hal_int.h"
+     16          #include "hal_led.h"
+     17          
+     18          #include "usb_cdc.h"
+     19          #include "usb_firmware_library_config.h"
+     20          #include "usb_firmware_library_headers.h"
+     21          
+     22          #include "usb_uart.h"
+     23          //#include "util_buffer.h"
+     24          
+     25          
+     26          /***********************************************************************************
+     27           * MACROS and DEFINITIONS
+     28           */
+     29          
+     30          #define HAL_LED_DEBUG
+     31          
+     32          
+     33          
+     34          
+     35          /***********************************************************************************
+     36           * EXTERNAL VARIABLES
+     37           */
+     38          
+     39          /* Ring buffers defined in hal_uart.c */
+     40          
+     41          //extern ringBuf_t rbRxBuf;
+     42          //extern ringBuf_t rbTxBuf;
+     43          
+     44          
+     45          /***********************************************************************************
+     46           * GLOBAL VARIABLES
+     47           */
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     48          CDC_LINE_CODING_STRUCTURE __xdata currentLineCoding;
+   \                     currentLineCoding:
+   \   000000                DS 7
+   \   000007                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     49          uint16 cdcRTS;              // Request-To-Send modem control line
+   \                     cdcRTS:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     50          uint8  cdcCTS;              // Clear-To-Send   modem control line
+   \                     cdcCTS:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     51          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     52          unsigned char message_length = USB_MAX_MESSAGE_LENGTH;
+   \                     message_length:
+   \   000000                DS 1
+   \   000001                REQUIRE `?<Initializer for message_length>`
+   \   000001                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     53          unsigned char usb_buffer[USB_MAX_MESSAGE_LENGTH+2];
+   \                     usb_buffer:
+   \   000000                DS 34
+   \   000022                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     54          char          usb_bufferIndex = 0;
+   \                     usb_bufferIndex:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     55          unsigned char usb_newdata = 0;
+   \                     usb_newdata:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     56          unsigned char usb_sendack = 0;
+   \                     usb_sendack:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     57          
+     58          
+     59          /***********************************************************************************
+     60           * LOCAL DATA
+     61           */
+     62          //static uint8 __xdata buffer[USB_MAX_PACKET_SIZE];
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     63          static uint8 oldEndpoint;
+   \                     oldEndpoint:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     64          
+     65          
+     66          /***********************************************************************************
+     67           * LOCAL FUNCTIONS
+     68           */
+     69          static void usbEventProcess(void);
+     70          static void usbOutProcess(void);
+     71          static void usbInProcess(void);
+     72          
+     73          
+     74          /******************************************************************************
+     75           * FUNCTIONS
+     76           */
+     77          extern void usb_decode(void);
+     78          
+     79          
+     80          /***********************************************************************************
+     81          * @fn           usbUartInit
+     82          *
+     83          * @brief        USB UART init function.
+     84          *               - Set initial line decoding to 8/NONE/1.
+     85          *               - Initialise the USB Firmware Library and the USB controller.
+     86          *
+     87          * @param        none
+     88          *
+     89          * @return       none
+     90          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     91          void usbUartInit(uint32 baudrate)
+   \                     usbUartInit:
+     92          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+   \   000009   8C..         MOV     ?V0 + 2,R4
+   \   00000B   8D..         MOV     ?V0 + 3,R5
+     93              usb_bufferIndex = 0;
+   \   00000D   90....       MOV     DPTR,#usb_bufferIndex
+   \   000010   E4           CLR     A
+   \   000011   F0           MOVX    @DPTR,A
+     94              usb_newdata = 0;
+   \   000012   90....       MOV     DPTR,#usb_newdata
+   \   000015   F0           MOVX    @DPTR,A
+     95              usb_sendack = 0;
+   \   000016   90....       MOV     DPTR,#usb_sendack
+   \   000019   F0           MOVX    @DPTR,A
+     96            
+     97              // Set default line coding.
+     98              currentLineCoding.dteRate = baudrate;
+   \   00001A   90....       MOV     DPTR,#currentLineCoding
+   \   00001D   78..         MOV     R0,#?V0 + 0
+   \   00001F   12....       LCALL   ?L_MOV_TO_X
+     99              currentLineCoding.charFormat = CDC_CHAR_FORMAT_1_STOP_BIT;
+   \   000022   A3           INC     DPTR
+   \   000023   E4           CLR     A
+   \   000024   F0           MOVX    @DPTR,A
+    100              currentLineCoding.parityType = CDC_PARITY_TYPE_NONE;
+   \   000025   A3           INC     DPTR
+   \   000026   F0           MOVX    @DPTR,A
+    101              currentLineCoding.dataBits = 8;
+   \   000027   A3           INC     DPTR
+   \   000028   7408         MOV     A,#0x8
+   \   00002A   F0           MOVX    @DPTR,A
+    102          
+    103              // Initialise hardware flow control
+    104              cdcRTS= 0;      // TRUE when DCE connected
+   \   00002B   90....       MOV     DPTR,#cdcRTS
+   \   00002E   E4           CLR     A
+   \   00002F   F0           MOVX    @DPTR,A
+   \   000030   A3           INC     DPTR
+   \   000031   F0           MOVX    @DPTR,A
+    105              cdcCTS= 1;      // Indicate CTS to DCE (here handled internally as CDC does
+   \   000032   90....       MOV     DPTR,#cdcCTS
+   \   000035   04           INC     A
+   \   000036   F0           MOVX    @DPTR,A
+    106                              // not directly support CTC).
+    107          
+    108              // Init USB library
+    109              usbfwInit();
+   \   000037                ; Setup parameters for call to function usbfwInit
+   \   000037   12....       LCALL   usbfwInit
+    110          
+    111              // Initialize the USB interrupt handler with bit mask containing all processed USBIRQ events
+    112              usbirqInit(0xFFFF);
+   \   00003A                ; Setup parameters for call to function usbirqInit
+   \   00003A   7AFF         MOV     R2,#-0x1
+   \   00003C   7BFF         MOV     R3,#-0x1
+   \   00003E   12....       LCALL   usbirqInit
+    113          
+    114              // Enable pullup on D+
+    115              HAL_USB_PULLUP_ENABLE();
+   \   000041   53F4FD       ANL     0xf4,#0xfd
+   \   000044   D291         SETB    0x90.1
+   \   000046   43FE02       ORL     0xfe,#0x2
+    116          
+    117              // Enable global interrupts
+    118              halIntOn();
+   \   000049                ; Setup parameters for call to function halIntOn
+   \   000049   12....       LCALL   halIntOn
+    119          }
+   \   00004C   7F04         MOV     R7,#0x4
+   \   00004E   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000051                REQUIRE P1SEL
+   \   000051                REQUIRE _A_P1
+   \   000051                REQUIRE P1DIR
+    120          
+    121          
+    122          
+    123          /***********************************************************************************
+    124          * @fn           usbUartProcess
+    125          *
+    126          * @brief        The USB UART main task function. Must be called from the
+    127          *               applications main loop.
+    128          *
+    129          * @param        none
+    130          *
+    131          * @return       none
+    132          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    133          void usbUartProcess(void)
+   \                     usbUartProcess:
+    134          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    135              // Process USB events
+    136              usbEventProcess();
+   \   000004                ; Setup parameters for call to function usbEventProcess
+   \   000004   12....       LCALL   usbEventProcess
+    137          
+    138              if (cdcCTS) {
+   \   000007   90....       MOV     DPTR,#cdcCTS
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   6006         JZ      ??usbUartProcess_0
+    139          
+    140                  // Process USB OUT data (USB -> RF)
+    141                  usbOutProcess();
+   \   00000D                ; Setup parameters for call to function usbOutProcess
+   \   00000D   12....       LCALL   usbOutProcess
+    142          
+    143                  // Process USB IN data (RF -> USB)
+    144                  usbInProcess();
+   \   000010                ; Setup parameters for call to function usbInProcess
+   \   000010   12....       LCALL   usbInProcess
+    145              }
+    146          }
+   \                     ??usbUartProcess_0:
+   \   000013   D083         POP     DPH
+   \   000015   D082         POP     DPL
+   \   000017   22           RET
+    147          
+    148          
+    149          
+    150          /***********************************************************************************
+    151          * @fn           usbEventProcess
+    152          *
+    153          * @brief        Handle the USB events which are not directly related to the UART.
+    154          *
+    155          * @param        none
+    156          *
+    157          * @return       none
+    158          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    159          static void usbEventProcess(void)
+   \                     usbEventProcess:
+    160          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    161              // Handle reset signaling on the bus
+    162              if (USBIRQ_GET_EVENT_MASK() & USBIRQ_EVENT_RESET) {
+   \   000000   A8..         MOV     R0,usbirqData+0x0
+   \   000002   E8           MOV     A,R0
+   \   000003   5404         ANL     A,#0x4
+   \   000005   600C         JZ      ??usbEventProcess_0
+    163                  USBIRQ_CLEAR_EVENTS(USBIRQ_EVENT_RESET);
+   \   000007   78..         MOV     R0,#usbirqData
+   \   000009   E6           MOV     A,@R0
+   \   00000A   54FB         ANL     A,#0xfb
+   \   00000C   F6           MOV     @R0,A
+   \   00000D   08           INC     R0
+   \   00000E   E6           MOV     A,@R0
+   \   00000F   F6           MOV     @R0,A
+    164                  usbfwResetHandler();
+   \   000010                ; Setup parameters for call to function usbfwResetHandler
+   \   000010   12....       LCALL   usbfwResetHandler
+    165              }
+    166          
+    167              // Handle packets on EP0
+    168              if (USBIRQ_GET_EVENT_MASK() & USBIRQ_EVENT_SETUP) {
+   \                     ??usbEventProcess_0:
+   \   000013   A8..         MOV     R0,usbirqData+0x0
+   \   000015   E8           MOV     A,R0
+   \   000016   5410         ANL     A,#0x10
+   \   000018   600C         JZ      ??usbEventProcess_1
+    169                  USBIRQ_CLEAR_EVENTS(USBIRQ_EVENT_SETUP);
+   \   00001A   78..         MOV     R0,#usbirqData
+   \   00001C   E6           MOV     A,@R0
+   \   00001D   54EF         ANL     A,#0xef
+   \   00001F   F6           MOV     @R0,A
+   \   000020   08           INC     R0
+   \   000021   E6           MOV     A,@R0
+   \   000022   F6           MOV     @R0,A
+    170                  usbfwSetupHandler();
+   \   000023                ; Setup parameters for call to function usbfwSetupHandler
+   \   000023   12....       LCALL   usbfwSetupHandler
+    171              }
+    172          
+    173              // Handle USB suspend
+    174              if (USBIRQ_GET_EVENT_MASK() & USBIRQ_EVENT_SUSPEND) {
+   \                     ??usbEventProcess_1:
+   \   000026   A8..         MOV     R0,usbirqData+0x0
+   \   000028   E8           MOV     A,R0
+   \   000029   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00002B   5015         JNC     ??usbEventProcess_2
+    175          
+    176                  // Clear USB suspend interrupt
+    177                  USBIRQ_CLEAR_EVENTS(USBIRQ_EVENT_SUSPEND);
+   \   00002D   78..         MOV     R0,#usbirqData
+   \   00002F   E6           MOV     A,@R0
+   \   000030   54FE         ANL     A,#0xfe
+   \   000032   F6           MOV     @R0,A
+   \   000033   08           INC     R0
+   \   000034   E6           MOV     A,@R0
+   \   000035   F6           MOV     @R0,A
+    178          
+    179                  // Take the chip into PM1 until a USB resume is deteceted.
+    180                  usbsuspEnter();
+   \   000036                ; Setup parameters for call to function usbsuspEnter
+   \   000036   12....       LCALL   usbsuspEnter
+    181          
+    182                  // Running again; first clear RESUME interrupt
+    183                  USBIRQ_CLEAR_EVENTS(USBIRQ_EVENT_RESUME);
+   \   000039   78..         MOV     R0,#usbirqData
+   \   00003B   E6           MOV     A,@R0
+   \   00003C   54FD         ANL     A,#0xfd
+   \   00003E   F6           MOV     @R0,A
+   \   00003F   08           INC     R0
+   \   000040   E6           MOV     A,@R0
+   \   000041   F6           MOV     @R0,A
+    184              }
+    185          }
+   \                     ??usbEventProcess_2:
+   \   000042   22           RET
+    186          
+    187          
+    188          
+    189          /***********************************************************************************
+    190          * @fn           usbInProcess
+    191          *
+    192          * @brief        Handle traffic flow from RF to USB.
+    193          *
+    194          * @param        none
+    195          *
+    196          * @return       none
+    197          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    198          static void usbInProcess(void)
+   \                     usbInProcess:
+    199          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    200              //uint8 length;
+    201          
+    202              // USB ready to accept new IN packet
+    203              halIntOff();
+   \   000005                ; Setup parameters for call to function halIntOff
+   \   000005   12....       LCALL   halIntOff
+    204          
+    205              oldEndpoint = USBFW_GET_SELECTED_ENDPOINT();
+   \   000008   90DE0E       MOV     DPTR,#-0x21f2
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   90....       MOV     DPTR,#oldEndpoint
+   \   00000F   F0           MOVX    @DPTR,A
+    206              USBFW_SELECT_ENDPOINT(4);
+   \   000010   90DE0E       MOV     DPTR,#-0x21f2
+   \   000013   7404         MOV     A,#0x4
+   \   000015   F0           MOVX    @DPTR,A
+    207          
+    208              // The IN endpoint is ready to accept data
+    209              if ( USBFW_IN_ENDPOINT_DISARMED() )
+   \   000016   90DE11       MOV     DPTR,#-0x21ef
+   \   000019   E0           MOVX    A,@DPTR
+   \   00001A   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00001C   4036         JC      ??usbInProcess_0
+    210              {
+    211                  if (usb_sendack)
+   \   00001E   90....       MOV     DPTR,#usb_sendack
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   6030         JZ      ??usbInProcess_0
+    212                  {
+    213                    // modify and return received packet
+    214                    usbfwWriteFifo(&USBF4, usb_buffer[2], &usb_buffer[0]);
+   \   000024                ; Setup parameters for call to function usbfwWriteFifo
+   \   000024   75....       MOV     ?V0 + 0,#usb_buffer & 0xff
+   \   000027   75....       MOV     ?V0 + 1,#(usb_buffer >> 8) & 0xff
+   \   00002A   75..00       MOV     ?V0 + 2,#0x0
+   \   00002D   78..         MOV     R0,#?V0 + 0
+   \   00002F   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   000032   90....       MOV     DPTR,#usb_buffer + 2
+   \   000035   E0           MOVX    A,@DPTR
+   \   000036   F9           MOV     R1,A
+   \   000037   7A28         MOV     R2,#0x28
+   \   000039   7BDE         MOV     R3,#-0x22
+   \   00003B   12....       LCALL   usbfwWriteFifo
+   \   00003E   7403         MOV     A,#0x3
+   \   000040   12....       LCALL   ?DEALLOC_XSTACK8
+    215                    //usbfwWriteFifo(&USBF4, USB_MAX_PACKET_SIZE, &usb_buffer[0]);
+    216                    usb_sendack = 0;
+   \   000043   90....       MOV     DPTR,#usb_sendack
+   \   000046   E4           CLR     A
+   \   000047   F0           MOVX    @DPTR,A
+    217                    
+    218                    // Flag USB IN buffer as not ready (disarming EP4)
+    219                    USBFW_SELECT_ENDPOINT(4);
+   \   000048   90DE0E       MOV     DPTR,#-0x21f2
+   \   00004B   7404         MOV     A,#0x4
+   \   00004D   F0           MOVX    @DPTR,A
+    220                    USBFW_ARM_IN_ENDPOINT();   // Send data to the host
+   \   00004E   90DE11       MOV     DPTR,#-0x21ef
+   \   000051   7401         MOV     A,#0x1
+   \   000053   F0           MOVX    @DPTR,A
+    221                  }
+    222                    
+    223          /*        // Number of bytes present in RF buffer
+    224                  length= bufNumBytes(&rbTxBuf);
+    225          
+    226                  if (length>0) {
+    227          
+    228                      // Limit the size
+    229                      if (length > USB_MAX_PACKET_SIZE)
+    230                      {
+    231                          length = USB_MAX_PACKET_SIZE;
+    232                      }
+    233          
+    234                      // Read from UART TX buffer
+    235                      bufGet(&rbTxBuf,buffer,length);
+    236          
+    237                      // Write to USB FIFO
+    238                      usbfwWriteFifo(&USBF4, length, buffer);
+    239          
+    240                      // Flag USB IN buffer as not ready (disarming EP4)
+    241                      USBFW_SELECT_ENDPOINT(4);
+    242                      USBFW_ARM_IN_ENDPOINT();   // Send data to the host
+    243          
+    244                  }*/
+    245              }
+    246          
+    247              USBFW_SELECT_ENDPOINT(oldEndpoint);
+   \                     ??usbInProcess_0:
+   \   000054   90....       MOV     DPTR,#oldEndpoint
+   \   000057   E0           MOVX    A,@DPTR
+   \   000058   90DE0E       MOV     DPTR,#-0x21f2
+   \   00005B   F0           MOVX    @DPTR,A
+    248              halIntOn();
+   \   00005C                ; Setup parameters for call to function halIntOn
+   \   00005C   12....       LCALL   halIntOn
+    249          
+    250          }
+   \   00005F   7F03         MOV     R7,#0x3
+   \   000061   02....       LJMP    ?FUNC_LEAVE_XDATA
+    251          
+    252          
+    253          /***********************************************************************************
+    254          * @fn           usbOutProcess
+    255          *
+    256          * @brief        Handle traffic flow from USB to RF.
+    257          *
+    258          * @param        none
+    259          *
+    260          * @return       none
+    261          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    262          static void usbOutProcess(void)
+   \                     usbOutProcess:
+    263          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    264              uint8 length, /*nToSend,*/ packetlength=0;
+   \   000005   7E00         MOV     R6,#0x0
+    265          
+    266              // If new packet is ready in USB FIFO
+    267              halIntOff();
+   \   000007                ; Setup parameters for call to function halIntOff
+   \   000007   12....       LCALL   halIntOff
+    268          
+    269              oldEndpoint = USBFW_GET_SELECTED_ENDPOINT();
+   \   00000A   90DE0E       MOV     DPTR,#-0x21f2
+   \   00000D   E0           MOVX    A,@DPTR
+   \   00000E   90....       MOV     DPTR,#oldEndpoint
+   \   000011   F0           MOVX    @DPTR,A
+    270              USBFW_SELECT_ENDPOINT(4);
+   \   000012   90DE0E       MOV     DPTR,#-0x21f2
+   \   000015   7404         MOV     A,#0x4
+   \   000017   F0           MOVX    @DPTR,A
+    271          
+    272          
+    273              if (USBFW_OUT_ENDPOINT_DISARMED() ) {
+   \   000018   90DE14       MOV     DPTR,#-0x21ec
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00001E   4003         JC      $+5
+   \   000020   02....       LJMP    ??usbOutProcess_0
+    274          
+    275                  // Get length of USB packet, this operation must not be interrupted.
+    276                  length = USBFW_GET_OUT_ENDPOINT_COUNT_LOW();
+   \   000023   90DE16       MOV     DPTR,#-0x21ea
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   FF           MOV     R7,A
+    277                  length+= USBFW_GET_OUT_ENDPOINT_COUNT_HIGH() >> 8;
+   \   000028   A3           INC     DPTR
+   \   000029   E0           MOVX    A,@DPTR
+    278                  
+    279                  // Avoid overflow
+    280                  message_length = USB_MAX_MESSAGE_LENGTH; 
+   \   00002A   90....       MOV     DPTR,#message_length
+   \   00002D   7420         MOV     A,#0x20
+   \   00002F   F0           MOVX    @DPTR,A
+    281                  if (usb_bufferIndex + length > USB_MAX_MESSAGE_LENGTH) usb_bufferIndex=0;
+   \   000030   90....       MOV     DPTR,#usb_bufferIndex
+   \   000033   E0           MOVX    A,@DPTR
+   \   000034   8F..         MOV     ?V0 + 0,R7
+   \   000036   25..         ADD     A,?V0 + 0
+   \   000038   F8           MOV     R0,A
+   \   000039   E4           CLR     A
+   \   00003A   3400         ADDC    A,#0x0
+   \   00003C   F9           MOV     R1,A
+   \   00003D   E8           MOV     A,R0
+   \   00003E   9421         SUBB    A,#0x21
+   \   000040   E9           MOV     A,R1
+   \   000041   9400         SUBB    A,#0x0
+   \   000043   4002         JC      ??usbOutProcess_1
+   \   000045   E4           CLR     A
+   \   000046   F0           MOVX    @DPTR,A
+    282                  
+    283                  // Copy received bytes from FIFO to buffer
+    284                  usbfwReadFifo(&USBF4, length, &usb_buffer[usb_bufferIndex]);
+   \                     ??usbOutProcess_1:
+   \   000047                ; Setup parameters for call to function usbfwReadFifo
+   \   000047   E0           MOVX    A,@DPTR
+   \   000048   F8           MOV     R0,A
+   \   000049   74..         MOV     A,#usb_buffer & 0xff
+   \   00004B   28           ADD     A,R0
+   \   00004C   F5..         MOV     ?V0 + 0,A
+   \   00004E   74..         MOV     A,#(usb_buffer >> 8) & 0xff
+   \   000050   3400         ADDC    A,#0x0
+   \   000052   F5..         MOV     ?V0 + 1,A
+   \   000054   8E..         MOV     ?V0 + 2,R6
+   \   000056   78..         MOV     R0,#?V0 + 0
+   \   000058   12....       LCALL   ?PUSH_XSTACK_I_THREE
+   \   00005B   EF           MOV     A,R7
+   \   00005C   F9           MOV     R1,A
+   \   00005D   7A28         MOV     R2,#0x28
+   \   00005F   7BDE         MOV     R3,#-0x22
+   \   000061   12....       LCALL   usbfwReadFifo
+   \   000064   7403         MOV     A,#0x3
+   \   000066   12....       LCALL   ?DEALLOC_XSTACK8
+    285                  
+    286                  // Increase buffer index
+    287                  usb_bufferIndex += length;
+   \   000069   90....       MOV     DPTR,#usb_bufferIndex
+   \   00006C   E0           MOVX    A,@DPTR
+   \   00006D   2F           ADD     A,R7
+   \   00006E   F0           MOVX    @DPTR,A
+    288                  
+    289                  // If entire USB packet is read from buffer
+    290                  USBFW_SELECT_ENDPOINT(4);
+   \   00006F   90DE0E       MOV     DPTR,#-0x21f2
+   \   000072   7404         MOV     A,#0x4
+   \   000074   F0           MOVX    @DPTR,A
+    291                  USBFW_ARM_OUT_ENDPOINT();
+   \   000075   90DE14       MOV     DPTR,#-0x21ec
+   \   000078   E4           CLR     A
+   \   000079   F0           MOVX    @DPTR,A
+    292          
+    293                  // get packet lenght from byte #2 of received packet
+    294                  if ((usb_bufferIndex >= 2) && (packetlength == 0)) packetlength = usb_buffer[2];
+   \   00007A   90....       MOV     DPTR,#usb_bufferIndex
+   \   00007D   E0           MOVX    A,@DPTR
+   \   00007E   C3           CLR     C
+   \   00007F   9402         SUBB    A,#0x2
+   \   000081   4005         JC      ??usbOutProcess_2
+   \   000083   90....       MOV     DPTR,#usb_buffer + 2
+   \   000086   E0           MOVX    A,@DPTR
+   \   000087   FE           MOV     R6,A
+    295                  if ((usb_bufferIndex > packetlength-1) && (packetlength >= USB_MIN_MESSAGE_LENGTH)) 
+   \                     ??usbOutProcess_2:
+   \   000088   8E..         MOV     ?V0 + 0,R6
+   \   00008A   E5..         MOV     A,?V0 + 0
+   \   00008C   24FF         ADD     A,#-0x1
+   \   00008E   F8           MOV     R0,A
+   \   00008F   E4           CLR     A
+   \   000090   34FF         ADDC    A,#-0x1
+   \   000092   F9           MOV     R1,A
+   \   000093   90....       MOV     DPTR,#usb_bufferIndex
+   \   000096   E0           MOVX    A,@DPTR
+   \   000097   FA           MOV     R2,A
+   \   000098   C3           CLR     C
+   \   000099   E8           MOV     A,R0
+   \   00009A   9A           SUBB    A,R2
+   \   00009B   E9           MOV     A,R1
+   \   00009C   9400         SUBB    A,#0x0
+   \   00009E   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   0000A0   65D0         XRL     A,PSW
+   \   0000A2   33           RLC     A
+   \   0000A3   500B         JNC     ??usbOutProcess_0
+   \   0000A5   EE           MOV     A,R6
+   \   0000A6   C3           CLR     C
+   \   0000A7   9403         SUBB    A,#0x3
+   \   0000A9   4005         JC      ??usbOutProcess_0
+    296                  { 
+    297                     //extract data from packet
+    298                     usb_decode();
+   \   0000AB                ; Setup parameters for call to function usb_decode
+   \   0000AB   12....       LCALL   usb_decode
+    299                     usb_bufferIndex = 0; 
+   \   0000AE   E4           CLR     A
+   \   0000AF   F0           MOVX    @DPTR,A
+    300                   }     
+    301                  
+    302                  /*
+    303                  // Calculate number of bytes available in RF buffer; and the number
+    304                  // of bytes we may transfer in this operation.
+    305                  nToSend= MIN(BUF_SIZE - bufNumBytes(&rbRxBuf), length);
+    306          
+    307                  // Space available in UART RX buffer ?
+    308                  if (nToSend>0)
+    309                  {
+    310                      // Read from USB FIFO
+    311                      usbfwReadFifo(&USBF4, nToSend, buffer);
+    312          
+    313                      // Write to radio TX buffer
+    314                      bufPut(&rbRxBuf,buffer,nToSend);
+    315          
+    316                      // If entire USB packet is read from buffer
+    317                      if (length == nToSend)
+    318                      {
+    319                          USBFW_SELECT_ENDPOINT(4);
+    320                          USBFW_ARM_OUT_ENDPOINT();
+    321                      }
+    322          
+    323                  }*/
+    324              }
+    325          
+    326              USBFW_SELECT_ENDPOINT(oldEndpoint);
+   \                     ??usbOutProcess_0:
+   \   0000B0   90....       MOV     DPTR,#oldEndpoint
+   \   0000B3   E0           MOVX    A,@DPTR
+   \   0000B4   90DE0E       MOV     DPTR,#-0x21f2
+   \   0000B7   F0           MOVX    @DPTR,A
+    327              halIntOn();
+   \   0000B8                ; Setup parameters for call to function halIntOn
+   \   0000B8   12....       LCALL   halIntOn
+    328          }
+   \   0000BB   7F03         MOV     R7,#0x3
+   \   0000BD   02....       LJMP    ?FUNC_LEAVE_XDATA
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for message_length>`:
+   \   000000   20           DB 32
+    329          /*
+    330          +------------------------------------------------------------------------------
+    331          |  Copyright 2004-2009 Texas Instruments Incorporated. All rights reserved.
+    332          |
+    333          |  IMPORTANT: Your use of this Software is limited to those specific rights
+    334          |  granted under the terms of a software license agreement between the user who
+    335          |  downloaded the software, his/her employer (which must be your employer) and
+    336          |  Texas Instruments Incorporated (the "License"). You may not use this Software
+    337          |  unless you agree to abide by the terms of the License. The License limits
+    338          |  your use, and you acknowledge, that the Software may not be modified, copied
+    339          |  or distributed unless embedded on a Texas Instruments microcontroller or used
+    340          |  solely and exclusively in conjunction with a Texas Instruments radio
+    341          |  frequency transceiver, which is integrated into your product. Other than for
+    342          |  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+    343          |  works of, modify, distribute, perform, display or sell this Software and/or
+    344          |  its documentation for any purpose.
+    345          |
+    346          |  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+    347          |  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+    348          |  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+    349          |  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+    350          |  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+    351          |  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+    352          |  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING
+    353          |  BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+    354          |  CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+    355          |  SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+    356          |  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+    357          |
+    358          |  Should you have any questions regarding your right to use this Software,
+    359          |  contact Texas Instruments Incorporated at www.TI.com.
+    360          |
+    361          +------------------------------------------------------------------------------
+    362          */
+    363          
+
+   Maximum stack usage in bytes:
+
+     Function               ISTACK PSTACK XSTACK
+     --------               ------ ------ ------
+     usbEventProcess            0      0      0
+       -> usbfwResetHandler     0      0      0
+       -> usbfwSetupHandler     0      0      0
+       -> usbsuspEnter          0      0      0
+     usbInProcess               0      0     13
+       -> halIntOff             0      0     20
+       -> usbfwWriteFifo        0      0     26
+       -> halIntOn              0      0     20
+     usbOutProcess              0      0     13
+       -> halIntOff             0      0     20
+       -> usbfwReadFifo         0      0     26
+       -> usb_decode            0      0     20
+       -> halIntOn              0      0     20
+     usbUartInit                0      0     11
+       -> usbfwInit             0      0     22
+       -> usbirqInit            0      0     22
+       -> halIntOn              0      0     22
+     usbUartProcess             2      0      0
+       -> usbEventProcess       4      0      0
+       -> usbOutProcess         4      0      0
+       -> usbInProcess          4      0      0
+
+
+   Segment part sizes:
+
+     Function/Label                    Bytes
+     --------------                    -----
+     _A_P1                                1
+     P1SEL                                1
+     P1DIR                                1
+     currentLineCoding                    7
+     cdcRTS                               2
+     cdcCTS                               1
+     message_length                       1
+     usb_buffer                          34
+     usb_bufferIndex                      1
+     usb_newdata                          1
+     usb_sendack                          1
+     oldEndpoint                          1
+     usbUartInit                         81
+     usbUartProcess                      24
+     usbEventProcess                     67
+     usbInProcess                       100
+     usbOutProcess                      192
+     ?<Initializer for message_length>    1
+
+ 
+ 464 bytes in segment NEAR_CODE
+   3 bytes in segment SFR_AN
+   1 byte  in segment XDATA_I
+   1 byte  in segment XDATA_ID
+  48 bytes in segment XDATA_Z
+ 
+ 465 bytes of CODE  memory
+   0 bytes of DATA  memory (+ 3 bytes shared)
+  49 bytes of XDATA memory
+
+Errors: none
+Warnings: none

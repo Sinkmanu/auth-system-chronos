@@ -1,0 +1,2508 @@
+################################################################################
+#                                                                              #
+#      IAR Universal Linker V5.0.2.5/W32                                       #
+#                                                                              #
+#           Link time     =  11/Sep/2012  09:53:48                             #
+#           Target CPU    =  x51                                               #
+#           List file     =  "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\List\ez430-chronos-AP-868MHz.map"              #
+#           Output file 1 =  "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Exe\ez430-chronos-AP-868MHz.hex"               #
+#                            Format: debug                                     #
+#                            UBROF version 10.0.3                              #
+#                            Using library modules for C-SPY (-rt)             #
+#           Command line  =  --ks_version -D_NR_OF_BANKS=0 -D_CODEBANK_END=0   #
+#                            -D_CODEBANK_START=0                               #
+#                            "-IC:\Archivos de programa\IAR Systems\Embedded W #
+#                            orkbench 6.0_2\8051\CONFIG\"                      #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\authentication_main.r51"                   #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\clock.r51"                                 #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\flash.r51"                                 #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\hal_assert.r51"                            #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\hal_board.r51"                             #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\hal_int.r51"                               #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\hal_led.r51"                               #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\hal_mcu.r51"                               #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\hal_uart_usb.r51"                          #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\main.r51"                                  #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\timer1.r51"                                #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_cdc_descriptor.r51"                    #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_cdc_hooks.r51"                         #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_descriptor_parser.r51"                 #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_firmware_library_config.r51"           #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_framework.r51"                         #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_interrupt.r51"                         #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_standard_requests.r51"                 #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_suspend.r51"                           #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\usb_uart.r51"                              #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Obj\util_buffer.r51"                           #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\simpliciti\CC1111 - Access Point - 86 #
+#                            8MHz.r51"                                         #
+#                            -e_small_write=_formatted_write -o                #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\Exe\ez430-chronos-AP-868MHz.hex"               #
+#                            -B -z -l                                          #
+#                            "C:\Documents and Settings\usuario\Mis documentos #
+#                            \Server_IAR\868MHz - Limited IAR Kickstart (Europ #
+#                            e)\List\ez430-chronos-AP-868MHz.map"              #
+#                            -xms                                              #
+#                            "-IC:\Archivos de programa\IAR Systems\Embedded W #
+#                            orkbench 6.0_2\8051\LIB\"                         #
+#                            -f                                                #
+#                            "C:\Archivos de programa\IAR Systems\Embedded Wor #
+#                            kbench 6.0_2\8051\config\devices\Texas Instrument #
+#                            s\lnk51ew_cc1111F32.xcl"                          #
+#                            (-D_IDATA0_START=0x00 -D_IDATA0_END=0xFF          #
+#                            -D_PDATA0_START=0xF000 -D_PDATA0_END=0xF0FF       #
+#                            -D_IXDATA0_START=0x00F000                         #
+#                            -D_IXDATA0_END=0x00FDA1                           #
+#                            -D_XDATA0_START=0x00F000 -D_XDATA0_END=0x00FDA1   #
+#                            -D_CODE0_START=0x000000 -D_CODE0_END=0x007FFF     #
+#                            -D?REGISTER_BANK=0x0 -D_REGISTER_BANK_START=0x0   #
+#                            -D_BREG_START=0x00 -D?VB=0x20 -D?ESP=0x9B         #
+#                            -Z(BIT)BREG=_BREG_START -Z(BIT)BIT_N=0-7F         #
+#                            -Z(DATA)REGISTERS+8=_REGISTER_BANK_START          #
+#                            -Z(DATA)BDATA_Z,BDATA_N,BDATA_I=20-2F             #
+#                            -Z(DATA)VREG+_NR_OF_VIRTUAL_REGISTERS=08-7F       #
+#                            -Z(DATA)PSP,XSP=08-7F -Z(DATA)DOVERLAY=08-7F      #
+#                            -Z(DATA)DATA_I,DATA_Z,DATA_N=08-7F                #
+#                            -U(IDATA)0-7F=(DATA)0-7F                          #
+#                            -Z(IDATA)IDATA_I,IDATA_Z,IDATA_N=08-_IDATA0_END   #
+#                            -Z(IDATA)ISTACK+_IDATA_STACK_SIZE#08-_IDATA0_END  #
+#                            -Z(IDATA)IOVERLAY=08-FF -Z(CODE)INTVEC=0          #
+#                            -Z(CODE)CSTART=_CODE0_START-_CODE0_END            #
+#                            -Z(CODE)BIT_ID,BDATA_ID,DATA_ID,IDATA_ID,IXDATA_I #
+#                            D,PDATA_ID,XDATA_ID=_CODE0_START-_CODE0_END       #
+#                            -Z(CODE)RCODE,DIFUNCT,CODE_C,CODE_N,NEAR_CODE=_CO #
+#                            DE0_START-_CODE0_END                              #
+#                            -Z(CODE)CHECKSUM#_CODE0_END                       #
+#                            -Z(XDATA)PDATA_Z,PDATA_I=_PDATA0_START-_PDATA0_EN #
+#                            D                                                 #
+#                            -P(XDATA)PDATA_N=_PDATA0_START-_PDATA0_END        #
+#                            -Z(XDATA)PSTACK+_PDATA_STACK_SIZE=_PDATA0_START-_ #
+#                            PDATA0_END                                        #
+#                            -Z(XDATA)EXT_STACK+_EXTENDED_STACK_SIZE=_EXTENDED #
+#                            _STACK_START                                      #
+#                            -Z(XDATA)XSTACK+_XDATA_STACK_SIZE=_XDATA0_START-_ #
+#                            XDATA0_END                                        #
+#                            -Z(XDATA)IXDATA_Z,IXDATA_I=_IXDATA0_START-_IXDATA #
+#                            0_END                                             #
+#                            -P(XDATA)IXDATA_N=_IXDATA0_START-_IXDATA0_END     #
+#                            -Z(XDATA)XDATA_Z,XDATA_I=_XDATA0_START-_XDATA0_EN #
+#                            D                                                 #
+#                            -P(XDATA)XDATA_N=_XDATA0_START-_XDATA0_END        #
+#                            -Z(XDATA)XDATA_HEAP+_XDATA_HEAP_SIZE=_XDATA0_STAR #
+#                            T-_XDATA0_END                                     #
+#                            -Z(CONST)XDATA_ROM_C=_XDATA0_START-_XDATA0_END    #
+#                            -cx51 -Z(XDATA)XDATA_SCRATCH=0xFDA2-0xFEFF)       #
+#                            -D_NR_OF_VIRTUAL_REGISTERS=8 -D?PBANK=0xA0 -rt    #
+#                            -s __program_start                                #
+#                            "C:\Archivos de programa\IAR Systems\Embedded Wor #
+#                            kbench 6.0_2\8051\LIB\CLIB\cl-pli-nlxd-1e16x01.r5 #
+#                            1"                                                #
+#                            -D_IDATA_STACK_SIZE=0xb0                          #
+#                            -D_EXTENDED_STACK_START=0x00                      #
+#                            -D_EXTENDED_STACK_SIZE=0x00                       #
+#                            -D_PDATA_STACK_SIZE=0x80                          #
+#                            -D_XDATA_STACK_SIZE=0x3ff                         #
+#                            -D_XDATA_HEAP_SIZE=0xFF -D_FAR_HEAP_SIZE=0xFFF    #
+#                            -D_HUGE_HEAP_SIZE=0xFFF                           #
+#                            -D_FAR22_HEAP_SIZE=0xFFF                          #
+#                                                                              #
+#                           Copyright (C) 1987-2010 IAR Systems AB.            #
+################################################################################
+
+
+
+
+
+                ****************************************
+                *                                      *
+                *           CROSS REFERENCE            *
+                *                                      *
+                ****************************************
+
+       Program entry at : CODE      000000E9  Relocatable, from module : CSTARTUP
+
+
+
+
+                ****************************************
+                *                                      *
+                *            RUNTIME MODEL             *
+                *                                      *
+                ****************************************
+
+  __SystemLibrary          = CLib
+  __calling_convention     = xdata_reentrant
+  __code_model             = near
+  __core                   = plain
+  __data_model             = large
+  __dptr_size              = 16
+  __extended_stack         = disabled
+  __location_for_constants = data
+  __number_of_dptrs        = 1
+  __rt_version             = 1
+
+
+
+                ****************************************
+                *                                      *
+                *              MODULE MAP              *
+                *                                      *
+                ****************************************
+
+
+  DEFINED ABSOLUTE ENTRIES
+    *************************************************************************
+
+  DEFINED ABSOLUTE ENTRIES
+  PROGRAM MODULE, NAME : ?ABS_ENTRY_MOD
+
+Absolute parts
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _FAR22_HEAP_SIZE        00000FFF 
+           _HUGE_HEAP_SIZE         00000FFF 
+           _FAR_HEAP_SIZE          00000FFF 
+           _XDATA_HEAP_SIZE        000000FF 
+           _XDATA_STACK_SIZE       000003FF 
+           _PDATA_STACK_SIZE       00000080 
+           _EXTENDED_STACK_SIZE    00000000 
+           _EXTENDED_STACK_START   00000000 
+           _IDATA_STACK_SIZE       000000B0 
+           ?PBANK                  000000A0 
+           _NR_OF_VIRTUAL_REGISTERS
+                                   00000008 
+           ?ESP                    0000009B 
+           ?VB                     00000020        ?FUNC_ENTER_XDATA (?FUNC_ENTER_XDATA)
+                                                   ?FUNC_LEAVE_XDATA (?FUNC_LEAVE_XDATA)
+                                                   ?INTERRUPT_ENTER_XSP (?INTERRUPT_ENTER_XSP)
+                                                   ?INTERRUPT_LEAVE_XSP (?INTERRUPT_LEAVE_XSP)
+           _BREG_START             00000000 
+           _REGISTER_BANK_START    00000000 
+           ?REGISTER_BANK          00000000        Segment part 6 (CSTARTUP)
+           _CODE0_END              00007FFF 
+           _CODE0_START            00000000 
+           _XDATA0_END             0000FDA1 
+           _XDATA0_START           0000F000 
+           _IXDATA0_END            0000FDA1 
+           _IXDATA0_START          0000F000 
+           _PDATA0_END             0000F0FF 
+           _PDATA0_START           0000F000 
+           _IDATA0_END             000000FF 
+           _IDATA0_START           00000000 
+           _CODEBANK_START         00000000 
+           _CODEBANK_END           00000000 
+           _NR_OF_BANKS            00000000 
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\authentication_main.r51
+  PROGRAM MODULE, NAME : authentication_main
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 00000091 - 00000091 (0x1 bytes), align: 0
+  Segment part 1. ROOT.       Intra module refs:   AuthRxModeOff
+                                                   AuthRxModeOn
+                                                   authentication_config
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           RFIM                    00000091 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 0000009A - 0000009A (0x1 bytes), align: 0
+  Segment part 2. ROOT.       Intra module refs:   authentication_config
+                                                   main (main)
+                                                   usbirqInit (usb_interrupt)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           IEN2                    0000009A 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 0000009B - 0000009B (0x1 bytes), align: 0
+  Segment part 3. ROOT.       Intra module refs:   AuthRxModeOff
+                                                   AuthRxModeOn
+                                                   radio_rf_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           S1CON                   0000009B 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000A2 - 000000A2 (0x1 bytes), align: 0
+  Segment part 4. ROOT.       Intra module refs:   authentication_config
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           WORCTRL                 000000A2 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000A3 - 000000A3 (0x1 bytes), align: 0
+  Segment part 5. ROOT.       Intra module refs:   authentication_config
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           WOREVT0                 000000A3 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000A4 - 000000A4 (0x1 bytes), align: 0
+  Segment part 6. ROOT.       Intra module refs:   authentication_config
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           WOREVT1                 000000A4 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000A8 - 000000A8 (0x1 bytes), align: 0
+  Segment part 7. ROOT.       Intra module refs:   authentication_config
+                                                   halIntOff (hal_int)
+                                                   halIntOn (hal_int)
+                                                   main (main)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _A_IEN0                 000000A8 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           IEN0                    000000A8 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000D9 - 000000D9 (0x1 bytes), align: 0
+  Segment part 8. ROOT.       Intra module refs:   radio_rftxrx
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           RFD                     000000D9 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000E1 - 000000E1 (0x1 bytes), align: 0
+  Segment part 9. ROOT.       Intra module refs:   AuthRxModeOn
+                                                   authentication_config
+                                                   radio_rf_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           RFST                    000000E1 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000E9 - 000000E9 (0x1 bytes), align: 0
+  Segment part 10. ROOT.      Intra module refs:   AuthRxModeOff
+                                                   AuthRxModeOn
+                                                   authentication_config
+                                                   radio_rf_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           RFIF                    000000E9 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F3FF - 0000F3FF (0x1 bytes), align: 0
+  Segment part 16.            Intra module refs:   authentication_main
+                                                   radio_rf_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           packet_ok               0000F3FF 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F400 - 0000F400 (0x1 bytes), align: 0
+  Segment part 20.            Intra module refs:   radio_rf_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           radio_rx_repeat         0000F400 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F401 - 0000F41A (0x1a bytes), align: 0
+  Segment part 21.            Intra module refs:   radio_rftxrx
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           auth_data               0000F401 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F41B - 0000F41B (0x1 bytes), align: 0
+  Segment part 22.            Intra module refs:   radio_rftxrx
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           auth_ptr                0000F41B 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F41C - 0000F41C (0x1 bytes), align: 0
+  Segment part 23.            Intra module refs:   authentication_main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           auth_flag               0000F41C 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000042E - 00000515 (0xe8 bytes), align: 0
+  Segment part 24.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           authentication_config   0000042E        main (main)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000516 - 00000532 (0x1d bytes), align: 0
+  Segment part 25.            Intra module refs:   authentication_main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           AuthRxModeOn            00000516 
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000533 - 0000053C (0xa bytes), align: 0
+  Segment part 26.            Intra module refs:   authentication_main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           AuthRxModeOff           00000533 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000053D - 00000563 (0x27 bytes), align: 0
+  Segment part 27.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           authentication_main     0000053D        main (main)
+               calls direct
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000564 - 000005AE (0x4b bytes), align: 0
+  Segment part 28.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           radio_rf_ISR            00000564        rf_ISR (main)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000005AF - 000005C7 (0x19 bytes), align: 0
+  Segment part 29.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           radio_rftxrx            000005AF        ISR_RFTXRX (main)
+               ISTACK = 00000000 ( 00000002 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\clock.r51
+  PROGRAM MODULE, NAME : clock
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000BE - 000000BE (0x1 bytes), align: 0
+  Segment part 1. ROOT.       Intra module refs:   main (main)
+                                                   usbfwInit (usb_framework)
+                                                   usbirqHandler (usb_interrupt)
+                                                   usbirqResumeHandler (usb_interrupt)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           SLEEP                   000000BE 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000C6 - 000000C6 (0x1 bytes), align: 0
+  Segment part 2. ROOT.       Intra module refs:   main (main)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           CLKCON                  000000C6 
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\flash.r51
+  PROGRAM MODULE, NAME : flash
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000AB - 000000AB (0x1 bytes), align: 0
+  Segment part 3. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           FWT                     000000AB 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000AC - 000000AC (0x1 bytes), align: 0
+  Segment part 4. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           FADDRL                  000000AC 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000AD - 000000AD (0x1 bytes), align: 0
+  Segment part 5. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           FADDRH                  000000AD 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000AE - 000000AE (0x1 bytes), align: 0
+  Segment part 6. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           FCTL                    000000AE 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000B8 - 000000B8 (0x1 bytes), align: 0
+  Segment part 7. ROOT.       Intra module refs:   main (main)
+                                                   usbfwInit (usb_framework)
+                                                   usbirqResumeHandler (usb_interrupt)
+                                                   usbsuspEnter (usb_suspend)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _A_IEN1                 000000B8 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           IEN1                    000000B8 
+    -------------------------------------------------------------------------
+XDATA_AN
+  Relative segment, address: XDATA 0000FC00 - 0000FC1F (0x20 bytes), align: 0
+  Segment part 9. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           flash_write_code        0000FC00 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000005C8 - 000005D7 (0x10 bytes), align: 0
+  Segment part 17.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           flash_byte_read         000005C8        main (main)
+               XSTACK = 0000000B ( 00000000 )
+               ISTACK = 00000000 ( 00000002 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\hal_assert.r51
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\hal_board.r51
+  PROGRAM MODULE, NAME : hal_board
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 00000090 - 00000090 (0x1 bytes), align: 0
+  Segment part 1. ROOT.       Intra module refs:   main (main)
+                                                   rf_ISR (main)
+                                                   usbUartInit (usb_uart)
+                                                   usb_decode (main)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _A_P1                   00000090 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           P1                      00000090 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000F4 - 000000F4 (0x1 bytes), align: 0
+  Segment part 2. ROOT.       Intra module refs:   usbUartInit (usb_uart)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           P1SEL                   000000F4 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000FE - 000000FE (0x1 bytes), align: 0
+  Segment part 3. ROOT.       Intra module refs:   main (main)
+                                                   usbUartInit (usb_uart)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           P1DIR                   000000FE 
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\hal_int.r51
+  PROGRAM MODULE, NAME : hal_int
+
+  SEGMENTS IN THE MODULE
+  ======================
+NEAR_CODE
+  Relative segment, address: CODE 000005D8 - 000005DA (0x3 bytes), align: 0
+  Segment part 7.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           halIntOn                000005D8        usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+                                                   usbUartInit (usb_uart)
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000005DB - 000005DD (0x3 bytes), align: 0
+  Segment part 8.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           halIntOff               000005DB        usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\hal_led.r51
+  PROGRAM MODULE, NAME : hal_led
+
+  SEGMENTS IN THE MODULE
+  ======================
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\hal_mcu.r51
+  PROGRAM MODULE, NAME : hal_mcu
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000C9 - 000000C9 (0x1 bytes), align: 0
+  Segment part 1. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           WDCTL                   000000C9 
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\hal_uart_usb.r51
+  PROGRAM MODULE, NAME : hal_uart_usb
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_I
+  Relative segment, address: XDATA 0000F4B3 - 0000F4B6 (0x4 bytes), align: 0
+  Segment part 12.            Intra module refs:   main (main)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __Constant_1c200        0000F4B3 
+    -------------------------------------------------------------------------
+XDATA_ID
+  Relative segment, address: CODE 000000FB - 000000FE (0x4 bytes), align: 0
+  Segment part 13.            Intra module refs:   __Constant_1c200
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\main.r51
+  PROGRAM MODULE, NAME : main
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000A9 - 000000A9 (0x1 bytes), align: 0
+  Segment part 4. ROOT.       Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           IP0                     000000A9 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000B9 - 000000B9 (0x1 bytes), align: 0
+  Segment part 6. ROOT.       Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           IP1                     000000B9 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000C0 - 000000C0 (0x1 bytes), align: 0
+  Segment part 8. ROOT.       Intra module refs:   t1Timer_ISR
+                                                   usbirqInit (usb_interrupt)
+                                                   usbirqResumeHandler (usb_interrupt)
+                                                   usbsuspEnter (usb_suspend)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _A_IRCON                000000C0 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           IRCON                   000000C0 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000D8 - 000000D8 (0x1 bytes), align: 0
+  Segment part 10. ROOT.      Intra module refs:   timer4_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _A_TIMIF                000000D8 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           TIMIF                   000000D8 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000E4 - 000000E4 (0x1 bytes), align: 0
+  Segment part 11. ROOT.      Intra module refs:   set_timer1_cycles (timer1)
+                                                   t1Timer_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T1CTL                   000000E4 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000EB - 000000EB (0x1 bytes), align: 0
+  Segment part 12. ROOT.      Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T4CTL                   000000EB 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000EC - 000000EC (0x1 bytes), align: 0
+  Segment part 13. ROOT.      Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T4CCTL0                 000000EC 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000ED - 000000ED (0x1 bytes), align: 0
+  Segment part 14. ROOT.      Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T4CC0                   000000ED 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000FD - 000000FD (0x1 bytes), align: 0
+  Segment part 15. ROOT.      Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           P0DIR                   000000FD 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000FF - 000000FF (0x1 bytes), align: 0
+  Segment part 17. ROOT.      Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           P2DIR                   000000FF 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F41D - 0000F41D (0x1 bytes), align: 0
+  Segment part 38.            Intra module refs:   main
+                                                   usb_decode
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           system_status           0000F41D 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F41E - 0000F41E (0x1 bytes), align: 0
+  Segment part 39.            Intra module refs:   ISR_RFTXRX
+                                                   main
+                                                   rf_ISR
+                                                   usb_decode
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           authentication_on       0000F41E 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F41F - 0000F41F (0x1 bytes), align: 0
+  Segment part 40.            Intra module refs:   main
+                                                   usb_decode
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           authentication_start_now
+                                   0000F41F 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F420 - 0000F420 (0x1 bytes), align: 0
+  Segment part 43.            Intra module refs:   main
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           frequoffset             0000F420 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000005DE - 000006B3 (0xd6 bytes), align: 0
+  Segment part 46.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           main                    000005DE        ?call_main (?cmain)
+               calls direct
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000006B4 - 00000749 (0x96 bytes), align: 0
+  Segment part 47.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usb_decode              000006B4        usbOutProcess (usb_uart)
+               XSTACK = 00000000 ( 00000009 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000074A - 00000760 (0x17 bytes), align: 0
+  Segment part 48.            Intra module refs:   rf_ISR::??INTVEC 131
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           rf_ISR                  0000074A 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000761 - 00000775 (0x15 bytes), align: 0
+  Segment part 49.            Intra module refs:   ISR_RFTXRX::??INTVEC 3
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ISR_RFTXRX              00000761 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000776 - 0000079F (0x2a bytes), align: 0
+  Segment part 50.            Intra module refs:   t1Timer_ISR::??INTVEC 75
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           t1Timer_ISR             00000776 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007A0 - 000007B0 (0x11 bytes), align: 0
+  Segment part 51.            Intra module refs:   timer4_ISR::??INTVEC 99
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           timer4_ISR              000007A0 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007B1 - 000007B2 (0x2 bytes), align: 0
+  Segment part 52.            Intra module refs:   adc_ISR
+                                                   dma_ISR
+                                                   enc_ISR
+                                                   p1_ISR
+                                                   st_ISR
+                                                   t2_ISR
+                                                   urx0_ISR
+                                                   urx1_ISR
+                                                   utx0_ISR
+                                                   utx1_ISR
+                                                   wdt_ISR
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           catch_stray_irq         000007B1 
+               XSTACK = 0000000E ( 00000000 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007B3 - 000007C1 (0xf bytes), align: 0
+  Segment part 53.            Intra module refs:   adc_ISR::??INTVEC 11
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           adc_ISR                 000007B3 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007C2 - 000007D0 (0xf bytes), align: 0
+  Segment part 54.            Intra module refs:   urx0_ISR::??INTVEC 19
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           urx0_ISR                000007C2 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007D1 - 000007DF (0xf bytes), align: 0
+  Segment part 55.            Intra module refs:   urx1_ISR::??INTVEC 27
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           urx1_ISR                000007D1 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007E0 - 000007EE (0xf bytes), align: 0
+  Segment part 56.            Intra module refs:   enc_ISR::??INTVEC 35
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           enc_ISR                 000007E0 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007EF - 000007FD (0xf bytes), align: 0
+  Segment part 57.            Intra module refs:   st_ISR::??INTVEC 43
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           st_ISR                  000007EF 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000007FE - 0000080C (0xf bytes), align: 0
+  Segment part 58.            Intra module refs:   utx0_ISR::??INTVEC 59
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           utx0_ISR                000007FE 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000080D - 0000081B (0xf bytes), align: 0
+  Segment part 59.            Intra module refs:   dma_ISR::??INTVEC 67
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           dma_ISR                 0000080D 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000081C - 0000082A (0xf bytes), align: 0
+  Segment part 60.            Intra module refs:   t2_ISR::??INTVEC 83
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           t2_ISR                  0000081C 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000082B - 00000839 (0xf bytes), align: 0
+  Segment part 61.            Intra module refs:   utx1_ISR::??INTVEC 115
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           utx1_ISR                0000082B 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000083A - 00000848 (0xf bytes), align: 0
+  Segment part 62.            Intra module refs:   p1_ISR::??INTVEC 123
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           p1_ISR                  0000083A 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000849 - 00000857 (0xf bytes), align: 0
+  Segment part 63.            Intra module refs:   wdt_ISR::??INTVEC 139
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           wdt_ISR                 00000849 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000005 (0x6 bytes), align: 0
+  Segment part 18. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ISR_RFTXRX::??INTVEC 3
+                                   00000003 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000000D (0xe bytes), align: 0
+  Segment part 19. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           adc_ISR::??INTVEC 11    0000000B 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000015 (0x16 bytes), align: 0
+  Segment part 20. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           urx0_ISR::??INTVEC 19   00000013 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000001D (0x1e bytes), align: 0
+  Segment part 21. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           urx1_ISR::??INTVEC 27   0000001B 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000025 (0x26 bytes), align: 0
+  Segment part 22. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           enc_ISR::??INTVEC 35    00000023 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000002D (0x2e bytes), align: 0
+  Segment part 23. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           st_ISR::??INTVEC 43     0000002B 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000003D (0x3e bytes), align: 0
+  Segment part 24. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           utx0_ISR::??INTVEC 59   0000003B 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000045 (0x46 bytes), align: 0
+  Segment part 25. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           dma_ISR::??INTVEC 67    00000043 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000004D (0x4e bytes), align: 0
+  Segment part 26. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           t1Timer_ISR::??INTVEC 75
+                                   0000004B 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000055 (0x56 bytes), align: 0
+  Segment part 27. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           t2_ISR::??INTVEC 83     00000053 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000065 (0x66 bytes), align: 0
+  Segment part 28. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           timer4_ISR::??INTVEC 99
+                                   00000063 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000075 (0x76 bytes), align: 0
+  Segment part 29. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           utx1_ISR::??INTVEC 115
+                                   00000073 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000007D (0x7e bytes), align: 0
+  Segment part 30. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           p1_ISR::??INTVEC 123    0000007B 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000085 (0x86 bytes), align: 0
+  Segment part 31. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           rf_ISR::??INTVEC 131    00000083 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000008D (0x8e bytes), align: 0
+  Segment part 32. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           wdt_ISR::??INTVEC 139   0000008B 
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\timer1.r51
+  PROGRAM MODULE, NAME : timer1
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000DA - 000000DA (0x1 bytes), align: 0
+  Segment part 1. ROOT.       Intra module refs:   set_timer1_cycles
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T1CC0L                  000000DA 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000DB - 000000DB (0x1 bytes), align: 0
+  Segment part 2. ROOT.       Intra module refs:   set_timer1_cycles
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T1CC0H                  000000DB 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000E5 - 000000E5 (0x1 bytes), align: 0
+  Segment part 4. ROOT.       Intra module refs:   set_timer1_cycles
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T1CCTL0                 000000E5 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F421 - 0000F429 (0x9 bytes), align: 0
+  Segment part 10.            Intra module refs:   set_timer1_cycles
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           sTimer1                 0000F421        t1Timer_ISR (main)
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000858 - 000008FE (0xa7 bytes), align: 0
+  Segment part 14.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           set_timer1_cycles       00000858        t1Timer_ISR (main)
+               XSTACK = 0000000F ( 00000009 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_cdc_descriptor.r51
+  LIBRARY MODULE, NAME : usb_descriptor
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 0000010C - 000001B6 (0xab bytes), align: 0
+  Segment part 0. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbDescStart            0000010C        Segment part 7 (usb_firmware_library_config)
+           usbDescEnd              000001AF        Segment part 7 (usb_firmware_library_config)
+           usbDescLut              000001AF        Segment part 7 (usb_firmware_library_config)
+           usbDescLutEnd           000001AF        Segment part 7 (usb_firmware_library_config)
+           usbDblbufLut            000001AF        Segment part 7 (usb_firmware_library_config)
+           usbDblbufLutEnd         000001B7        Segment part 7 (usb_firmware_library_config)
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           deviceDesc              0000010C 
+           deviceDescEnd           0000011E 
+           config1LengthStart      0000011E 
+           configDesc              0000011E 
+           configDescEnd           00000127 
+           config1LengthEnd        00000161 
+           interface0Desc          00000127 
+           interface0DescEnd       00000130 
+           headerFunctionalDesc    00000130 
+           headerFunctionalDescEnd
+                                   00000135 
+           absCtrlManFuncDesc      00000135 
+           absCtrlManFuncDescEnd   00000139 
+           unionFunctionalDesc     00000139 
+           unionFunctionalDescEnd
+                                   0000013E 
+           callMngFuncDesc         0000013E 
+           callMngFuncDescEnd      00000143 
+           endpoint0Desc           00000143 
+           endpoint0DescEnd        0000014A 
+           interface1Desc          0000014A 
+           interface1DescEnd       00000153 
+           endpoint1Desc           00000153 
+           endpoint1DescEnd        0000015A 
+           endpoint2Desc           0000015A 
+           endpoint2DescEnd        00000161 
+           string0Desc             00000161 
+           string0DescEnd          00000165 
+           string1Desc             00000165 
+           string1DescEnd          00000189 
+           string2Desc             00000189 
+           string2DescEnd          000001A7 
+           string3Desc             000001A7 
+           string3DescEnd          000001AF 
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_cdc_hooks.r51
+  PROGRAM MODULE, NAME : usb_cdc_hooks
+
+  SEGMENTS IN THE MODULE
+  ======================
+NEAR_CODE
+  Relative segment, address: CODE 000008FF - 0000094A (0x4c bytes), align: 0
+  Segment part 6.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbcrHookProcessOut     000008FF        usbfwSetupHandler (usb_framework)
+               is indirectly called
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000094B - 0000097E (0x34 bytes), align: 0
+  Segment part 7.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbcrHookProcessIn      0000094B        usbfwSetupHandler (usb_framework)
+               is indirectly called
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000097F - 0000098D (0xf bytes), align: 0
+  Segment part 8.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbvrHookProcessOut     0000097F        usbfwSetupHandler (usb_framework)
+               is indirectly called
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000098E - 0000099C (0xf bytes), align: 0
+  Segment part 9.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbvrHookProcessIn      0000098E        usbfwSetupHandler (usb_framework)
+               is indirectly called
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000099D - 000009AB (0xf bytes), align: 0
+  Segment part 12.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrHookClearFeature   0000099D        usbsrClearFeature (usb_standard_requests)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000009AC - 000009BA (0xf bytes), align: 0
+  Segment part 13.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrHookSetFeature     000009AC        usbsrSetFeature (usb_standard_requests)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000009BB - 000009BB (0x1 bytes), align: 0
+  Segment part 15.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrHookProcessEvent   000009BB        ChangeFeature (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+                                                   usbsrSetInterface (usb_standard_requests)
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000009BC - 000009BC (0x1 bytes), align: 0
+  Segment part 16.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqHookProcessEvents
+                                   000009BC        usbirqHandler (usb_interrupt)
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_descriptor_parser.r51
+  PROGRAM MODULE, NAME : usb_descriptor_parser
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_Z
+  Relative segment, address: XDATA 0000F42A - 0000F42B (0x2 bytes), align: 0
+  Segment part 6.             Intra module refs:   usbdpFindNext
+                                                   usbdpInit
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           usbdpData               0000F42A 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000009BD - 000009D5 (0x19 bytes), align: 0
+  Segment part 7.             Intra module refs:   usbdpGetConfigurationDesc
+                                                   usbdpGetDeviceDesc
+                                                   usbdpGetStringDesc
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbdpInit               000009BD 
+               XSTACK = 00000009 ( 00000000 )
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000009D6 - 00000A65 (0x90 bytes), align: 0
+  Segment part 8.             Intra module refs:   usbdpGetConfigurationDesc
+                                                   usbdpGetDeviceDesc
+                                                   usbdpGetInterfaceDesc
+                                                   usbdpGetStringDesc
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbdpFindNext           000009D6        ConfigureEndpoints (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+               XSTACK = 0000000B ( 00000000 )
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000A66 - 00000A6F (0xa bytes), align: 0
+  Segment part 9.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbdpGetDeviceDesc      00000A66        usbsrGetDescriptor (usb_standard_requests)
+               calls direct
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000A70 - 00000AA7 (0x38 bytes), align: 0
+  Segment part 10.            Intra module refs:   usbdpGetInterfaceDesc
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbdpGetConfigurationDesc
+                                   00000A70        usbfwInit (usb_framework)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+               calls direct
+               XSTACK = 0000000B ( 00000009 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000AA8 - 00000ADD (0x36 bytes), align: 0
+  Segment part 11.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbdpGetInterfaceDesc   00000AA8        usbsrSetInterface (usb_standard_requests)
+               calls direct
+               XSTACK = 00000000 ( 0000000B )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000ADE - 00000AFC (0x1f bytes), align: 0
+  Segment part 12.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbdpGetStringDesc      00000ADE        usbsrGetDescriptor (usb_standard_requests)
+               calls direct
+               XSTACK = 00000000 ( 00000009 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_firmware_library_config.r51
+  PROGRAM MODULE, NAME : usb_firmware_library_config
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_I
+  Relative segment, address: XDATA 0000F4B7 - 0000F4C2 (0xc bytes), align: 0
+  Segment part 6.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbDescriptorMarker     0000F4B7        ConfigureEndpoints (usb_standard_requests)
+                                                   usbdpFindNext (usb_descriptor_parser)
+                                                   usbdpInit (usb_descriptor_parser)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+    -------------------------------------------------------------------------
+XDATA_ID
+  Relative segment, address: CODE 000000FF - 0000010A (0xc bytes), align: 0
+  Segment part 7.             Intra module refs:   usbDescriptorMarker
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_framework.r51
+  PROGRAM MODULE, NAME : usb_framework
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_Z
+  Relative segment, address: XDATA 0000F42C - 0000F43F (0x14 bytes), align: 0
+  Segment part 8.             Intra module refs:   usbfwInit
+                                                   usbfwResetHandler
+                                                   usbfwSetAllEpStatus
+                                                   usbfwSetupHandler
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwData               0000F42C        ChangeFeature (usb_standard_requests)
+                                                   ConfigureEndpoints (usb_standard_requests)
+                                                   usbcrHookProcessIn (usb_cdc_hooks)
+                                                   usbcrHookProcessOut (usb_cdc_hooks)
+                                                   usbsrGetConfiguration (usb_standard_requests)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrGetInterface (usb_standard_requests)
+                                                   usbsrGetStatus (usb_standard_requests)
+                                                   usbsrHookClearFeature (usb_cdc_hooks)
+                                                   usbsrHookSetFeature (usb_cdc_hooks)
+                                                   usbsrSetAddress (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+                                                   usbsrSetInterface (usb_standard_requests)
+                                                   usbvrHookProcessIn (usb_cdc_hooks)
+                                                   usbvrHookProcessOut (usb_cdc_hooks)
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F440 - 0000F444 (0x5 bytes), align: 0
+  Segment part 9.             Intra module refs:   usbfwSetupHandler
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbSetupData            0000F440        usbcrHookProcessIn (usb_cdc_hooks)
+                                                   usbcrHookProcessOut (usb_cdc_hooks)
+                                                   usbsrGetConfiguration (usb_standard_requests)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrGetInterface (usb_standard_requests)
+                                                   usbsrGetStatus (usb_standard_requests)
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F445 - 0000F44C (0x8 bytes), align: 0
+  Segment part 10.            Intra module refs:   usbfwSetupHandler
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbSetupHeader          0000F445        ChangeFeature (usb_standard_requests)
+                                                   usbcrHookProcessIn (usb_cdc_hooks)
+                                                   usbcrHookProcessOut (usb_cdc_hooks)
+                                                   usbsrGetConfiguration (usb_standard_requests)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrGetInterface (usb_standard_requests)
+                                                   usbsrGetStatus (usb_standard_requests)
+                                                   usbsrSetAddress (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+                                                   usbsrSetInterface (usb_standard_requests)
+    -------------------------------------------------------------------------
+DATA_Z
+  Relative segment, address: DATA 00000012 - 00000013 (0x2 bytes), align: 0
+  Segment part 11.            Intra module refs:   usbfwResetHandler
+                                                   usbfwSetupHandler
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           ProcessFunc             00000012 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000AFD - 00000B30 (0x34 bytes), align: 0
+  Segment part 12.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwInit               00000AFD        usbUartInit (usb_uart)
+               calls direct
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000B31 - 00000B51 (0x21 bytes), align: 0
+  Segment part 13.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwResetHandler       00000B31        usbEventProcess (usb_uart)
+               calls direct
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000B52 - 00000DB0 (0x25f bytes), align: 0
+  Segment part 14.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwSetupHandler       00000B52        usbEventProcess (usb_uart)
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000DB1 - 00000DF8 (0x48 bytes), align: 0
+  Segment part 15.            Intra module refs:   usbfwResetHandler
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwSetAllEpStatus     00000DB1        usbsrSetConfiguration (usb_standard_requests)
+               XSTACK = 00000000 ( 00000009 )
+               ISTACK = 00000000 ( 00000001 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000DF9 - 00000E32 (0x3a bytes), align: 0
+  Segment part 16.            Intra module refs:   usbfwSetupHandler
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwReadFifo           00000DF9        usbOutProcess (usb_uart)
+               XSTACK = 0000000E ( 0000000A )
+               ISTACK = 00000000 ( 00000001 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000E33 - 00000E6C (0x3a bytes), align: 0
+  Segment part 17.            Intra module refs:   usbfwSetupHandler
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbfwWriteFifo          00000E33        usbInProcess (usb_uart)
+               XSTACK = 0000000E ( 0000000A )
+               ISTACK = 00000000 ( 00000001 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_interrupt.r51
+  PROGRAM MODULE, NAME : usb_interrupt
+
+  SEGMENTS IN THE MODULE
+  ======================
+DATA_Z
+  Relative segment, address: DATA 00000014 - 00000018 (0x5 bytes), align: 0
+  Segment part 16.            Intra module refs:   usbirqHandler
+                                                   usbirqInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqData              00000014        usbEventProcess (usb_uart)
+                                                   usbsuspEnter (usb_suspend)
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 00000089 - 00000089 (0x1 bytes), align: 0
+  Segment part 1. ROOT.       Intra module refs:   usbirqInit
+                                                   usbirqResumeHandler
+                                                   usbsuspEnter (usb_suspend)
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           P0IFG                   00000089 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 0000008B - 0000008B (0x1 bytes), align: 0
+  Segment part 2. ROOT.       Intra module refs:   usbirqHandler
+                                                   usbirqInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           P2IFG                   0000008B 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 0000008C - 0000008C (0x1 bytes), align: 0
+  Segment part 3. ROOT.       Intra module refs:   usbirqInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           PICTL                   0000008C 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000E8 - 000000E8 (0x1 bytes), align: 0
+  Segment part 8. ROOT.       Intra module refs:   usbirqHandler
+                                                   usbirqInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           _A_IRCON2               000000E8 
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           IRCON2                  000000E8 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000E6D - 00000EBC (0x50 bytes), align: 0
+  Segment part 17.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqInit              00000E6D        usbUartInit (usb_uart)
+               XSTACK = 00000000 ( 00000009 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000EBD - 00000F61 (0xa5 bytes), align: 0
+  Segment part 18.            Intra module refs:   usbirqHandler::??INTVEC 51
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqHandler           00000EBD 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000F )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00000F62 - 00000F83 (0x22 bytes), align: 0
+  Segment part 19.            Intra module refs:   usbirqResumeHandler::??INTVEC 107
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqResumeHandler     00000F62 
+               interrupt function
+               calls direct
+               XSTACK = 00000000 ( 0000000E )
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000035 (0x36 bytes), align: 0
+  Segment part 9. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqHandler::??INTVEC 51
+                                   00000033 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 0000006D (0x6e bytes), align: 0
+  Segment part 10. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbirqResumeHandler::??INTVEC 107
+                                   0000006B 
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_standard_requests.r51
+  PROGRAM MODULE, NAME : usb_standard_requests
+
+  SEGMENTS IN THE MODULE
+  ======================
+NEAR_CODE
+  Relative segment, address: CODE 00000F84 - 00001070 (0xed bytes), align: 0
+  Segment part 7.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrGetStatus          00000F84        usbfwSetupHandler (usb_framework)
+               XSTACK = 00000000 ( 00000009 )
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F44D - 0000F44E (0x2 bytes), align: 0
+  Segment part 6.             Intra module refs:   usbsrGetStatus
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           usbsrGetStatus::status
+                                   0000F44D 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001071 - 00001164 (0xf4 bytes), align: 0
+  Segment part 8.             Intra module refs:   usbsrClearFeature
+                                                   usbsrSetFeature
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           ChangeFeature           00001071 
+               calls direct
+               XSTACK = 00000000 ( 00000009 )
+               ISTACK = 00000000 ( 00000001 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001165 - 00001170 (0xc bytes), align: 0
+  Segment part 9.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrClearFeature       00001165        usbfwSetupHandler (usb_framework)
+               calls direct
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001171 - 0000117C (0xc bytes), align: 0
+  Segment part 10.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrSetFeature         00001171        usbfwSetupHandler (usb_framework)
+               calls direct
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000117D - 000011D3 (0x57 bytes), align: 0
+  Segment part 11.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrSetAddress         0000117D        usbfwSetupHandler (usb_framework)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000011D4 - 00001398 (0x1c5 bytes), align: 0
+  Segment part 12.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrGetDescriptor      000011D4        usbfwSetupHandler (usb_framework)
+               calls direct
+               XSTACK = 00000000 ( 0000000B )
+               ISTACK = 00000000 ( 00000001 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001399 - 000014F9 (0x161 bytes), align: 0
+  Segment part 13.            Intra module refs:   usbsrSetConfiguration
+                                                   usbsrSetInterface
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           ConfigureEndpoints      00001399 
+               calls direct
+               XSTACK = 0000000D ( 0000000F )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000014FA - 00001541 (0x48 bytes), align: 0
+  Segment part 14.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrGetConfiguration   000014FA        usbfwSetupHandler (usb_framework)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001542 - 00001608 (0xc7 bytes), align: 0
+  Segment part 15.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrSetConfiguration   00001542        usbfwSetupHandler (usb_framework)
+               calls direct
+               XSTACK = 00000000 ( 0000000D )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001609 - 00001667 (0x5f bytes), align: 0
+  Segment part 16.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrGetInterface       00001609        usbfwSetupHandler (usb_framework)
+               XSTACK = 00000000 ( 0000000A )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001668 - 000016EB (0x84 bytes), align: 0
+  Segment part 17.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsrSetInterface       00001668        usbfwSetupHandler (usb_framework)
+               calls direct
+               XSTACK = 00000000 ( 00000009 )
+               ISTACK = 00000000 ( 00000001 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_suspend.r51
+  PROGRAM MODULE, NAME : usb_suspend
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_Z
+  Relative segment, address: XDATA 0000F44F - 0000F45C (0xe bytes), align: 0
+  Segment part 9.             Intra module refs:   usbsuspEnter
+                                                   usbsuspStopPm1
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           usbsuspEnterXdata       0000F44F 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F45D - 0000F45E (0x2 bytes), align: 0
+  Segment part 10.            Intra module refs:   usbsuspEnter
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           pUsbsuspEnterXdata      0000F45D 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F45F - 0000F460 (0x2 bytes), align: 0
+  Segment part 11.            Intra module refs:   usbsuspEnter
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           pFnSuspendEnterHook     0000F45F 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F461 - 0000F462 (0x2 bytes), align: 0
+  Segment part 12.            Intra module refs:   usbsuspEnter
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           pFnSuspendExitHook      0000F461 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000016EC - 0000177E (0x93 bytes), align: 0
+  Segment part 13.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsuspEnter            000016EC        usbEventProcess (usb_uart)
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000177F - 00001792 (0x14 bytes), align: 0
+  Segment part 15.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbsuspStopPm1          0000177F        usbirqResumeHandler (usb_interrupt)
+               ISTACK = 00000000 ( 00000002 )
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\usb_uart.r51
+  PROGRAM MODULE, NAME : usb_uart
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_Z
+  Relative segment, address: XDATA 0000F463 - 0000F469 (0x7 bytes), align: 0
+  Segment part 9.             Intra module refs:   usbUartInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           currentLineCoding       0000F463        usbcrHookProcessIn (usb_cdc_hooks)
+                                                   usbcrHookProcessOut (usb_cdc_hooks)
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F46A - 0000F46B (0x2 bytes), align: 0
+  Segment part 10.            Intra module refs:   usbUartInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           cdcRTS                  0000F46A        usbcrHookProcessOut (usb_cdc_hooks)
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F46C - 0000F46C (0x1 bytes), align: 0
+  Segment part 11.            Intra module refs:   usbUartInit
+                                                   usbUartProcess
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           cdcCTS                  0000F46C 
+    -------------------------------------------------------------------------
+XDATA_I
+  Relative segment, address: XDATA 0000F4C3 - 0000F4C3 (0x1 bytes), align: 0
+  Segment part 12.            Intra module refs:   usbOutProcess
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           message_length          0000F4C3 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F46D - 0000F48E (0x22 bytes), align: 0
+  Segment part 14.            Intra module refs:   usbInProcess
+                                                   usbOutProcess
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usb_buffer              0000F46D        usb_decode (main)
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F48F - 0000F48F (0x1 bytes), align: 0
+  Segment part 15.            Intra module refs:   usbOutProcess
+                                                   usbUartInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usb_bufferIndex         0000F48F 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F490 - 0000F490 (0x1 bytes), align: 0
+  Segment part 16.            Intra module refs:   usbUartInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usb_newdata             0000F490 
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F491 - 0000F491 (0x1 bytes), align: 0
+  Segment part 17.            Intra module refs:   usbInProcess
+                                                   usbUartInit
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usb_sendack             0000F491        usb_decode (main)
+    -------------------------------------------------------------------------
+XDATA_Z
+  Relative segment, address: XDATA 0000F492 - 0000F492 (0x1 bytes), align: 0
+  Segment part 18.            Intra module refs:   usbInProcess
+                                                   usbOutProcess
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           oldEndpoint             0000F492 
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 00001793 - 000017E3 (0x51 bytes), align: 0
+  Segment part 19.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbUartInit             00001793        main (main)
+               calls direct
+               XSTACK = 00000000 ( 0000000B )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000017E4 - 000017FB (0x18 bytes), align: 0
+  Segment part 20.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           usbUartProcess          000017E4        main (main)
+                                                   timer4_ISR (main)
+               calls direct
+               ISTACK = 00000000 ( 00000002 )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000017FC - 0000183E (0x43 bytes), align: 0
+  Segment part 21.            Intra module refs:   usbUartProcess
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           usbEventProcess         000017FC 
+               calls direct
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 0000183F - 000018A2 (0x64 bytes), align: 0
+  Segment part 22.            Intra module refs:   usbUartProcess
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           usbInProcess            0000183F 
+               calls direct
+               XSTACK = 00000000 ( 0000000D )
+    -------------------------------------------------------------------------
+NEAR_CODE
+  Relative segment, address: CODE 000018A3 - 00001962 (0xc0 bytes), align: 0
+  Segment part 23.            Intra module refs:   usbUartProcess
+           LOCAL                   ADDRESS         
+           =====                   =======         
+           usbOutProcess           000018A3 
+               calls direct
+               XSTACK = 00000000 ( 0000000D )
+    -------------------------------------------------------------------------
+XDATA_ID
+  Relative segment, address: CODE 0000010B - 0000010B (0x1 bytes), align: 0
+  Segment part 13.            Intra module refs:   message_length
+
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\868MHz - Limited IAR Kickstart (Europe)\Obj\util_buffer.r51
+    *************************************************************************
+
+  FILE NAME : C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\CC1111 - Access Point - 868MHz.r51
+  LIBRARY MODULE, NAME : bsp
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000CB - 000000CB (0x1 bytes), align: 0
+  Segment part 3. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T3CTL                   000000CB 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000CD - 000000CD (0x1 bytes), align: 0
+  Segment part 4. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           T3CC0                   000000CD 
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : main_AP_BM
+
+  SEGMENTS IN THE MODULE
+  ======================
+XDATA_Z
+  Relative segment, address: XDATA 0000F493 - 0000F4B2 (0x20 bytes), align: 0
+  Segment part 16.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           simpliciti_data         0000F493        main (main)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : mrfi
+
+  SEGMENTS IN THE MODULE
+  ======================
+SFR_AN
+  Relative segment, address: DATA 000000B4 - 000000B4 (0x1 bytes), align: 0
+  Segment part 5. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ADCCON1                 000000B4 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000BC - 000000BC (0x1 bytes), align: 0
+  Segment part 6. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           RNDL                    000000BC 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000D1 - 000000D1 (0x1 bytes), align: 0
+  Segment part 9. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           DMAIRQ                  000000D1 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000D4 - 000000D4 (0x1 bytes), align: 0
+  Segment part 10. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           DMA0CFGL                000000D4 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000D5 - 000000D5 (0x1 bytes), align: 0
+  Segment part 11. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           DMA0CFGH                000000D5 
+    -------------------------------------------------------------------------
+SFR_AN
+  Relative segment, address: DATA 000000D6 - 000000D6 (0x1 bytes), align: 0
+  Segment part 12. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           DMAARM                  000000D6 
+
+    *************************************************************************
+
+  FILE NAME : C:\Archivos de programa\IAR Systems\Embedded Workbench 6.0_2\8051\LIB\CLIB\cl-pli-nlxd-1e16x01.r51
+  LIBRARY MODULE, NAME : ?cexit
+
+  SEGMENTS IN THE MODULE
+  ======================
+CSTART
+  Relative segment, address: CODE 0000008E - 00000092 (0x5 bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           exit                    0000008E        ?call_main (?cmain)
+           ?C_EXIT                 0000008E 
+           ?ROM_MONITOR_NOPS       0000008E 
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?cmain
+
+  SEGMENTS IN THE MODULE
+  ======================
+CSTART
+  Relative segment, address: CODE 00000093, align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?cmain                  00000093        Segment part 13 (CSTARTUP)
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 00000093 - 0000009B (0x9 bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __low_level_init_call   00000093        __low_level_init (?low_level_init)
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 0000009C - 000000A9 (0xe bytes), align: 0
+  Segment part 5.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __INIT_DATA_Z           0000009C        ProcessFunc (usb_framework)
+                                                   usbirqData (usb_interrupt)
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000AA - 000000B9 (0x10 bytes), align: 0
+  Segment part 11.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __INIT_XDATA_Z          000000AA        auth_data (authentication_main)
+                                                   auth_flag (authentication_main)
+                                                   auth_ptr (authentication_main)
+                                                   authentication_on (main)
+                                                   authentication_start_now (main)
+                                                   cdcCTS (usb_uart)
+                                                   cdcRTS (usb_uart)
+                                                   currentLineCoding (usb_uart)
+                                                   frequoffset (main)
+                                                   oldEndpoint (usb_uart)
+                                                   pFnSuspendEnterHook (usb_suspend)
+                                                   pFnSuspendExitHook (usb_suspend)
+                                                   pUsbsuspEnterXdata (usb_suspend)
+                                                   packet_ok (authentication_main)
+                                                   radio_rx_repeat (authentication_main)
+                                                   sTimer1 (timer1)
+                                                   simpliciti_data (main_AP_BM)
+                                                   system_status (main)
+                                                   usbSetupData (usb_framework)
+                                                   usbSetupHeader (usb_framework)
+                                                   usb_buffer (usb_uart)
+                                                   usb_bufferIndex (usb_uart)
+                                                   usb_newdata (usb_uart)
+                                                   usb_sendack (usb_uart)
+                                                   usbdpData (usb_descriptor_parser)
+                                                   usbfwData (usb_framework)
+                                                   usbsrGetStatus::status (usb_standard_requests)
+                                                   usbsuspEnterXdata (usb_suspend)
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000BA - 000000E2 (0x29 bytes), align: 0
+  Segment part 28.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __INIT_XDATA_I          000000BA        __Constant_1c200 (hal_uart_usb)
+                                                   message_length (usb_uart)
+                                                   usbDescriptorMarker (usb_firmware_library_config)
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000E3, align: 0
+  Segment part 32.            Intra module refs:   __low_level_init_call
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000E3 - 000000E8 (0x6 bytes), align: 0
+  Segment part 33.            Intra module refs:   ?cmain
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?call_main              000000E3 
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : CSTARTUP
+
+  SEGMENTS IN THE MODULE
+  ======================
+REGISTERS
+  Relative segment, address: DATA 00000000, align: 0
+  Segment part 0.             Intra module refs:   Segment part 6
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?REGISTERS              00000000 
+    -------------------------------------------------------------------------
+ISTACK
+  Relative segment, address: IDATA 00000050, align: 0
+  Segment part 1.             Intra module refs:   Segment part 6
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?ISTACK_START           00000050 
+    -------------------------------------------------------------------------
+XSTACK
+  Relative segment, address: XDATA 0000F000, align: 0
+  Segment part 3.             Intra module refs:   ?RESET_XSP
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?XSTACK_START           0000F000 
+    -------------------------------------------------------------------------
+INTVEC
+  Common segment, address: CODE 00000000 - 00000002 (0x3 bytes), align: 0
+  Segment part 5. ROOT.       Intra module refs:   Segment part 6
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000E9 - 000000EE (0x6 bytes), align: 0
+  Segment part 6. ROOT.       Intra module refs:   Segment part 5
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __program_start         000000E9        Absolute parts (?ABS_ENTRY_MOD)
+           ?RESET_SP               000000EC 
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000EF - 000000F4 (0x6 bytes), align: 0
+  Segment part 8.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?RESET_XSP              000000EF        ?XSP (VIRTUAL_REGISTERS)
+    -------------------------------------------------------------------------
+CSTART
+  Relative segment, address: CODE 000000F5 - 000000F7 (0x3 bytes), align: 0
+  Segment part 13.            Intra module refs:   Absolute parts
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : VIRTUAL_REGISTERS
+
+  SEGMENTS IN THE MODULE
+  ======================
+BREG
+  Relative segment, address: BIT 00000020.0 - 00000020.7 (0x8 bits), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?B0                     00000020.0      Absolute parts (CSTARTUP)
+    -------------------------------------------------------------------------
+VREG
+  Relative segment, address: DATA 00000008, align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?V0                     00000008        ?FUNC_ENTER_XDATA (?FUNC_ENTER_XDATA)
+                                                   ?FUNC_LEAVE_XDATA (?FUNC_LEAVE_XDATA)
+                                                   ?INTERRUPT_ENTER_XSP (?INTERRUPT_ENTER_XSP)
+                                                   ?INTERRUPT_LEAVE_XSP (?INTERRUPT_LEAVE_XSP)
+                                                   ChangeFeature (usb_standard_requests)
+                                                   ConfigureEndpoints (usb_standard_requests)
+                                                   usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+                                                   usbUartInit (usb_uart)
+                                                   usb_decode (main)
+                                                   usbdpGetInterfaceDesc (usb_descriptor_parser)
+                                                   usbfwReadFifo (usb_framework)
+                                                   usbfwSetAllEpStatus (usb_framework)
+                                                   usbfwSetupHandler (usb_framework)
+                                                   usbfwWriteFifo (usb_framework)
+                                                   usbirqHandler (usb_interrupt)
+                                                   usbirqInit (usb_interrupt)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrGetInterface (usb_standard_requests)
+                                                   usbsrGetStatus (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+                                                   usbsrSetInterface (usb_standard_requests)
+    -------------------------------------------------------------------------
+XSP
+  Relative segment, address: DATA 00000010 - 00000011 (0x2 bytes), align: 0
+  Segment part 3.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?XSP                    00000010        ?ADD_XSTACK_DISP0_8 (?ADD_XSTACK_DISP8)
+                                                   ?DEALLOC_XSTACK8 (?DEALLOC_XSTACK8)
+                                                   ?FUNC_ENTER_XDATA (?FUNC_ENTER_XDATA)
+                                                   ?FUNC_LEAVE_XDATA (?FUNC_LEAVE_XDATA)
+                                                   ?INTERRUPT_ENTER_XSP (?INTERRUPT_ENTER_XSP)
+                                                   ?INTERRUPT_LEAVE_XSP (?INTERRUPT_LEAVE_XSP)
+                                                   ?PUSH_XSTACK8_X (?PUSH_XSTACK8_X)
+                                                   ?RESET_XSP (CSTARTUP)
+                                                   ?XSTACK_DISP0_8 (?XSTACK_DISP8)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?C_GPTR_LOAD
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 000001B7 - 000001D0 (0x1a bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?C_GPTR_LOAD            000001B7        usbfwWriteFifo (usb_framework)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?C_GPTR_STORE
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 000001D1 - 000001E6 (0x16 bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?C_GPTR_STORE           000001D1        usbfwReadFifo (usb_framework)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?L_MOV_TO_X
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 000001E7 - 000001F5 (0xf bytes), align: 0
+  Segment part 2.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?L_MOV_TO_X             000001E7        usbUartInit (usb_uart)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?XLOAD_R2345
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 000001F6 - 00000201 (0xc bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?XLOAD_R2345            000001F6        main (main)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?MOVE_LONG8_XDATA_IDATA
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000202 - 0000020E (0xd bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?MOVE_LONG8_XDATA_IDATA
+                                   00000202        ?PUSH_XSTACK_I (?PUSH_XSTACK_I)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?MOVE_LONG8_XDATA_XDATA
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 0000020F - 0000022F (0x21 bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?MOVE_LONG8_XDATA_XDATA
+                                   0000020F        ?PUSH_XSTACK8_X (?PUSH_XSTACK8_X)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?US_SHR
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000230 - 00000232 (0x3 bytes), align: 0
+  Segment part 1.             Intra module refs:   Segment part 2
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?US_SHR                 00000230        ConfigureEndpoints (usb_standard_requests)
+                                                   usbirqHandler (usb_interrupt)
+                                                   usbirqInit (usb_interrupt)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+    -------------------------------------------------------------------------
+RCODE
+  Relative segment, address: CODE 00000233 - 0000023E (0xc bytes), align: 0
+  Segment part 2.             Intra module refs:   ?US_SHR
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?S_SHL
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 0000023F - 00000241 (0x3 bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?S_SHL                  0000023F        ConfigureEndpoints (usb_standard_requests)
+                                                   usbirqHandler (usb_interrupt)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+    -------------------------------------------------------------------------
+RCODE
+  Relative segment, address: CODE 00000242 - 00000244 (0x3 bytes), align: 0
+  Segment part 1.             Intra module refs:   Segment part 2
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?S_SHL_REW              00000242 
+    -------------------------------------------------------------------------
+RCODE
+  Relative segment, address: CODE 00000245 - 00000251 (0xd bytes), align: 0
+  Segment part 2.             Intra module refs:   ?S_SHL
+                                                   ?S_SHL_REW
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?DEALLOC_XSTACK8
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000252 - 0000026B (0x1a bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?DEALLOC_XSTACK8        00000252        usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+                                                   usbfwSetupHandler (usb_framework)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?ADD_XSTACK_DISP8
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 0000026C - 00000286 (0x1b bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?ADD_XSTACK_DISP0_8     0000026C        ?PUSH_XSTACK_I (?PUSH_XSTACK_I)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?XSTACK_DISP8
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000287 - 00000290 (0xa bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?XSTACK_DISP0_8         00000287        usbfwReadFifo (usb_framework)
+                                                   usbfwWriteFifo (usb_framework)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?CALL_IND
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000291 - 00000292 (0x2 bytes), align: 0
+  Segment part 0.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?CALL_IND               00000291        usbfwSetupHandler (usb_framework)
+                                                   usbsuspEnter (usb_suspend)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?FUNC_ENTER_XDATA
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000293 - 000002F8 (0x66 bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?FUNC_ENTER_XDATA       00000293        ChangeFeature (usb_standard_requests)
+                                                   ConfigureEndpoints (usb_standard_requests)
+                                                   set_timer1_cycles (timer1)
+                                                   usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+                                                   usbUartInit (usb_uart)
+                                                   usb_decode (main)
+                                                   usbdpGetConfigurationDesc (usb_descriptor_parser)
+                                                   usbdpGetInterfaceDesc (usb_descriptor_parser)
+                                                   usbdpGetStringDesc (usb_descriptor_parser)
+                                                   usbfwReadFifo (usb_framework)
+                                                   usbfwSetAllEpStatus (usb_framework)
+                                                   usbfwSetupHandler (usb_framework)
+                                                   usbfwWriteFifo (usb_framework)
+                                                   usbirqInit (usb_interrupt)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrGetInterface (usb_standard_requests)
+                                                   usbsrGetStatus (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+                                                   usbsrSetInterface (usb_standard_requests)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?FUNC_LEAVE_XDATA
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 000002F9 - 00000338 (0x40 bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?FUNC_LEAVE_XDATA       000002F9        ChangeFeature (usb_standard_requests)
+                                                   ConfigureEndpoints (usb_standard_requests)
+                                                   set_timer1_cycles (timer1)
+                                                   usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+                                                   usbUartInit (usb_uart)
+                                                   usb_decode (main)
+                                                   usbdpGetConfigurationDesc (usb_descriptor_parser)
+                                                   usbdpGetInterfaceDesc (usb_descriptor_parser)
+                                                   usbdpGetStringDesc (usb_descriptor_parser)
+                                                   usbfwReadFifo (usb_framework)
+                                                   usbfwSetAllEpStatus (usb_framework)
+                                                   usbfwSetupHandler (usb_framework)
+                                                   usbfwWriteFifo (usb_framework)
+                                                   usbirqInit (usb_interrupt)
+                                                   usbsrGetDescriptor (usb_standard_requests)
+                                                   usbsrGetInterface (usb_standard_requests)
+                                                   usbsrGetStatus (usb_standard_requests)
+                                                   usbsrSetConfiguration (usb_standard_requests)
+                                                   usbsrSetInterface (usb_standard_requests)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?INTERRUPT_ENTER_XSP
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000339 - 00000397 (0x5f bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?INTERRUPT_ENTER_XSP    00000339        ISR_RFTXRX (main)
+                                                   adc_ISR (main)
+                                                   dma_ISR (main)
+                                                   enc_ISR (main)
+                                                   p1_ISR (main)
+                                                   rf_ISR (main)
+                                                   st_ISR (main)
+                                                   t1Timer_ISR (main)
+                                                   t2_ISR (main)
+                                                   timer4_ISR (main)
+                                                   urx0_ISR (main)
+                                                   urx1_ISR (main)
+                                                   usbirqHandler (usb_interrupt)
+                                                   usbirqResumeHandler (usb_interrupt)
+                                                   utx0_ISR (main)
+                                                   utx1_ISR (main)
+                                                   wdt_ISR (main)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?INTERRUPT_LEAVE_XSP
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000398 - 000003EF (0x58 bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?INTERRUPT_LEAVE_XSP    00000398        ISR_RFTXRX (main)
+                                                   adc_ISR (main)
+                                                   dma_ISR (main)
+                                                   enc_ISR (main)
+                                                   p1_ISR (main)
+                                                   rf_ISR (main)
+                                                   st_ISR (main)
+                                                   t1Timer_ISR (main)
+                                                   t2_ISR (main)
+                                                   timer4_ISR (main)
+                                                   urx0_ISR (main)
+                                                   urx1_ISR (main)
+                                                   usbirqHandler (usb_interrupt)
+                                                   usbirqResumeHandler (usb_interrupt)
+                                                   utx0_ISR (main)
+                                                   utx1_ISR (main)
+                                                   wdt_ISR (main)
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?PUSH_XSTACK_I
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 000003F0 - 000003F3 (0x4 bytes), align: 0
+  Segment part 1.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?PUSH_XSTACK_I_THREE    000003F0        usbInProcess (usb_uart)
+                                                   usbOutProcess (usb_uart)
+                                                   usbfwSetupHandler (usb_framework)
+    -------------------------------------------------------------------------
+RCODE
+  Relative segment, address: CODE 000003F4 - 00000400 (0xd bytes), align: 0
+  Segment part 4.             Intra module refs:   ?PUSH_XSTACK_I_THREE
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?PUSH_XSTACK_I          000003F4 
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?PUSH_XSTACK8_X
+
+  SEGMENTS IN THE MODULE
+  ======================
+RCODE
+  Relative segment, address: CODE 00000401 - 00000404 (0x4 bytes), align: 0
+  Segment part 2.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?PUSH_XSTACK8_X_THREE   00000401        usbfwSetupHandler (usb_framework)
+    -------------------------------------------------------------------------
+RCODE
+  Relative segment, address: CODE 00000405 - 0000042D (0x29 bytes), align: 0
+  Segment part 5.             Intra module refs:   ?PUSH_XSTACK8_X_THREE
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           ?PUSH_XSTACK8_X         00000405 
+
+    -------------------------------------------------------------------------
+  LIBRARY MODULE, NAME : ?low_level_init
+
+  SEGMENTS IN THE MODULE
+  ======================
+CSTART
+  Relative segment, address: CODE 000000F8 - 000000FA (0x3 bytes), align: 0
+  Segment part 6. ROOT.
+           ENTRY                   ADDRESS         REF BY
+           =====                   =======         ======
+           __low_level_init        000000F8        __low_level_init_call (?cmain)
+
+
+
+
+                ****************************************
+                *                                      *
+                *      SEGMENTS IN ADDRESS ORDER       *
+                *                                      *
+                ****************************************
+
+
+SEGMENT              SPACE    START ADDRESS   END ADDRESS     SIZE  TYPE  ALIGN
+=======              =====    =============   ===========     ====  ====  =====
+INTVEC               CODE          00000000 - 0000008D          8E   com    0
+CSTART               CODE          0000008E - 000000FA          6D   rel    0
+IDATA_ID             CODE               000000FB                     dse    0
+BDATA_ID             CODE               000000FB                     dse    0
+BIT_ID               CODE               000000FB                     dse    0
+IXDATA_ID            CODE               000000FB                     dse    0
+PDATA_ID             CODE               000000FB                     dse    0
+DATA_ID              CODE               000000FB                     dse    0
+XDATA_ID             CODE          000000FB - 0000010B          11   rel    0
+RCODE                CODE          0000010C - 0000042D         322   rel    0
+DIFUNCT              CODE               0000042E                     dse    0
+CODE_C               CODE               0000042E                     dse    0
+CODE_N               CODE               0000042E                     dse    0
+NEAR_CODE            CODE          0000042E - 00001962        1535   rel    0
+REGISTERS            DATA          00000000 - 00000007           8   rel    0
+VREG                 DATA          00000008 - 0000000F           8   rel    0
+PSP                  DATA               00000010                     dse    0
+XSP                  DATA          00000010 - 00000011           2   rel    0
+DATA_I               DATA               00000012                     dse    0
+DATA_Z               DATA          00000012 - 00000018           7   rel    0
+BREG                 BIT        00000020.0  -  00000020.7        8   rel    0
+SFR_AN               DATA          00000089 - 00000089           1   rel    0
+                     DATA          0000008B - 0000008C           2 
+                     DATA          00000090 - 00000091           2 
+                     DATA          0000009A - 0000009B           2 
+                     DATA          000000A2 - 000000A4           3 
+                     DATA          000000A8 - 000000A9           2 
+                     DATA          000000AB - 000000AE           4 
+                     DATA          000000B4 - 000000B4           1 
+                     DATA          000000B8 - 000000B9           2 
+                     DATA          000000BC - 000000BC           1 
+                     DATA          000000BE - 000000BE           1 
+                     DATA          000000C0 - 000000C0           1 
+                     DATA          000000C6 - 000000C6           1 
+                     DATA          000000C9 - 000000C9           1 
+                     DATA          000000CB - 000000CB           1 
+                     DATA          000000CD - 000000CD           1 
+                     DATA          000000D1 - 000000D1           1 
+                     DATA          000000D4 - 000000D6           3 
+                     DATA          000000D8 - 000000DB           4 
+                     DATA          000000E1 - 000000E1           1 
+                     DATA          000000E4 - 000000E5           2 
+                     DATA          000000E8 - 000000E9           2 
+                     DATA          000000EB - 000000ED           3 
+                     DATA          000000F4 - 000000F4           1 
+                     DATA          000000FD - 000000FF           3 
+XSTACK               XDATA         0000F000 - 0000F3FE         3FF   rel    0
+XDATA_Z              XDATA         0000F3FF - 0000F4B2          B4   rel    0
+XDATA_I              XDATA         0000F4B3 - 0000F4C3          11   rel    0
+XDATA_AN             XDATA         0000FC00 - 0000FC1F          20   rel    0
+ISTACK               IDATA         00000050 - 000000FF          B0   rel    0
+
+                ****************************************
+                *                                      *
+                *        END OF CROSS REFERENCE        *
+                *                                      *
+                ****************************************
+
+ 6 499 bytes of CODE  memory
+    25 bytes of DATA  memory (+ 46 absolute )
+ 1 220 bytes of XDATA memory (+ 32 absolute )
+   176 bytes of IDATA memory
+     8 bits  of BIT   memory
+
+Errors: none
+Warnings: none
+

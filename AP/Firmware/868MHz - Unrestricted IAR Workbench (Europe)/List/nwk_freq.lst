@@ -1,0 +1,741 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:37 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\nwk_ap #
+#                          plications\nwk_freq.c                              #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\nwk_freq.c" -D     #
+#                          CC1111EM -D ISM_EU -D MCU_H=<ioCC1111.h> -D        #
+#                          chip=1111 -D RF_FREQUENCY=868000 -D MRFI_CC1111    #
+#                          -D NDEBUG -lC "C:\Documents and                    #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\List\" -o    #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\" -e --no_unroll            #
+#                          --no_inline --no_tbaa --debug --core=plain         #
+#                          --dptr=16,1 --data_model=large --code_model=near   #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\nwk_freq.lst               #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\nwk_freq.r51                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\nwk_applications\nwk_freq.c
+      1          /**************************************************************************************************
+      2            Filename:       nwk_freq.c
+      3            Revised:        $Date: 2008-12-10 13:50:46 -0800 (Wed, 10 Dec 2008) $
+      4            Revision:       $Revision: 18594 $
+      5            Author:         $Author: lfriedman $
+      6          
+      7            Description:    This file supports the SimpliciTI Freq network application.
+      8          
+      9            Copyright 2007-2009 Texas Instruments Incorporated. All rights reserved.
+     10          
+     11            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+     12            the terms of a software license agreement between the user who downloaded the software,
+     13            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     14            "License"). You may not use this Software unless you agree to abide by the terms of the
+     15            License. The License limits your use, and you acknowledge, that the Software may not be
+     16            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     17            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     18            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     19            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     20            perform, display or sell this Software and/or its documentation for any purpose.
+     21          
+     22            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     23            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     24            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     25            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     26            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     27            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     28            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     29            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     30            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     31          
+     32            Should you have any questions regarding your right to use this Software,
+     33            contact Texas Instruments Incorporated at www.TI.com.
+     34          **************************************************************************************************/
+     35          /******************************************************************************
+     36           * INCLUDES
+     37           */
+     38          
+     39          #include <string.h>
+     40          #include "bsp.h"
+     41          #include "mrfi.h"
+     42          #include "nwk_types.h"
+     43          #include "nwk.h"
+     44          #include "nwk_frame.h"
+     45          #include "nwk_freq.h"
+     46          #include "nwk_globals.h"
+     47          #include "nwk_api.h"
+     48          #include "nwk_security.h"
+     49          
+     50          #if defined( FREQUENCY_AGILITY )
+     51          /******************************************************************************
+     52           * MACROS
+     53           */
+     54          
+     55          /******************************************************************************
+     56           * CONSTANTS AND DEFINES
+     57           */
+     58          
+     59          /******************************************************************************
+     60           * TYPEDEFS
+     61           */
+     62          
+     63          /******************************************************************************
+     64           * LOCAL VARIABLES
+     65           */
+     66          static freqEntry_t      sCurLogicalChan;
+     67          static volatile uint8_t sTid = 0;
+     68          
+     69          /******************************************************************************
+     70           * LOCAL FUNCTIONS
+     71           */
+     72          
+     73          static fhStatus_t handle_freq_cmd(mrfiPacket_t *);
+     74          static fhStatus_t send_ping_reply(mrfiPacket_t *);
+     75          #ifndef ACCESS_POINT
+     76          static uint8_t change_channel_cmd_is_valid(mrfiPacket_t *);
+     77          #endif
+     78          #ifdef RANGE_EXTENDER
+     79          /* REs must replay frame before changing channels */
+     80          static void       replayFirst(mrfiPacket_t *);
+     81          #endif
+     82          #ifdef ACCESS_POINT
+     83          /* only the AP can broadcast this command */
+     84          static void broadcast_channel_change(uint8_t);
+     85          #else
+     86          /* APs do not process this frame */
+     87          static void change_channel_cmd(mrfiPacket_t *);
+     88          #endif
+     89          
+     90          /******************************************************************************
+     91           * GLOBAL VARIABLES
+     92           */
+     93          
+     94          /******************************************************************************
+     95           * GLOBAL FUNCTIONS
+     96           */
+     97          
+     98          /******************************************************************************
+     99           * @fn          nwk_freqInit
+    100           *
+    101           * @brief       Initialize NWK Frequency application.
+    102           *
+    103           * @return   none.
+    104           */
+    105          void nwk_freqInit(void)
+    106          {
+    107          
+    108            memset(&sCurLogicalChan, 0x0, sizeof(sCurLogicalChan));
+    109          
+    110            /* pick a random value to start the transaction ID for this app. */
+    111            sTid = MRFI_RandomByte();
+    112          
+    113            return;
+    114          }
+    115          
+    116          /***************************************************************************
+    117           * @fn          nwk_setChannel
+    118           *
+    119           * @brief       Set requested logical channel.  Accessed by application
+    120           *              through IOCTL interface
+    121           *
+    122           * input parameters
+    123           * @param   chan     - pointer to channel object of requested channel
+    124           *
+    125           * @return   status of operation:
+    126           *             SMPL_SUCCESS    if channel set
+    127           *             SMPL_BAD_PARAM  if requested channel is out of range
+    128           */
+    129          smplStatus_t nwk_setChannel(freqEntry_t *chan)
+    130          {
+    131            smplStatus_t rc = SMPL_BAD_PARAM;
+    132          
+    133            if (chan->logicalChan < NWK_FREQ_TBL_SIZE)
+    134            {
+    135              MRFI_SetLogicalChannel(chan->logicalChan);
+    136              sCurLogicalChan = *chan;
+    137              rc = SMPL_SUCCESS;
+    138            }
+    139            return rc;
+    140          }
+    141          
+    142          /******************************************************************************
+    143           * @fn          nwk_getChannel
+    144           *
+    145           * @brief       Get current logical channel. Accessed by application through
+    146           *              IOCTL interface
+    147           *
+    148           * input parameters
+    149           * @param   chan     - pointer to channel object of requested channel
+    150           *
+    151           * output parameters
+    152           * @param   chan     - populated channel object
+    153           *
+    154           * @return   none.
+    155           */
+    156          void nwk_getChannel(freqEntry_t *chan)
+    157          {
+    158            *chan = sCurLogicalChan;
+    159          
+    160            return;
+    161          }
+    162          
+    163          /******************************************************************************
+    164           * @fn          handle_freq_cmd
+    165           *
+    166           * @brief       Handle a Frequency application command.
+    167           *
+    168           * input parameters
+    169           * @param   frame     - pointer to frame with command context
+    170           *
+    171           * @return   Return FHS_RELEASE if caller should release frame otherwise
+    172           *           return FHS_REPLAY.
+    173           */
+    174          static fhStatus_t handle_freq_cmd(mrfiPacket_t *frame)
+    175          {
+    176            fhStatus_t rc = FHS_RELEASE;
+    177          
+    178            switch (*(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS))
+    179            {
+    180              case FREQ_REQ_PING:
+    181                rc = send_ping_reply(frame);
+    182                break;
+    183          
+    184          #ifndef ACCESS_POINT
+    185              case FREQ_REQ_MOVE:
+    186          #ifdef RANGE_EXTENDER
+    187                replayFirst(frame);
+    188          #endif
+    189                /* Make sure the change channel Freq command came from
+    190                 * a valid source before obeying.
+    191                 */
+    192                if (change_channel_cmd_is_valid(frame))
+    193                {
+    194                  change_channel_cmd(frame);
+    195                }
+    196                break;
+    197          #endif
+    198          
+    199          #ifdef ACCESS_POINT
+    200              case FREQ_REQ_REQ_MOVE:
+    201                break;
+    202          #endif
+    203              default:
+    204                break;
+    205            }
+    206          
+    207            return rc;
+    208          }
+    209          
+    210          #ifndef ACCESS_POINT
+    211          /******************************************************************************
+    212           * @fn          change_channel_cmd_is_valid
+    213           *
+    214           * @brief       Check validity of a change channel command frame.
+    215           *
+    216           * input parameters
+    217           * @param   frame  - pointer to frame with command context
+    218           *
+    219           * @return   Returns non-zero if command is valid, otherwise returns 0.
+    220           *           Command is valid if either:
+    221           *             - frame is directed
+    222           *             - frame is from an AP and we know about that AP
+    223           *
+    224           *           It is possible that either we don't know about an AP or that
+    225           *           we do but this frame comes from another AP in range.
+    226           */
+    227          static uint8_t change_channel_cmd_is_valid(mrfiPacket_t *frame)
+    228          {
+    229            uint8_t rc = 0;
+    230            addr_t const *apAddr;
+    231          
+    232            /* If this was a directed frame obey the command. */
+    233            if (!memcmp(MRFI_P_DST_ADDR(frame), nwk_getMyAddress(), NET_ADDR_SIZE))
+    234            {
+    235              rc = 1;
+    236            }
+    237            else
+    238            {
+    239              /* Do we know about an AP? If not assume frame bogus. */
+    240              apAddr = nwk_getAPAddress();
+    241              if (apAddr)
+    242              {
+    243                /* Yes, we know about an AP. Is that who sent it? */
+    244                if (!memcmp(apAddr, MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE))
+    245                {
+    246                  /* OK. We obey. */
+    247                  rc = 1;
+    248                }
+    249              }
+    250            }
+    251          
+    252            return rc;
+    253          }
+    254          #endif   /* !ACCESS_POINT */
+    255          
+    256          #ifdef RANGE_EXTENDER
+    257          /******************************************************************************
+    258           * @fn          replayFirst
+    259           *
+    260           * @brief       Range Extenders must replay the change-channel boradcast
+    261           *              frame before actually changing its own channel.
+    262           *
+    263           * input parameters
+    264           * @param   frame     - pointer to frame with command context
+    265           *
+    266           * @return   void
+    267           */
+    268          
+    269          /* This routine takes care of some awkwardness. From the dispatch thread all
+    270           * we have is a pointer to the mrfiPacket_t element in the frame buffer into
+    271           * which the frame was retrieved. But to call the replay routine we need the
+    272           * entire frame information structure frameInfo_t. This routine regenerates
+    273           * the frame information structure pointer and then calls the replay routine.
+    274           *
+    275           * This approach requires that the disptach thread guarantee that it will
+    276           * always pass a pointer to the mrfiPacket_t structure in the frame
+    277           * information structure and not a copy of the mrfipacket_t element. It is
+    278           * either the approach here or change all the NWK application dispatch routine
+    279           * argument types. This latter has the downside of interfering with any
+    280           * user-implemented NWK applications. It also needlessly complicates the argument
+    281           * handling: except for this instance all any routine needs is the mrfiPacket_t
+    282           * pointer.
+    283           */
+    284          static void replayFirst(mrfiPacket_t *frame)
+    285          {
+    286            frameInfo_t *fiptr;
+    287            uint16_t     offset = (uint16_t)&(((frameInfo_t *)0)->mrfiPkt);
+    288          
+    289            fiptr = (frameInfo_t *)(((uint8_t *)frame) - ((uint8_t *)offset));
+    290          
+    291            nwk_replayFrame(fiptr);
+    292          
+    293            return;
+    294          }
+    295          #endif  /* RANGE_EXTENDER */
+    296          
+    297          #ifndef ACCESS_POINT
+    298          /********************************************************************************
+    299           * @fn          change_channel_cmd
+    300           *
+    301           * @brief       Change to channel specified in received frame. Polling devices
+    302           *              might be awake when the broadcast occurs but we want the channel
+    303           *              change recovery to occur in a disciplined manner using the
+    304           *              polling code. Also, with certain Test sceanrios in which a
+    305           *              sleeping device is emulated we want to emulate 'missing' the
+    306           *              broadcast change-channel command.
+    307           *
+    308           * input parameters
+    309           * @param   frame     - pointer to frame containing target logical channel.
+    310           *
+    311           * @return   none.
+    312           */
+    313          static void change_channel_cmd(mrfiPacket_t *frame)
+    314          {
+    315          #if !defined( RX_POLLS )
+    316            freqEntry_t chan;
+    317          
+    318            chan.logicalChan = *(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS+F_CHAN_OS);
+    319          
+    320            nwk_setChannel(&chan);
+    321          #endif
+    322            return;
+    323          }
+    324          #endif  /* !ACCESS_POINT */
+    325          
+    326          /******************************************************************************
+    327           * @fn          send_ping_reply
+    328           *
+    329           * @brief       Send Frequency application ping reply.
+    330           *
+    331           * input parameters
+    332           * @param   frame     - pointer to frame from pinger.
+    333           *
+    334           * @return   FHS_RELEASE unless this isn't an Access Point. In this case for
+    335           *           flow to et this far it is a Range Extender, so replay the frame
+    336           *           by returning FHW_REPLAY
+    337           */
+    338          static fhStatus_t send_ping_reply(mrfiPacket_t *frame)
+    339          {
+    340          #ifdef ACCESS_POINT
+    341            uint8_t      msg[FREQ_REQ_PING_FRAME_SIZE];
+    342            frameInfo_t *pOutFrame;
+    343          
+    344            /* original request with reply bit on */
+    345            msg[FB_APP_INFO_OS] = *(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS) | NWK_APP_REPLY_BIT;
+    346            msg[FB_TID_OS]      = *(MRFI_P_PAYLOAD(frame)+F_APP_PAYLOAD_OS+FB_TID_OS);
+    347          
+    348            if (pOutFrame = nwk_buildFrame(SMPL_PORT_FREQ, msg, sizeof(msg), MAX_HOPS_FROM_AP))
+    349            {
+    350              /* destination address is the source address of the received frame. */
+    351              memcpy(MRFI_P_DST_ADDR(&pOutFrame->mrfiPkt), MRFI_P_SRC_ADDR(frame), NET_ADDR_SIZE);
+    352              /* must use transaction ID of source frame */
+    353              PUT_INTO_FRAME(MRFI_P_PAYLOAD(&pOutFrame->mrfiPkt), F_TRACTID_OS, (GET_FROM_FRAME(MRFI_P_PAYLOAD(frame), F_TRACTID_OS)));
+    354          #ifdef SMPL_SECURE
+    355              nwk_setSecureFrame(&pOutFrame->mrfiPkt, sizeof(msg), 0);
+    356          #endif  /* SMPL_SECURE */
+    357              nwk_sendFrame(pOutFrame, MRFI_TX_TYPE_FORCED);
+    358            }
+    359          
+    360            return FHS_RELEASE;
+    361          #else
+    362            return FHS_REPLAY;
+    363          #endif  /* ACCESS_POINT */
+    364          }
+    365          
+    366          /****************************************************************************************
+    367           * @fn          nwk_processFreq
+    368           *
+    369           * @brief       Process a Frequency application frame.
+    370           *
+    371           * input parameters
+    372           * @param   frame     - pointer to frame
+    373           *
+    374           * @return   Disposition for frame: either release (FHS_RELEASE) or replay (FHS_REPLAY).
+    375           */
+    376          fhStatus_t nwk_processFreq(mrfiPacket_t *frame)
+    377          {
+    378            fhStatus_t rc = FHS_RELEASE;
+    379            uint8_t    replyType;
+    380          
+    381            /* Make sure this is a reply and see if we sent this. Validate the
+    382             * packet for reception by client app.
+    383             */
+    384            if (SMPL_MY_REPLY == (replyType=nwk_isValidReply(frame, sTid, FB_APP_INFO_OS, FB_TID_OS)))
+    385            {
+    386              /* It's a match and it's a reply. Validate the received packet by
+    387               * returning a 1 so it can be received by the client app.
+    388               */
+    389              MRFI_PostKillSem();
+    390              rc = FHS_KEEP;
+    391            }
+    392          #if !defined( END_DEVICE )
+    393            else if (SMPL_A_REPLY == replyType)
+    394            {
+    395              /* no match. if i'm not an ED this is a reply that should be passed on. */
+    396              rc = FHS_REPLAY;
+    397            }
+    398          #endif  /* !END_DEVICE */
+    399            else if (SMPL_NOT_REPLY == replyType)
+    400            {
+    401              rc = handle_freq_cmd(frame);
+    402            }
+    403          
+    404            return rc;
+    405          }
+    406          
+    407          /******************************************************************************
+    408           * @fn          nwk_scanForChannels
+    409           *
+    410           * @brief       Scan for channels by sending a ping frame on each channel in the
+    411           *              channel table and listen for a reply.
+    412           *
+    413           * input parameters
+    414           * @param  channels    - pointer to area to receive list of channels from which
+    415           *                       ping replies were received.
+    416           *
+    417           * output parameters
+    418           * @param   channels   - populated list of channels.
+    419           *
+    420           * @return   statuis of operation..
+    421           */
+    422          uint8_t nwk_scanForChannels(freqEntry_t *channels)
+    423          {
+    424            uint8_t      msg[FREQ_REQ_PING_FRAME_SIZE], i, num=0, notBcast = 1;
+    425            addr_t      *apAddr, retAddr;
+    426            uint8_t      radioState = MRFI_GetRadioState();
+    427            freqEntry_t  chan;
+    428            freqEntry_t  curChan;
+    429          
+    430            union
+    431            {
+    432              ioctlRawSend_t    send;
+    433              ioctlRawReceive_t recv;
+    434            } ioctl_info;
+    435          
+    436            nwk_getChannel(&curChan);
+    437          
+    438            /* send to AP. If we don't know AP address, broadcast. */
+    439            apAddr = (addr_t *)nwk_getAPAddress();
+    440            if (!apAddr)
+    441            {
+    442              apAddr = (addr_t *)nwk_getBCastAddress();
+    443              notBcast = 0;
+    444            }
+    445          
+    446            for (i=0; i<NWK_FREQ_TBL_SIZE; ++i)
+    447            {
+    448              chan.logicalChan = i;
+    449          
+    450              nwk_setChannel(&chan);
+    451          
+    452              ioctl_info.send.addr = apAddr;
+    453              ioctl_info.send.msg  = msg;
+    454              ioctl_info.send.len  = sizeof(msg);
+    455              ioctl_info.send.port = SMPL_PORT_FREQ;
+    456          
+    457              msg[FB_APP_INFO_OS] = FREQ_REQ_PING;
+    458              msg[FB_TID_OS]      = sTid;
+    459          
+    460              SMPL_Ioctl(IOCTL_OBJ_RAW_IO, IOCTL_ACT_WRITE, &ioctl_info.send);
+    461          
+    462              ioctl_info.recv.port = SMPL_PORT_FREQ;
+    463              ioctl_info.recv.msg  = msg;
+    464              ioctl_info.recv.addr = &retAddr;
+    465          
+    466              NWK_CHECK_FOR_SETRX(radioState);
+    467              NWK_REPLY_DELAY();
+    468              NWK_CHECK_FOR_RESTORE_STATE(radioState);
+    469          
+    470              if (SMPL_SUCCESS == SMPL_Ioctl(IOCTL_OBJ_RAW_IO, IOCTL_ACT_READ, &ioctl_info.recv))
+    471              {
+    472                /* Once we know the Access Point we're related to we only accept
+    473                 * ping replies from that one.
+    474                 */
+    475                if (!notBcast || (notBcast && !memcmp(&retAddr, apAddr, NET_ADDR_SIZE)))
+    476                {
+    477                  channels[num++].logicalChan = i;
+    478                }
+    479              }
+    480          
+    481              sTid++;
+    482              if (num && notBcast)
+    483              {
+    484                /* we're done...only one possible channel if we know the AP address. */
+    485                break;
+    486              }
+    487              /* TODO: process encryption stuff */
+    488            }
+    489          
+    490            /* reset original channel */
+    491            nwk_setChannel(&curChan);
+    492          
+    493            return num;
+    494          }
+    495          
+    496          /******************************************************************************
+    497           * @fn          nwk_freqControl
+    498           *
+    499           * @brief       Handle application requests received through IOCTL interface.
+    500           *
+    501           * input parameters
+    502           * @param   action  - requested action
+    503           * @param   val     - pointer to parameters required/returned for action
+    504           *
+    505           * output parameters
+    506           * @param   val   - populated values if action was a retrieval action.
+    507           *
+    508           * @return   status of operation.
+    509           */
+    510          smplStatus_t nwk_freqControl(ioctlAction_t action, void *val)
+    511          {
+    512            smplStatus_t rc;
+    513          
+    514            switch (action)
+    515            {
+    516              case IOCTL_ACT_SET:
+    517          #ifdef ACCESS_POINT
+    518                broadcast_channel_change(((freqEntry_t *)val)->logicalChan);
+    519          #endif  /* ACCESS_POINT */
+    520                rc = nwk_setChannel((freqEntry_t *)val);
+    521                break;
+    522          
+    523              case IOCTL_ACT_GET:
+    524                nwk_getChannel((freqEntry_t *)val);
+    525                rc = SMPL_SUCCESS;
+    526                break;
+    527          
+    528              case IOCTL_ACT_SCAN:
+    529                {
+    530                  ioctlScanChan_t *sc = (ioctlScanChan_t *)val;
+    531          
+    532                  sc->numChan = nwk_scanForChannels(sc->freq);
+    533                  rc = SMPL_SUCCESS;
+    534                }
+    535                break;
+    536          
+    537              default:
+    538                rc = SMPL_BAD_PARAM;
+    539                break;
+    540            }
+    541          
+    542            return rc;
+    543          }
+    544          
+    545          /******************************************************************************
+    546           * @fn          broadcast_channel_change
+    547           *
+    548          * @brief       For Access Point only: broadcast a channel change frame.
+    549           *
+    550           * input parameters
+    551           * @param   idx  -  index into channel table of new (logical) channel
+    552           *
+    553           * @return   none.
+    554           */
+    555          #ifdef ACCESS_POINT
+    556          #define CC_REDUNDANCY      1   /* Change-channel redundancy count */
+    557          static void broadcast_channel_change(uint8_t idx)
+    558          {
+    559            ioctlRawSend_t send;
+    560            uint8_t        msg[FREQ_REQ_MOVE_FRAME_SIZE];
+    561            uint8_t        repeat = CC_REDUNDANCY;
+    562          
+    563            if (idx >= NWK_FREQ_TBL_SIZE)
+    564            {
+    565              return;
+    566            }
+    567          
+    568            msg[FB_APP_INFO_OS] = FREQ_REQ_MOVE;
+    569            msg[F_CHAN_OS]      = idx;
+    570          
+    571            send.addr = (addr_t *)nwk_getBCastAddress();
+    572            send.msg  = msg;
+    573            send.len  = sizeof(msg);
+    574            send.port = SMPL_PORT_FREQ;
+    575          
+    576            SMPL_Ioctl(IOCTL_OBJ_RAW_IO, IOCTL_ACT_WRITE, &send);
+    577            /* Redundancy addresses the fact that an RE (or any always-listening
+    578             * device) might miss the command
+    579             */
+    580            while (repeat--)
+    581            {
+    582              NWK_DELAY(250);
+    583              SMPL_Ioctl(IOCTL_OBJ_RAW_IO, IOCTL_ACT_WRITE, &send);
+    584            }
+    585          }
+    586          #endif  /* ACCESS_POINT */
+    587          
+    588          #else  /* FREQUENCY_AGILITY */
+    589          
+    590          /**********************************************************************************
+    591           * @fn          nwk_freqInit
+    592           *
+    593           * @brief       Initialize NWK Frequency application. Stub when Frequency Agility
+    594           *              not supported.
+    595           *
+    596           * @return   none.
+    597           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    598          void nwk_freqInit(void)
+   \                     nwk_freqInit:
+    599          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    600            return;
+   \   000000   22           RET
+    601          }
+    602          
+    603          /****************************************************************************************
+    604           * @fn          nwk_processFreq
+    605           *
+    606           * @brief       Process a Frequency application frame. Stub when Frequency Agility
+    607           *              not supported.
+    608           *
+    609           * input parameters
+    610           * @param   frame     - pointer to frame
+    611           *
+    612           * @return   Disposition for frame: either release (FHS_RELEASE) or replay (FHS_REPLAY).
+    613           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    614          fhStatus_t nwk_processFreq(mrfiPacket_t *frame)
+   \                     nwk_processFreq:
+    615          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    616            return FHS_RELEASE;
+   \   000000   7900         MOV     R1,#0x0
+   \   000002   22           RET
+    617          }
+    618          
+    619          #endif  /* FREQUENCY_AGILITY */
+
+   Maximum stack usage in bytes:
+
+     Function        ISTACK PSTACK XSTACK
+     --------        ------ ------ ------
+     nwk_freqInit        0      0      0
+     nwk_processFreq     0      0      0
+
+
+   Segment part sizes:
+
+     Function/Label  Bytes
+     --------------  -----
+     nwk_freqInit       1
+     nwk_processFreq    3
+
+ 
+ 4 bytes in segment NEAR_CODE
+ 
+ 4 bytes of CODE memory
+
+Errors: none
+Warnings: none

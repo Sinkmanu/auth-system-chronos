@@ -1,0 +1,1985 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:33 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\AuthSystem\authentication_ma #
+#                          in.c                                               #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\AuthSys #
+#                          tem\authentication_main.c" -D CC1111EM -D ISM_EU   #
+#                          -D MCU_H=<ioCC1111.h> -D chip=1111 -D              #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\authentication_main.lst    #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\authentication_main.r51     #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\AuthSystem\authentication_main.c
+      1          // *************************************************************************************************
+      2          // Include section
+      3          #include <string.h>
+      4          #include "bsp.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x91
+   \   unsigned char volatile __sfr RFIM
+   \                     RFIM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9b
+   \   unsigned char volatile __sfr S1CON
+   \                     S1CON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa2
+   \   unsigned char volatile __sfr WORCTRL
+   \                     WORCTRL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa3
+   \   unsigned char volatile __sfr WOREVT0
+   \                     WOREVT0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa4
+   \   unsigned char volatile __sfr WOREVT1
+   \                     WOREVT1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd9
+   \   unsigned char volatile __sfr RFD
+   \                     RFD:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe1
+   \   unsigned char volatile __sfr RFST
+   \                     RFST:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe9
+   \   unsigned char volatile __sfr RFIF
+   \                     RFIF:
+   \   000000                DS 1
+      5          #include "mrfi.h"
+      6          #include "bsp_leds.h"
+      7          #include "bsp_buttons.h"
+      8          #include "nwk_types.h"
+      9          #include "nwk_api.h"
+     10          #include "nwk_frame.h"
+     11          #include "nwk.h"
+     12          #include "ioCCxx10_bitdef.h" 
+     13          #include "packet.h"
+     14          #include "authentication.h"
+     15          #include "aes.h"
+     16          
+     17          #include "hal_types.h"
+     18          #include "usb_uart.h"
+     19          #include "hal_board.h"
+
+  #warning "Macro TRUE already defined"
+   ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\include\hal_defs.h",19  Warning[Pe1105]: 
+          #warning directive: "Macro TRUE already defined"
+
+  #warning "Macro FALSE already defined"
+   ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\include\hal_defs.h",27  Warning[Pe1105]: 
+          #warning directive: "Macro FALSE already defined"
+
+  #warning "Macro NULL already defined"
+   ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\include\hal_defs.h",35  Warning[Pe1105]: 
+          #warning directive: "Macro NULL already defined"
+
+  #define BIT0              0x01
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",21  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT0" (declared at line 113 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT1              0x02
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",22  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT1" (declared at line 114 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT2              0x04
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",23  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT2" (declared at line 115 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT3              0x08
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",24  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT3" (declared at line 116 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT4              0x10
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",25  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT4" (declared at line 117 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT5              0x20
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",26  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT5" (declared at line 118 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT6              0x40
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",27  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT6" (declared at line 119 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+
+  #define BIT7              0x80
+          ^
+"C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\cc8051\hal_cc8051.h",28  Warning[Pe047]: 
+          incompatible redefinition of macro "BIT7" (declared at line 120 of
+          "C:\Documents and Settings\usuario\Mis
+          documentos\Server_IAR\bm-br1\project.h")
+     20          #include "hal_led.h"
+     21          #include "hal_uart.h"
+     22          
+     23          void authentication_config(void);
+     24          void authentication_main(u32 random);
+     25          void authentication_receive(void);
+     26          void authentication_retrieve(packet_t *packet);
+     27          void AuthRxModeOn(void);
+     28          void AuthRxModeOff(void);
+     29          void radio_transmit(void);
+     30          
+     31          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     32          u8 key_ap[16] = {0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F};
+   \                     key_ap:
+   \   000000                DS 16
+   \   000010                REQUIRE `?<Initializer for key_ap>`
+   \   000010                REQUIRE __INIT_XDATA_I
+     33          u8 data2usb(u8 data[6]);
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     34          u8 paquete_recibido[41] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+   \                     paquete_recibido:
+   \   000000                DS 41
+   \   000029                REQUIRE __INIT_XDATA_Z
+     35                                     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+     36                                     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     37          u8 auth_usb[18] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+   \                     auth_usb:
+   \   000000                DS 18
+   \   000012                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     38          packet_t packet;
+   \                     packet:
+   \   000000                DS 41
+   \   000029                REQUIRE __INIT_XDATA_Z
+     39          void send_example(void);
+     40          void send_rand(u32 rand);
+     41          void send_ack_radio(u8 randaes[16]);
+     42          
+     43          /*extern unsigned char usb_buffer[USB_MAX_MESSAGE_LENGTH+2];
+     44          extern unsigned char usb_sendack;
+     45          extern void usb_decode(void);*/
+     46          
+     47          // *************************************************************************************************
+     48          // Global section
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     49          u8 packet_ok = 0;
+   \                     packet_ok:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     50          u8 packet_id_rand = 0;
+   \                     packet_id_rand:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     51          u8 envia_ejemplo = 0;
+   \                     envia_ejemplo:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     52          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     53          u8 auth_data_tx[PACKET_BEACON_LENGTH];//[PACKET_TRANSMIT_LENGTH];
+   \                     auth_data_tx:
+   \   000000                DS 14
+   \   00000E                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     54          u8 auth_data_example[26];
+   \                     auth_data_example:
+   \   000000                DS 26
+   \   00001A                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     55          u8 auth_data_rx[PACKET_RECEIVE_LENGTH];
+   \                     auth_data_rx:
+   \   000000                DS 44
+   \   00002C                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     56          u8 auth_ptr_tx = 0;
+   \                     auth_ptr_tx:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     57          u8 auth_ptr_rx = 0;
+   \                     auth_ptr_rx:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     58          
+     59          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     60          volatile unsigned char auth_flag;
+   \                     auth_flag:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+     61          
+     62          // *************************************************************************************************
+     63          // @fn          authentication_config
+     64          // @brief       Configures the Radio Settings for AuthenticationSystem
+     65          // @param       none
+     66          // @return      none
+     67          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     68          void authentication_config(void)
+   \                     authentication_config:
+     69          {                        
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     70          
+     71             	//Set the SYNC words to be used
+     72             	SYNC1      =   0xD3; // SYNC1: high nyte of Sync Word
+   \   000004   90DF00       MOV     DPTR,#-0x2100
+   \   000007   74D3         MOV     A,#-0x2d
+   \   000009   F0           MOVX    @DPTR,A
+     73             	SYNC0      =   0x91;  // SYNC0: low nyte of Sync Word
+   \   00000A   A3           INC     DPTR
+   \   00000B   7491         MOV     A,#-0x6f
+   \   00000D   F0           MOVX    @DPTR,A
+     74             	//Setup radio
+     75             	FSCTRL1     = 0x09;   // Frequency synthesizer control.
+   \   00000E   90DF07       MOV     DPTR,#-0x20f9
+   \   000011   7409         MOV     A,#0x9
+   \   000013   F0           MOVX    @DPTR,A
+     76             	FSCTRL0     = 0x00;   // Frequency synthesizer control.
+   \   000014   A3           INC     DPTR
+   \   000015   E4           CLR     A
+   \   000016   F0           MOVX    @DPTR,A
+     77          	// 869.525MHz
+     78                  FREQ2     = 0x24; // frequency control word, high byte 
+   \   000017   A3           INC     DPTR
+   \   000018   7424         MOV     A,#0x24
+   \   00001A   F0           MOVX    @DPTR,A
+     79                  FREQ1     = 0x3A; // frequency control word, middle byte 
+   \   00001B   A3           INC     DPTR
+   \   00001C   743A         MOV     A,#0x3a
+   \   00001E   F0           MOVX    @DPTR,A
+     80                  FREQ0     = 0xEE; // frequency control word, low byte 
+   \   00001F   A3           INC     DPTR
+   \   000020   74EE         MOV     A,#-0x12
+   \   000022   F0           MOVX    @DPTR,A
+     81             	CHANNR      = 0x00;                  // Channel number.
+   \   000023   90DF06       MOV     DPTR,#-0x20fa
+   \   000026   E4           CLR     A
+   \   000027   F0           MOVX    @DPTR,A
+     82             	//PA_TABLE0   = 0x8C;               // PA output power setting.
+     83                  PA_TABLE0   = 0x84;
+   \   000028   90DF2E       MOV     DPTR,#-0x20d2
+   \   00002B   7484         MOV     A,#-0x7c
+   \   00002D   F0           MOVX    @DPTR,A
+     84                  
+     85                  MDMCFG4   = 0x6B; // modem configuration 
+   \   00002E   90DF0C       MOV     DPTR,#-0x20f4
+   \   000031   746B         MOV     A,#0x6b
+   \   000033   F0           MOVX    @DPTR,A
+     86                  MDMCFG3   = 0xA3; // modem configuration 
+   \   000034   A3           INC     DPTR
+   \   000035   74A3         MOV     A,#-0x5d
+   \   000037   F0           MOVX    @DPTR,A
+     87                  MDMCFG2   = 0x13; // modem configuration 
+   \   000038   A3           INC     DPTR
+   \   000039   7413         MOV     A,#0x13
+   \   00003B   F0           MOVX    @DPTR,A
+     88            	MDMCFG1   = 0x23;               // Modem configuration.
+   \   00003C   A3           INC     DPTR
+   \   00003D   7423         MOV     A,#0x23
+   \   00003F   F0           MOVX    @DPTR,A
+     89             	MDMCFG0   = 0x11;               // Modem configuration.
+   \   000040   A3           INC     DPTR
+   \   000041   7411         MOV     A,#0x11
+   \   000043   F0           MOVX    @DPTR,A
+     90             
+     91             	DEVIATN   = 0x43;   // Modem deviation setting (when FSK modulation is enabled).
+   \   000044   A3           INC     DPTR
+   \   000045   7443         MOV     A,#0x43
+   \   000047   F0           MOVX    @DPTR,A
+     92             	FREND1    = 0xB6;   // Front end RX configuration.
+   \   000048   90DF1A       MOV     DPTR,#-0x20e6
+   \   00004B   74B6         MOV     A,#-0x4a
+   \   00004D   F0           MOVX    @DPTR,A
+     93             	FREND0    = 0x10;   // Front end TX configuration.
+   \   00004E   A3           INC     DPTR
+   \   00004F   7410         MOV     A,#0x10
+   \   000051   F0           MOVX    @DPTR,A
+     94          
+     95             	MCSM0     = 0x18;   // Main Radio Control State Machine configuration. CONFIGURADO.
+   \   000052   90DF14       MOV     DPTR,#-0x20ec
+   \   000055   7418         MOV     A,#0x18
+   \   000057   F0           MOVX    @DPTR,A
+     96             	MCSM1     = 0x30;  
+   \   000058   90DF13       MOV     DPTR,#-0x20ed
+   \   00005B   7430         MOV     A,#0x30
+   \   00005D   F0           MOVX    @DPTR,A
+     97             	MCSM2     = 0x07;
+   \   00005E   90DF12       MOV     DPTR,#-0x20ee
+   \   000061   7407         MOV     A,#0x7
+   \   000063   F0           MOVX    @DPTR,A
+     98          
+     99             	WOREVT1   = 0x87;
+   \   000064   75A487       MOV     0xa4,#-0x79
+    100             	WOREVT0   = 0x6B;
+   \   000067   75A36B       MOV     0xa3,#0x6b
+    101             	WORCTL    = 0xF8;
+   \   00006A   75A2F8       MOV     0xa2,#-0x8
+    102             	FOCCFG    = 0x1D;   // Frequency Offset Compensation Configuration.
+   \   00006D   90DF15       MOV     DPTR,#-0x20eb
+   \   000070   741D         MOV     A,#0x1d
+   \   000072   F0           MOVX    @DPTR,A
+    103             	BSCFG     = 0x1C;   // Bit synchronization Configuration.
+   \   000073   A3           INC     DPTR
+   \   000074   14           DEC     A
+   \   000075   F0           MOVX    @DPTR,A
+    104             	AGCCTRL2  = 0xC7;   // AGC control.
+   \   000076   A3           INC     DPTR
+   \   000077   74C7         MOV     A,#-0x39
+   \   000079   F0           MOVX    @DPTR,A
+    105             	AGCCTRL1  = 0x00;   // AGC control.
+   \   00007A   A3           INC     DPTR
+   \   00007B   E4           CLR     A
+   \   00007C   F0           MOVX    @DPTR,A
+    106             	AGCCTRL0  = 0xB2;   // AGC control.
+   \   00007D   A3           INC     DPTR
+   \   00007E   74B2         MOV     A,#-0x4e
+   \   000080   F0           MOVX    @DPTR,A
+    107             	FSCAL3    = 0xEA;   // Frequency synthesizer calibration.
+   \   000081   90DF1C       MOV     DPTR,#-0x20e4
+   \   000084   74EA         MOV     A,#-0x16
+   \   000086   F0           MOVX    @DPTR,A
+    108             	FSCAL2    = 0x2A;   // Frequency synthesizer calibration.
+   \   000087   A3           INC     DPTR
+   \   000088   742A         MOV     A,#0x2a
+   \   00008A   F0           MOVX    @DPTR,A
+    109             	FSCAL1    = 0x00;   // Frequency synthesizer calibration.
+   \   00008B   A3           INC     DPTR
+   \   00008C   E4           CLR     A
+   \   00008D   F0           MOVX    @DPTR,A
+    110             	FSCAL0    = 0x1F;   // Frequency synthesizer calibration.
+   \   00008E   A3           INC     DPTR
+   \   00008F   741F         MOV     A,#0x1f
+   \   000091   F0           MOVX    @DPTR,A
+    111             	FSTEST    = 0x59;
+   \   000092   A3           INC     DPTR
+   \   000093   7459         MOV     A,#0x59
+   \   000095   F0           MOVX    @DPTR,A
+    112             	TEST2     = 0x81;   // Various test settings.
+   \   000096   90DF23       MOV     DPTR,#-0x20dd
+   \   000099   7481         MOV     A,#-0x7f
+   \   00009B   F0           MOVX    @DPTR,A
+    113             	TEST1     = 0x35;   // Various test settings.
+   \   00009C   A3           INC     DPTR
+   \   00009D   7435         MOV     A,#0x35
+   \   00009F   F0           MOVX    @DPTR,A
+    114             	TEST0     = 0x09;   // Various test settings.
+   \   0000A0   A3           INC     DPTR
+   \   0000A1   7409         MOV     A,#0x9
+   \   0000A3   F0           MOVX    @DPTR,A
+    115             	PTEST     = 0x7F;
+   \   0000A4   90DF21       MOV     DPTR,#-0x20df
+   \   0000A7   747F         MOV     A,#0x7f
+   \   0000A9   F0           MOVX    @DPTR,A
+    116             	AGCTEST   = 0x88;
+   \   0000AA   A3           INC     DPTR
+   \   0000AB   7488         MOV     A,#-0x78
+   \   0000AD   F0           MOVX    @DPTR,A
+    117             	IOCFG2    = 0x29;
+   \   0000AE   90DF2F       MOV     DPTR,#-0x20d1
+   \   0000B1   7429         MOV     A,#0x29
+   \   0000B3   F0           MOVX    @DPTR,A
+    118             	IOCFG1    = 0x1E;
+   \   0000B4   A3           INC     DPTR
+   \   0000B5   741E         MOV     A,#0x1e
+   \   0000B7   F0           MOVX    @DPTR,A
+    119             	IOCFG0    = 0x1B;
+   \   0000B8   A3           INC     DPTR
+   \   0000B9   741B         MOV     A,#0x1b
+   \   0000BB   F0           MOVX    @DPTR,A
+    120             
+    121             	PKTCTRL1  = 0x04;   // Packet automation control. CONFIGURADO.
+   \   0000BC   90DF03       MOV     DPTR,#-0x20fd
+   \   0000BF   7404         MOV     A,#0x4
+   \   0000C1   F0           MOVX    @DPTR,A
+    122             	PKTCTRL0  = 0x05;   // Packet automation control. Bit(1:0) 01-> Variable packet len mode. 00 -> PKTLEN Register. and CRC Enable
+   \   0000C2   A3           INC     DPTR
+   \   0000C3   04           INC     A
+   \   0000C4   F0           MOVX    @DPTR,A
+    123             	ADDR      = 0x00;   // Device address.
+   \   0000C5   A3           INC     DPTR
+   \   0000C6   E4           CLR     A
+   \   0000C7   F0           MOVX    @DPTR,A
+    124             	PKTLEN    = 0xFF;   // Packet length. 	Si ponemos 0xFF en el primer byte a recibir/transmitir (RFD) debemos indicar el tamaño.
+   \   0000C8   90DF02       MOV     DPTR,#-0x20fe
+   \   0000CB   74FF         MOV     A,#-0x1
+   \   0000CD   F0           MOVX    @DPTR,A
+    125          
+    126          
+    127          	//
+    128          	// Enable interrupts.
+    129          	//
+    130          	RFIF = 0;
+   \   0000CE   75E900       MOV     0xe9,#0x0
+    131          	IEN2 |= IEN2_RFIE;			// General RF interrupts
+   \   0000D1   439A01       ORL     0x9a,#0x1
+    132          	RFTXRXIE = 1;				// CPU interrupts for RF TX done / RX ready
+   \   0000D4   D2A8         SETB    0xa8.0
+    133          	RFIM |= RFIF_IRQ_DONE |		// packet completion
+    134          			RFIF_IRQ_TXUNF |	// tx underflow
+    135          			RFIF_IRQ_RXOVF |	// rx overflow
+    136          			RFIF_IRQ_SFD |		// start frame delimiter
+    137          			RFIF_IRQ_TIMEOUT;	// rx timeout
+   \   0000D6   4391F1       ORL     0x91,#0xf1
+    138          
+    139          	//
+    140          	// Go into idle state.
+    141          	//
+    142          	RFST = RFST_SIDLE;
+   \   0000D9   75E104       MOV     0xe1,#0x4
+    143          	while (MARCSTATE != MARC_STATE_IDLE);
+   \                     ??authentication_config_0:
+   \   0000DC   90DF3B       MOV     DPTR,#-0x20c5
+   \   0000DF   E0           MOVX    A,@DPTR
+   \   0000E0   6401         XRL     A,#0x1
+   \   0000E2   70F8         JNZ     ??authentication_config_0
+    144          }
+   \   0000E4   D083         POP     DPH
+   \   0000E6   D082         POP     DPL
+   \   0000E8   22           RET
+   \   0000E9                REQUIRE WOREVT1
+   \   0000E9                REQUIRE WOREVT0
+   \   0000E9                REQUIRE WORCTRL
+   \   0000E9                REQUIRE RFIF
+   \   0000E9                REQUIRE IEN2
+   \   0000E9                REQUIRE _A_IEN0
+   \   0000E9                REQUIRE RFIM
+   \   0000E9                REQUIRE RFST
+    145          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    146          void AuthRxModeOn(void)
+   \                     AuthRxModeOn:
+    147          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    148          
+    149            RFST = RFST_SIDLE;
+   \   000004   75E104       MOV     0xe1,#0x4
+    150            while (MARCSTATE != MARC_STATE_IDLE);
+   \                     ??AuthRxModeOn_0:
+   \   000007   90DF3B       MOV     DPTR,#-0x20c5
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   6401         XRL     A,#0x1
+   \   00000D   70F8         JNZ     ??AuthRxModeOn_0
+    151          
+    152            auth_ptr_rx = 0;
+   \   00000F   90....       MOV     DPTR,#auth_ptr_rx
+   \   000012   E4           CLR     A
+   \   000013   F0           MOVX    @DPTR,A
+    153            
+    154            /* send strobe to enter receive mode */
+    155            RFST = RFST_SRX;
+   \   000014   75E102       MOV     0xe1,#0x2
+    156            while (MARCSTATE != MARC_STATE_RX);
+   \                     ??AuthRxModeOn_1:
+   \   000017   90DF3B       MOV     DPTR,#-0x20c5
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   640D         XRL     A,#0xd
+   \   00001D   70F8         JNZ     ??AuthRxModeOn_1
+    157          }
+   \   00001F   D083         POP     DPH
+   \   000021   D082         POP     DPL
+   \   000023   22           RET
+   \   000024                REQUIRE RFST
+    158          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    159          void AuthRxModeOff(void)
+   \                     AuthRxModeOff:
+    160          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    161            /*disable receive (IM_DONE) interrupts */
+    162            RFIM &= ~(RFIM_IM_DONE | RFIF_IRQ_TXUNF | RFIF_IRQ_RXOVF | RFIF_IRQ_SFD | RFIF_IRQ_TIMEOUT);
+   \   000000   53910E       ANL     0x91,#0xe
+    163          
+    164            /* flush the receive FIFO of any residual data */
+    165            /* no need for flush. only 1 byte deep fifo. */
+    166          
+    167            /* clear receive interrupt */
+    168            S1CON &= ~(S1CON_RFIF_1 | S1CON_RFIF_0); /* Clear MCU interrupt flag */
+   \   000003   539BFC       ANL     0x9b,#0xfc
+    169            RFIF &= ~RFIF_IRQ_DONE;           /* Clear the interrupt at the source */
+   \   000006   53E9EF       ANL     0xe9,#0xef
+    170          
+    171          }
+   \   000009   22           RET
+   \   00000A                REQUIRE RFIM
+   \   00000A                REQUIRE S1CON
+   \   00000A                REQUIRE RFIF
+    172          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    173          void radio_receive(void)
+   \                     radio_receive:
+    174          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    175            RFST = RFST_SIDLE;
+   \   000004   75E104       MOV     0xe1,#0x4
+    176            while (MARCSTATE != MARC_STATE_IDLE);
+   \                     ??radio_receive_0:
+   \   000007   90DF3B       MOV     DPTR,#-0x20c5
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   6401         XRL     A,#0x1
+   \   00000D   70F8         JNZ     ??radio_receive_0
+    177            
+    178            //prepare
+    179            auth_ptr_rx = 0;
+   \   00000F   90....       MOV     DPTR,#auth_ptr_rx
+   \   000012   E4           CLR     A
+   \   000013   F0           MOVX    @DPTR,A
+    180            
+    181            RFST = RFST_SRX;
+   \   000014   75E102       MOV     0xe1,#0x2
+    182            while(MARCSTATE != MARC_STATE_RX);
+   \                     ??radio_receive_1:
+   \   000017   90DF3B       MOV     DPTR,#-0x20c5
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   640D         XRL     A,#0xd
+   \   00001D   70F8         JNZ     ??radio_receive_1
+    183          }
+   \   00001F   D083         POP     DPH
+   \   000021   D082         POP     DPL
+   \   000023   22           RET
+   \   000024                REQUIRE RFST
+    184          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    185          u8 example_packet_tx[26] = { 25,                  //Length
+   \                     example_packet_tx:
+   \   000000                DS 26
+   \   00001A                REQUIRE `?<Initializer for example_packet_tx>`
+   \   00001A                REQUIRE __INIT_XDATA_I
+    186                                      0xFF,0xFF,0xFF,0xFF,  //Dst
+    187                                      0x02,0x02,0x02,0x02,  //Src
+    188                                      0x02,                 //type
+    189                                      0x00,0x02,0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x07,0x08,0x09,0x0A,0x0B,0x0C};  //Payload
+    190          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    191          void radio_transmit(void)
+   \                     radio_transmit:
+    192          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    193            RFST = RFST_SIDLE;
+   \   000004   75E104       MOV     0xe1,#0x4
+    194            
+    195            while (MARCSTATE != MARC_STATE_IDLE);
+   \                     ??radio_transmit_0:
+   \   000007   90DF3B       MOV     DPTR,#-0x20c5
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   6401         XRL     A,#0x1
+   \   00000D   70F8         JNZ     ??radio_transmit_0
+    196            
+    197            auth_ptr_tx = 0;
+   \   00000F   90....       MOV     DPTR,#auth_ptr_tx
+   \   000012   E4           CLR     A
+   \   000013   F0           MOVX    @DPTR,A
+    198            RFST = RFST_STX;
+   \   000014   75E103       MOV     0xe1,#0x3
+    199            while (MARCSTATE != MARC_STATE_TX);
+   \                     ??radio_transmit_1:
+   \   000017   90DF3B       MOV     DPTR,#-0x20c5
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   6413         XRL     A,#0x13
+   \   00001D   70F8         JNZ     ??radio_transmit_1
+    200            
+    201          }
+   \   00001F   D083         POP     DPH
+   \   000021   D082         POP     DPL
+   \   000023   22           RET
+   \   000024                REQUIRE RFST
+    202          
+    203          // *************************************************************************************************
+    204          // RF TX/RX general IRQ providing status handling
+    205          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    206          void radio_rf_ISR(void)
+   \                     radio_rf_ISR:
+    207          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    208          	//Clear CPU int flag
+    209          	S1CON &= ~(S1CON_RFIF_1 + S1CON_RFIF_0);
+   \   000004   539BFC       ANL     0x9b,#0xfc
+    210          	
+    211          	if (RFIF & RFIF_IRQ_DONE) //Paquete recibido/transmitido
+   \   000007   E5E9         MOV     A,0xe9
+   \   000009   A2E4         MOV     C,0xE0 /* A   */.4
+   \   00000B   5057         JNC     ??radio_rf_ISR_0
+    212          	{		
+    213                         /*if (auth_ptr_tx == PACKET_BEACON_LENGTH)//26)//PACKET_TRANSMIT_LENGTH) 
+    214                         {
+    215                                  RFST = RFST_SIDLE;
+    216                                  auth_ptr_tx = 0;
+    217                          }
+    218                          else if (auth_ptr_rx == PACKET_RECEIVE_LENGTH)//28) //PACKET_RECEIVE_LENGTH
+    219                          {
+    220                             RFST = RFST_SIDLE;
+    221                             packet_ok=1;
+    222                             auth_ptr_rx = 0;
+    223                          }
+    224                          else  
+    225                          {
+    226                              auth_ptr_tx = 0;
+    227                              auth_ptr_rx = 0;
+    228                              RFST = RFST_SIDLE;
+    229                          }*/
+    230                          if ((auth_ptr_tx == PACKET_BEACON_LENGTH) && (!envia_ejemplo))//26)//PACKET_TRANSMIT_LENGTH) 
+   \   00000D   90....       MOV     DPTR,#auth_ptr_tx
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   640E         XRL     A,#0xe
+   \   000013   7010         JNZ     ??radio_rf_ISR_1
+   \   000015   90....       MOV     DPTR,#envia_ejemplo
+   \   000018   E0           MOVX    A,@DPTR
+   \   000019   700A         JNZ     ??radio_rf_ISR_1
+    231                          {
+    232                                  RFST = RFST_SIDLE;
+   \   00001B   75E104       MOV     0xe1,#0x4
+    233                                  auth_ptr_tx = 0;
+   \   00001E   90....       MOV     DPTR,#auth_ptr_tx
+   \   000021   E4           CLR     A
+   \                     ??radio_rf_ISR_2:
+   \   000022   F0           MOVX    @DPTR,A
+   \   000023   803F         SJMP    ??radio_rf_ISR_0
+    234                          }
+    235                          else if ((auth_ptr_tx == 26) && (envia_ejemplo))
+   \                     ??radio_rf_ISR_1:
+   \   000025   90....       MOV     DPTR,#auth_ptr_tx
+   \   000028   E0           MOVX    A,@DPTR
+   \   000029   641A         XRL     A,#0x1a
+   \   00002B   7013         JNZ     ??radio_rf_ISR_3
+   \   00002D   90....       MOV     DPTR,#envia_ejemplo
+   \   000030   E0           MOVX    A,@DPTR
+   \   000031   600D         JZ      ??radio_rf_ISR_3
+    236                          {
+    237                                  RFST = RFST_SIDLE;
+   \   000033   75E104       MOV     0xe1,#0x4
+    238                                  auth_ptr_tx = 0;
+   \   000036   90....       MOV     DPTR,#auth_ptr_tx
+   \   000039   E4           CLR     A
+   \   00003A   F0           MOVX    @DPTR,A
+    239                                  envia_ejemplo = 0;
+   \   00003B   90....       MOV     DPTR,#envia_ejemplo
+   \   00003E   80E2         SJMP    ??radio_rf_ISR_2
+    240                          }
+    241                          else if (auth_ptr_rx == PACKET_RECEIVE_LENGTH)//28) //PACKET_RECEIVE_LENGTH
+   \                     ??radio_rf_ISR_3:
+   \   000040   90....       MOV     DPTR,#auth_ptr_rx
+   \   000043   E0           MOVX    A,@DPTR
+   \   000044   642C         XRL     A,#0x2c
+   \   000046   7010         JNZ     ??radio_rf_ISR_4
+    242                          {
+    243                             RFST = RFST_SIDLE;
+   \   000048   75E104       MOV     0xe1,#0x4
+    244                             packet_ok=1;
+   \   00004B   90....       MOV     DPTR,#packet_ok
+   \   00004E   7401         MOV     A,#0x1
+   \   000050   F0           MOVX    @DPTR,A
+    245                             auth_ptr_rx = 0;
+   \   000051   90....       MOV     DPTR,#auth_ptr_rx
+   \   000054   E4           CLR     A
+   \   000055   F0           MOVX    @DPTR,A
+   \   000056   800C         SJMP    ??radio_rf_ISR_0
+    246                          }
+    247                          else  
+    248                          {
+    249                              auth_ptr_tx = 0;
+   \                     ??radio_rf_ISR_4:
+   \   000058   90....       MOV     DPTR,#auth_ptr_tx
+   \   00005B   E4           CLR     A
+   \   00005C   F0           MOVX    @DPTR,A
+    250                              auth_ptr_rx = 0;
+   \   00005D   90....       MOV     DPTR,#auth_ptr_rx
+   \   000060   F0           MOVX    @DPTR,A
+    251                              RFST = RFST_SIDLE;
+   \   000061   75E104       MOV     0xe1,#0x4
+    252                          }
+    253          	}
+    254                  
+    255                  if (RFIF & RFIF_IRQ_TXUNF)
+   \                     ??radio_rf_ISR_0:
+   \   000064   E5E9         MOV     A,0xe9
+   \   000066   A2E7         MOV     C,0xE0 /* A   */.7
+   \   000068   5008         JNC     ??radio_rf_ISR_5
+    256                  {
+    257                     auth_ptr_tx = 0;
+   \   00006A   90....       MOV     DPTR,#auth_ptr_tx
+   \   00006D   E4           CLR     A
+   \   00006E   F0           MOVX    @DPTR,A
+    258                     RFST = RFST_SIDLE;
+   \   00006F   75E104       MOV     0xe1,#0x4
+    259                  }
+    260          	
+    261          	if (RFIF & RFIF_IRQ_RXOVF)
+   \                     ??radio_rf_ISR_5:
+   \   000072   E5E9         MOV     A,0xe9
+   \   000074   A2E6         MOV     C,0xE0 /* A   */.6
+   \   000076   5008         JNC     ??radio_rf_ISR_6
+    262          	{
+    263          		// rx overflow, this should not happen, reset
+    264          		//radio_rx_index = 0;
+    265                          auth_ptr_rx = 0;
+   \   000078   90....       MOV     DPTR,#auth_ptr_rx
+   \   00007B   E4           CLR     A
+   \   00007C   F0           MOVX    @DPTR,A
+    266          		RFST = RFST_SIDLE;
+   \   00007D   75E104       MOV     0xe1,#0x4
+    267          	}
+    268          	
+    269          	if (RFIF & RFIF_IRQ_SFD)
+   \                     ??radio_rf_ISR_6:
+   \   000080   E5E9         MOV     A,0xe9
+   \   000082   A2E0         MOV     C,0xE0 /* A   */.0
+   \   000084   5005         JNC     ??radio_rf_ISR_7
+    270          	{
+    271          		// Start Frame Delimiter
+    272          		// start receiving
+    273          		auth_ptr_rx = 0;
+   \   000086   90....       MOV     DPTR,#auth_ptr_rx
+   \   000089   E4           CLR     A
+   \   00008A   F0           MOVX    @DPTR,A
+    274          	}
+    275          	
+    276          	if (RFIF & RFIF_IRQ_TIMEOUT)
+   \                     ??radio_rf_ISR_7:
+   \   00008B   E5E9         MOV     A,0xe9
+   \   00008D   A2E5         MOV     C,0xE0 /* A   */.5
+   \   00008F   5008         JNC     ??radio_rf_ISR_8
+    277          	{
+    278          		// reset
+    279          		RFST = RFST_SIDLE;
+   \   000091   75E104       MOV     0xe1,#0x4
+    280          		auth_ptr_rx = 0;
+   \   000094   90....       MOV     DPTR,#auth_ptr_rx
+   \   000097   E4           CLR     A
+   \   000098   F0           MOVX    @DPTR,A
+    281          	}
+    282          	//Clear IRQ
+    283          	RFIF = 0;
+   \                     ??radio_rf_ISR_8:
+   \   000099   75E900       MOV     0xe9,#0x0
+    284          }
+   \   00009C   D083         POP     DPH
+   \   00009E   D082         POP     DPL
+   \   0000A0   22           RET
+   \   0000A1                REQUIRE S1CON
+   \   0000A1                REQUIRE RFIF
+   \   0000A1                REQUIRE RFST
+    285          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    286          void radio_rftxrx(void)
+   \                     radio_rftxrx:
+    287          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    288          	//u8 data;
+    289                  
+    290                  if (MARCSTATE == MARC_STATE_RX)
+   \   000004   90DF3B       MOV     DPTR,#-0x20c5
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   640D         XRL     A,#0xd
+   \   00000A   7022         JNZ     ??radio_rftxrx_0
+    291                  {
+    292          	  if (auth_ptr_rx < PACKET_RECEIVE_LENGTH)//28)//PACKET_RECEIVE_LENGTH)
+   \   00000C   90....       MOV     DPTR,#auth_ptr_rx
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   C3           CLR     C
+   \   000011   942C         SUBB    A,#0x2c
+   \   000013   5063         JNC     ??radio_rftxrx_1
+    293          	  {
+    294          		auth_data_rx[auth_ptr_rx] = RFD;
+   \   000015   E5D9         MOV     A,0xd9
+   \   000017   C0E0         PUSH    A
+   \   000019   E0           MOVX    A,@DPTR
+   \   00001A   F8           MOV     R0,A
+   \   00001B   74..         MOV     A,#auth_data_rx & 0xff
+   \   00001D   28           ADD     A,R0
+   \   00001E   F582         MOV     DPL,A
+   \   000020   74..         MOV     A,#(auth_data_rx >> 8) & 0xff
+   \   000022   3400         ADDC    A,#0x0
+   \   000024   F583         MOV     DPH,A
+   \   000026   D0E0         POP     A
+   \   000028   F0           MOVX    @DPTR,A
+    295          		auth_ptr_rx++;
+   \   000029   90....       MOV     DPTR,#auth_ptr_rx
+   \   00002C   8047         SJMP    ??radio_rftxrx_2
+    296          	  }
+    297                  }
+    298                  else if (MARCSTATE == MARC_STATE_TX)
+   \                     ??radio_rftxrx_0:
+   \   00002E   E0           MOVX    A,@DPTR
+   \   00002F   6413         XRL     A,#0x13
+   \   000031   7045         JNZ     ??radio_rftxrx_1
+    299                  { 
+    300                      if ((auth_ptr_tx < PACKET_BEACON_LENGTH) && (!envia_ejemplo))//26)//PACKET_TRANSMIT_LENGTH)
+   \   000033   90....       MOV     DPTR,#auth_ptr_tx
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   C3           CLR     C
+   \   000038   940E         SUBB    A,#0xe
+   \   00003A   5014         JNC     ??radio_rftxrx_3
+   \   00003C   90....       MOV     DPTR,#envia_ejemplo
+   \   00003F   E0           MOVX    A,@DPTR
+   \   000040   700E         JNZ     ??radio_rftxrx_3
+    301                        {
+    302                            RFD = auth_data_tx[auth_ptr_tx];
+   \   000042   90....       MOV     DPTR,#auth_ptr_tx
+   \   000045   E0           MOVX    A,@DPTR
+   \   000046   F8           MOV     R0,A
+   \   000047   74..         MOV     A,#auth_data_tx & 0xff
+   \   000049   28           ADD     A,R0
+   \   00004A   F582         MOV     DPL,A
+   \   00004C   74..         MOV     A,#(auth_data_tx >> 8) & 0xff
+   \   00004E   801B         SJMP    ??radio_rftxrx_4
+    303                           auth_ptr_tx++;
+    304                        }else if ((auth_ptr_tx < 26) && (envia_ejemplo))
+   \                     ??radio_rftxrx_3:
+   \   000050   90....       MOV     DPTR,#auth_ptr_tx
+   \   000053   E0           MOVX    A,@DPTR
+   \   000054   C3           CLR     C
+   \   000055   941A         SUBB    A,#0x1a
+   \   000057   501F         JNC     ??radio_rftxrx_1
+   \   000059   90....       MOV     DPTR,#envia_ejemplo
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   6019         JZ      ??radio_rftxrx_1
+    305                        {
+    306                           RFD = auth_data_example[auth_ptr_tx];
+   \   00005F   90....       MOV     DPTR,#auth_ptr_tx
+   \   000062   E0           MOVX    A,@DPTR
+   \   000063   F8           MOV     R0,A
+   \   000064   74..         MOV     A,#auth_data_example & 0xff
+   \   000066   28           ADD     A,R0
+   \   000067   F582         MOV     DPL,A
+   \   000069   74..         MOV     A,#(auth_data_example >> 8) & 0xff
+   \                     ??radio_rftxrx_4:
+   \   00006B   3400         ADDC    A,#0x0
+   \   00006D   F583         MOV     DPH,A
+   \   00006F   E0           MOVX    A,@DPTR
+   \   000070   F5D9         MOV     0xd9,A
+    307                           auth_ptr_tx++;
+   \   000072   90....       MOV     DPTR,#auth_ptr_tx
+   \                     ??radio_rftxrx_2:
+   \   000075   E0           MOVX    A,@DPTR
+   \   000076   04           INC     A
+   \   000077   F0           MOVX    @DPTR,A
+    308                          
+    309                        }
+    310                    //LED_ON;
+    311                  }
+    312          }
+   \                     ??radio_rftxrx_1:
+   \   000078   D083         POP     DPH
+   \   00007A   D082         POP     DPL
+   \   00007C   22           RET
+   \   00007D                REQUIRE RFD
+    313          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    314          u8 check_packet(packet_t *packet)
+   \                     check_packet:
+    315          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    316            /*Aqui usamos python para comprobar la ID y RAND*/
+    317            if (packet->type != 0x01) return PACKET_ERROR_TYPE;
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   A3           INC     DPTR
+   \   000009   A3           INC     DPTR
+   \   00000A   A3           INC     DPTR
+   \   00000B   A3           INC     DPTR
+   \   00000C   A3           INC     DPTR
+   \   00000D   A3           INC     DPTR
+   \   00000E   A3           INC     DPTR
+   \   00000F   A3           INC     DPTR
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   6401         XRL     A,#0x1
+   \   000013   6004         JZ      ??check_packet_0
+   \   000015   7903         MOV     R1,#0x3
+   \   000017   8002         SJMP    ??check_packet_1
+    318            else return PACKET_SIN_ERROR;
+   \                     ??check_packet_0:
+   \   000019   7900         MOV     R1,#0x0
+   \                     ??check_packet_1:
+   \   00001B   D083         POP     DPH
+   \   00001D   D082         POP     DPL
+   \   00001F   22           RET
+    319          }
+    320          
+    321          //packet_d = AESap(ID XOR IV) - AESap(AESap(ID XOR IV) XOR AESw(RANDOM))
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    322          void decompress_packet(u8 *packet_d,packet_t *packet)
+   \                     decompress_packet:
+    323          {
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 32
+   \   000005   74E0         MOV     A,#-0x20
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   EC           MOV     A,R4
+   \   00000B   FE           MOV     R6,A
+   \   00000C   ED           MOV     A,R5
+   \   00000D   FF           MOV     R7,A
+    324            u8 i;
+    325            u8 data_encrypt[32];
+    326            for (i=0;i<4;i++) packet->dst[i] = packet_d[i];
+   \   00000E   7800         MOV     R0,#0x0
+   \   000010   801D         SJMP    ??decompress_packet_0
+   \                     ??decompress_packet_1:
+   \   000012   8882         MOV     DPL,R0
+   \   000014   AC82         MOV     R4,DPL
+   \   000016   EA           MOV     A,R2
+   \   000017   2C           ADD     A,R4
+   \   000018   F582         MOV     DPL,A
+   \   00001A   EB           MOV     A,R3
+   \   00001B   3400         ADDC    A,#0x0
+   \   00001D   F583         MOV     DPH,A
+   \   00001F   E0           MOVX    A,@DPTR
+   \   000020   C0E0         PUSH    A
+   \   000022   EE           MOV     A,R6
+   \   000023   2C           ADD     A,R4
+   \   000024   F582         MOV     DPL,A
+   \   000026   EF           MOV     A,R7
+   \   000027   3400         ADDC    A,#0x0
+   \   000029   F583         MOV     DPH,A
+   \   00002B   D0E0         POP     A
+   \   00002D   F0           MOVX    @DPTR,A
+   \   00002E   08           INC     R0
+   \                     ??decompress_packet_0:
+   \   00002F   E8           MOV     A,R0
+   \   000030   C3           CLR     C
+   \   000031   9404         SUBB    A,#0x4
+   \   000033   40DD         JC      ??decompress_packet_1
+    327            for (i=0;i<4;i++) packet->src[i] = packet_d[4+i];
+   \   000035   7800         MOV     R0,#0x0
+   \   000037   8025         SJMP    ??decompress_packet_2
+   \                     ??decompress_packet_3:
+   \   000039   8882         MOV     DPL,R0
+   \   00003B   AC82         MOV     R4,DPL
+   \   00003D   EA           MOV     A,R2
+   \   00003E   2C           ADD     A,R4
+   \   00003F   F582         MOV     DPL,A
+   \   000041   EB           MOV     A,R3
+   \   000042   3400         ADDC    A,#0x0
+   \   000044   F583         MOV     DPH,A
+   \   000046   A3           INC     DPTR
+   \   000047   A3           INC     DPTR
+   \   000048   A3           INC     DPTR
+   \   000049   A3           INC     DPTR
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   C0E0         PUSH    A
+   \   00004D   EE           MOV     A,R6
+   \   00004E   2C           ADD     A,R4
+   \   00004F   F582         MOV     DPL,A
+   \   000051   EF           MOV     A,R7
+   \   000052   3400         ADDC    A,#0x0
+   \   000054   F583         MOV     DPH,A
+   \   000056   A3           INC     DPTR
+   \   000057   A3           INC     DPTR
+   \   000058   A3           INC     DPTR
+   \   000059   A3           INC     DPTR
+   \   00005A   D0E0         POP     A
+   \   00005C   F0           MOVX    @DPTR,A
+   \   00005D   08           INC     R0
+   \                     ??decompress_packet_2:
+   \   00005E   E8           MOV     A,R0
+   \   00005F   C3           CLR     C
+   \   000060   9404         SUBB    A,#0x4
+   \   000062   40D5         JC      ??decompress_packet_3
+    328            packet->type = packet_d[8];
+   \   000064   8A82         MOV     DPL,R2
+   \   000066   8B83         MOV     DPH,R3
+   \   000068   A3           INC     DPTR
+   \   000069   A3           INC     DPTR
+   \   00006A   A3           INC     DPTR
+   \   00006B   A3           INC     DPTR
+   \   00006C   A3           INC     DPTR
+   \   00006D   A3           INC     DPTR
+   \   00006E   A3           INC     DPTR
+   \   00006F   A3           INC     DPTR
+   \   000070   E0           MOVX    A,@DPTR
+   \   000071   8E82         MOV     DPL,R6
+   \   000073   8F83         MOV     DPH,R7
+   \   000075   A3           INC     DPTR
+   \   000076   A3           INC     DPTR
+   \   000077   A3           INC     DPTR
+   \   000078   A3           INC     DPTR
+   \   000079   A3           INC     DPTR
+   \   00007A   A3           INC     DPTR
+   \   00007B   A3           INC     DPTR
+   \   00007C   A3           INC     DPTR
+   \   00007D   F0           MOVX    @DPTR,A
+    329            for(i=0;i<32;i++) data_encrypt[i] = packet_d[9+i];
+   \   00007E   7800         MOV     R0,#0x0
+   \   000080   802E         SJMP    ??decompress_packet_4
+   \                     ??decompress_packet_5:
+   \   000082   8882         MOV     DPL,R0
+   \   000084   AC82         MOV     R4,DPL
+   \   000086   EA           MOV     A,R2
+   \   000087   2C           ADD     A,R4
+   \   000088   F582         MOV     DPL,A
+   \   00008A   EB           MOV     A,R3
+   \   00008B   3400         ADDC    A,#0x0
+   \   00008D   F583         MOV     DPH,A
+   \   00008F   A3           INC     DPTR
+   \   000090   A3           INC     DPTR
+   \   000091   A3           INC     DPTR
+   \   000092   A3           INC     DPTR
+   \   000093   A3           INC     DPTR
+   \   000094   A3           INC     DPTR
+   \   000095   A3           INC     DPTR
+   \   000096   A3           INC     DPTR
+   \   000097   A3           INC     DPTR
+   \   000098   E0           MOVX    A,@DPTR
+   \   000099   C0E0         PUSH    A
+   \   00009B   85..82       MOV     DPL,?XSP + 0
+   \   00009E   85..83       MOV     DPH,?XSP + 1
+   \   0000A1   E582         MOV     A,DPL
+   \   0000A3   2C           ADD     A,R4
+   \   0000A4   F582         MOV     DPL,A
+   \   0000A6   E583         MOV     A,DPH
+   \   0000A8   3400         ADDC    A,#0x0
+   \   0000AA   F583         MOV     DPH,A
+   \   0000AC   D0E0         POP     A
+   \   0000AE   F0           MOVX    @DPTR,A
+   \   0000AF   08           INC     R0
+   \                     ??decompress_packet_4:
+   \   0000B0   E8           MOV     A,R0
+   \   0000B1   C3           CLR     C
+   \   0000B2   9420         SUBB    A,#0x20
+   \   0000B4   40CC         JC      ??decompress_packet_5
+    330            aes_decryptCBC(data_encrypt,key_ap);
+   \   0000B6                ; Setup parameters for call to function aes_decryptCBC
+   \   0000B6   7C..         MOV     R4,#key_ap & 0xff
+   \   0000B8   7D..         MOV     R5,#(key_ap >> 8) & 0xff
+   \   0000BA   85..82       MOV     DPL,?XSP + 0
+   \   0000BD   85..83       MOV     DPH,?XSP + 1
+   \   0000C0   AA82         MOV     R2,DPL
+   \   0000C2   AB83         MOV     R3,DPH
+   \   0000C4   12....       LCALL   aes_decryptCBC
+    331            packet->payload.random.id = (data_encrypt[0]*0x100) + data_encrypt[1];
+   \   0000C7   E0           MOVX    A,@DPTR
+   \   0000C8   F8           MOV     R0,A
+   \   0000C9   E4           CLR     A
+   \   0000CA   C8           XCH     A,R0
+   \   0000CB   F9           MOV     R1,A
+   \   0000CC   7401         MOV     A,#0x1
+   \   0000CE   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000D1   E0           MOVX    A,@DPTR
+   \   0000D2   8E82         MOV     DPL,R6
+   \   0000D4   8F83         MOV     DPH,R7
+   \   0000D6   A3           INC     DPTR
+   \   0000D7   A3           INC     DPTR
+   \   0000D8   A3           INC     DPTR
+   \   0000D9   A3           INC     DPTR
+   \   0000DA   A3           INC     DPTR
+   \   0000DB   A3           INC     DPTR
+   \   0000DC   A3           INC     DPTR
+   \   0000DD   A3           INC     DPTR
+   \   0000DE   A3           INC     DPTR
+   \   0000DF   F0           MOVX    @DPTR,A
+   \   0000E0   A3           INC     DPTR
+   \   0000E1   E9           MOV     A,R1
+   \   0000E2   F0           MOVX    @DPTR,A
+    332            for(i=0;i<14;i++) packet->payload.random.padd_id[i] = data_encrypt[i+2]; //Deberian de ser todos 0x00
+   \   0000E3   802F         SJMP    ??decompress_packet_6
+   \                     ??decompress_packet_7:
+   \   0000E5   8882         MOV     DPL,R0
+   \   0000E7   AA82         MOV     R2,DPL
+   \   0000E9   85..82       MOV     DPL,?XSP + 0
+   \   0000EC   85..83       MOV     DPH,?XSP + 1
+   \   0000EF   E582         MOV     A,DPL
+   \   0000F1   2A           ADD     A,R2
+   \   0000F2   F582         MOV     DPL,A
+   \   0000F4   E583         MOV     A,DPH
+   \   0000F6   3400         ADDC    A,#0x0
+   \   0000F8   F583         MOV     DPH,A
+   \   0000FA   A3           INC     DPTR
+   \   0000FB   A3           INC     DPTR
+   \   0000FC   E0           MOVX    A,@DPTR
+   \   0000FD   C0E0         PUSH    A
+   \   0000FF   EE           MOV     A,R6
+   \   000100   2A           ADD     A,R2
+   \   000101   FA           MOV     R2,A
+   \   000102   EF           MOV     A,R7
+   \   000103   3400         ADDC    A,#0x0
+   \   000105   FB           MOV     R3,A
+   \   000106   EA           MOV     A,R2
+   \   000107   240B         ADD     A,#0xb
+   \   000109   F582         MOV     DPL,A
+   \   00010B   EB           MOV     A,R3
+   \   00010C   3400         ADDC    A,#0x0
+   \   00010E   F583         MOV     DPH,A
+   \   000110   D0E0         POP     A
+   \   000112   F0           MOVX    @DPTR,A
+   \   000113   08           INC     R0
+   \                     ??decompress_packet_6:
+   \   000114   E8           MOV     A,R0
+   \   000115   C3           CLR     C
+   \   000116   940E         SUBB    A,#0xe
+   \   000118   40CB         JC      ??decompress_packet_7
+    333            for(i=0;i<16;i++) packet->payload.random.number_encrypt[i] = data_encrypt[i+16];
+   \   00011A   7800         MOV     R0,#0x0
+   \   00011C   8035         SJMP    ??decompress_packet_8
+   \                     ??decompress_packet_9:
+   \   00011E   8882         MOV     DPL,R0
+   \   000120   AA82         MOV     R2,DPL
+   \   000122   85..82       MOV     DPL,?XSP + 0
+   \   000125   85..83       MOV     DPH,?XSP + 1
+   \   000128   E582         MOV     A,DPL
+   \   00012A   2A           ADD     A,R2
+   \   00012B   FC           MOV     R4,A
+   \   00012C   E583         MOV     A,DPH
+   \   00012E   3400         ADDC    A,#0x0
+   \   000130   FD           MOV     R5,A
+   \   000131   EC           MOV     A,R4
+   \   000132   2410         ADD     A,#0x10
+   \   000134   F582         MOV     DPL,A
+   \   000136   ED           MOV     A,R5
+   \   000137   3400         ADDC    A,#0x0
+   \   000139   F583         MOV     DPH,A
+   \   00013B   E0           MOVX    A,@DPTR
+   \   00013C   C0E0         PUSH    A
+   \   00013E   EE           MOV     A,R6
+   \   00013F   2A           ADD     A,R2
+   \   000140   FA           MOV     R2,A
+   \   000141   EF           MOV     A,R7
+   \   000142   3400         ADDC    A,#0x0
+   \   000144   FB           MOV     R3,A
+   \   000145   EA           MOV     A,R2
+   \   000146   2419         ADD     A,#0x19
+   \   000148   F582         MOV     DPL,A
+   \   00014A   EB           MOV     A,R3
+   \   00014B   3400         ADDC    A,#0x0
+   \   00014D   F583         MOV     DPH,A
+   \   00014F   D0E0         POP     A
+   \   000151   F0           MOVX    @DPTR,A
+   \   000152   08           INC     R0
+   \                     ??decompress_packet_8:
+   \   000153   E8           MOV     A,R0
+   \   000154   C3           CLR     C
+   \   000155   9410         SUBB    A,#0x10
+   \   000157   40C5         JC      ??decompress_packet_9
+    334          }
+   \   000159   7420         MOV     A,#0x20
+   \   00015B   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00015E   7F01         MOV     R7,#0x1
+   \   000160   02....       LJMP    ?FUNC_LEAVE_XDATA
+    335          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    336          void send_example(void)
+   \                     send_example:
+    337          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 16
+   \   000004   74F0         MOV     A,#-0x10
+   \   000006   12....       LCALL   ?ALLOC_XSTACK8
+    338            u8 i;
+    339            u8 cad[16];
+    340            envia_ejemplo = 1;
+   \   000009   90....       MOV     DPTR,#envia_ejemplo
+   \   00000C   7401         MOV     A,#0x1
+   \   00000E   F0           MOVX    @DPTR,A
+    341            
+    342            for (i=0;i<16;i++) cad[i] = example_packet_tx[i+10];
+   \   00000F   7A00         MOV     R2,#0x0
+   \   000011   8027         SJMP    ??send_example_0
+   \                     ??send_example_1:
+   \   000013   8A82         MOV     DPL,R2
+   \   000015   A882         MOV     R0,DPL
+   \   000017   74..         MOV     A,#(example_packet_tx + 10) & 0xff
+   \   000019   28           ADD     A,R0
+   \   00001A   F582         MOV     DPL,A
+   \   00001C   74..         MOV     A,#((example_packet_tx + 10) >> 8) & 0xff
+   \   00001E   3400         ADDC    A,#0x0
+   \   000020   F583         MOV     DPH,A
+   \   000022   E0           MOVX    A,@DPTR
+   \   000023   C0E0         PUSH    A
+   \   000025   85..82       MOV     DPL,?XSP + 0
+   \   000028   85..83       MOV     DPH,?XSP + 1
+   \   00002B   E582         MOV     A,DPL
+   \   00002D   28           ADD     A,R0
+   \   00002E   F582         MOV     DPL,A
+   \   000030   E583         MOV     A,DPH
+   \   000032   3400         ADDC    A,#0x0
+   \   000034   F583         MOV     DPH,A
+   \   000036   D0E0         POP     A
+   \   000038   F0           MOVX    @DPTR,A
+   \   000039   0A           INC     R2
+   \                     ??send_example_0:
+   \   00003A   EA           MOV     A,R2
+   \   00003B   C3           CLR     C
+   \   00003C   9410         SUBB    A,#0x10
+   \   00003E   40D3         JC      ??send_example_1
+    343            aes_encrypt(cad,key_ap);
+   \   000040                ; Setup parameters for call to function aes_encrypt
+   \   000040   7C..         MOV     R4,#key_ap & 0xff
+   \   000042   7D..         MOV     R5,#(key_ap >> 8) & 0xff
+   \   000044   85..82       MOV     DPL,?XSP + 0
+   \   000047   85..83       MOV     DPH,?XSP + 1
+   \   00004A   AA82         MOV     R2,DPL
+   \   00004C   AB83         MOV     R3,DPH
+   \   00004E   12....       LCALL   aes_encrypt
+    344            for (i=0;i<10;i++) auth_data_example[i]=example_packet_tx[i];
+   \   000051   7A00         MOV     R2,#0x0
+   \   000053   8021         SJMP    ??send_example_2
+   \                     ??send_example_3:
+   \   000055   8A82         MOV     DPL,R2
+   \   000057   A882         MOV     R0,DPL
+   \   000059   74..         MOV     A,#example_packet_tx & 0xff
+   \   00005B   28           ADD     A,R0
+   \   00005C   F582         MOV     DPL,A
+   \   00005E   74..         MOV     A,#(example_packet_tx >> 8) & 0xff
+   \   000060   3400         ADDC    A,#0x0
+   \   000062   F583         MOV     DPH,A
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   C0E0         PUSH    A
+   \   000067   74..         MOV     A,#auth_data_example & 0xff
+   \   000069   28           ADD     A,R0
+   \   00006A   F582         MOV     DPL,A
+   \   00006C   74..         MOV     A,#(auth_data_example >> 8) & 0xff
+   \   00006E   3400         ADDC    A,#0x0
+   \   000070   F583         MOV     DPH,A
+   \   000072   D0E0         POP     A
+   \   000074   F0           MOVX    @DPTR,A
+   \   000075   0A           INC     R2
+   \                     ??send_example_2:
+   \   000076   EA           MOV     A,R2
+   \   000077   C3           CLR     C
+   \   000078   940A         SUBB    A,#0xa
+   \   00007A   40D9         JC      ??send_example_3
+    345            for(i=0;i<16;i++) auth_data_example[i+10]=cad[i];
+   \   00007C   7A00         MOV     R2,#0x0
+   \   00007E   8027         SJMP    ??send_example_4
+   \                     ??send_example_5:
+   \   000080   8A82         MOV     DPL,R2
+   \   000082   A882         MOV     R0,DPL
+   \   000084   85..82       MOV     DPL,?XSP + 0
+   \   000087   85..83       MOV     DPH,?XSP + 1
+   \   00008A   E582         MOV     A,DPL
+   \   00008C   28           ADD     A,R0
+   \   00008D   F582         MOV     DPL,A
+   \   00008F   E583         MOV     A,DPH
+   \   000091   3400         ADDC    A,#0x0
+   \   000093   F583         MOV     DPH,A
+   \   000095   E0           MOVX    A,@DPTR
+   \   000096   C0E0         PUSH    A
+   \   000098   74..         MOV     A,#(auth_data_example + 10) & 0xff
+   \   00009A   28           ADD     A,R0
+   \   00009B   F582         MOV     DPL,A
+   \   00009D   74..         MOV     A,#((auth_data_example + 10) >> 8) & 0xff
+   \   00009F   3400         ADDC    A,#0x0
+   \   0000A1   F583         MOV     DPH,A
+   \   0000A3   D0E0         POP     A
+   \   0000A5   F0           MOVX    @DPTR,A
+   \   0000A6   0A           INC     R2
+   \                     ??send_example_4:
+   \   0000A7   EA           MOV     A,R2
+   \   0000A8   C3           CLR     C
+   \   0000A9   9410         SUBB    A,#0x10
+   \   0000AB   40D3         JC      ??send_example_5
+    346            radio_transmit();
+   \   0000AD                ; Setup parameters for call to function radio_transmit
+   \   0000AD   12....       LCALL   radio_transmit
+    347            while (auth_ptr_tx != 0);
+   \                     ??send_example_6:
+   \   0000B0   90....       MOV     DPTR,#auth_ptr_tx
+   \   0000B3   E0           MOVX    A,@DPTR
+   \   0000B4   70FA         JNZ     ??send_example_6
+    348          }
+   \   0000B6   7410         MOV     A,#0x10
+   \   0000B8   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000BB   D083         POP     DPH
+   \   0000BD   D082         POP     DPL
+   \   0000BF   22           RET
+    349          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    350          void send_rand(u32 rand)
+   \                     send_rand:
+    351          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 0
+    352            u8 i;
+    353            auth_data_tx[0]=13;
+   \   000005   90....       MOV     DPTR,#auth_data_tx
+   \   000008   740D         MOV     A,#0xd
+   \   00000A   F0           MOVX    @DPTR,A
+    354            for (i=1;i<5;i++) auth_data_tx[i] = 0xFF; //DST
+   \   00000B   7801         MOV     R0,#0x1
+   \   00000D   8012         SJMP    ??send_rand_0
+   \                     ??send_rand_1:
+   \   00000F   88..         MOV     ?V0 + 0,R0
+   \   000011   74..         MOV     A,#auth_data_tx & 0xff
+   \   000013   25..         ADD     A,?V0 + 0
+   \   000015   F582         MOV     DPL,A
+   \   000017   74..         MOV     A,#(auth_data_tx >> 8) & 0xff
+   \   000019   3400         ADDC    A,#0x0
+   \   00001B   F583         MOV     DPH,A
+   \   00001D   74FF         MOV     A,#-0x1
+   \   00001F   F0           MOVX    @DPTR,A
+   \   000020   08           INC     R0
+   \                     ??send_rand_0:
+   \   000021   E8           MOV     A,R0
+   \   000022   C3           CLR     C
+   \   000023   9405         SUBB    A,#0x5
+   \   000025   40E8         JC      ??send_rand_1
+    355            for (i=5;i<9;i++) auth_data_tx[i] = 0x02; //SRC
+   \   000027   7805         MOV     R0,#0x5
+   \   000029   8012         SJMP    ??send_rand_2
+   \                     ??send_rand_3:
+   \   00002B   88..         MOV     ?V0 + 0,R0
+   \   00002D   74..         MOV     A,#auth_data_tx & 0xff
+   \   00002F   25..         ADD     A,?V0 + 0
+   \   000031   F582         MOV     DPL,A
+   \   000033   74..         MOV     A,#(auth_data_tx >> 8) & 0xff
+   \   000035   3400         ADDC    A,#0x0
+   \   000037   F583         MOV     DPH,A
+   \   000039   7402         MOV     A,#0x2
+   \   00003B   F0           MOVX    @DPTR,A
+   \   00003C   08           INC     R0
+   \                     ??send_rand_2:
+   \   00003D   E8           MOV     A,R0
+   \   00003E   C3           CLR     C
+   \   00003F   9409         SUBB    A,#0x9
+   \   000041   40E8         JC      ??send_rand_3
+    356            auth_data_tx[9]=PACKET_TYPE_BEACON;
+   \   000043   90....       MOV     DPTR,#auth_data_tx + 9
+   \   000046   7403         MOV     A,#0x3
+   \   000048   F0           MOVX    @DPTR,A
+    357            auth_data_tx[10]=(u8)(rand>>24);
+   \   000049   ED           MOV     A,R5
+   \   00004A   A3           INC     DPTR
+   \   00004B   F0           MOVX    @DPTR,A
+    358            auth_data_tx[11]=(u8)(rand>>16);
+   \   00004C   EC           MOV     A,R4
+   \   00004D   A3           INC     DPTR
+   \   00004E   F0           MOVX    @DPTR,A
+    359            auth_data_tx[12]=(u8)(rand>>8);
+   \   00004F   EB           MOV     A,R3
+   \   000050   A3           INC     DPTR
+   \   000051   F0           MOVX    @DPTR,A
+    360            auth_data_tx[13]=(u8)(rand>>0);
+   \   000052   EA           MOV     A,R2
+   \   000053   A3           INC     DPTR
+   \   000054   F0           MOVX    @DPTR,A
+    361            //for (i=14;i<PACKET_TRANSMIT_LENGTH;i++) auth_data_tx[i] = 0x00;
+    362            radio_transmit();
+   \   000055                ; Setup parameters for call to function radio_transmit
+   \   000055   12....       LCALL   radio_transmit
+    363            while (auth_ptr_tx != 0);
+   \                     ??send_rand_4:
+   \   000058   90....       MOV     DPTR,#auth_ptr_tx
+   \   00005B   E0           MOVX    A,@DPTR
+   \   00005C   70FA         JNZ     ??send_rand_4
+    364          }
+   \   00005E   7F08         MOV     R7,#0x8
+   \   000060   02....       LJMP    ?FUNC_LEAVE_XDATA
+    365          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    366          void send_ack_radio(u8 randaes[16])
+   \                     send_ack_radio:
+    367          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    368             u8 i;
+    369             envia_ejemplo = 1;
+   \   000005   90....       MOV     DPTR,#envia_ejemplo
+   \   000008   7401         MOV     A,#0x1
+   \   00000A   F0           MOVX    @DPTR,A
+    370             auth_data_example[0]=25;
+   \   00000B   90....       MOV     DPTR,#auth_data_example
+   \   00000E   7419         MOV     A,#0x19
+   \   000010   F0           MOVX    @DPTR,A
+    371             for (i=1;i<5;i++) auth_data_example[i] = 0xFF; //DST
+   \   000011   7C01         MOV     R4,#0x1
+   \   000013   8012         SJMP    ??send_ack_radio_0
+   \                     ??send_ack_radio_1:
+   \   000015   8C..         MOV     ?V0 + 0,R4
+   \   000017   74..         MOV     A,#auth_data_example & 0xff
+   \   000019   25..         ADD     A,?V0 + 0
+   \   00001B   F582         MOV     DPL,A
+   \   00001D   74..         MOV     A,#(auth_data_example >> 8) & 0xff
+   \   00001F   3400         ADDC    A,#0x0
+   \   000021   F583         MOV     DPH,A
+   \   000023   74FF         MOV     A,#-0x1
+   \   000025   F0           MOVX    @DPTR,A
+   \   000026   0C           INC     R4
+   \                     ??send_ack_radio_0:
+   \   000027   EC           MOV     A,R4
+   \   000028   C3           CLR     C
+   \   000029   9405         SUBB    A,#0x5
+   \   00002B   40E8         JC      ??send_ack_radio_1
+    372             for (i=5;i<9;i++) auth_data_example[i] = 0x02; //SRC
+   \   00002D   7C05         MOV     R4,#0x5
+   \   00002F   8012         SJMP    ??send_ack_radio_2
+   \                     ??send_ack_radio_3:
+   \   000031   8C..         MOV     ?V0 + 0,R4
+   \   000033   74..         MOV     A,#auth_data_example & 0xff
+   \   000035   25..         ADD     A,?V0 + 0
+   \   000037   F582         MOV     DPL,A
+   \   000039   74..         MOV     A,#(auth_data_example >> 8) & 0xff
+   \   00003B   3400         ADDC    A,#0x0
+   \   00003D   F583         MOV     DPH,A
+   \   00003F   7402         MOV     A,#0x2
+   \   000041   F0           MOVX    @DPTR,A
+   \   000042   0C           INC     R4
+   \                     ??send_ack_radio_2:
+   \   000043   EC           MOV     A,R4
+   \   000044   C3           CLR     C
+   \   000045   9409         SUBB    A,#0x9
+   \   000047   40E8         JC      ??send_ack_radio_3
+    373             auth_data_example[9] = PACKET_TYPE_OK;
+   \   000049   90....       MOV     DPTR,#auth_data_example + 9
+   \   00004C   7402         MOV     A,#0x2
+   \   00004E   F0           MOVX    @DPTR,A
+    374             for(i=0;i<16;i++) auth_data_example[i+10] = randaes[i];
+   \   00004F   7C00         MOV     R4,#0x0
+   \   000051   801F         SJMP    ??send_ack_radio_4
+   \                     ??send_ack_radio_5:
+   \   000053   8C82         MOV     DPL,R4
+   \   000055   A882         MOV     R0,DPL
+   \   000057   EA           MOV     A,R2
+   \   000058   28           ADD     A,R0
+   \   000059   F582         MOV     DPL,A
+   \   00005B   EB           MOV     A,R3
+   \   00005C   3400         ADDC    A,#0x0
+   \   00005E   F583         MOV     DPH,A
+   \   000060   E0           MOVX    A,@DPTR
+   \   000061   C0E0         PUSH    A
+   \   000063   74..         MOV     A,#(auth_data_example + 10) & 0xff
+   \   000065   28           ADD     A,R0
+   \   000066   F582         MOV     DPL,A
+   \   000068   74..         MOV     A,#((auth_data_example + 10) >> 8) & 0xff
+   \   00006A   3400         ADDC    A,#0x0
+   \   00006C   F583         MOV     DPH,A
+   \   00006E   D0E0         POP     A
+   \   000070   F0           MOVX    @DPTR,A
+   \   000071   0C           INC     R4
+   \                     ??send_ack_radio_4:
+   \   000072   EC           MOV     A,R4
+   \   000073   C3           CLR     C
+   \   000074   9410         SUBB    A,#0x10
+   \   000076   40DB         JC      ??send_ack_radio_5
+    375             radio_transmit();
+   \   000078                ; Setup parameters for call to function radio_transmit
+   \   000078   12....       LCALL   radio_transmit
+    376             while (auth_ptr_tx != 0);
+   \                     ??send_ack_radio_6:
+   \   00007B   90....       MOV     DPTR,#auth_ptr_tx
+   \   00007E   E0           MOVX    A,@DPTR
+   \   00007F   70FA         JNZ     ??send_ack_radio_6
+    377          }
+   \   000081   7F02         MOV     R7,#0x2
+   \   000083   02....       LJMP    ?FUNC_LEAVE_XDATA
+    378          
+    379          //Rerurn ID and AES(RAND)
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    380          u8 data2usb(u8 data[18])
+   \                     data2usb:
+    381          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    382              u8 i;
+    383              if (packet_id_rand)
+   \   000005   90....       MOV     DPTR,#packet_id_rand
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   603C         JZ      ??data2usb_0
+    384              {
+    385                data[0]=(u8)(packet.payload.random.id >> 8);
+   \   00000B   90....       MOV     DPTR,#packet + 10
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   8A82         MOV     DPL,R2
+   \   000011   8B83         MOV     DPH,R3
+   \   000013   F0           MOVX    @DPTR,A
+    386                data[1]=(u8)(packet.payload.random.id);
+   \   000014   90....       MOV     DPTR,#packet + 9
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   8A82         MOV     DPL,R2
+   \   00001A   8B83         MOV     DPH,R3
+   \   00001C   A3           INC     DPTR
+   \   00001D   F0           MOVX    @DPTR,A
+    387                for(i=2;i<18;i++) data[i] = packet.payload.random.number_encrypt[i-2];
+   \   00001E   7C02         MOV     R4,#0x2
+   \                     ??data2usb_1:
+   \   000020   EC           MOV     A,R4
+   \   000021   C3           CLR     C
+   \   000022   9412         SUBB    A,#0x12
+   \   000024   503A         JNC     ??data2usb_2
+   \   000026   8C82         MOV     DPL,R4
+   \   000028   A882         MOV     R0,DPL
+   \   00002A   74..         MOV     A,#(packet + 23) & 0xff
+   \   00002C   28           ADD     A,R0
+   \   00002D   F582         MOV     DPL,A
+   \   00002F   74..         MOV     A,#((packet + 23) >> 8) & 0xff
+   \   000031   3400         ADDC    A,#0x0
+   \   000033   F583         MOV     DPH,A
+   \   000035   E0           MOVX    A,@DPTR
+   \   000036   C0E0         PUSH    A
+   \   000038   EA           MOV     A,R2
+   \   000039   28           ADD     A,R0
+   \   00003A   F582         MOV     DPL,A
+   \   00003C   EB           MOV     A,R3
+   \   00003D   3400         ADDC    A,#0x0
+   \   00003F   F583         MOV     DPH,A
+   \   000041   D0E0         POP     A
+   \   000043   F0           MOVX    @DPTR,A
+   \   000044   0C           INC     R4
+   \   000045   80D9         SJMP    ??data2usb_1
+    388              } else {
+    389                for (i=0;i<18;i++) data[i]=0x00;
+   \                     ??data2usb_0:
+   \   000047   7C00         MOV     R4,#0x0
+   \   000049   800F         SJMP    ??data2usb_3
+   \                     ??data2usb_4:
+   \   00004B   8C..         MOV     ?V0 + 0,R4
+   \   00004D   EA           MOV     A,R2
+   \   00004E   25..         ADD     A,?V0 + 0
+   \   000050   F582         MOV     DPL,A
+   \   000052   EB           MOV     A,R3
+   \   000053   3400         ADDC    A,#0x0
+   \   000055   F583         MOV     DPH,A
+   \   000057   E4           CLR     A
+   \   000058   F0           MOVX    @DPTR,A
+   \   000059   0C           INC     R4
+   \                     ??data2usb_3:
+   \   00005A   EC           MOV     A,R4
+   \   00005B   C3           CLR     C
+   \   00005C   9412         SUBB    A,#0x12
+   \   00005E   40EB         JC      ??data2usb_4
+    390              }
+    391              packet_id_rand = 0;
+   \                     ??data2usb_2:
+   \   000060   90....       MOV     DPTR,#packet_id_rand
+   \   000063   E4           CLR     A
+   \   000064   F0           MOVX    @DPTR,A
+    392              return 18;
+   \   000065   7912         MOV     R1,#0x12
+   \   000067   7F02         MOV     R7,#0x2
+   \   000069   02....       LJMP    ?FUNC_LEAVE_XDATA
+    393          }
+    394          
+    395          
+    396          // AP main routine
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    397          void authentication_main(u32 random)
+   \                     authentication_main:
+    398          {
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+    399            u8 i;
+    400            u16 d_sleep = 0;
+    401            
+    402            AuthRxModeOn(); //Mode RX Start
+   \   000005                ; Setup parameters for call to function AuthRxModeOn
+   \   000005   12....       LCALL   AuthRxModeOn
+    403            
+    404            /* Espera recibir un paquete de autenticacion */
+    405            for (d_sleep=0;d_sleep<10000;d_sleep++)
+   \   000008   7E00         MOV     R6,#0x0
+   \   00000A   7F00         MOV     R7,#0x0
+   \   00000C   804F         SJMP    ??authentication_main_0
+    406            {
+    407                  //if (auth_data_rx[9] == 0x01) LED_ON; //type
+    408                  //if (auth_data_rx[11] == 'O') LED_ON;
+    409                  if (packet_ok) //receive packet 
+    410                  {
+    411                          LED_ON;
+    412                    	//if (auth_data_rx[2] == 0xFF) radio_transmit();
+    413                          packet_ok = 0;
+    414          
+    415                          for(i=0;i<41;i++) paquete_recibido[i] = auth_data_rx[i+1];
+   \                     ??authentication_main_1:
+   \   00000E   8A82         MOV     DPL,R2
+   \   000010   A882         MOV     R0,DPL
+   \   000012   74..         MOV     A,#(auth_data_rx + 1) & 0xff
+   \   000014   28           ADD     A,R0
+   \   000015   F582         MOV     DPL,A
+   \   000017   74..         MOV     A,#((auth_data_rx + 1) >> 8) & 0xff
+   \   000019   3400         ADDC    A,#0x0
+   \   00001B   F583         MOV     DPH,A
+   \   00001D   E0           MOVX    A,@DPTR
+   \   00001E   C0E0         PUSH    A
+   \   000020   74..         MOV     A,#paquete_recibido & 0xff
+   \   000022   28           ADD     A,R0
+   \   000023   F582         MOV     DPL,A
+   \   000025   74..         MOV     A,#(paquete_recibido >> 8) & 0xff
+   \   000027   3400         ADDC    A,#0x0
+   \   000029   F583         MOV     DPH,A
+   \   00002B   D0E0         POP     A
+   \   00002D   F0           MOVX    @DPTR,A
+   \   00002E   0A           INC     R2
+   \                     ??authentication_main_2:
+   \   00002F   EA           MOV     A,R2
+   \   000030   C3           CLR     C
+   \   000031   9429         SUBB    A,#0x29
+   \   000033   40D9         JC      ??authentication_main_1
+    416                          
+    417                          decompress_packet(paquete_recibido,&packet);
+   \   000035                ; Setup parameters for call to function decompress_packet
+   \   000035   7C..         MOV     R4,#packet & 0xff
+   \   000037   7D..         MOV     R5,#(packet >> 8) & 0xff
+   \   000039   7A..         MOV     R2,#paquete_recibido & 0xff
+   \   00003B   7B..         MOV     R3,#(paquete_recibido >> 8) & 0xff
+   \   00003D   12....       LCALL   decompress_packet
+    418                          
+    419                          //send_rand(packet.payload.random.number);
+    420                          if (check_packet(&packet) == PACKET_SIN_ERROR)
+   \   000040                ; Setup parameters for call to function check_packet
+   \   000040   7A..         MOV     R2,#packet & 0xff
+   \   000042   7B..         MOV     R3,#(packet >> 8) & 0xff
+   \   000044   12....       LCALL   check_packet
+   \   000047   E9           MOV     A,R1
+   \   000048   7006         JNZ     ??authentication_main_3
+    421                          {
+    422                            packet_id_rand = 1;
+   \   00004A   90....       MOV     DPTR,#packet_id_rand
+   \   00004D   7401         MOV     A,#0x1
+   \   00004F   F0           MOVX    @DPTR,A
+    423                            
+    424                            //Comprobamos random para ver si es valido, si es valido sacamos el (ID,random) encriptado por USB
+    425                            //en auth_usb se guarda la id[0:1] y el random encriptado[2:18]
+    426                            /*for (d_sleep=0; d_sleep<50000; d_sleep++);
+    427                            for (d_sleep=0; d_sleep<50000; d_sleep++);
+    428                            for (d_sleep=0; d_sleep<50000; d_sleep++);
+    429                            for (d_sleep=0; d_sleep<50000; d_sleep++);
+    430                            for (d_sleep=0; d_sleep<50000; d_sleep++);
+    431                            for (d_sleep=0; d_sleep<50000; d_sleep++);
+    432                            send_example();*/
+    433                          }
+    434                          AuthRxModeOn();
+   \                     ??authentication_main_3:
+   \   000050                ; Setup parameters for call to function AuthRxModeOn
+   \   000050   12....       LCALL   AuthRxModeOn
+    435                          LED_OFF;
+   \   000053   C291         CLR     0x90.1
+   \                     ??authentication_main_4:
+   \   000055   EE           MOV     A,R6
+   \   000056   2401         ADD     A,#0x1
+   \   000058   0E           INC     R6
+   \   000059   EF           MOV     A,R7
+   \   00005A   3400         ADDC    A,#0x0
+   \   00005C   FF           MOV     R7,A
+   \                     ??authentication_main_0:
+   \   00005D   C3           CLR     C
+   \   00005E   EE           MOV     A,R6
+   \   00005F   9410         SUBB    A,#0x10
+   \   000061   EF           MOV     A,R7
+   \   000062   9427         SUBB    A,#0x27
+   \   000064   500D         JNC     ??authentication_main_5
+   \   000066   90....       MOV     DPTR,#packet_ok
+   \   000069   E0           MOVX    A,@DPTR
+   \   00006A   60E9         JZ      ??authentication_main_4
+   \   00006C   D291         SETB    0x90.1
+   \   00006E   E4           CLR     A
+   \   00006F   F0           MOVX    @DPTR,A
+   \   000070   FA           MOV     R2,A
+   \   000071   80BC         SJMP    ??authentication_main_2
+    436                  }
+    437            }
+    438          }
+   \                     ??authentication_main_5:
+   \   000073   7F01         MOV     R7,#0x1
+   \   000075   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000078                REQUIRE _A_P1
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for key_ap>`:
+   \   000000   00           DB 0
+   \   000001   01           DB 1
+   \   000002   02           DB 2
+   \   000003   03           DB 3
+   \   000004   04           DB 4
+   \   000005   05           DB 5
+   \   000006   06           DB 6
+   \   000007   07           DB 7
+   \   000008   08           DB 8
+   \   000009   09           DB 9
+   \   00000A   0A           DB 10
+   \   00000B   0B           DB 11
+   \   00000C   0C           DB 12
+   \   00000D   0D           DB 13
+   \   00000E   0E           DB 14
+   \   00000F   0F           DB 15
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for example_packet_tx>`:
+   \   000000   19           DB 25
+   \   000001   FF           DB 255
+   \   000002   FF           DB 255
+   \   000003   FF           DB 255
+   \   000004   FF           DB 255
+   \   000005   02           DB 2
+   \   000006   02           DB 2
+   \   000007   02           DB 2
+   \   000008   02           DB 2
+   \   000009   02           DB 2
+   \   00000A   00           DB 0
+   \   00000B   02           DB 2
+   \   00000C   00           DB 0
+   \   00000D   01           DB 1
+   \   00000E   02           DB 2
+   \   00000F   03           DB 3
+   \   000010   04           DB 4
+   \   000011   05           DB 5
+   \   000012   06           DB 6
+   \   000013   07           DB 7
+   \   000014   07           DB 7
+   \   000015   08           DB 8
+   \   000016   09           DB 9
+   \   000017   0A           DB 10
+   \   000018   0B           DB 11
+   \   000019   0C           DB 12
+
+   Maximum stack usage in bytes:
+
+     Function               ISTACK PSTACK XSTACK
+     --------               ------ ------ ------
+     AuthRxModeOff              0      0      0
+     AuthRxModeOn               2      0      8
+     authentication_config      2      0      0
+     authentication_main        1      0      8
+       -> AuthRxModeOn          0      0     16
+       -> decompress_packet     0      0     16
+       -> check_packet          0      0     16
+       -> AuthRxModeOn          0      0     16
+     check_packet               2      0      8
+     data2usb                   1      0      9
+     decompress_packet          1      0     48
+       -> aes_decryptCBC        0      0     80
+     radio_receive              2      0      0
+     radio_rf_ISR               2      0      0
+     radio_rftxrx               3      0      0
+     radio_transmit             2      0     16
+     send_ack_radio             1      0      9
+       -> radio_transmit        0      0     18
+     send_example               3      0     16
+       -> aes_encrypt           4      0     32
+       -> radio_transmit        4      0     32
+     send_rand                  0      0     15
+       -> radio_transmit        0      0     30
+
+
+   Segment part sizes:
+
+     Function/Label                       Bytes
+     --------------                       -----
+     _A_P1                                   1
+     RFIM                                    1
+     IEN2                                    1
+     S1CON                                   1
+     WORCTRL                                 1
+     WOREVT0                                 1
+     WOREVT1                                 1
+     _A_IEN0                                 1
+     RFD                                     1
+     RFST                                    1
+     RFIF                                    1
+     key_ap                                 16
+     paquete_recibido                       41
+     auth_usb                               18
+     packet                                 41
+     packet_ok                               1
+     packet_id_rand                          1
+     envia_ejemplo                           1
+     auth_data_tx                           14
+     auth_data_example                      26
+     auth_data_rx                           44
+     auth_ptr_tx                             1
+     auth_ptr_rx                             1
+     auth_flag                               1
+     authentication_config                 233
+     AuthRxModeOn                           36
+     AuthRxModeOff                          10
+     radio_receive                          36
+     example_packet_tx                      26
+     radio_transmit                         36
+     radio_rf_ISR                          161
+     radio_rftxrx                          125
+     check_packet                           32
+     decompress_packet                     355
+     send_example                          192
+     send_rand                              99
+     send_ack_radio                        134
+     data2usb                              108
+     authentication_main                   120
+     ?<Initializer for key_ap>              16
+     ?<Initializer for example_packet_tx>   26
+
+ 
+ 1 677 bytes in segment NEAR_CODE
+    11 bytes in segment SFR_AN
+    42 bytes in segment XDATA_I
+    42 bytes in segment XDATA_ID
+   190 bytes in segment XDATA_Z
+ 
+ 1 719 bytes of CODE  memory
+     0 bytes of DATA  memory (+ 11 bytes shared)
+   232 bytes of XDATA memory
+
+Errors: none
+Warnings: 11

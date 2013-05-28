@@ -1,0 +1,623 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:32 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\AuthSystem\aes.c             #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\AuthSys #
+#                          tem\aes.c" -D CC1111EM -D ISM_EU -D                #
+#                          MCU_H=<ioCC1111.h> -D chip=1111 -D                 #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\aes.lst                    #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\aes.r51                     #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\AuthSystem\aes.c
+      1          // *************************************************************************************************
+      2          // AES encryption and decryption functions.
+      3          // *************************************************************************************************
+      4          
+      5          // *************************************************************************************************
+      6          // Include section
+      7          #include "aes.h"
+
+   \                                 In  segment SFR_AN, at 0xb1
+   \   unsigned char volatile __sfr ENCDI
+   \                     ENCDI:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb2
+   \   unsigned char volatile __sfr ENCDO
+   \                     ENCDO:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb3
+   \   unsigned char volatile __sfr ENCCS
+   \                     ENCCS:
+   \   000000                DS 1
+      8          #include "ioCCxx10_bitdef.h"
+      9          
+     10          // *************************************************************************************************
+     11          // Define section
+     12          #define DELAY 0x0f
+     13          
+     14          // *************************************************************************************************
+     15          // Prototype section
+     16          void aes_encrypt(u8 *data, u8 *key);
+     17          void aes_decrypt(u8 *data, u8 *key);
+     18          void aes_decryptCBC(u8 *data,u8 *key);
+     19          
+     20          // *************************************************************************************************
+     21          // @fn          aes_encrypt
+     22          // @brief       AES 128-bit Encryption.
+     23          // @param       data - to be encrypted, key - used to encrypt
+     24          // @return      none
+     25          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     26          void aes_encrypt(u8 *data, u8 *key)
+   \                     aes_encrypt:
+     27          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     28          	u8 i = 0, delay = DELAY;
+   \   000005   790F         MOV     R1,#0xf
+     29          
+     30          	// Load key
+     31          	ENCCS = ENCCS_CMD_LDKEY | ENCCS_ST;
+   \   000007   75B305       MOV     0xb3,#0x5
+     32          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   00000A   7800         MOV     R0,#0x0
+   \   00000C   8010         SJMP    ??aes_encrypt_0
+     33          	{
+     34          		ENCDI = key[i]; 
+   \                     ??aes_encrypt_1:
+   \   00000E   88..         MOV     ?V0 + 0,R0
+   \   000010   EC           MOV     A,R4
+   \   000011   25..         ADD     A,?V0 + 0
+   \   000013   F582         MOV     DPL,A
+   \   000015   ED           MOV     A,R5
+   \   000016   3400         ADDC    A,#0x0
+   \   000018   F583         MOV     DPH,A
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   F5B1         MOV     0xb1,A
+     35          	}
+   \   00001D   08           INC     R0
+   \                     ??aes_encrypt_0:
+   \   00001E   E8           MOV     A,R0
+   \   00001F   C3           CLR     C
+   \   000020   9410         SUBB    A,#0x10
+   \   000022   40EA         JC      ??aes_encrypt_1
+     36          	
+     37          
+     38          	// Load IV
+     39          	ENCCS = ENCCS_CMD_LDIV | ENCCS_ST;
+   \   000024   75B307       MOV     0xb3,#0x7
+     40          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   000027   7800         MOV     R0,#0x0
+   \   000029   8004         SJMP    ??aes_encrypt_2
+     41          	{
+     42          		ENCDI = 0;
+   \                     ??aes_encrypt_3:
+   \   00002B   75B100       MOV     0xb1,#0x0
+     43          	}
+   \   00002E   08           INC     R0
+   \                     ??aes_encrypt_2:
+   \   00002F   E8           MOV     A,R0
+   \   000030   C3           CLR     C
+   \   000031   9410         SUBB    A,#0x10
+   \   000033   40F6         JC      ??aes_encrypt_3
+     44          
+     45          	// Load data
+     46          	ENCCS = ENCCS_CMD_ENC | ENCCS_ST;
+   \   000035   75B301       MOV     0xb3,#0x1
+     47          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   000038   7800         MOV     R0,#0x0
+   \   00003A   8010         SJMP    ??aes_encrypt_4
+     48          	{
+     49          		ENCDI = data[i];
+   \                     ??aes_encrypt_5:
+   \   00003C   88..         MOV     ?V0 + 0,R0
+   \   00003E   EA           MOV     A,R2
+   \   00003F   25..         ADD     A,?V0 + 0
+   \   000041   F582         MOV     DPL,A
+   \   000043   EB           MOV     A,R3
+   \   000044   3400         ADDC    A,#0x0
+   \   000046   F583         MOV     DPH,A
+   \   000048   E0           MOVX    A,@DPTR
+   \   000049   F5B1         MOV     0xb1,A
+     50          	}
+   \   00004B   08           INC     R0
+   \                     ??aes_encrypt_4:
+   \   00004C   E8           MOV     A,R0
+   \   00004D   C3           CLR     C
+   \   00004E   9410         SUBB    A,#0x10
+   \   000050   40EA         JC      ??aes_encrypt_5
+     51          
+     52          	while(delay--);
+   \                     ??aes_encrypt_6:
+   \   000052   E9           MOV     A,R1
+   \   000053   FC           MOV     R4,A
+   \   000054   74FF         MOV     A,#-0x1
+   \   000056   2C           ADD     A,R4
+   \   000057   19           DEC     R1
+   \   000058   04           INC     A
+   \   000059   70F7         JNZ     ??aes_encrypt_6
+     53          
+     54          	// Read data
+     55          	for(i = 0; i < AES_KEY_SIZE; i++)
+   \   00005B   7800         MOV     R0,#0x0
+   \   00005D   8014         SJMP    ??aes_encrypt_7
+     56          	{
+     57          		data[i] = ENCDO; 
+   \                     ??aes_encrypt_8:
+   \   00005F   E5B2         MOV     A,0xb2
+   \   000061   C0E0         PUSH    A
+   \   000063   88..         MOV     ?V0 + 0,R0
+   \   000065   EA           MOV     A,R2
+   \   000066   25..         ADD     A,?V0 + 0
+   \   000068   F582         MOV     DPL,A
+   \   00006A   EB           MOV     A,R3
+   \   00006B   3400         ADDC    A,#0x0
+   \   00006D   F583         MOV     DPH,A
+   \   00006F   D0E0         POP     A
+   \   000071   F0           MOVX    @DPTR,A
+     58          	}
+   \   000072   08           INC     R0
+   \                     ??aes_encrypt_7:
+   \   000073   E8           MOV     A,R0
+   \   000074   C3           CLR     C
+   \   000075   9410         SUBB    A,#0x10
+   \   000077   40E6         JC      ??aes_encrypt_8
+     59          
+     60          }
+   \   000079   7F02         MOV     R7,#0x2
+   \   00007B   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   00007E                REQUIRE ENCCS
+   \   00007E                REQUIRE ENCDI
+   \   00007E                REQUIRE ENCDO
+     61          
+     62          // *************************************************************************************************
+     63          // @fn          aes_decrypt
+     64          // @brief       AES 128-bit Decryption.
+     65          // @param       data - to be decrypted, key - used to decrypt
+     66          // @return      none
+     67          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     68          void aes_decrypt(u8 *data, u8 *key)
+   \                     aes_decrypt:
+     69          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     70          	u8 i = 0, delay = DELAY;
+   \   000005   790F         MOV     R1,#0xf
+     71          
+     72          	// Load key
+     73          	ENCCS =   ENCCS_MODE_ECB | ENCCS_CMD_LDKEY | ENCCS_ST;
+   \   000007   75B345       MOV     0xb3,#0x45
+     74          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   00000A   7800         MOV     R0,#0x0
+   \   00000C   8010         SJMP    ??aes_decrypt_0
+     75          	{
+     76          		ENCDI = key[i]; 
+   \                     ??aes_decrypt_1:
+   \   00000E   88..         MOV     ?V0 + 0,R0
+   \   000010   EC           MOV     A,R4
+   \   000011   25..         ADD     A,?V0 + 0
+   \   000013   F582         MOV     DPL,A
+   \   000015   ED           MOV     A,R5
+   \   000016   3400         ADDC    A,#0x0
+   \   000018   F583         MOV     DPH,A
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   F5B1         MOV     0xb1,A
+     77          	}
+   \   00001D   08           INC     R0
+   \                     ??aes_decrypt_0:
+   \   00001E   E8           MOV     A,R0
+   \   00001F   C3           CLR     C
+   \   000020   9410         SUBB    A,#0x10
+   \   000022   40EA         JC      ??aes_decrypt_1
+     78          
+     79          	// Load IV
+     80          	ENCCS = ENCCS_MODE_ECB | ENCCS_CMD_LDIV | ENCCS_ST;
+   \   000024   75B347       MOV     0xb3,#0x47
+     81          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   000027   7800         MOV     R0,#0x0
+   \   000029   8004         SJMP    ??aes_decrypt_2
+     82          	{
+     83          		ENCDI = 0;
+   \                     ??aes_decrypt_3:
+   \   00002B   75B100       MOV     0xb1,#0x0
+     84          	}
+   \   00002E   08           INC     R0
+   \                     ??aes_decrypt_2:
+   \   00002F   E8           MOV     A,R0
+   \   000030   C3           CLR     C
+   \   000031   9410         SUBB    A,#0x10
+   \   000033   40F6         JC      ??aes_decrypt_3
+     85          
+     86          	// Load data
+     87          	ENCCS = ENCCS_MODE_ECB | ENCCS_CMD_DEC | ENCCS_ST;
+   \   000035   75B343       MOV     0xb3,#0x43
+     88          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   000038   7800         MOV     R0,#0x0
+   \   00003A   8010         SJMP    ??aes_decrypt_4
+     89          	{
+     90          		ENCDI = data[i];
+   \                     ??aes_decrypt_5:
+   \   00003C   88..         MOV     ?V0 + 0,R0
+   \   00003E   EA           MOV     A,R2
+   \   00003F   25..         ADD     A,?V0 + 0
+   \   000041   F582         MOV     DPL,A
+   \   000043   EB           MOV     A,R3
+   \   000044   3400         ADDC    A,#0x0
+   \   000046   F583         MOV     DPH,A
+   \   000048   E0           MOVX    A,@DPTR
+   \   000049   F5B1         MOV     0xb1,A
+     91          	}
+   \   00004B   08           INC     R0
+   \                     ??aes_decrypt_4:
+   \   00004C   E8           MOV     A,R0
+   \   00004D   C3           CLR     C
+   \   00004E   9410         SUBB    A,#0x10
+   \   000050   40EA         JC      ??aes_decrypt_5
+     92          
+     93          	while(delay--);
+   \                     ??aes_decrypt_6:
+   \   000052   E9           MOV     A,R1
+   \   000053   FC           MOV     R4,A
+   \   000054   74FF         MOV     A,#-0x1
+   \   000056   2C           ADD     A,R4
+   \   000057   19           DEC     R1
+   \   000058   04           INC     A
+   \   000059   70F7         JNZ     ??aes_decrypt_6
+     94          
+     95          	// Read data
+     96          	for (i = 0; i < AES_KEY_SIZE; i++)
+   \   00005B   7800         MOV     R0,#0x0
+   \   00005D   8014         SJMP    ??aes_decrypt_7
+     97          	{
+     98          		data[i] = ENCDO; 
+   \                     ??aes_decrypt_8:
+   \   00005F   E5B2         MOV     A,0xb2
+   \   000061   C0E0         PUSH    A
+   \   000063   88..         MOV     ?V0 + 0,R0
+   \   000065   EA           MOV     A,R2
+   \   000066   25..         ADD     A,?V0 + 0
+   \   000068   F582         MOV     DPL,A
+   \   00006A   EB           MOV     A,R3
+   \   00006B   3400         ADDC    A,#0x0
+   \   00006D   F583         MOV     DPH,A
+   \   00006F   D0E0         POP     A
+   \   000071   F0           MOVX    @DPTR,A
+     99          	}
+   \   000072   08           INC     R0
+   \                     ??aes_decrypt_7:
+   \   000073   E8           MOV     A,R0
+   \   000074   C3           CLR     C
+   \   000075   9410         SUBB    A,#0x10
+   \   000077   40E6         JC      ??aes_decrypt_8
+    100          }
+   \   000079   7F02         MOV     R7,#0x2
+   \   00007B   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   00007E                REQUIRE ENCCS
+   \   00007E                REQUIRE ENCDI
+   \   00007E                REQUIRE ENCDO
+    101          
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    102          void aes_decryptCBC(u8 *data,u8 *key)
+   \                     aes_decryptCBC:
+    103          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 32
+   \   000005   74E0         MOV     A,#-0x20
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+   \   00000A   EA           MOV     A,R2
+   \   00000B   FE           MOV     R6,A
+   \   00000C   EB           MOV     A,R3
+   \   00000D   FF           MOV     R7,A
+   \   00000E   8C..         MOV     ?V0 + 0,R4
+   \   000010   8D..         MOV     ?V0 + 1,R5
+    104            u8 buffer[16];
+    105            u8 buffer_d[16];
+    106            u8 i;
+    107            for(i=0;i<16;i++)
+   \   000012   7C00         MOV     R4,#0x0
+   \   000014   8041         SJMP    ??aes_decryptCBC_0
+    108            {
+    109              buffer[i] = data[i];
+   \                     ??aes_decryptCBC_1:
+   \   000016   8C82         MOV     DPL,R4
+   \   000018   AA82         MOV     R2,DPL
+   \   00001A   EE           MOV     A,R6
+   \   00001B   2A           ADD     A,R2
+   \   00001C   F8           MOV     R0,A
+   \   00001D   EF           MOV     A,R7
+   \   00001E   3400         ADDC    A,#0x0
+   \   000020   F9           MOV     R1,A
+   \   000021   8882         MOV     DPL,R0
+   \   000023   8983         MOV     DPH,R1
+   \   000025   E0           MOVX    A,@DPTR
+   \   000026   C0E0         PUSH    A
+   \   000028   85..82       MOV     DPL,?XSP + 0
+   \   00002B   85..83       MOV     DPH,?XSP + 1
+   \   00002E   E582         MOV     A,DPL
+   \   000030   2A           ADD     A,R2
+   \   000031   F582         MOV     DPL,A
+   \   000033   E583         MOV     A,DPH
+   \   000035   3400         ADDC    A,#0x0
+   \   000037   F583         MOV     DPH,A
+   \   000039   D0E0         POP     A
+   \   00003B   F0           MOVX    @DPTR,A
+    110              buffer_d[i] = data[i];
+   \   00003C   8882         MOV     DPL,R0
+   \   00003E   8983         MOV     DPH,R1
+   \   000040   E0           MOVX    A,@DPTR
+   \   000041   C0E0         PUSH    A
+   \   000043   7410         MOV     A,#0x10
+   \   000045   12....       LCALL   ?XSTACK_DISP0_8
+   \   000048   E582         MOV     A,DPL
+   \   00004A   2A           ADD     A,R2
+   \   00004B   F582         MOV     DPL,A
+   \   00004D   E583         MOV     A,DPH
+   \   00004F   3400         ADDC    A,#0x0
+   \   000051   F583         MOV     DPH,A
+   \   000053   D0E0         POP     A
+   \   000055   F0           MOVX    @DPTR,A
+    111            }
+   \   000056   0C           INC     R4
+   \                     ??aes_decryptCBC_0:
+   \   000057   EC           MOV     A,R4
+   \   000058   C3           CLR     C
+   \   000059   9410         SUBB    A,#0x10
+   \   00005B   40B9         JC      ??aes_decryptCBC_1
+    112            aes_decrypt(buffer,key);
+   \   00005D                ; Setup parameters for call to function aes_decrypt
+   \   00005D   AC..         MOV     R4,?V0 + 0
+   \   00005F   85..82       MOV     DPL,?XSP + 0
+   \   000062   85..83       MOV     DPH,?XSP + 1
+   \   000065   AA82         MOV     R2,DPL
+   \   000067   AB83         MOV     R3,DPH
+   \   000069   12....       LCALL   aes_decrypt
+    113            for(i=0;i<16;i++) data[i] = buffer[i] ^ 0x00; //^ 0;
+   \   00006C   7C00         MOV     R4,#0x0
+   \   00006E   8025         SJMP    ??aes_decryptCBC_2
+   \                     ??aes_decryptCBC_3:
+   \   000070   8C82         MOV     DPL,R4
+   \   000072   A882         MOV     R0,DPL
+   \   000074   85..82       MOV     DPL,?XSP + 0
+   \   000077   85..83       MOV     DPH,?XSP + 1
+   \   00007A   E582         MOV     A,DPL
+   \   00007C   28           ADD     A,R0
+   \   00007D   F582         MOV     DPL,A
+   \   00007F   E583         MOV     A,DPH
+   \   000081   3400         ADDC    A,#0x0
+   \   000083   F583         MOV     DPH,A
+   \   000085   E0           MOVX    A,@DPTR
+   \   000086   C0E0         PUSH    A
+   \   000088   EE           MOV     A,R6
+   \   000089   28           ADD     A,R0
+   \   00008A   F582         MOV     DPL,A
+   \   00008C   EF           MOV     A,R7
+   \   00008D   3400         ADDC    A,#0x0
+   \   00008F   F583         MOV     DPH,A
+   \   000091   D0E0         POP     A
+   \   000093   F0           MOVX    @DPTR,A
+   \   000094   0C           INC     R4
+   \                     ??aes_decryptCBC_2:
+   \   000095   EC           MOV     A,R4
+   \   000096   C3           CLR     C
+   \   000097   9410         SUBB    A,#0x10
+   \   000099   40D5         JC      ??aes_decryptCBC_3
+    114            for(i=0;i<16;i++) buffer[i] = data[16+i];
+   \   00009B   7C00         MOV     R4,#0x0
+   \   00009D   802D         SJMP    ??aes_decryptCBC_4
+   \                     ??aes_decryptCBC_5:
+   \   00009F   8C82         MOV     DPL,R4
+   \   0000A1   A882         MOV     R0,DPL
+   \   0000A3   EE           MOV     A,R6
+   \   0000A4   28           ADD     A,R0
+   \   0000A5   FA           MOV     R2,A
+   \   0000A6   EF           MOV     A,R7
+   \   0000A7   3400         ADDC    A,#0x0
+   \   0000A9   FB           MOV     R3,A
+   \   0000AA   EA           MOV     A,R2
+   \   0000AB   2410         ADD     A,#0x10
+   \   0000AD   F582         MOV     DPL,A
+   \   0000AF   EB           MOV     A,R3
+   \   0000B0   3400         ADDC    A,#0x0
+   \   0000B2   F583         MOV     DPH,A
+   \   0000B4   E0           MOVX    A,@DPTR
+   \   0000B5   C0E0         PUSH    A
+   \   0000B7   85..82       MOV     DPL,?XSP + 0
+   \   0000BA   85..83       MOV     DPH,?XSP + 1
+   \   0000BD   E582         MOV     A,DPL
+   \   0000BF   28           ADD     A,R0
+   \   0000C0   F582         MOV     DPL,A
+   \   0000C2   E583         MOV     A,DPH
+   \   0000C4   3400         ADDC    A,#0x0
+   \   0000C6   F583         MOV     DPH,A
+   \   0000C8   D0E0         POP     A
+   \   0000CA   F0           MOVX    @DPTR,A
+   \   0000CB   0C           INC     R4
+   \                     ??aes_decryptCBC_4:
+   \   0000CC   EC           MOV     A,R4
+   \   0000CD   C3           CLR     C
+   \   0000CE   9410         SUBB    A,#0x10
+   \   0000D0   40CD         JC      ??aes_decryptCBC_5
+    115            aes_decrypt(buffer,key);
+   \   0000D2                ; Setup parameters for call to function aes_decrypt
+   \   0000D2   AC..         MOV     R4,?V0 + 0
+   \   0000D4   AD..         MOV     R5,?V0 + 1
+   \   0000D6   85..82       MOV     DPL,?XSP + 0
+   \   0000D9   85..83       MOV     DPH,?XSP + 1
+   \   0000DC   AA82         MOV     R2,DPL
+   \   0000DE   AB83         MOV     R3,DPH
+   \   0000E0   12....       LCALL   aes_decrypt
+    116            for(i=0;i<16;i++) data[i+16] = buffer[i]^buffer_d[i];
+   \   0000E3   7C00         MOV     R4,#0x0
+   \   0000E5   8048         SJMP    ??aes_decryptCBC_6
+   \                     ??aes_decryptCBC_7:
+   \   0000E7   8C82         MOV     DPL,R4
+   \   0000E9   A882         MOV     R0,DPL
+   \   0000EB   7410         MOV     A,#0x10
+   \   0000ED   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000F0   E582         MOV     A,DPL
+   \   0000F2   28           ADD     A,R0
+   \   0000F3   F582         MOV     DPL,A
+   \   0000F5   E583         MOV     A,DPH
+   \   0000F7   3400         ADDC    A,#0x0
+   \   0000F9   F583         MOV     DPH,A
+   \   0000FB   C082         PUSH    DPL
+   \   0000FD   C083         PUSH    DPH
+   \   0000FF   85..82       MOV     DPL,?XSP + 0
+   \   000102   85..83       MOV     DPH,?XSP + 1
+   \   000105   E582         MOV     A,DPL
+   \   000107   28           ADD     A,R0
+   \   000108   F582         MOV     DPL,A
+   \   00010A   E583         MOV     A,DPH
+   \   00010C   3400         ADDC    A,#0x0
+   \   00010E   F583         MOV     DPH,A
+   \   000110   E0           MOVX    A,@DPTR
+   \   000111   D083         POP     DPH
+   \   000113   D082         POP     DPL
+   \   000115   FA           MOV     R2,A
+   \   000116   E0           MOVX    A,@DPTR
+   \   000117   6A           XRL     A,R2
+   \   000118   C0E0         PUSH    A
+   \   00011A   EE           MOV     A,R6
+   \   00011B   28           ADD     A,R0
+   \   00011C   F8           MOV     R0,A
+   \   00011D   EF           MOV     A,R7
+   \   00011E   3400         ADDC    A,#0x0
+   \   000120   F9           MOV     R1,A
+   \   000121   E8           MOV     A,R0
+   \   000122   2410         ADD     A,#0x10
+   \   000124   F582         MOV     DPL,A
+   \   000126   E9           MOV     A,R1
+   \   000127   3400         ADDC    A,#0x0
+   \   000129   F583         MOV     DPH,A
+   \   00012B   D0E0         POP     A
+   \   00012D   F0           MOVX    @DPTR,A
+   \   00012E   0C           INC     R4
+   \                     ??aes_decryptCBC_6:
+   \   00012F   EC           MOV     A,R4
+   \   000130   C3           CLR     C
+   \   000131   9410         SUBB    A,#0x10
+   \   000133   40B2         JC      ??aes_decryptCBC_7
+    117          }
+   \   000135   7420         MOV     A,#0x20
+   \   000137   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00013A   7F02         MOV     R7,#0x2
+   \   00013C   02....       LJMP    ?FUNC_LEAVE_XDATA
+    118          
+    119          
+
+   Maximum stack usage in bytes:
+
+     Function         ISTACK PSTACK XSTACK
+     --------         ------ ------ ------
+     aes_decrypt          1      0     50
+     aes_decryptCBC       2      0     41
+       -> aes_decrypt     0      0     82
+       -> aes_decrypt     0      0     82
+     aes_encrypt          1      0      9
+
+
+   Segment part sizes:
+
+     Function/Label Bytes
+     -------------- -----
+     ENCDI             1
+     ENCDO             1
+     ENCCS             1
+     aes_encrypt     126
+     aes_decrypt     126
+     aes_decryptCBC  319
+
+ 
+ 571 bytes in segment NEAR_CODE
+   3 bytes in segment SFR_AN
+ 
+ 571 bytes of CODE memory
+   0 bytes of DATA memory (+ 3 bytes shared)
+
+Errors: none
+Warnings: none

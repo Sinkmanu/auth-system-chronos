@@ -1,0 +1,1818 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:35 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\mrfi\m #
+#                          rfi.c                                              #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\mrfi.c" -D CC1111EM -D ISM_EU  #
+#                          -D MCU_H=<ioCC1111.h> -D chip=1111 -D              #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\mrfi.lst                   #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\mrfi.r51                    #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\mrfi\mrfi.c
+      1          /**************************************************************************************************
+      2            Revised:        $Date: 2007-07-06 11:19:00 -0700 (Fri, 06 Jul 2007) $
+      3            Revision:       $Revision: 13579 $
+      4          
+      5            Copyright 2007 Texas Instruments Incorporated.  All rights reserved.
+      6          
+      7            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+      8            the terms of a software license agreement between the user who downloaded the software,
+      9            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     10            "License"). You may not use this Software unless you agree to abide by the terms of the
+     11            License. The License limits your use, and you acknowledge, that the Software may not be
+     12            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     13            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     14            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     15            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     16            perform, display or sell this Software and/or its documentation for any purpose.
+     17          
+     18            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     19            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     20            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     21            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     22            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     23            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     24            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     25            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     26            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     27          
+     28            Should you have any questions regarding your right to use this Software,
+     29            contact Texas Instruments Incorporated at www.TI.com.
+     30          **************************************************************************************************/
+     31          
+     32          /* ~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+     33           *   MRFI (Minimal RF Interface)
+     34           *   Top-level code file.
+     35           * ~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+     36           */
+     37          
+     38          /* ------------------------------------------------------------------------------------------------
+     39           *                                          Includes
+     40           * ------------------------------------------------------------------------------------------------
+     41           */
+     42          #include "mrfi_defs.h"
+
+   \                                 In  segment SFR_AN, at 0x91
+   \   unsigned char volatile __sfr RFIM
+   \                     RFIM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9b
+   \   unsigned char volatile __sfr S1CON
+   \                     S1CON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb4
+   \   unsigned char volatile __sfr ADCCON1
+   \                     ADCCON1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xbc
+   \   unsigned char volatile __sfr RNDL
+   \                     RNDL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xbe
+   \   unsigned char volatile __sfr SLEEP
+   \                     SLEEP:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xc6
+   \   unsigned char volatile __sfr CLKCON
+   \                     CLKCON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd1
+   \   unsigned char volatile __sfr DMAIRQ
+   \                     DMAIRQ:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd4
+   \   unsigned char volatile __sfr DMA0CFGL
+   \                     DMA0CFGL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd5
+   \   unsigned char volatile __sfr DMA0CFGH
+   \                     DMA0CFGH:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd6
+   \   unsigned char volatile __sfr DMAARM
+   \                     DMAARM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe1
+   \   unsigned char volatile __sfr RFST
+   \                     RFST:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe9
+   \   unsigned char volatile __sfr RFIF
+   \                     RFIF:
+   \   000000                DS 1
+     43          
+     44          
+     45          /* ------------------------------------------------------------------------------------------------
+     46           *                                       C Code Includes
+     47           * ------------------------------------------------------------------------------------------------
+     48           */
+     49          
+     50          /* ----- Radio Family 1 ----- */
+     51          #if (defined MRFI_RADIO_FAMILY1)
+     52          #include "radios/family1/mrfi_radio.c"
+     53          #include "radios/family1/mrfi_spi.c"
+     54          #include "radios/common/mrfi_f1f2.c"
+     55          #include "bsp_external/mrfi_board.c"
+     56          
+     57          /* ----- Radio Family 2 ----- */
+     58          #elif (defined MRFI_RADIO_FAMILY2)
+     59          #include "radios/family2/mrfi_radio.c"
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static uint8_t mrfiRadioState
+   \                     mrfiRadioState:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static mrfiPacket_t mrfiIncomingPacket
+   \                     mrfiIncomingPacket:
+   \   000000                DS 33
+   \   000021                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static uint8_t volatile sKillSem
+   \                     sKillSem:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static uint8_t volatile sReplyDelayContext
+   \                     sReplyDelayContext:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static uint16_t sReplyDelayScalar
+   \                     sReplyDelayScalar:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static uint16_t sBackoffHelper
+   \                     sBackoffHelper:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   unsigned char mrfiDmaCfg[8]
+   \                     mrfiDmaCfg:
+   \   000000                DS 8
+   \   000008                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_Init(void)
+   \                     MRFI_Init:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005                ; Setup parameters for call to function memset
+   \   000005   75..21       MOV     ?V0 + 0,#0x21
+   \   000008   75..00       MOV     ?V0 + 1,#0x0
+   \   00000B   78..         MOV     R0,#?V0 + 0
+   \   00000D   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000010   7C00         MOV     R4,#0x0
+   \   000012   7D00         MOV     R5,#0x0
+   \   000014   7A..         MOV     R2,#mrfiIncomingPacket & 0xff
+   \   000016   7B..         MOV     R3,#(mrfiIncomingPacket >> 8) & 0xff
+   \   000018   12....       LCALL   memset
+   \   00001B   7402         MOV     A,#0x2
+   \   00001D   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000020   90DF36       MOV     DPTR,#-0x20ca
+   \   000023   E0           MOVX    A,@DPTR
+   \   000024   54EF         ANL     A,#0xef
+   \   000026   6401         XRL     A,#0x1
+   \   000028   6004         JZ      ??MRFI_Init_0
+   \   00002A   C2AF         CLR     0xa8.7
+   \                     ??MRFI_Init_1:
+   \   00002C   80FE         SJMP    ??MRFI_Init_1
+   \                     ??MRFI_Init_0:
+   \   00002E   A3           INC     DPTR
+   \   00002F   E0           MOVX    A,@DPTR
+   \   000030   C3           CLR     C
+   \   000031   9403         SUBB    A,#0x3
+   \   000033   5004         JNC     ??MRFI_Init_2
+   \   000035   C2AF         CLR     0xa8.7
+   \                     ??MRFI_Init_3:
+   \   000037   80FE         SJMP    ??MRFI_Init_3
+   \                     ??MRFI_Init_2:
+   \   000039   53BEFB       ANL     0xbe,#0xfb
+   \                     ??MRFI_Init_4:
+   \   00003C   E5BE         MOV     A,0xbe
+   \   00003E   A2E6         MOV     C,0xE0 /* A   */.6
+   \   000040   50FA         JNC     ??MRFI_Init_4
+   \   000042   53C6BF       ANL     0xc6,#0xbf
+   \   000045   43BE04       ORL     0xbe,#0x4
+   \   000048   74..         MOV     A,#(mrfiDmaCfg >> 8) & 0xff
+   \   00004A   F5D5         MOV     0xd5,A
+   \   00004C   75D4..       MOV     0xd4,#mrfiDmaCfg & 0xff
+   \   00004F   90DF13       MOV     DPTR,#-0x20ed
+   \   000052   743C         MOV     A,#0x3c
+   \   000054   F0           MOVX    @DPTR,A
+   \   000055   A3           INC     DPTR
+   \   000056   7414         MOV     A,#0x14
+   \   000058   F0           MOVX    @DPTR,A
+   \   000059   90DF02       MOV     DPTR,#-0x20fe
+   \   00005C   741E         MOV     A,#0x1e
+   \   00005E   F0           MOVX    @DPTR,A
+   \   00005F   90DF04       MOV     DPTR,#-0x20fc
+   \   000062   7405         MOV     A,#0x5
+   \   000064   F0           MOVX    @DPTR,A
+   \   000065   90DF2E       MOV     DPTR,#-0x20d2
+   \   000068   7450         MOV     A,#0x50
+   \   00006A   F0           MOVX    @DPTR,A
+   \   00006B   90DF25       MOV     DPTR,#-0x20db
+   \   00006E   7409         MOV     A,#0x9
+   \   000070   F0           MOVX    @DPTR,A
+   \   000071   90DF07       MOV     DPTR,#-0x20f9
+   \   000074   F0           MOVX    @DPTR,A
+   \   000075   90....       MOV     DPTR,#frequoffset
+   \   000078   E0           MOVX    A,@DPTR
+   \   000079   90DF08       MOV     DPTR,#-0x20f8
+   \   00007C   F0           MOVX    @DPTR,A
+   \   00007D   A3           INC     DPTR
+   \   00007E   7424         MOV     A,#0x24
+   \   000080   F0           MOVX    @DPTR,A
+   \   000081   A3           INC     DPTR
+   \   000082   743A         MOV     A,#0x3a
+   \   000084   F0           MOVX    @DPTR,A
+   \   000085   A3           INC     DPTR
+   \   000086   74EE         MOV     A,#-0x12
+   \   000088   F0           MOVX    @DPTR,A
+   \   000089   A3           INC     DPTR
+   \   00008A   746B         MOV     A,#0x6b
+   \   00008C   F0           MOVX    @DPTR,A
+   \   00008D   A3           INC     DPTR
+   \   00008E   74A3         MOV     A,#-0x5d
+   \   000090   F0           MOVX    @DPTR,A
+   \   000091   A3           INC     DPTR
+   \   000092   7413         MOV     A,#0x13
+   \   000094   F0           MOVX    @DPTR,A
+   \   000095   A3           INC     DPTR
+   \   000096   7423         MOV     A,#0x23
+   \   000098   F0           MOVX    @DPTR,A
+   \   000099   A3           INC     DPTR
+   \   00009A   7411         MOV     A,#0x11
+   \   00009C   F0           MOVX    @DPTR,A
+   \   00009D   A3           INC     DPTR
+   \   00009E   7443         MOV     A,#0x43
+   \   0000A0   F0           MOVX    @DPTR,A
+   \   0000A1   90DF15       MOV     DPTR,#-0x20eb
+   \   0000A4   741D         MOV     A,#0x1d
+   \   0000A6   F0           MOVX    @DPTR,A
+   \   0000A7   A3           INC     DPTR
+   \   0000A8   14           DEC     A
+   \   0000A9   F0           MOVX    @DPTR,A
+   \   0000AA   A3           INC     DPTR
+   \   0000AB   74C7         MOV     A,#-0x39
+   \   0000AD   F0           MOVX    @DPTR,A
+   \   0000AE   A3           INC     DPTR
+   \   0000AF   E4           CLR     A
+   \   0000B0   F0           MOVX    @DPTR,A
+   \   0000B1   A3           INC     DPTR
+   \   0000B2   74B0         MOV     A,#-0x50
+   \   0000B4   F0           MOVX    @DPTR,A
+   \   0000B5   A3           INC     DPTR
+   \   0000B6   74B6         MOV     A,#-0x4a
+   \   0000B8   F0           MOVX    @DPTR,A
+   \   0000B9   A3           INC     DPTR
+   \   0000BA   7410         MOV     A,#0x10
+   \   0000BC   F0           MOVX    @DPTR,A
+   \   0000BD   A3           INC     DPTR
+   \   0000BE   74EA         MOV     A,#-0x16
+   \   0000C0   F0           MOVX    @DPTR,A
+   \   0000C1   A3           INC     DPTR
+   \   0000C2   742A         MOV     A,#0x2a
+   \   0000C4   F0           MOVX    @DPTR,A
+   \   0000C5   A3           INC     DPTR
+   \   0000C6   E4           CLR     A
+   \   0000C7   F0           MOVX    @DPTR,A
+   \   0000C8   A3           INC     DPTR
+   \   0000C9   741F         MOV     A,#0x1f
+   \   0000CB   F0           MOVX    @DPTR,A
+   \   0000CC   90DF23       MOV     DPTR,#-0x20dd
+   \   0000CF   7481         MOV     A,#-0x7f
+   \   0000D1   F0           MOVX    @DPTR,A
+   \   0000D2   A3           INC     DPTR
+   \   0000D3   7435         MOV     A,#0x35
+   \   0000D5   F0           MOVX    @DPTR,A
+   \   0000D6   90....       MOV     DPTR,#mrfiRadioState
+   \   0000D9   7402         MOV     A,#0x2
+   \   0000DB   F0           MOVX    @DPTR,A
+   \   0000DC                ; Setup parameters for call to function MRFI_SetLogicalChannel
+   \   0000DC   7900         MOV     R1,#0x0
+   \   0000DE   12....       LCALL   MRFI_SetLogicalChannel
+   \   0000E1   7E00         MOV     R6,#0x0
+   \   0000E3   7F00         MOV     R7,#0x0
+   \   0000E5   75E102       MOV     0xe1,#0x2
+   \   0000E8   75..14       MOV     ?V0 + 0,#0x14
+   \   0000EB   75..05       MOV     ?V0 + 1,#0x5
+   \                     ??MRFI_Init_5:
+   \   0000EE   90DF3C       MOV     DPTR,#-0x20c4
+   \   0000F1   E0           MOVX    A,@DPTR
+   \   0000F2   5450         ANL     A,#0x50
+   \   0000F4   7023         JNZ     ??MRFI_Init_6
+   \   0000F6                ; Setup parameters for call to function Mrfi_DelayUsec
+   \   0000F6   7A40         MOV     R2,#0x40
+   \   0000F8   7B00         MOV     R3,#0x0
+   \   0000FA   12....       LCALL   Mrfi_DelayUsec
+   \   0000FD   E5..         MOV     A,?V0 + 0
+   \   0000FF   24C0         ADD     A,#-0x40
+   \   000101   F5..         MOV     ?V0 + 0,A
+   \   000103   E5..         MOV     A,?V0 + 1
+   \   000105   34FF         ADDC    A,#-0x1
+   \   000107   F5..         MOV     ?V0 + 1,A
+   \   000109   C3           CLR     C
+   \   00010A   E5..         MOV     A,?V0 + 0
+   \   00010C   9401         SUBB    A,#0x1
+   \   00010E   E5..         MOV     A,?V0 + 1
+   \   000110   9400         SUBB    A,#0x0
+   \   000112   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   000114   65D0         XRL     A,PSW
+   \   000116   33           RLC     A
+   \   000117   50D5         JNC     ??MRFI_Init_5
+   \                     ??MRFI_Init_6:
+   \   000119   7A00         MOV     R2,#0x0
+   \   00011B   8014         SJMP    ??MRFI_Init_7
+   \                     ??MRFI_Init_8:
+   \   00011D   EE           MOV     A,R6
+   \   00011E   C3           CLR     C
+   \   00011F   33           RLC     A
+   \   000120   FE           MOV     R6,A
+   \   000121   EF           MOV     A,R7
+   \   000122   33           RLC     A
+   \   000123   FF           MOV     R7,A
+   \   000124   90DF3A       MOV     DPTR,#-0x20c6
+   \   000127   E0           MOVX    A,@DPTR
+   \   000128   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00012A   E4           CLR     A
+   \   00012B   33           RLC     A
+   \   00012C   F8           MOV     R0,A
+   \   00012D   EE           MOV     A,R6
+   \   00012E   48           ORL     A,R0
+   \   00012F   FE           MOV     R6,A
+   \   000130   0A           INC     R2
+   \                     ??MRFI_Init_7:
+   \   000131   EA           MOV     A,R2
+   \   000132   C3           CLR     C
+   \   000133   9410         SUBB    A,#0x10
+   \   000135   40E6         JC      ??MRFI_Init_8
+   \   000137   7480         MOV     A,#-0x80
+   \   000139   4E           ORL     A,R6
+   \   00013A   F5BC         MOV     0xbc,A
+   \   00013C   EF           MOV     A,R7
+   \   00013D   F5BC         MOV     0xbc,A
+   \   00013F                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   00013F   12....       LCALL   Mrfi_RxModeOff
+   \   000142   90....       MOV     DPTR,#sReplyDelayScalar
+   \   000145   7436         MOV     A,#0x36
+   \   000147   F0           MOVX    @DPTR,A
+   \   000148   A3           INC     DPTR
+   \   000149   E4           CLR     A
+   \   00014A   F0           MOVX    @DPTR,A
+   \   00014B   90....       MOV     DPTR,#sBackoffHelper
+   \   00014E   74E2         MOV     A,#-0x1e
+   \   000150   F0           MOVX    @DPTR,A
+   \   000151   A3           INC     DPTR
+   \   000152   7404         MOV     A,#0x4
+   \   000154   F0           MOVX    @DPTR,A
+   \   000155   439A01       ORL     0x9a,#0x1
+   \   000158   D2AF         SETB    0xa8.7
+   \   00015A   7F02         MOV     R7,#0x2
+   \   00015C   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   00015F                REQUIRE _A_IEN0
+   \   00015F                REQUIRE SLEEP
+   \   00015F                REQUIRE CLKCON
+   \   00015F                REQUIRE DMA0CFGH
+   \   00015F                REQUIRE DMA0CFGL
+   \   00015F                REQUIRE RFST
+   \   00015F                REQUIRE RNDL
+   \   00015F                REQUIRE IEN2
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant uint8_t MRFI_Transmit(mrfiPacket_t *, uint8_t)
+   \                     MRFI_Transmit:
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+   \   000009   89..         MOV     ?V0 + 1,R1
+   \   00000B   75..00       MOV     ?V0 + 0,#0x0
+   \   00000E   90....       MOV     DPTR,#mrfiRadioState
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   6401         XRL     A,#0x1
+   \   000014   7004         JNZ     ??MRFI_Transmit_0
+   \   000016   C2AF         CLR     0xa8.7
+   \                     ??MRFI_Transmit_1:
+   \   000018   80FE         SJMP    ??MRFI_Transmit_1
+   \                     ??MRFI_Transmit_0:
+   \   00001A                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   00001A   12....       LCALL   Mrfi_RxModeOff
+   \   00001D   EF           MOV     A,R7
+   \   00001E   90....       MOV     DPTR,#mrfiDmaCfg
+   \   000021   F0           MOVX    @DPTR,A
+   \   000022   EE           MOV     A,R6
+   \   000023   A3           INC     DPTR
+   \   000024   F0           MOVX    @DPTR,A
+   \   000025   A3           INC     DPTR
+   \   000026   74DF         MOV     A,#-0x21
+   \   000028   F0           MOVX    @DPTR,A
+   \   000029   A3           INC     DPTR
+   \   00002A   74D9         MOV     A,#-0x27
+   \   00002C   F0           MOVX    @DPTR,A
+   \   00002D   A3           INC     DPTR
+   \   00002E   7420         MOV     A,#0x20
+   \   000030   F0           MOVX    @DPTR,A
+   \   000031   A3           INC     DPTR
+   \   000032   04           INC     A
+   \   000033   F0           MOVX    @DPTR,A
+   \   000034   A3           INC     DPTR
+   \   000035   7413         MOV     A,#0x13
+   \   000037   F0           MOVX    @DPTR,A
+   \   000038   A3           INC     DPTR
+   \   000039   7441         MOV     A,#0x41
+   \   00003B   F0           MOVX    @DPTR,A
+   \   00003C   E5..         MOV     A,?V0 + 1
+   \   00003E   7011         JNZ     ??MRFI_Transmit_2
+   \   000040   43D601       ORL     0xd6,#0x1
+   \   000043   75E103       MOV     0xe1,#0x3
+   \                     ??MRFI_Transmit_3:
+   \   000046   E5E9         MOV     A,0xe9
+   \   000048   A2E4         MOV     C,0xE0 /* A   */.4
+   \   00004A   50FA         JNC     ??MRFI_Transmit_3
+   \                     ??MRFI_Transmit_4:
+   \   00004C   53E9EF       ANL     0xe9,#0xef
+   \   00004F   8068         SJMP    ??MRFI_Transmit_5
+   \                     ??MRFI_Transmit_2:
+   \   000051   7401         MOV     A,#0x1
+   \   000053   65..         XRL     A,?V0 + 1
+   \   000055   6004         JZ      ??MRFI_Transmit_6
+   \   000057   C2AF         CLR     0xa8.7
+   \                     ??MRFI_Transmit_7:
+   \   000059   80FE         SJMP    ??MRFI_Transmit_7
+   \                     ??MRFI_Transmit_6:
+   \   00005B   75..04       MOV     ?V0 + 2,#0x4
+   \   00005E   8008         SJMP    ??MRFI_Transmit_8
+   \                     ??MRFI_Transmit_9:
+   \   000060                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   000060   12....       LCALL   Mrfi_RxModeOff
+   \   000063                ; Setup parameters for call to function Mrfi_RandomBackoffDelay
+   \   000063   12....       LCALL   Mrfi_RandomBackoffDelay
+   \   000066   15..         DEC     ?V0 + 2
+   \                     ??MRFI_Transmit_8:
+   \   000068   43D601       ORL     0xd6,#0x1
+   \   00006B   75E102       MOV     0xe1,#0x2
+   \                     ??MRFI_Transmit_10:
+   \   00006E   90DF3B       MOV     DPTR,#-0x20c5
+   \   000071   E0           MOVX    A,@DPTR
+   \   000072   640D         XRL     A,#0xd
+   \   000074   70F8         JNZ     ??MRFI_Transmit_10
+   \   000076   7E14         MOV     R6,#0x14
+   \   000078   7F05         MOV     R7,#0x5
+   \                     ??MRFI_Transmit_11:
+   \   00007A   90DF3C       MOV     DPTR,#-0x20c4
+   \   00007D   E0           MOVX    A,@DPTR
+   \   00007E   5450         ANL     A,#0x50
+   \   000080   701D         JNZ     ??MRFI_Transmit_12
+   \   000082                ; Setup parameters for call to function Mrfi_DelayUsec
+   \   000082   7A40         MOV     R2,#0x40
+   \   000084   7B00         MOV     R3,#0x0
+   \   000086   12....       LCALL   Mrfi_DelayUsec
+   \   000089   EE           MOV     A,R6
+   \   00008A   24C0         ADD     A,#-0x40
+   \   00008C   FE           MOV     R6,A
+   \   00008D   EF           MOV     A,R7
+   \   00008E   34FF         ADDC    A,#-0x1
+   \   000090   FF           MOV     R7,A
+   \   000091   C3           CLR     C
+   \   000092   EE           MOV     A,R6
+   \   000093   9401         SUBB    A,#0x1
+   \   000095   EF           MOV     A,R7
+   \   000096   9400         SUBB    A,#0x0
+   \   000098   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   00009A   65D0         XRL     A,PSW
+   \   00009C   33           RLC     A
+   \   00009D   50DB         JNC     ??MRFI_Transmit_11
+   \                     ??MRFI_Transmit_12:
+   \   00009F   75E103       MOV     0xe1,#0x3
+   \   0000A2   90DF3B       MOV     DPTR,#-0x20c5
+   \   0000A5   E0           MOVX    A,@DPTR
+   \   0000A6   640D         XRL     A,#0xd
+   \   0000A8   6008         JZ      ??MRFI_Transmit_13
+   \                     ??MRFI_Transmit_14:
+   \   0000AA   E5E9         MOV     A,0xe9
+   \   0000AC   A2E4         MOV     C,0xE0 /* A   */.4
+   \   0000AE   50FA         JNC     ??MRFI_Transmit_14
+   \   0000B0   809A         SJMP    ??MRFI_Transmit_4
+   \                     ??MRFI_Transmit_13:
+   \   0000B2   E5..         MOV     A,?V0 + 2
+   \   0000B4   70AA         JNZ     ??MRFI_Transmit_9
+   \   0000B6   75..01       MOV     ?V0 + 0,#0x1
+   \                     ??MRFI_Transmit_5:
+   \   0000B9                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   0000B9   12....       LCALL   Mrfi_RxModeOff
+   \   0000BC   90....       MOV     DPTR,#mrfiRadioState
+   \   0000BF   E0           MOVX    A,@DPTR
+   \   0000C0   6403         XRL     A,#0x3
+   \   0000C2   7003         JNZ     ??MRFI_Transmit_15
+   \   0000C4                ; Setup parameters for call to function Mrfi_RxModeOn
+   \   0000C4   12....       LCALL   Mrfi_RxModeOn
+   \                     ??MRFI_Transmit_15:
+   \   0000C7   A9..         MOV     R1,?V0 + 0
+   \   0000C9   7F03         MOV     R7,#0x3
+   \   0000CB   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   0000CE                REQUIRE _A_IEN0
+   \   0000CE                REQUIRE DMAARM
+   \   0000CE                REQUIRE RFST
+   \   0000CE                REQUIRE RFIF
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_Receive(mrfiPacket_t *)
+   \                     MRFI_Receive:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#mrfiIncomingPacket
+   \   000007   EA           MOV     A,R2
+   \   000008   FC           MOV     R4,A
+   \   000009   EB           MOV     A,R3
+   \   00000A   FD           MOV     R5,A
+   \   00000B   7421         MOV     A,#0x21
+   \   00000D   12....       LCALL   ?MOVE_LONG8_XDATA_XDATA
+   \   000010   D083         POP     DPH
+   \   000012   D082         POP     DPL
+   \   000014   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_RfIsr(void)
+   \                     MRFI_RfIsr:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   90....       MOV     DPTR,#mrfiRadioState
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   6403         XRL     A,#0x3
+   \   00000B   6004         JZ      ??MRFI_RfIsr_0
+   \   00000D   C2AF         CLR     0xa8.7
+   \                     ??MRFI_RfIsr_1:
+   \   00000F   80FE         SJMP    ??MRFI_RfIsr_1
+   \                     ??MRFI_RfIsr_0:
+   \   000011   E5E9         MOV     A,0xe9
+   \   000013   A2E4         MOV     C,0xE0 /* A   */.4
+   \   000015   5033         JNC     ??MRFI_RfIsr_2
+   \   000017   E5E9         MOV     A,0xe9
+   \   000019   A2E6         MOV     C,0xE0 /* A   */.6
+   \   00001B   502D         JNC     ??MRFI_RfIsr_2
+   \   00001D   53E9EF       ANL     0xe9,#0xef
+   \   000020   53E9BF       ANL     0xe9,#0xbf
+   \   000023   539BFC       ANL     0x9b,#0xfc
+   \   000026                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   000026   12....       LCALL   Mrfi_RxModeOff
+   \   000029                ; Setup parameters for call to function memset
+   \   000029   75..1F       MOV     ?V0 + 0,#0x1f
+   \   00002C   75..00       MOV     ?V0 + 1,#0x0
+   \   00002F   78..         MOV     R0,#?V0 + 0
+   \   000031   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000034   7C00         MOV     R4,#0x0
+   \   000036   7D00         MOV     R5,#0x0
+   \   000038   7A..         MOV     R2,#mrfiIncomingPacket & 0xff
+   \   00003A   7B..         MOV     R3,#(mrfiIncomingPacket >> 8) & 0xff
+   \   00003C   12....       LCALL   memset
+   \   00003F   7402         MOV     A,#0x2
+   \   000041   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000044                ; Setup parameters for call to function Mrfi_RxModeOn
+   \   000044   12....       LCALL   Mrfi_RxModeOn
+   \   000047   02....       LJMP    ??MRFI_RfIsr_3
+   \                     ??MRFI_RfIsr_2:
+   \   00004A   53E9EF       ANL     0xe9,#0xef
+   \   00004D   539BFC       ANL     0x9b,#0xfc
+   \   000050                ; Setup parameters for call to function memmove
+   \   000050   75..02       MOV     ?V0 + 0,#0x2
+   \   000053   75..00       MOV     ?V0 + 1,#0x0
+   \   000056   78..         MOV     R0,#?V0 + 0
+   \   000058   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   00005B   90....       MOV     DPTR,#mrfiIncomingPacket
+   \   00005E   E0           MOVX    A,@DPTR
+   \   00005F   04           INC     A
+   \   000060   F8           MOV     R0,A
+   \   000061   74..         MOV     A,#mrfiIncomingPacket & 0xff
+   \   000063   28           ADD     A,R0
+   \   000064   FC           MOV     R4,A
+   \   000065   74..         MOV     A,#(mrfiIncomingPacket >> 8) & 0xff
+   \   000067   3400         ADDC    A,#0x0
+   \   000069   FD           MOV     R5,A
+   \   00006A   7A..         MOV     R2,#(mrfiIncomingPacket + 31) & 0xff
+   \   00006C   7B..         MOV     R3,#((mrfiIncomingPacket + 31) >> 8) & 0xff
+   \   00006E   12....       LCALL   memmove
+   \   000071   7402         MOV     A,#0x2
+   \   000073   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000076   E0           MOVX    A,@DPTR
+   \   000077   FA           MOV     R2,A
+   \   000078   90....       MOV     DPTR,#mrfiIncomingPacket + 32
+   \   00007B   E0           MOVX    A,@DPTR
+   \   00007C   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00007E   5036         JNC     ??MRFI_RfIsr_4
+   \   000080   EA           MOV     A,R2
+   \   000081   2401         ADD     A,#0x1
+   \   000083   F8           MOV     R0,A
+   \   000084   E4           CLR     A
+   \   000085   3400         ADDC    A,#0x0
+   \   000087   F9           MOV     R1,A
+   \   000088   E8           MOV     A,R0
+   \   000089   9420         SUBB    A,#0x20
+   \   00008B   E9           MOV     A,R1
+   \   00008C   9400         SUBB    A,#0x0
+   \   00008E   C3           CLR     C
+   \   00008F   65D0         XRL     A,PSW
+   \   000091   33           RLC     A
+   \   000092   5022         JNC     ??MRFI_RfIsr_4
+   \   000094   EA           MOV     A,R2
+   \   000095   C3           CLR     C
+   \   000096   940B         SUBB    A,#0xb
+   \   000098   401C         JC      ??MRFI_RfIsr_4
+   \   00009A                ; Setup parameters for call to function MRFI_RxAddrIsFiltered
+   \   00009A   7A..         MOV     R2,#(mrfiIncomingPacket + 1) & 0xff
+   \   00009C   7B..         MOV     R3,#((mrfiIncomingPacket + 1) >> 8) & 0xff
+   \   00009E   12....       LCALL   MRFI_RxAddrIsFiltered
+   \   0000A1   E9           MOV     A,R1
+   \   0000A2   7012         JNZ     ??MRFI_RfIsr_4
+   \   0000A4                ; Setup parameters for call to function Mrfi_CalculateRssi
+   \   0000A4   90....       MOV     DPTR,#mrfiIncomingPacket + 31
+   \   0000A7   E0           MOVX    A,@DPTR
+   \   0000A8   F9           MOV     R1,A
+   \   0000A9   12....       LCALL   Mrfi_CalculateRssi
+   \   0000AC   E9           MOV     A,R1
+   \   0000AD   F0           MOVX    @DPTR,A
+   \   0000AE   A3           INC     DPTR
+   \   0000AF   E0           MOVX    A,@DPTR
+   \   0000B0   C2E7         CLR     0xE0 /* A   */.7
+   \   0000B2   F0           MOVX    @DPTR,A
+   \   0000B3                ; Setup parameters for call to function MRFI_RxCompleteISR
+   \   0000B3   12....       LCALL   MRFI_RxCompleteISR
+   \                     ??MRFI_RfIsr_4:
+   \   0000B6                ; Setup parameters for call to function memset
+   \   0000B6   75..1F       MOV     ?V0 + 0,#0x1f
+   \   0000B9   78..         MOV     R0,#?V0 + 0
+   \   0000BB   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   0000BE   7C00         MOV     R4,#0x0
+   \   0000C0   7D00         MOV     R5,#0x0
+   \   0000C2   7A..         MOV     R2,#mrfiIncomingPacket & 0xff
+   \   0000C4   7B..         MOV     R3,#(mrfiIncomingPacket >> 8) & 0xff
+   \   0000C6   12....       LCALL   memset
+   \   0000C9   7402         MOV     A,#0x2
+   \   0000CB   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0000CE   43D601       ORL     0xd6,#0x1
+   \                     ??MRFI_RfIsr_3:
+   \   0000D1   7F02         MOV     R7,#0x2
+   \   0000D3   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   0000D6                REQUIRE _A_IEN0
+   \   0000D6                REQUIRE RFIF
+   \   0000D6                REQUIRE S1CON
+   \   0000D6                REQUIRE DMAARM
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_Sleep(void)
+   \                     MRFI_Sleep:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   90....       MOV     DPTR,#mrfiRadioState
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   6401         XRL     A,#0x1
+   \   00000B   6012         JZ      ??MRFI_Sleep_0
+   \   00000D   A2AF         MOV     C,0xa8.7
+   \   00000F   E4           CLR     A
+   \   000010   33           RLC     A
+   \   000011   FE           MOV     R6,A
+   \   000012   C2AF         CLR     0xa8.7
+   \   000014                ; Setup parameters for call to function MRFI_RxIdle
+   \   000014   12....       LCALL   MRFI_RxIdle
+   \   000017   7401         MOV     A,#0x1
+   \   000019   F0           MOVX    @DPTR,A
+   \   00001A   EE           MOV     A,R6
+   \   00001B   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00001D   92AF         MOV     0xa8.7,C
+   \                     ??MRFI_Sleep_0:
+   \   00001F   7F01         MOV     R7,#0x1
+   \   000021   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000024                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_WakeUp(void)
+   \                     MRFI_WakeUp:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   E5C6         MOV     A,0xc6
+   \   000006   A2E6         MOV     C,0xE0 /* A   */.6
+   \   000008   5004         JNC     ??MRFI_WakeUp_0
+   \   00000A   C2AF         CLR     0xa8.7
+   \                     ??MRFI_WakeUp_1:
+   \   00000C   80FE         SJMP    ??MRFI_WakeUp_1
+   \                     ??MRFI_WakeUp_0:
+   \   00000E   90....       MOV     DPTR,#mrfiRadioState
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   6401         XRL     A,#0x1
+   \   000014   701E         JNZ     ??MRFI_WakeUp_2
+   \   000016   90DF1C       MOV     DPTR,#-0x20e4
+   \   000019   74EA         MOV     A,#-0x16
+   \   00001B   F0           MOVX    @DPTR,A
+   \   00001C   A3           INC     DPTR
+   \   00001D   742A         MOV     A,#0x2a
+   \   00001F   F0           MOVX    @DPTR,A
+   \   000020   A3           INC     DPTR
+   \   000021   E4           CLR     A
+   \   000022   F0           MOVX    @DPTR,A
+   \   000023   90....       MOV     DPTR,#mrfiRadioState
+   \   000026   7402         MOV     A,#0x2
+   \   000028   F0           MOVX    @DPTR,A
+   \   000029   75E104       MOV     0xe1,#0x4
+   \                     ??MRFI_WakeUp_3:
+   \   00002C   90DF3B       MOV     DPTR,#-0x20c5
+   \   00002F   E0           MOVX    A,@DPTR
+   \   000030   6401         XRL     A,#0x1
+   \   000032   70F8         JNZ     ??MRFI_WakeUp_3
+   \                     ??MRFI_WakeUp_2:
+   \   000034   D083         POP     DPH
+   \   000036   D082         POP     DPL
+   \   000038   22           RET
+   \   000039                REQUIRE CLKCON
+   \   000039                REQUIRE _A_IEN0
+   \   000039                REQUIRE RFST
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant uint8_t MRFI_RandomByte(void)
+   \                     MRFI_RandomByte:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   43B404       ORL     0xb4,#0x4
+   \   000003   A9BC         MOV     R1,0xbc
+   \   000005   22           RET
+   \   000006                REQUIRE ADCCON1
+   \   000006                REQUIRE RNDL
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   static __near_func __xdata_reentrant void Mrfi_RxModeOn(void)
+   \                     Mrfi_RxModeOn:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   90....       MOV     DPTR,#mrfiDmaCfg
+   \   000008   74DF         MOV     A,#-0x21
+   \   00000A   F0           MOVX    @DPTR,A
+   \   00000B   A3           INC     DPTR
+   \   00000C   74D9         MOV     A,#-0x27
+   \   00000E   F0           MOVX    @DPTR,A
+   \   00000F   74..         MOV     A,#(mrfiIncomingPacket >> 8) & 0xff
+   \   000011   A3           INC     DPTR
+   \   000012   F0           MOVX    @DPTR,A
+   \   000013   A3           INC     DPTR
+   \   000014   74..         MOV     A,#mrfiIncomingPacket & 0xff
+   \   000016   F0           MOVX    @DPTR,A
+   \   000017   A3           INC     DPTR
+   \   000018   7480         MOV     A,#-0x80
+   \   00001A   F0           MOVX    @DPTR,A
+   \   00001B   A3           INC     DPTR
+   \   00001C   7421         MOV     A,#0x21
+   \   00001E   F0           MOVX    @DPTR,A
+   \   00001F   A3           INC     DPTR
+   \   000020   7413         MOV     A,#0x13
+   \   000022   F0           MOVX    @DPTR,A
+   \   000023   A3           INC     DPTR
+   \   000024   7411         MOV     A,#0x11
+   \   000026   F0           MOVX    @DPTR,A
+   \   000027   75D681       MOV     0xd6,#-0x7f
+   \   00002A                ; Setup parameters for call to function memset
+   \   00002A   75..1F       MOV     ?V0 + 0,#0x1f
+   \   00002D   75..00       MOV     ?V0 + 1,#0x0
+   \   000030   78..         MOV     R0,#?V0 + 0
+   \   000032   12....       LCALL   ?PUSH_XSTACK_I_TWO
+   \   000035   7C00         MOV     R4,#0x0
+   \   000037   7D00         MOV     R5,#0x0
+   \   000039   7A..         MOV     R2,#mrfiIncomingPacket & 0xff
+   \   00003B   7B..         MOV     R3,#(mrfiIncomingPacket >> 8) & 0xff
+   \   00003D   12....       LCALL   memset
+   \   000040   7402         MOV     A,#0x2
+   \   000042   12....       LCALL   ?DEALLOC_XSTACK8
+   \   000045   43D601       ORL     0xd6,#0x1
+   \   000048   539BFC       ANL     0x9b,#0xfc
+   \   00004B   53E9EF       ANL     0xe9,#0xef
+   \   00004E   75E102       MOV     0xe1,#0x2
+   \   000051   439110       ORL     0x91,#0x10
+   \   000054   7F02         MOV     R7,#0x2
+   \   000056   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000059                REQUIRE DMAARM
+   \   000059                REQUIRE S1CON
+   \   000059                REQUIRE RFIF
+   \   000059                REQUIRE RFST
+   \   000059                REQUIRE RFIM
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_RxOn(void)
+   \                     MRFI_RxOn:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#mrfiRadioState
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   6401         XRL     A,#0x1
+   \   00000A   7004         JNZ     ??MRFI_RxOn_0
+   \   00000C   C2AF         CLR     0xa8.7
+   \                     ??MRFI_RxOn_1:
+   \   00000E   80FE         SJMP    ??MRFI_RxOn_1
+   \                     ??MRFI_RxOn_0:
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   6403         XRL     A,#0x3
+   \   000013   6006         JZ      ??MRFI_RxOn_2
+   \   000015   7403         MOV     A,#0x3
+   \   000017   F0           MOVX    @DPTR,A
+   \   000018                ; Setup parameters for call to function Mrfi_RxModeOn
+   \   000018   12....       LCALL   Mrfi_RxModeOn
+   \                     ??MRFI_RxOn_2:
+   \   00001B   D083         POP     DPH
+   \   00001D   D082         POP     DPL
+   \   00001F   22           RET
+   \   000020                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   static __near_func __xdata_reentrant void Mrfi_RxModeOff(void)
+   \                     Mrfi_RxModeOff:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   5391EF       ANL     0x91,#0xef
+   \   000007   75E104       MOV     0xe1,#0x4
+   \                     ??Mrfi_RxModeOff_0:
+   \   00000A   90DF3B       MOV     DPTR,#-0x20c5
+   \   00000D   E0           MOVX    A,@DPTR
+   \   00000E   6401         XRL     A,#0x1
+   \   000010   70F8         JNZ     ??Mrfi_RxModeOff_0
+   \   000012   75D681       MOV     0xd6,#-0x7f
+   \   000015   53D1FE       ANL     0xd1,#0xfe
+   \   000018   539BFC       ANL     0x9b,#0xfc
+   \   00001B   53E9EF       ANL     0xe9,#0xef
+   \   00001E   D083         POP     DPH
+   \   000020   D082         POP     DPL
+   \   000022   22           RET
+   \   000023                REQUIRE RFIM
+   \   000023                REQUIRE RFST
+   \   000023                REQUIRE DMAARM
+   \   000023                REQUIRE DMAIRQ
+   \   000023                REQUIRE S1CON
+   \   000023                REQUIRE RFIF
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_RxIdle(void)
+   \                     MRFI_RxIdle:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#mrfiRadioState
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   6401         XRL     A,#0x1
+   \   00000A   7004         JNZ     ??MRFI_RxIdle_0
+   \   00000C   C2AF         CLR     0xa8.7
+   \                     ??MRFI_RxIdle_1:
+   \   00000E   80FE         SJMP    ??MRFI_RxIdle_1
+   \                     ??MRFI_RxIdle_0:
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   6403         XRL     A,#0x3
+   \   000013   7006         JNZ     ??MRFI_RxIdle_2
+   \   000015                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   000015   12....       LCALL   Mrfi_RxModeOff
+   \   000018   7402         MOV     A,#0x2
+   \   00001A   F0           MOVX    @DPTR,A
+   \                     ??MRFI_RxIdle_2:
+   \   00001B   D083         POP     DPH
+   \   00001D   D082         POP     DPL
+   \   00001F   22           RET
+   \   000020                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   static __near_func __xdata_reentrant void Mrfi_DelayUsec(uint16_t)
+   \                     Mrfi_DelayUsec:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+   \   000009   7404         MOV     A,#0x4
+   \   00000B   78..         MOV     R0,#?V0 + 0
+   \   00000D   12....       LCALL   ?US_SHR
+   \   000010   AE..         MOV     R6,?V0 + 0
+   \   000012   AF..         MOV     R7,?V0 + 1
+   \   000014   EA           MOV     A,R2
+   \   000015   4B           ORL     A,R3
+   \   000016   6025         JZ      ??Mrfi_DelayUsec_0
+   \                     ??Mrfi_DelayUsec_1:
+   \   000018   A2AF         MOV     C,0xa8.7
+   \   00001A   E4           CLR     A
+   \   00001B   33           RLC     A
+   \   00001C   F5..         MOV     ?V0 + 0,A
+   \   00001E   C2AF         CLR     0xa8.7
+   \   000020                ; Setup parameters for call to function BSP_Delay
+   \   000020   7A10         MOV     R2,#0x10
+   \   000022   7B00         MOV     R3,#0x0
+   \   000024   12....       LCALL   BSP_Delay
+   \   000027   E5..         MOV     A,?V0 + 0
+   \   000029   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00002B   92AF         MOV     0xa8.7,C
+   \   00002D   EE           MOV     A,R6
+   \   00002E   F8           MOV     R0,A
+   \   00002F   EF           MOV     A,R7
+   \   000030   F9           MOV     R1,A
+   \   000031   E8           MOV     A,R0
+   \   000032   24FF         ADD     A,#-0x1
+   \   000034   1E           DEC     R6
+   \   000035   E9           MOV     A,R1
+   \   000036   34FF         ADDC    A,#-0x1
+   \   000038   FF           MOV     R7,A
+   \   000039   E8           MOV     A,R0
+   \   00003A   49           ORL     A,R1
+   \   00003B   70DB         JNZ     ??Mrfi_DelayUsec_1
+   \                     ??Mrfi_DelayUsec_0:
+   \   00003D   7F02         MOV     R7,#0x2
+   \   00003F   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000042                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   static __near_func __xdata_reentrant void Mrfi_DelayUsecSem(uint16_t)
+   \                     Mrfi_DelayUsecSem:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   8A..         MOV     ?V0 + 0,R2
+   \   000007   8B..         MOV     ?V0 + 1,R3
+   \   000009   7404         MOV     A,#0x4
+   \   00000B   78..         MOV     R0,#?V0 + 0
+   \   00000D   12....       LCALL   ?US_SHR
+   \   000010   AE..         MOV     R6,?V0 + 0
+   \   000012   AF..         MOV     R7,?V0 + 1
+   \   000014   EA           MOV     A,R2
+   \   000015   4B           ORL     A,R3
+   \   000016   602B         JZ      ??Mrfi_DelayUsecSem_0
+   \                     ??Mrfi_DelayUsecSem_1:
+   \   000018   A2AF         MOV     C,0xa8.7
+   \   00001A   E4           CLR     A
+   \   00001B   33           RLC     A
+   \   00001C   F5..         MOV     ?V0 + 0,A
+   \   00001E   C2AF         CLR     0xa8.7
+   \   000020                ; Setup parameters for call to function BSP_Delay
+   \   000020   7A10         MOV     R2,#0x10
+   \   000022   7B00         MOV     R3,#0x0
+   \   000024   12....       LCALL   BSP_Delay
+   \   000027   E5..         MOV     A,?V0 + 0
+   \   000029   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00002B   92AF         MOV     0xa8.7,C
+   \   00002D   90....       MOV     DPTR,#sKillSem
+   \   000030   E0           MOVX    A,@DPTR
+   \   000031   7010         JNZ     ??Mrfi_DelayUsecSem_0
+   \   000033   EE           MOV     A,R6
+   \   000034   F8           MOV     R0,A
+   \   000035   EF           MOV     A,R7
+   \   000036   F9           MOV     R1,A
+   \   000037   E8           MOV     A,R0
+   \   000038   24FF         ADD     A,#-0x1
+   \   00003A   1E           DEC     R6
+   \   00003B   E9           MOV     A,R1
+   \   00003C   34FF         ADDC    A,#-0x1
+   \   00003E   FF           MOV     R7,A
+   \   00003F   E8           MOV     A,R0
+   \   000040   49           ORL     A,R1
+   \   000041   70D5         JNZ     ??Mrfi_DelayUsecSem_1
+   \                     ??Mrfi_DelayUsecSem_0:
+   \   000043   7F02         MOV     R7,#0x2
+   \   000045   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000048                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_DelayMs(uint16_t)
+   \                     MRFI_DelayMs:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   800E         SJMP    ??MRFI_DelayMs_0
+   \                     ??MRFI_DelayMs_1:
+   \   00000A                ; Setup parameters for call to function Mrfi_DelayUsec
+   \   00000A   7AF4         MOV     R2,#-0xc
+   \   00000C   7B01         MOV     R3,#0x1
+   \   00000E   12....       LCALL   Mrfi_DelayUsec
+   \   000011   EE           MOV     A,R6
+   \   000012   24FF         ADD     A,#-0x1
+   \   000014   1E           DEC     R6
+   \   000015   EF           MOV     A,R7
+   \   000016   34FF         ADDC    A,#-0x1
+   \                     ??MRFI_DelayMs_0:
+   \   000018   FF           MOV     R7,A
+   \   000019   EE           MOV     A,R6
+   \   00001A   4F           ORL     A,R7
+   \   00001B   70ED         JNZ     ??MRFI_DelayMs_1
+   \   00001D   7F01         MOV     R7,#0x1
+   \   00001F   02....       LJMP    ?FUNC_LEAVE_XDATA
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_ReplyDelay()
+   \                     MRFI_ReplyDelay:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   90....       MOV     DPTR,#sReplyDelayScalar
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   FE           MOV     R6,A
+   \   00000A   A3           INC     DPTR
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   FF           MOV     R7,A
+   \   00000D   A2AF         MOV     C,0xa8.7
+   \   00000F   E4           CLR     A
+   \   000010   33           RLC     A
+   \   000011   F8           MOV     R0,A
+   \   000012   C2AF         CLR     0xa8.7
+   \   000014   90....       MOV     DPTR,#sReplyDelayContext
+   \   000017   7401         MOV     A,#0x1
+   \   000019   F0           MOVX    @DPTR,A
+   \   00001A   E8           MOV     A,R0
+   \   00001B   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00001D   92AF         MOV     0xa8.7,C
+   \   00001F   8008         SJMP    ??MRFI_ReplyDelay_0
+   \                     ??MRFI_ReplyDelay_1:
+   \   000021   EE           MOV     A,R6
+   \   000022   24FF         ADD     A,#-0x1
+   \   000024   1E           DEC     R6
+   \   000025   EF           MOV     A,R7
+   \   000026   34FF         ADDC    A,#-0x1
+   \   000028   FF           MOV     R7,A
+   \                     ??MRFI_ReplyDelay_0:
+   \   000029   EE           MOV     A,R6
+   \   00002A   4F           ORL     A,R7
+   \   00002B   600D         JZ      ??MRFI_ReplyDelay_2
+   \   00002D                ; Setup parameters for call to function Mrfi_DelayUsecSem
+   \   00002D   7AF4         MOV     R2,#-0xc
+   \   00002F   7B01         MOV     R3,#0x1
+   \   000031   12....       LCALL   Mrfi_DelayUsecSem
+   \   000034   90....       MOV     DPTR,#sKillSem
+   \   000037   E0           MOVX    A,@DPTR
+   \   000038   60E7         JZ      ??MRFI_ReplyDelay_1
+   \                     ??MRFI_ReplyDelay_2:
+   \   00003A   A2AF         MOV     C,0xa8.7
+   \   00003C   E4           CLR     A
+   \   00003D   33           RLC     A
+   \   00003E   F8           MOV     R0,A
+   \   00003F   C2AF         CLR     0xa8.7
+   \   000041   90....       MOV     DPTR,#sKillSem
+   \   000044   E4           CLR     A
+   \   000045   F0           MOVX    @DPTR,A
+   \   000046   90....       MOV     DPTR,#sReplyDelayContext
+   \   000049   F0           MOVX    @DPTR,A
+   \   00004A   E8           MOV     A,R0
+   \   00004B   A2E0         MOV     C,0xE0 /* A   */.0
+   \   00004D   92AF         MOV     0xa8.7,C
+   \   00004F   7F01         MOV     R7,#0x1
+   \   000051   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000054                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_PostKillSem(void)
+   \                     MRFI_PostKillSem:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#sReplyDelayContext
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   6006         JZ      ??MRFI_PostKillSem_0
+   \   00000A   90....       MOV     DPTR,#sKillSem
+   \   00000D   7401         MOV     A,#0x1
+   \   00000F   F0           MOVX    @DPTR,A
+   \                     ??MRFI_PostKillSem_0:
+   \   000010   D083         POP     DPH
+   \   000012   D082         POP     DPL
+   \   000014   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   static __near_func __xdata_reentrant void Mrfi_RandomBackoffDelay(void)
+   \                     Mrfi_RandomBackoffDelay:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005                ; Setup parameters for call to function MRFI_RandomByte
+   \   000005   12....       LCALL   MRFI_RandomByte
+   \   000008   E9           MOV     A,R1
+   \   000009   540F         ANL     A,#0xf
+   \   00000B   04           INC     A
+   \   00000C   FF           MOV     R7,A
+   \   00000D   7E00         MOV     R6,#0x0
+   \   00000F   800C         SJMP    ??Mrfi_RandomBackoffDelay_0
+   \                     ??Mrfi_RandomBackoffDelay_1:
+   \   000011                ; Setup parameters for call to function Mrfi_DelayUsec
+   \   000011   90....       MOV     DPTR,#sBackoffHelper
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   FA           MOV     R2,A
+   \   000016   A3           INC     DPTR
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   FB           MOV     R3,A
+   \   000019   12....       LCALL   Mrfi_DelayUsec
+   \   00001C   0E           INC     R6
+   \                     ??Mrfi_RandomBackoffDelay_0:
+   \   00001D   EE           MOV     A,R6
+   \   00001E   C3           CLR     C
+   \   00001F   9F           SUBB    A,R7
+   \   000020   40EF         JC      ??Mrfi_RandomBackoffDelay_1
+   \   000022   7F01         MOV     R7,#0x1
+   \   000024   02....       LJMP    ?FUNC_LEAVE_XDATA
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant int8_t MRFI_Rssi(void)
+   \                     MRFI_Rssi:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   90....       MOV     DPTR,#mrfiRadioState
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   6403         XRL     A,#0x3
+   \   00000B   6004         JZ      ??MRFI_Rssi_0
+   \   00000D   C2AF         CLR     0xa8.7
+   \                     ??MRFI_Rssi_1:
+   \   00000F   80FE         SJMP    ??MRFI_Rssi_1
+   \                     ??MRFI_Rssi_0:
+   \   000011   7E14         MOV     R6,#0x14
+   \   000013   7F05         MOV     R7,#0x5
+   \                     ??MRFI_Rssi_2:
+   \   000015   90DF3C       MOV     DPTR,#-0x20c4
+   \   000018   E0           MOVX    A,@DPTR
+   \   000019   5450         ANL     A,#0x50
+   \   00001B   701D         JNZ     ??MRFI_Rssi_3
+   \   00001D                ; Setup parameters for call to function Mrfi_DelayUsec
+   \   00001D   7A40         MOV     R2,#0x40
+   \   00001F   7B00         MOV     R3,#0x0
+   \   000021   12....       LCALL   Mrfi_DelayUsec
+   \   000024   EE           MOV     A,R6
+   \   000025   24C0         ADD     A,#-0x40
+   \   000027   FE           MOV     R6,A
+   \   000028   EF           MOV     A,R7
+   \   000029   34FF         ADDC    A,#-0x1
+   \   00002B   FF           MOV     R7,A
+   \   00002C   C3           CLR     C
+   \   00002D   EE           MOV     A,R6
+   \   00002E   9401         SUBB    A,#0x1
+   \   000030   EF           MOV     A,R7
+   \   000031   9400         SUBB    A,#0x0
+   \   000033   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   000035   65D0         XRL     A,PSW
+   \   000037   33           RLC     A
+   \   000038   50DB         JNC     ??MRFI_Rssi_2
+   \                     ??MRFI_Rssi_3:
+   \   00003A                ; Setup parameters for call to function Mrfi_CalculateRssi
+   \   00003A   90DF3A       MOV     DPTR,#-0x20c6
+   \   00003D   E0           MOVX    A,@DPTR
+   \   00003E   F9           MOV     R1,A
+   \   00003F   12....       LCALL   Mrfi_CalculateRssi
+   \   000042   7F01         MOV     R7,#0x1
+   \   000044   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000047                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   static __near_func __xdata_reentrant int8_t Mrfi_CalculateRssi(uint8_t)
+   \                     Mrfi_CalculateRssi:
+   \   000000                ; Saved register size: 2
+   \   000000                ; Auto size: 0
+   \   000000   E9           MOV     A,R1
+   \   000001   FC           MOV     R4,A
+   \   000002   C3           CLR     C
+   \   000003   9480         SUBB    A,#-0x80
+   \   000005   4012         JC      ??Mrfi_CalculateRssi_0
+   \   000007   E9           MOV     A,R1
+   \   000008   F8           MOV     R0,A
+   \   000009   79FF         MOV     R1,#-0x1
+   \   00000B   7A02         MOV     R2,#0x2
+   \   00000D   7B00         MOV     R3,#0x0
+   \   00000F   12....       LCALL   ?S_DIV_MOD
+   \   000012   E8           MOV     A,R0
+   \   000013   24B7         ADD     A,#-0x49
+   \   000015   F8           MOV     R0,A
+   \   000016   E9           MOV     A,R1
+   \   000017   8007         SJMP    ??Mrfi_CalculateRssi_1
+   \                     ??Mrfi_CalculateRssi_0:
+   \   000019   EC           MOV     A,R4
+   \   00001A   C3           CLR     C
+   \   00001B   13           RRC     A
+   \   00001C   24B7         ADD     A,#-0x49
+   \   00001E   F8           MOV     R0,A
+   \   00001F   E4           CLR     A
+   \                     ??Mrfi_CalculateRssi_1:
+   \   000020   34FF         ADDC    A,#-0x1
+   \   000022   F9           MOV     R1,A
+   \   000023   C3           CLR     C
+   \   000024   E8           MOV     A,R0
+   \   000025   9480         SUBB    A,#-0x80
+   \   000027   E9           MOV     A,R1
+   \   000028   94FF         SUBB    A,#-0x1
+   \   00002A   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   00002C   65D0         XRL     A,PSW
+   \   00002E   33           RLC     A
+   \   00002F   5002         JNC     ??Mrfi_CalculateRssi_2
+   \   000031   7880         MOV     R0,#-0x80
+   \                     ??Mrfi_CalculateRssi_2:
+   \   000033   E8           MOV     A,R0
+   \   000034   F9           MOV     R1,A
+   \   000035   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant uint8_t MRFI_GetRadioState(void)
+   \                     MRFI_GetRadioState:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#mrfiRadioState
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F9           MOV     R1,A
+   \   000009   D083         POP     DPH
+   \   00000B   D082         POP     DPL
+   \   00000D   22           RET
+     60          #include "radios/common/mrfi_f1f2.c"
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \   unsigned char const mrfiBroadcastAddr[4]
+   \                     mrfiBroadcastAddr:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for mrfiBroadcastAddr>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \   static unsigned char const mrfiLogicalChanTable[4]
+   \                     mrfiLogicalChanTable:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for mrfiLogicalChanTable>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \   static unsigned char const mrfiRFPowerTable[3]
+   \                     mrfiRFPowerTable:
+   \   000000                DS 3
+   \   000003                REQUIRE `?<Initializer for mrfiRFPowerTable>`
+   \   000003                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \   static uint8_t mrfiRxFilterEnabled
+   \                     mrfiRxFilterEnabled:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \   static uint8_t mrfiRxFilterAddr[4]
+   \                     mrfiRxFilterAddr:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for mrfiRxFilterAddr>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_SetLogicalChannel(uint8_t)
+   \                     MRFI_SetLogicalChannel:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+   \   000007   C3           CLR     C
+   \   000008   9404         SUBB    A,#0x4
+   \   00000A   4004         JC      ??MRFI_SetLogicalChannel_0
+   \   00000C   C2AF         CLR     0xa8.7
+   \                     ??MRFI_SetLogicalChannel_1:
+   \   00000E   80FE         SJMP    ??MRFI_SetLogicalChannel_1
+   \                     ??MRFI_SetLogicalChannel_0:
+   \   000010                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   000010   12....       LCALL   Mrfi_RxModeOff
+   \   000013   8E..         MOV     ?V0 + 0,R6
+   \   000015   74..         MOV     A,#mrfiLogicalChanTable & 0xff
+   \   000017   25..         ADD     A,?V0 + 0
+   \   000019   F582         MOV     DPL,A
+   \   00001B   74..         MOV     A,#(mrfiLogicalChanTable >> 8) & 0xff
+   \   00001D   3400         ADDC    A,#0x0
+   \   00001F   F583         MOV     DPH,A
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   90DF06       MOV     DPTR,#-0x20fa
+   \   000025   F0           MOVX    @DPTR,A
+   \   000026   90....       MOV     DPTR,#mrfiRadioState
+   \   000029   E0           MOVX    A,@DPTR
+   \   00002A   6403         XRL     A,#0x3
+   \   00002C   7003         JNZ     ??MRFI_SetLogicalChannel_2
+   \   00002E                ; Setup parameters for call to function Mrfi_RxModeOn
+   \   00002E   12....       LCALL   Mrfi_RxModeOn
+   \                     ??MRFI_SetLogicalChannel_2:
+   \   000031   7F02         MOV     R7,#0x2
+   \   000033   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000036                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_SetRFPwr(uint8_t)
+   \                     MRFI_SetRFPwr:
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+   \   000007   C3           CLR     C
+   \   000008   9403         SUBB    A,#0x3
+   \   00000A   4004         JC      ??MRFI_SetRFPwr_0
+   \   00000C   C2AF         CLR     0xa8.7
+   \                     ??MRFI_SetRFPwr_1:
+   \   00000E   80FE         SJMP    ??MRFI_SetRFPwr_1
+   \                     ??MRFI_SetRFPwr_0:
+   \   000010                ; Setup parameters for call to function Mrfi_RxModeOff
+   \   000010   12....       LCALL   Mrfi_RxModeOff
+   \   000013   8E..         MOV     ?V0 + 0,R6
+   \   000015   74..         MOV     A,#mrfiRFPowerTable & 0xff
+   \   000017   25..         ADD     A,?V0 + 0
+   \   000019   F582         MOV     DPL,A
+   \   00001B   74..         MOV     A,#(mrfiRFPowerTable >> 8) & 0xff
+   \   00001D   3400         ADDC    A,#0x0
+   \   00001F   F583         MOV     DPH,A
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   90DF2E       MOV     DPTR,#-0x20d2
+   \   000025   F0           MOVX    @DPTR,A
+   \   000026   90....       MOV     DPTR,#mrfiRadioState
+   \   000029   E0           MOVX    A,@DPTR
+   \   00002A   6403         XRL     A,#0x3
+   \   00002C   7003         JNZ     ??MRFI_SetRFPwr_2
+   \   00002E                ; Setup parameters for call to function Mrfi_RxModeOn
+   \   00002E   12....       LCALL   Mrfi_RxModeOn
+   \                     ??MRFI_SetRFPwr_2:
+   \   000031   7F02         MOV     R7,#0x2
+   \   000033   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000036                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant uint8_t MRFI_SetRxAddrFilter(uint8_t *)
+   \                     MRFI_SetRxAddrFilter:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   8A82         MOV     DPL,R2
+   \   000006   8B83         MOV     DPH,R3
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   F4           CPL     A
+   \   00000A   7004         JNZ     ??MRFI_SetRxAddrFilter_0
+   \   00000C   7901         MOV     R1,#0x1
+   \   00000E   8030         SJMP    ??MRFI_SetRxAddrFilter_1
+   \                     ??MRFI_SetRxAddrFilter_0:
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   90DF05       MOV     DPTR,#-0x20fb
+   \   000014   F0           MOVX    @DPTR,A
+   \   000015   7C00         MOV     R4,#0x0
+   \   000017   801F         SJMP    ??MRFI_SetRxAddrFilter_2
+   \                     ??MRFI_SetRxAddrFilter_3:
+   \   000019   8C82         MOV     DPL,R4
+   \   00001B   A882         MOV     R0,DPL
+   \   00001D   EA           MOV     A,R2
+   \   00001E   28           ADD     A,R0
+   \   00001F   F582         MOV     DPL,A
+   \   000021   EB           MOV     A,R3
+   \   000022   3400         ADDC    A,#0x0
+   \   000024   F583         MOV     DPH,A
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   C0E0         PUSH    A
+   \   000029   74..         MOV     A,#mrfiRxFilterAddr & 0xff
+   \   00002B   28           ADD     A,R0
+   \   00002C   F582         MOV     DPL,A
+   \   00002E   74..         MOV     A,#(mrfiRxFilterAddr >> 8) & 0xff
+   \   000030   3400         ADDC    A,#0x0
+   \   000032   F583         MOV     DPH,A
+   \   000034   D0E0         POP     A
+   \   000036   F0           MOVX    @DPTR,A
+   \   000037   0C           INC     R4
+   \                     ??MRFI_SetRxAddrFilter_2:
+   \   000038   EC           MOV     A,R4
+   \   000039   C3           CLR     C
+   \   00003A   9404         SUBB    A,#0x4
+   \   00003C   40DB         JC      ??MRFI_SetRxAddrFilter_3
+   \   00003E   7900         MOV     R1,#0x0
+   \                     ??MRFI_SetRxAddrFilter_1:
+   \   000040   D083         POP     DPH
+   \   000042   D082         POP     DPL
+   \   000044   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_EnableRxAddrFilter(void)
+   \                     MRFI_EnableRxAddrFilter:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#mrfiRxFilterAddr
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F4           CPL     A
+   \   000009   7004         JNZ     ??MRFI_EnableRxAddrFilter_0
+   \   00000B   C2AF         CLR     0xa8.7
+   \                     ??MRFI_EnableRxAddrFilter_1:
+   \   00000D   80FE         SJMP    ??MRFI_EnableRxAddrFilter_1
+   \                     ??MRFI_EnableRxAddrFilter_0:
+   \   00000F   90....       MOV     DPTR,#mrfiRxFilterEnabled
+   \   000012   7401         MOV     A,#0x1
+   \   000014   F0           MOVX    @DPTR,A
+   \   000015   90DF03       MOV     DPTR,#-0x20fd
+   \   000018   7407         MOV     A,#0x7
+   \   00001A   F0           MOVX    @DPTR,A
+   \   00001B   D083         POP     DPH
+   \   00001D   D082         POP     DPL
+   \   00001F   22           RET
+   \   000020                REQUIRE _A_IEN0
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void MRFI_DisableRxAddrFilter(void)
+   \                     MRFI_DisableRxAddrFilter:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#mrfiRxFilterEnabled
+   \   000007   E4           CLR     A
+   \   000008   F0           MOVX    @DPTR,A
+   \   000009   90DF03       MOV     DPTR,#-0x20fd
+   \   00000C   7404         MOV     A,#0x4
+   \   00000E   F0           MOVX    @DPTR,A
+   \   00000F   D083         POP     DPH
+   \   000011   D082         POP     DPL
+   \   000013   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant uint8_t MRFI_RxAddrIsFiltered(uint8_t *)
+   \                     MRFI_RxAddrIsFiltered:
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   90....       MOV     DPTR,#mrfiRxFilterEnabled
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   7004         JNZ     ??MRFI_RxAddrIsFiltered_0
+   \                     ??MRFI_RxAddrIsFiltered_1:
+   \   00000B   7900         MOV     R1,#0x0
+   \   00000D   804A         SJMP    ??MRFI_RxAddrIsFiltered_2
+   \                     ??MRFI_RxAddrIsFiltered_0:
+   \   00000F   7E00         MOV     R6,#0x0
+   \   000011   7D00         MOV     R5,#0x0
+   \   000013   7C00         MOV     R4,#0x0
+   \   000015   8030         SJMP    ??MRFI_RxAddrIsFiltered_3
+   \                     ??MRFI_RxAddrIsFiltered_4:
+   \   000017   8C82         MOV     DPL,R4
+   \   000019   A882         MOV     R0,DPL
+   \   00001B   EA           MOV     A,R2
+   \   00001C   28           ADD     A,R0
+   \   00001D   F582         MOV     DPL,A
+   \   00001F   EB           MOV     A,R3
+   \   000020   3400         ADDC    A,#0x0
+   \   000022   F583         MOV     DPH,A
+   \   000024   E0           MOVX    A,@DPTR
+   \   000025   FF           MOV     R7,A
+   \   000026   74..         MOV     A,#mrfiRxFilterAddr & 0xff
+   \   000028   28           ADD     A,R0
+   \   000029   F582         MOV     DPL,A
+   \   00002B   74..         MOV     A,#(mrfiRxFilterAddr >> 8) & 0xff
+   \   00002D   3400         ADDC    A,#0x0
+   \   00002F   F583         MOV     DPH,A
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   6F           XRL     A,R7
+   \   000033   7001         JNZ     ??MRFI_RxAddrIsFiltered_5
+   \   000035   0E           INC     R6
+   \                     ??MRFI_RxAddrIsFiltered_5:
+   \   000036   74..         MOV     A,#mrfiBroadcastAddr & 0xff
+   \   000038   28           ADD     A,R0
+   \   000039   F582         MOV     DPL,A
+   \   00003B   74..         MOV     A,#(mrfiBroadcastAddr >> 8) & 0xff
+   \   00003D   3400         ADDC    A,#0x0
+   \   00003F   F583         MOV     DPH,A
+   \   000041   E0           MOVX    A,@DPTR
+   \   000042   6F           XRL     A,R7
+   \   000043   7001         JNZ     ??MRFI_RxAddrIsFiltered_6
+   \   000045   0D           INC     R5
+   \                     ??MRFI_RxAddrIsFiltered_6:
+   \   000046   0C           INC     R4
+   \                     ??MRFI_RxAddrIsFiltered_3:
+   \   000047   EC           MOV     A,R4
+   \   000048   C3           CLR     C
+   \   000049   9404         SUBB    A,#0x4
+   \   00004B   40CA         JC      ??MRFI_RxAddrIsFiltered_4
+   \   00004D   7404         MOV     A,#0x4
+   \   00004F   6D           XRL     A,R5
+   \   000050   60B9         JZ      ??MRFI_RxAddrIsFiltered_1
+   \   000052   7404         MOV     A,#0x4
+   \   000054   6E           XRL     A,R6
+   \   000055   60B4         JZ      ??MRFI_RxAddrIsFiltered_1
+   \   000057   7901         MOV     R1,#0x1
+   \                     ??MRFI_RxAddrIsFiltered_2:
+   \   000059   7F01         MOV     R7,#0x1
+   \   00005B   02....       LJMP    ?FUNC_LEAVE_XDATA
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for mrfiBroadcastAddr>`:
+   \   000000   FF           DB 255
+   \   000001   FF           DB 255
+   \   000002   FF           DB 255
+   \   000003   FF           DB 255
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for mrfiLogicalChanTable>`:
+   \   000000   00           DB 0
+   \   000001   32           DB 50
+   \   000002   50           DB 80
+   \   000003   6E           DB 110
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for mrfiRFPowerTable>`:
+   \   000000   0E           DB 14
+   \   000001   27           DB 39
+   \   000002   8C           DB 140
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for mrfiRxFilterAddr>`:
+   \   000000   FF           DB 255
+   \   000001   00           DB 0
+   \   000002   00           DB 0
+   \   000003   00           DB 0
+     61          
+     62          /* ----- Radio Family 3 ----- */
+     63          #elif (defined MRFI_RADIO_FAMILY3)
+     64          #include "bsp_external/mrfi_board.c"
+     65          #include "radios/family3/mrfi_spi.c"
+     66          #include "radios/family3/mrfi_radio.c"
+     67          
+     68          /* ----- Radio Family 4 ----- */
+     69          #elif (defined MRFI_RADIO_FAMILY4)
+     70          #include "radios/family4/mrfi_radio.c"
+     71          
+     72          /* ----- Radio Family 5 ----- */
+     73          #elif (defined MRFI_RADIO_FAMILY5)
+     74          #include "radios/family5/mrfi_radio.c"
+     75          #include "radios/family5/mrfi_radio_interface.c"
+     76          
+     77          /* ----- Radio Family 6 ----- */
+     78          #elif (defined MRFI_RADIO_FAMILY6)
+     79          #include "radios/family6/mrfi_radio.c"
+     80          
+     81          #else
+     82          #error "ERROR: Radio family is not defined."
+     83          #endif
+     84          
+     85          
+     86          /**************************************************************************************************
+     87           */
+
+   Maximum stack usage in bytes:
+
+     Function                     ISTACK PSTACK XSTACK
+     --------                     ------ ------ ------
+     MRFI_DelayMs                     0      0      8
+       -> Mrfi_DelayUsec              0      0     16
+     MRFI_DisableRxAddrFilter         2      0      0
+     MRFI_EnableRxAddrFilter          2      0      0
+     MRFI_GetRadioState               2      0      0
+     MRFI_Init                        0      0     11
+       -> memset                      0      0     22
+       -> MRFI_SetLogicalChannel      0      0     18
+       -> Mrfi_DelayUsec              0      0     18
+       -> Mrfi_RxModeOff              0      0     18
+     MRFI_PostKillSem                 2      0      0
+     MRFI_RandomByte                  0      0      8
+     MRFI_Receive                     2      0      0
+     MRFI_ReplyDelay                  0      0      8
+       -> Mrfi_DelayUsecSem           0      0     16
+     MRFI_RfIsr                       0      0     11
+       -> Mrfi_RxModeOff              0      0     18
+       -> memset                      0      0     22
+       -> Mrfi_RxModeOn               0      0     18
+       -> memmove                     0      0     22
+       -> MRFI_RxAddrIsFiltered       0      0     18
+       -> Mrfi_CalculateRssi          0      0     18
+       -> MRFI_RxCompleteISR          0      0     18
+       -> memset                      0      0     22
+     MRFI_Rssi                        0      0      8
+       -> Mrfi_DelayUsec              0      0     16
+       -> Mrfi_CalculateRssi          0      0     16
+     MRFI_RxAddrIsFiltered            0      0     17
+     MRFI_RxIdle                      2      0      8
+       -> Mrfi_RxModeOff              4      0      0
+     MRFI_RxOn                        2      0      0
+       -> Mrfi_RxModeOn               4      0      0
+     MRFI_SetLogicalChannel           0      0     18
+       -> Mrfi_RxModeOff              0      0     18
+       -> Mrfi_RxModeOn               0      0     18
+     MRFI_SetRFPwr                    0      0      9
+       -> Mrfi_RxModeOff              0      0     18
+       -> Mrfi_RxModeOn               0      0     18
+     MRFI_SetRxAddrFilter             3      0      0
+     MRFI_Sleep                       0      0      8
+       -> MRFI_RxIdle                 0      0     16
+     MRFI_Transmit                    0      0     10
+       -> Mrfi_RxModeOff              0      0     20
+       -> Mrfi_RxModeOff              0      0     20
+       -> Mrfi_RandomBackoffDelay     0      0     20
+       -> Mrfi_DelayUsec              0      0     20
+       -> Mrfi_RxModeOff              0      0     20
+       -> Mrfi_RxModeOn               0      0     20
+     MRFI_WakeUp                      2      0      0
+     Mrfi_CalculateRssi               2      0      9
+     Mrfi_DelayUsec                   0      0     19
+       -> BSP_Delay                   0      0     18
+     Mrfi_DelayUsecSem                0      0     17
+       -> BSP_Delay                   0      0     18
+     Mrfi_RandomBackoffDelay          0      0     18
+       -> MRFI_RandomByte             0      0     16
+       -> Mrfi_DelayUsec              0      0     16
+     Mrfi_RxModeOff                   2      0     10
+     Mrfi_RxModeOn                    0      0     21
+       -> memset                      0      0     22
+
+
+   Segment part sizes:
+
+     Function/Label                          Bytes
+     --------------                          -----
+     RFIM                                       1
+     IEN2                                       1
+     S1CON                                      1
+     _A_IEN0                                    1
+     ADCCON1                                    1
+     RNDL                                       1
+     SLEEP                                      1
+     CLKCON                                     1
+     DMAIRQ                                     1
+     DMA0CFGL                                   1
+     DMA0CFGH                                   1
+     DMAARM                                     1
+     RFST                                       1
+     RFIF                                       1
+     mrfiRadioState                             1
+     mrfiIncomingPacket                        33
+     sKillSem                                   1
+     sReplyDelayContext                         1
+     sReplyDelayScalar                          2
+     sBackoffHelper                             2
+     mrfiDmaCfg                                 8
+     MRFI_Init                                351
+     MRFI_Transmit                            206
+     MRFI_Receive                              21
+     MRFI_RfIsr                               214
+     MRFI_Sleep                                36
+     MRFI_WakeUp                               57
+     MRFI_RandomByte                            6
+     Mrfi_RxModeOn                             89
+     MRFI_RxOn                                 32
+     Mrfi_RxModeOff                            35
+     MRFI_RxIdle                               32
+     Mrfi_DelayUsec                            66
+     Mrfi_DelayUsecSem                         72
+     MRFI_DelayMs                              34
+     MRFI_ReplyDelay                           84
+     MRFI_PostKillSem                          21
+     Mrfi_RandomBackoffDelay                   39
+     MRFI_Rssi                                 71
+     Mrfi_CalculateRssi                        54
+     MRFI_GetRadioState                        14
+     mrfiBroadcastAddr                          4
+     mrfiLogicalChanTable                       4
+     mrfiRFPowerTable                           3
+     mrfiRxFilterEnabled                        1
+     mrfiRxFilterAddr                           4
+     MRFI_SetLogicalChannel                    54
+     MRFI_SetRFPwr                             54
+     MRFI_SetRxAddrFilter                      69
+     MRFI_EnableRxAddrFilter                   32
+     MRFI_DisableRxAddrFilter                  20
+     MRFI_RxAddrIsFiltered                     94
+     ?<Initializer for mrfiBroadcastAddr>       4
+     ?<Initializer for mrfiLogicalChanTable>    4
+     ?<Initializer for mrfiRFPowerTable>        3
+     ?<Initializer for mrfiRxFilterAddr>        4
+
+ 
+ 1 857 bytes in segment NEAR_CODE
+    14 bytes in segment SFR_AN
+    15 bytes in segment XDATA_I
+    15 bytes in segment XDATA_ID
+    49 bytes in segment XDATA_Z
+ 
+ 1 872 bytes of CODE  memory
+     0 bytes of DATA  memory (+ 14 bytes shared)
+    64 bytes of XDATA memory
+
+Errors: none
+Warnings: none

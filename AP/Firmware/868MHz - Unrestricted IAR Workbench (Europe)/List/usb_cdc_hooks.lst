@@ -1,0 +1,480 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:32 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\usb\class_cdc\usb_cdc_hooks. #
+#                          c                                                  #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\cla #
+#                          ss_cdc\usb_cdc_hooks.c" -D CC1111EM -D ISM_EU -D   #
+#                          MCU_H=<ioCC1111.h> -D chip=1111 -D                 #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\usb_cdc_hooks.lst          #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\usb_cdc_hooks.r51           #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\usb\class_cdc\usb_cdc_hooks.c
+      1          /***********************************************************************************
+      2          
+      3              Filename: usb_cdc_hooks.c
+      4          
+      5              Contains the necessary hook functions for various USB request processing
+      6              that is featured from the USB firmware library. Some
+      7              functions are empty.
+      8          
+      9          ***********************************************************************************/
+     10          
+     11          
+     12          /**********************************************************************************
+     13           * INCLUDES
+     14           */
+     15          
+     16          #include "usb_firmware_library_headers.h"
+     17          #include "usb_cdc.h"
+     18          #include "usb_uart.h"
+     19          //#include "hal_led.h"
+     20          
+     21          /* Global data */
+     22          
+     23          extern CDC_LINE_CODING_STRUCTURE currentLineCoding;
+     24          extern uint16 cdcRTS;
+     25          
+     26          
+     27          // *********************************************************************************
+     28          // All Hooks and functions required by the USB library.
+     29          // *********************************************************************************
+     30          
+     31          // **************** Process USB class requests with OUT data phase *****************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     32          void usbcrHookProcessOut(void)
+   \                     usbcrHookProcessOut:
+     33          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     34             // Process USB class requests with OUT data phase, or stall endpoint 0 when unsupported
+     35             if (usbSetupHeader.request == CDC_SET_CONTROL_LINE_STATE) {
+   \   000004   90....       MOV     DPTR,#usbSetupHeader + 1
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F8           MOV     R0,A
+   \   000009   7422         MOV     A,#0x22
+   \   00000B   68           XRL     A,R0
+   \   00000C   701D         JNZ     ??usbcrHookProcessOut_0
+     36                 // Control line state from host
+     37                if(usbfwData.ep0Status == EP_IDLE)
+   \   00000E   90....       MOV     DPTR,#usbfwData + 7
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   7033         JNZ     ??usbcrHookProcessOut_1
+     38                {
+     39                   cdcRTS= usbSetupHeader.value;
+   \   000014   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000017   E0           MOVX    A,@DPTR
+   \   000018   F8           MOV     R0,A
+   \   000019   A3           INC     DPTR
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   F9           MOV     R1,A
+   \   00001C   90....       MOV     DPTR,#cdcRTS
+   \   00001F   E8           MOV     A,R0
+   \   000020   F0           MOVX    @DPTR,A
+   \   000021   A3           INC     DPTR
+   \   000022   E9           MOV     A,R1
+   \                     ??usbcrHookProcessOut_2:
+   \   000023   F0           MOVX    @DPTR,A
+     40                /*   if (cdcRTS)
+     41                       halLedSet(2);
+     42                   else
+     43                       halLedClear(2);*/
+     44          
+     45                   usbfwData.ep0Status = EP_RX;
+   \   000024   90....       MOV     DPTR,#usbfwData + 7
+   \   000027   7402         MOV     A,#0x2
+   \   000029   801B         SJMP    ??usbcrHookProcessOut_3
+     46                }
+     47          
+     48          
+     49             } else if(usbSetupHeader.request == CDC_SET_LINE_CODING) {
+   \                     ??usbcrHookProcessOut_0:
+   \   00002B   7420         MOV     A,#0x20
+   \   00002D   68           XRL     A,R0
+   \   00002E   90....       MOV     DPTR,#usbfwData + 7
+   \   000031   7011         JNZ     ??usbcrHookProcessOut_4
+     50          
+     51                if(usbfwData.ep0Status == EP_IDLE)
+   \   000033   E0           MOVX    A,@DPTR
+   \   000034   7011         JNZ     ??usbcrHookProcessOut_1
+     52                {
+     53                   usbSetupData.pBuffer = (uint8 __xdata *) &currentLineCoding;
+   \   000036   90....       MOV     DPTR,#usbSetupData
+   \   000039   74..         MOV     A,#currentLineCoding & 0xff
+   \   00003B   F0           MOVX    @DPTR,A
+   \   00003C   A3           INC     DPTR
+   \   00003D   74..         MOV     A,#(currentLineCoding >> 8) & 0xff
+   \   00003F   F0           MOVX    @DPTR,A
+   \   000040   A3           INC     DPTR
+   \   000041   E4           CLR     A
+   \   000042   80DF         SJMP    ??usbcrHookProcessOut_2
+     54                   usbfwData.ep0Status = EP_RX;
+     55                }
+     56                else if(usbfwData.ep0Status == EP_RX) { }
+     57             }
+     58             // Unknown request?
+     59             else {
+     60                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbcrHookProcessOut_4:
+   \   000044   7404         MOV     A,#0x4
+   \                     ??usbcrHookProcessOut_3:
+   \   000046   F0           MOVX    @DPTR,A
+     61             }
+     62          }
+   \                     ??usbcrHookProcessOut_1:
+   \   000047   D083         POP     DPH
+   \   000049   D082         POP     DPL
+   \   00004B   22           RET
+     63          
+     64          // **************** Process USB class requests with IN data phase ******************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     65          void usbcrHookProcessIn(void)
+   \                     usbcrHookProcessIn:
+     66          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     67             // Process USB class requests with IN data phase, or stall endpoint 0 when unsupported
+     68             if (usbSetupHeader.request == CDC_GET_LINE_CODING) {
+   \   000004   90....       MOV     DPTR,#usbSetupHeader + 1
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   6421         XRL     A,#0x21
+   \   00000A   90....       MOV     DPTR,#usbfwData + 7
+   \   00000D   701D         JNZ     ??usbcrHookProcessIn_0
+     69                // First the endpoint status is EP_IDLE...
+     70                if (usbfwData.ep0Status == EP_IDLE) {
+   \   00000F   E0           MOVX    A,@DPTR
+   \   000010   701D         JNZ     ??usbcrHookProcessIn_1
+     71                   usbSetupData.pBuffer = (uint8 __xdata *) &currentLineCoding;
+   \   000012   90....       MOV     DPTR,#usbSetupData
+   \   000015   74..         MOV     A,#currentLineCoding & 0xff
+   \   000017   F0           MOVX    @DPTR,A
+   \   000018   A3           INC     DPTR
+   \   000019   74..         MOV     A,#(currentLineCoding >> 8) & 0xff
+   \   00001B   F0           MOVX    @DPTR,A
+   \   00001C   A3           INC     DPTR
+   \   00001D   E4           CLR     A
+   \   00001E   F0           MOVX    @DPTR,A
+     72                   usbSetupData.bytesLeft = 7;
+   \   00001F   A3           INC     DPTR
+   \   000020   7407         MOV     A,#0x7
+   \   000022   F0           MOVX    @DPTR,A
+   \   000023   A3           INC     DPTR
+   \   000024   E4           CLR     A
+   \   000025   F0           MOVX    @DPTR,A
+     73                   usbfwData.ep0Status = EP_TX;
+   \   000026   90....       MOV     DPTR,#usbfwData + 7
+   \   000029   04           INC     A
+   \   00002A   8002         SJMP    ??usbcrHookProcessIn_2
+     74                   // Then the endpoint status is EP_TX (remember: we did that here when setting up the buffer)
+     75                } else if (usbfwData.ep0Status == EP_TX) {
+     76                   // usbfwData.ep0Status is automatically reset to EP_IDLE when returning to usbfwSetupHandler()
+     77                }
+     78             } else {
+     79                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbcrHookProcessIn_0:
+   \   00002C   7404         MOV     A,#0x4
+   \                     ??usbcrHookProcessIn_2:
+   \   00002E   F0           MOVX    @DPTR,A
+     80             }
+     81          }
+   \                     ??usbcrHookProcessIn_1:
+   \   00002F   D083         POP     DPH
+   \   000031   D082         POP     DPL
+   \   000033   22           RET
+     82          
+     83          // ********************************  Unsupported USB hooks *************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     84          void usbvrHookProcessOut(void) {usbfwData.ep0Status = EP_STALL; }
+   \                     usbvrHookProcessOut:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#usbfwData + 7
+   \   000007   7404         MOV     A,#0x4
+   \   000009   F0           MOVX    @DPTR,A
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     85          void usbvrHookProcessIn(void) {usbfwData.ep0Status = EP_STALL; }
+   \                     usbvrHookProcessIn:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#usbfwData + 7
+   \   000007   7404         MOV     A,#0x4
+   \   000009   F0           MOVX    @DPTR,A
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+     86          
+     87          // ************************  unsupported/unhandled standard requests ***************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     88          void usbsrHookSetDescriptor(void) { usbfwData.ep0Status = EP_STALL; }
+   \                     usbsrHookSetDescriptor:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#usbfwData + 7
+   \   000007   7404         MOV     A,#0x4
+   \   000009   F0           MOVX    @DPTR,A
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     89          void usbsrHookSynchFrame(void) { usbfwData.ep0Status = EP_STALL; }
+   \                     usbsrHookSynchFrame:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#usbfwData + 7
+   \   000007   7404         MOV     A,#0x4
+   \   000009   F0           MOVX    @DPTR,A
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     90          void usbsrHookClearFeature(void) { usbfwData.ep0Status = EP_STALL; }
+   \                     usbsrHookClearFeature:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#usbfwData + 7
+   \   000007   7404         MOV     A,#0x4
+   \   000009   F0           MOVX    @DPTR,A
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     91          void usbsrHookSetFeature(void) { usbfwData.ep0Status = EP_STALL; }
+   \                     usbsrHookSetFeature:
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+   \   000004   90....       MOV     DPTR,#usbfwData + 7
+   \   000007   7404         MOV     A,#0x4
+   \   000009   F0           MOVX    @DPTR,A
+   \   00000A   D083         POP     DPH
+   \   00000C   D082         POP     DPL
+   \   00000E   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     92          void usbsrHookModifyGetStatus(uint8 recipient, uint8 index, uint16 __xdata *pStatus) { }
+   \                     usbsrHookModifyGetStatus:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   22           RET
+     93          
+     94          
+     95          // ************************ USB standard request event processing ******************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     96          void usbsrHookProcessEvent(uint8 event, uint8 index)
+   \                     usbsrHookProcessEvent:
+     97          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     98             // Process relevant events, one at a time.
+     99             switch (event) {
+    100             case USBSR_EVENT_CONFIGURATION_CHANGING : //(the device configuration is about to change)
+    101                break;
+    102             case USBSR_EVENT_CONFIGURATION_CHANGED :// (the device configuration has changed)
+    103                break;
+    104             case USBSR_EVENT_INTERFACE_CHANGING ://(the alternate setting of the given interface is about to change)
+    105                break;
+    106             case USBSR_EVENT_INTERFACE_CHANGED : //(the alternate setting of the given interface has changed)
+    107                break;
+    108             case USBSR_EVENT_REMOTE_WAKEUP_ENABLED ://(remote wakeup has been enabled by the host)
+    109                break;
+    110             case USBSR_EVENT_REMOTE_WAKEUP_DISABLED ://(remote wakeup has been disabled by the host)
+    111                break;
+    112             case USBSR_EVENT_EPIN_STALL_CLEARED ://(the given IN endpoint's stall condition has been cleared the host)
+    113                break;
+    114             case USBSR_EVENT_EPIN_STALL_SET ://(the given IN endpoint has been stalled by the host)
+    115                break;
+    116             case USBSR_EVENT_EPOUT_STALL_CLEARED ://(the given OUT endpoint's stall condition has been cleared the host)
+    117                break;
+    118             case USBSR_EVENT_EPOUT_STALL_SET ://(the given OUT endpoint has been stalled by the PC)
+    119                break;
+    120             }
+    121          }
+   \   000000   22           RET
+    122          
+    123          // ************************ USB interrupt event processing *************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    124          void usbirqHookProcessEvents(void)
+   \                     usbirqHookProcessEvents:
+    125          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    126              // Handle events that require immediate processing here
+    127          }
+   \   000000   22           RET
+    128          
+    129          /*
+    130          +------------------------------------------------------------------------------
+    131          |  Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+    132          |
+    133          |  IMPORTANT: Your use of this Software is limited to those specific rights
+    134          |  granted under the terms of a software license agreement between the user who
+    135          |  downloaded the software, his/her employer (which must be your employer) and
+    136          |  Texas Instruments Incorporated (the "License"). You may not use this Software
+    137          |  unless you agree to abide by the terms of the License. The License limits
+    138          |  your use, and you acknowledge, that the Software may not be modified, copied
+    139          |  or distributed unless embedded on a Texas Instruments microcontroller or used
+    140          |  solely and exclusively in conjunction with a Texas Instruments radio
+    141          |  frequency transceiver, which is integrated into your product. Other than for
+    142          |  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+    143          |  works of, modify, distribute, perform, display or sell this Software and/or
+    144          |  its documentation for any purpose.
+    145          |
+    146          |  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+    147          |  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+    148          |  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+    149          |  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+    150          |  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+    151          |  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+    152          |  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING
+    153          |  BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+    154          |  CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+    155          |  SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+    156          |  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+    157          |
+    158          |  Should you have any questions regarding your right to use this Software,
+    159          |  contact Texas Instruments Incorporated at www.TI.com.
+    160          |
+    161          +------------------------------------------------------------------------------
+    162          */
+
+   Maximum stack usage in bytes:
+
+     Function                 ISTACK PSTACK XSTACK
+     --------                 ------ ------ ------
+     usbcrHookProcessIn           2      0      0
+     usbcrHookProcessOut          2      0      0
+     usbirqHookProcessEvents      0      0      0
+     usbsrHookClearFeature        2      0      0
+     usbsrHookModifyGetStatus     0      0      0
+     usbsrHookProcessEvent        0      0      0
+     usbsrHookSetDescriptor       2      0      0
+     usbsrHookSetFeature          2      0      0
+     usbsrHookSynchFrame          2      0      0
+     usbvrHookProcessIn           2      0      0
+     usbvrHookProcessOut          2      0      0
+
+
+   Segment part sizes:
+
+     Function/Label           Bytes
+     --------------           -----
+     usbcrHookProcessOut        76
+     usbcrHookProcessIn         52
+     usbvrHookProcessOut        15
+     usbvrHookProcessIn         15
+     usbsrHookSetDescriptor     15
+     usbsrHookSynchFrame        15
+     usbsrHookClearFeature      15
+     usbsrHookSetFeature        15
+     usbsrHookModifyGetStatus    1
+     usbsrHookProcessEvent       1
+     usbirqHookProcessEvents     1
+
+ 
+ 221 bytes in segment NEAR_CODE
+ 
+ 221 bytes of CODE memory
+
+Errors: none
+Warnings: none

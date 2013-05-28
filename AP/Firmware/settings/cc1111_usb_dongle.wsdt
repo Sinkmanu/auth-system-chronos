@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>cc1111_usb_dongle/868MHz - Unrestricted IAR Workbench (Europe)</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>258</Column0><Column1>4</Column1><Column2>27</Column2><Column3>0</Column3></ColumnWidths>
+      <PreferedWindows><Position>1</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>SourceBrowser</Factory></Window></Windows></PreferedWindows></Workspace>
+      <Build>
+        
+        
+        
+        
+      <PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Find-in-Files</Factory></Window></Windows></PreferedWindows><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>915</ColumnWidth1><ColumnWidth2>240</ColumnWidth2><ColumnWidth3>61</ColumnWidth3></Build>
+    <Debug-Log><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1308</ColumnWidth1></Debug-Log><TerminalIO/><Find-in-Files><PreferedWindows><Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Build</Factory></Window></Windows></PreferedWindows><ColumnWidth0>440</ColumnWidth0><ColumnWidth1>62</ColumnWidth1><ColumnWidth2>754</ColumnWidth2></Find-in-Files><Disassembly><MixedMode>1</MixedMode><CodeCovShow>1</CodeCovShow><InstrProfShow>1</InstrProfShow></Disassembly><SourceBrowser><PreferedWindows><Position>1</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Workspace</Factory></Window></Windows></PreferedWindows></SourceBrowser></Static>
+    <Windows>
+      
+      
+    <Wnd0><Tabs><Tab><Identity>TabID-17759-11906</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-9414-11171</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd0><Wnd1><Tabs><Tab><Identity>TabID-14663-20672</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd1><Wnd2><Tabs><Tab><Identity>TabID-23255-26109</Identity><TabName>Workspace</TabName><Factory>Workspace</Factory><Session><NodeDict><ExpandedNode>cc1111_usb_dongle</ExpandedNode><ExpandedNode>cc1111_usb_dongle/AuthSystem</ExpandedNode></NodeDict></Session></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd2></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\simpliciti\Components\mrfi\smartrf\CC1111\smartrf_CC1111.h</Filename><XPos>0</XPos><YPos>96</YPos><SelStart>4132</SelStart><SelEnd>4132</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\BM_API.h</Filename><XPos>0</XPos><YPos>85</YPos><SelStart>3751</SelStart><SelEnd>3751</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\bm-br1\project.h</Filename><XPos>0</XPos><YPos>87</YPos><SelStart>4549</SelStart><SelEnd>4549</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\HAL\source\cc8051\hal_cc8051.h</Filename><XPos>0</XPos><YPos>13</YPos><SelStart>741</SelStart><SelEnd>741</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\AuthSystem\packet.h</Filename><XPos>0</XPos><YPos>12</YPos><SelStart>1241</SelStart><SelEnd>1255</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\AuthSystem\authentication_main.c</Filename><XPos>0</XPos><YPos>75</YPos><SelStart>2965</SelStart><SelEnd>2965</SelEnd></Tab><ActiveTab>5</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\usb\class_cdc\usb_uart.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>497</SelStart><SelEnd>497</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\usb\class_cdc\usb_uart.c</Filename><XPos>0</XPos><YPos>273</YPos><SelStart>1946</SelStart><SelEnd>1975</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\AuthSystem\aes.c</Filename><XPos>0</XPos><YPos>87</YPos><SelStart>1420</SelStart><SelEnd>1420</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\AuthSystem\aes.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>793</SelStart><SelEnd>837</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\wbsl\ioCCxx10_bitdef.h</Filename><XPos>0</XPos><YPos>750</YPos><SelStart>30522</SelStart><SelEnd>30522</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\HAL\include\hal_defs.h</Filename><XPos>0</XPos><YPos>29</YPos><SelStart>681</SelStart><SelEnd>681</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\AuthSystem\authentication.h</Filename><XPos>0</XPos><YPos>6</YPos><SelStart>650</SelStart><SelEnd>692</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>194</YPos><SelStart>7170</SelStart><SelEnd>7170</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-012eb4a8><key>iaridepm.enu1</key></Toolbar-012eb4a8></Sizes></Row0></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>522</Bottom><Right>309</Right><x>-2</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>156250</sizeHorzCX><sizeHorzCY>210970</sizeHorzCY><sizeVertCX>242969</sizeVertCX><sizeVertCY>552743</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>184</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>186</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>196203</sizeHorzCY><sizeVertCX>96094</sizeVertCX><sizeVertCY>100211</sizeVertCY></Rect></Wnd0></Sizes></Row0><Row1><Sizes><Wnd1><Rect><Top>182</Top><Left>-2</Left><Bottom>382</Bottom><Right>1282</Right><x>-2</x><y>182</y><xscreen>1284</xscreen><yscreen>200</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>210970</sizeHorzCY><sizeVertCX>156250</sizeVertCX><sizeVertCY>210970</sizeVertCY></Rect></Wnd1></Sizes></Row1></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

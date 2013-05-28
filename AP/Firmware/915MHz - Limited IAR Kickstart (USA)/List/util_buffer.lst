@@ -1,0 +1,640 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         11/Sep/2012  09:49:40 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\HAL\source\util_buffer.c     #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\HAL\sou #
+#                          rce\util_buffer.c" -D ISM_US -D                    #
+#                          MCU_H=<ioCC1111.h> -D chip=1111 -D                 #
+#                          RF_FREQUENCY=915000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\915MHz - Limited IAR         #
+#                          Kickstart (USA)\List\" -o "C:\Documents and        #
+#                          Settings\usuario\Mis documentos\Server_IAR\915MHz  #
+#                          - Limited IAR Kickstart (USA)\Obj\" -e             #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\915MHz - Limited IAR         #
+#                          Kickstart (USA)\List\util_buffer.lst               #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\915MHz - Limited IAR         #
+#                          Kickstart (USA)\Obj\util_buffer.r51                #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\util_buffer.c
+      1          /***********************************************************************************
+      2            Filename:     util_buffer.c
+      3          
+      4            Description:  Ringbuffer implementation.
+      5          
+      6          ***********************************************************************************/
+      7          
+      8          /***********************************************************************************
+      9          * INCLUDES
+     10          */
+     11          #include "util_buffer.h"
+     12          #include "hal_board.h"
+     13          #include "hal_int.h"
+     14          #include "hal_assert.h"
+     15          
+     16          /***********************************************************************************
+     17          * GLOBAL FUNCTIONS
+     18          */
+     19          
+     20          /***********************************************************************************
+     21          * @fn      bufInit
+     22          *
+     23          * @brief   Initialise a ringbuffer. The buffer must be allocated by the
+     24          *          application.
+     25          *
+     26          * @param   pBuf - pointer to the ringbuffer
+     27          *
+     28          * @return  none
+     29          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     30          void bufInit(ringBuf_t *pBuf)
+   \                     bufInit:
+     31          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+     32              uint16 s;
+     33          
+     34              // Critical section start
+     35              s = halIntLock();
+   \   000009                ; Setup parameters for call to function halIntLock
+   \   000009   12....       LCALL   halIntLock
+     36          
+     37              pBuf->nBytes= 0;
+   \   00000C   EE           MOV     A,R6
+   \   00000D   2440         ADD     A,#0x40
+   \   00000F   F582         MOV     DPL,A
+   \   000011   EF           MOV     A,R7
+   \   000012   3400         ADDC    A,#0x0
+   \   000014   F583         MOV     DPH,A
+   \   000016   E4           CLR     A
+   \   000017   F0           MOVX    @DPTR,A
+     38              pBuf->iHead= 0;
+   \   000018   EE           MOV     A,R6
+   \   000019   2441         ADD     A,#0x41
+   \   00001B   F582         MOV     DPL,A
+   \   00001D   EF           MOV     A,R7
+   \   00001E   3400         ADDC    A,#0x0
+   \   000020   F583         MOV     DPH,A
+   \   000022   E4           CLR     A
+   \   000023   F0           MOVX    @DPTR,A
+     39              pBuf->iTail= 0;
+   \   000024   EE           MOV     A,R6
+   \   000025   2442         ADD     A,#0x42
+   \   000027   F582         MOV     DPL,A
+   \   000029   EF           MOV     A,R7
+   \   00002A   3400         ADDC    A,#0x0
+   \   00002C   F583         MOV     DPH,A
+   \   00002E   E4           CLR     A
+   \   00002F   F0           MOVX    @DPTR,A
+     40          
+     41              // Critical section end
+     42              halIntUnlock(s);
+   \   000030                ; Setup parameters for call to function halIntUnlock
+   \   000030   12....       LCALL   halIntUnlock
+     43          }
+   \   000033   7F02         MOV     R7,#0x2
+   \   000035   02....       LJMP    ?FUNC_LEAVE_XDATA
+     44          
+     45          
+     46          /***********************************************************************************
+     47          * @fn      bufPut
+     48          *
+     49          * @brief   Add bytes to the buffer.
+     50          *
+     51          * @param   pBuf - pointer to the ringbuffer
+     52          *          pData - pointer to data to be appended to the buffer
+     53          *          nBytes - number of bytes
+     54          *
+     55          * @return  Number of bytes copied to the buffer
+     56          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     57          uint8 bufPut(ringBuf_t *pBuf, const uint8 *pData, uint8 nBytes)
+   \                     bufPut:
+     58          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+   \   000009   8C..         MOV     ?V0 + 4,R4
+   \   00000B   8D..         MOV     ?V0 + 5,R5
+   \   00000D   89..         MOV     ?V0 + 1,R1
+     59              uint8 i;
+     60              uint16 s;
+     61          
+     62              // Critical section start
+     63              s = halIntLock();
+   \   00000F                ; Setup parameters for call to function halIntLock
+   \   00000F   12....       LCALL   halIntLock
+     64              
+     65              if (pBuf->nBytes+nBytes < BUF_SIZE) {
+   \   000012   EE           MOV     A,R6
+   \   000013   2440         ADD     A,#0x40
+   \   000015   F8           MOV     R0,A
+   \   000016   EF           MOV     A,R7
+   \   000017   3400         ADDC    A,#0x0
+   \   000019   F9           MOV     R1,A
+   \   00001A   8882         MOV     DPL,R0
+   \   00001C   8983         MOV     DPH,R1
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   85....       MOV     ?V0 + 2,?V0 + 1
+   \   000022   25..         ADD     A,?V0 + 2
+   \   000024   FC           MOV     R4,A
+   \   000025   E4           CLR     A
+   \   000026   3400         ADDC    A,#0x0
+   \   000028   FD           MOV     R5,A
+   \   000029   EC           MOV     A,R4
+   \   00002A   9440         SUBB    A,#0x40
+   \   00002C   ED           MOV     A,R5
+   \   00002D   9400         SUBB    A,#0x0
+   \   00002F   C3           CLR     C
+   \   000030   65D0         XRL     A,PSW
+   \   000032   33           RLC     A
+   \   000033   75..00       MOV     ?V0 + 0,#0x0
+   \   000036   504F         JNC     ??bufPut_0
+     66          
+     67                  i= 0;
+   \   000038   803E         SJMP    ??bufPut_1
+     68                  while(i<nBytes) {
+     69                      pBuf->pData[pBuf->iTail]= pData[i];
+   \                     ??bufPut_2:
+   \   00003A   EE           MOV     A,R6
+   \   00003B   2442         ADD     A,#0x42
+   \   00003D   FC           MOV     R4,A
+   \   00003E   EF           MOV     A,R7
+   \   00003F   3400         ADDC    A,#0x0
+   \   000041   FD           MOV     R5,A
+   \   000042   85....       MOV     ?V0 + 2,?V0 + 0
+   \   000045   E5..         MOV     A,?V0 + 4
+   \   000047   25..         ADD     A,?V0 + 2
+   \   000049   F582         MOV     DPL,A
+   \   00004B   E5..         MOV     A,?V0 + 5
+   \   00004D   3400         ADDC    A,#0x0
+   \   00004F   F583         MOV     DPH,A
+   \   000051   E0           MOVX    A,@DPTR
+   \   000052   C0E0         PUSH    A
+   \   000054   8C82         MOV     DPL,R4
+   \   000056   8D83         MOV     DPH,R5
+   \   000058   E0           MOVX    A,@DPTR
+   \   000059   F5..         MOV     ?V0 + 2,A
+   \   00005B   EE           MOV     A,R6
+   \   00005C   25..         ADD     A,?V0 + 2
+   \   00005E   F582         MOV     DPL,A
+   \   000060   EF           MOV     A,R7
+   \   000061   3400         ADDC    A,#0x0
+   \   000063   F583         MOV     DPH,A
+   \   000065   D0E0         POP     A
+   \   000067   F0           MOVX    @DPTR,A
+     70                      pBuf->iTail++;
+   \   000068   8C82         MOV     DPL,R4
+   \   00006A   8D83         MOV     DPH,R5
+   \   00006C   E0           MOVX    A,@DPTR
+   \   00006D   04           INC     A
+   \   00006E   F0           MOVX    @DPTR,A
+     71                      if (pBuf->iTail==BUF_SIZE)
+   \   00006F   E0           MOVX    A,@DPTR
+   \   000070   6440         XRL     A,#0x40
+   \   000072   7002         JNZ     ??bufPut_3
+     72                          pBuf->iTail= 0;
+   \   000074   E4           CLR     A
+   \   000075   F0           MOVX    @DPTR,A
+     73                      i++;
+   \                     ??bufPut_3:
+   \   000076   05..         INC     ?V0 + 0
+     74                  }
+   \                     ??bufPut_1:
+   \   000078   E5..         MOV     A,?V0 + 0
+   \   00007A   C3           CLR     C
+   \   00007B   95..         SUBB    A,?V0 + 1
+   \   00007D   40BB         JC      ??bufPut_2
+     75                  pBuf->nBytes+= i;
+   \   00007F   8882         MOV     DPL,R0
+   \   000081   8983         MOV     DPH,R1
+   \   000083   E0           MOVX    A,@DPTR
+   \   000084   25..         ADD     A,?V0 + 0
+   \   000086   F0           MOVX    @DPTR,A
+     76              } else {
+     77                  i= 0;
+     78              }
+     79          
+     80              // Critical section end
+     81              halIntUnlock(s);
+   \                     ??bufPut_0:
+   \   000087                ; Setup parameters for call to function halIntUnlock
+   \   000087   12....       LCALL   halIntUnlock
+     82          
+     83              return i;
+   \   00008A   A9..         MOV     R1,?V0 + 0
+   \   00008C   7F06         MOV     R7,#0x6
+   \   00008E   02....       LJMP    ?FUNC_LEAVE_XDATA
+     84          }
+     85          
+     86          
+     87          /***********************************************************************************
+     88          * @fn      bufGet
+     89          *
+     90          * @brief   Extract bytes from the buffer.
+     91          *
+     92          * @param   pBuf   - pointer to the ringbuffer
+     93          *          pData  - pointer to data to be extracted
+     94          *          nBytes - number of bytes
+     95          *
+     96          * @return  Bytes actually returned
+     97          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     98          uint8 bufGet(ringBuf_t *pBuf, uint8 *pData, uint8 nBytes)
+   \                     bufGet:
+     99          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+   \   000009   8C..         MOV     ?V0 + 4,R4
+   \   00000B   8D..         MOV     ?V0 + 5,R5
+   \   00000D   89..         MOV     ?V0 + 1,R1
+    100              uint8 i;
+    101              uint16 s;
+    102          
+    103              // Critical section start
+    104              s = halIntLock();
+   \   00000F                ; Setup parameters for call to function halIntLock
+   \   00000F   12....       LCALL   halIntLock
+    105          
+    106              i= 0;
+   \   000012   75..00       MOV     ?V0 + 0,#0x0
+   \   000015   803C         SJMP    ??bufGet_0
+    107              while(i<nBytes && i<pBuf->nBytes) {
+    108                  pData[i]= pBuf->pData[pBuf->iHead];
+   \                     ??bufGet_1:
+   \   000017   EE           MOV     A,R6
+   \   000018   2441         ADD     A,#0x41
+   \   00001A   F8           MOV     R0,A
+   \   00001B   EF           MOV     A,R7
+   \   00001C   3400         ADDC    A,#0x0
+   \   00001E   F9           MOV     R1,A
+   \   00001F   8882         MOV     DPL,R0
+   \   000021   8983         MOV     DPH,R1
+   \   000023   E0           MOVX    A,@DPTR
+   \   000024   FC           MOV     R4,A
+   \   000025   EE           MOV     A,R6
+   \   000026   2C           ADD     A,R4
+   \   000027   F582         MOV     DPL,A
+   \   000029   EF           MOV     A,R7
+   \   00002A   3400         ADDC    A,#0x0
+   \   00002C   F583         MOV     DPH,A
+   \   00002E   E0           MOVX    A,@DPTR
+   \   00002F   C0E0         PUSH    A
+   \   000031   85....       MOV     ?V0 + 2,?V0 + 0
+   \   000034   E5..         MOV     A,?V0 + 4
+   \   000036   25..         ADD     A,?V0 + 2
+   \   000038   F582         MOV     DPL,A
+   \   00003A   E5..         MOV     A,?V0 + 5
+   \   00003C   3400         ADDC    A,#0x0
+   \   00003E   F583         MOV     DPH,A
+   \   000040   D0E0         POP     A
+   \   000042   F0           MOVX    @DPTR,A
+    109                  pBuf->iHead++;
+   \   000043   8882         MOV     DPL,R0
+   \   000045   8983         MOV     DPH,R1
+   \   000047   E0           MOVX    A,@DPTR
+   \   000048   04           INC     A
+   \   000049   F0           MOVX    @DPTR,A
+    110                  if (pBuf->iHead==BUF_SIZE)
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   6440         XRL     A,#0x40
+   \   00004D   7002         JNZ     ??bufGet_2
+    111                      pBuf->iHead= 0;
+   \   00004F   E4           CLR     A
+   \   000050   F0           MOVX    @DPTR,A
+    112                  i++;
+   \                     ??bufGet_2:
+   \   000051   05..         INC     ?V0 + 0
+    113              }
+   \                     ??bufGet_0:
+   \   000053   EE           MOV     A,R6
+   \   000054   2440         ADD     A,#0x40
+   \   000056   F582         MOV     DPL,A
+   \   000058   EF           MOV     A,R7
+   \   000059   3400         ADDC    A,#0x0
+   \   00005B   F583         MOV     DPH,A
+   \   00005D   E5..         MOV     A,?V0 + 0
+   \   00005F   C3           CLR     C
+   \   000060   95..         SUBB    A,?V0 + 1
+   \   000062   5008         JNC     ??bufGet_3
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   F8           MOV     R0,A
+   \   000066   E5..         MOV     A,?V0 + 0
+   \   000068   C3           CLR     C
+   \   000069   98           SUBB    A,R0
+   \   00006A   40AB         JC      ??bufGet_1
+    114              pBuf->nBytes-= i;
+   \                     ??bufGet_3:
+   \   00006C   A8..         MOV     R0,?V0 + 0
+   \   00006E   E0           MOVX    A,@DPTR
+   \   00006F   C3           CLR     C
+   \   000070   98           SUBB    A,R0
+   \   000071   F0           MOVX    @DPTR,A
+    115          
+    116              // Critical section end
+    117              halIntUnlock(s);
+   \   000072                ; Setup parameters for call to function halIntUnlock
+   \   000072   12....       LCALL   halIntUnlock
+    118              return i;
+   \   000075   A9..         MOV     R1,?V0 + 0
+   \   000077   7F06         MOV     R7,#0x6
+   \   000079   02....       LJMP    ?FUNC_LEAVE_XDATA
+    119          }
+    120          
+    121          
+    122          /***********************************************************************************
+    123          * @fn      bufPeek
+    124          *
+    125          * @brief   Read bytes from the buffer but leave them in the queue.
+    126          *
+    127          * @param   pBuf   - pointer to the ringbuffer
+    128          *          pData  - pointer to data to be extracted
+    129          *          nBytes - number of bytes
+    130          *
+    131          * @return  Bytes actually returned
+    132          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    133          uint8 bufPeek(ringBuf_t *pBuf, uint8 *pData, uint8 nBytes)
+   \                     bufPeek:
+    134          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+   \   000009   8C..         MOV     ?V0 + 4,R4
+   \   00000B   8D..         MOV     ?V0 + 5,R5
+   \   00000D   89..         MOV     ?V0 + 1,R1
+    135              uint8 i,j;
+    136              uint16 s;
+    137          
+    138              // Critical section start
+    139              s = halIntLock();
+   \   00000F                ; Setup parameters for call to function halIntLock
+   \   00000F   12....       LCALL   halIntLock
+    140          
+    141              i= 0;
+   \   000012   75..00       MOV     ?V0 + 0,#0x0
+    142              j= pBuf->iHead;
+   \   000015   EE           MOV     A,R6
+   \   000016   2441         ADD     A,#0x41
+   \   000018   F582         MOV     DPL,A
+   \   00001A   EF           MOV     A,R7
+   \   00001B   3400         ADDC    A,#0x0
+   \   00001D   F583         MOV     DPH,A
+   \   00001F   E0           MOVX    A,@DPTR
+   \   000020   F8           MOV     R0,A
+   \   000021   802B         SJMP    ??bufPeek_0
+    143              while(i<nBytes && i<pBuf->nBytes) {
+    144                  pData[i]= pBuf->pData[j];
+   \                     ??bufPeek_1:
+   \   000023   88..         MOV     ?V0 + 2,R0
+   \   000025   EE           MOV     A,R6
+   \   000026   25..         ADD     A,?V0 + 2
+   \   000028   F582         MOV     DPL,A
+   \   00002A   EF           MOV     A,R7
+   \   00002B   3400         ADDC    A,#0x0
+   \   00002D   F583         MOV     DPH,A
+   \   00002F   E0           MOVX    A,@DPTR
+   \   000030   C0E0         PUSH    A
+   \   000032   85....       MOV     ?V0 + 2,?V0 + 0
+   \   000035   E5..         MOV     A,?V0 + 4
+   \   000037   25..         ADD     A,?V0 + 2
+   \   000039   F582         MOV     DPL,A
+   \   00003B   E5..         MOV     A,?V0 + 5
+   \   00003D   3400         ADDC    A,#0x0
+   \   00003F   F583         MOV     DPH,A
+   \   000041   D0E0         POP     A
+   \   000043   F0           MOVX    @DPTR,A
+    145                  j++;
+   \   000044   08           INC     R0
+    146                  if (j==BUF_SIZE)
+   \   000045   7440         MOV     A,#0x40
+   \   000047   68           XRL     A,R0
+   \   000048   7002         JNZ     ??bufPeek_2
+    147                      j= 0;
+   \   00004A   7800         MOV     R0,#0x0
+    148                  i++;
+   \                     ??bufPeek_2:
+   \   00004C   05..         INC     ?V0 + 0
+    149              }
+   \                     ??bufPeek_0:
+   \   00004E   E5..         MOV     A,?V0 + 0
+   \   000050   C3           CLR     C
+   \   000051   95..         SUBB    A,?V0 + 1
+   \   000053   5012         JNC     ??bufPeek_3
+   \   000055   EE           MOV     A,R6
+   \   000056   2440         ADD     A,#0x40
+   \   000058   F582         MOV     DPL,A
+   \   00005A   EF           MOV     A,R7
+   \   00005B   3400         ADDC    A,#0x0
+   \   00005D   F583         MOV     DPH,A
+   \   00005F   E0           MOVX    A,@DPTR
+   \   000060   F9           MOV     R1,A
+   \   000061   E5..         MOV     A,?V0 + 0
+   \   000063   C3           CLR     C
+   \   000064   99           SUBB    A,R1
+   \   000065   40BC         JC      ??bufPeek_1
+    150          
+    151              // Critical section end
+    152              halIntUnlock(s);
+   \                     ??bufPeek_3:
+   \   000067                ; Setup parameters for call to function halIntUnlock
+   \   000067   12....       LCALL   halIntUnlock
+    153              return i;
+   \   00006A   A9..         MOV     R1,?V0 + 0
+   \   00006C   7F06         MOV     R7,#0x6
+   \   00006E   02....       LJMP    ?FUNC_LEAVE_XDATA
+    154          }
+    155          
+    156          
+    157          /***********************************************************************************
+    158          * @fn      bufNumBytes
+    159          *
+    160          * @brief   Return the byte count for the ring buffer.
+    161          *
+    162          * @param   pBuf- pointer to the buffer
+    163          *
+    164          * @return  Number of bytes present.
+    165          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    166          uint8 bufNumBytes(ringBuf_t *pBuf)
+   \                     bufNumBytes:
+    167          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    168              return pBuf->nBytes;
+   \   000004   EA           MOV     A,R2
+   \   000005   2440         ADD     A,#0x40
+   \   000007   F582         MOV     DPL,A
+   \   000009   EB           MOV     A,R3
+   \   00000A   3400         ADDC    A,#0x0
+   \   00000C   F583         MOV     DPH,A
+   \   00000E   E0           MOVX    A,@DPTR
+   \   00000F   F9           MOV     R1,A
+   \   000010   D083         POP     DPH
+   \   000012   D082         POP     DPL
+   \   000014   22           RET
+    169          }
+    170          
+    171          /***********************************************************************************
+    172            Copyright 2007 Texas Instruments Incorporated. All rights reserved.
+    173          
+    174            IMPORTANT: Your use of this Software is limited to those specific rights
+    175            granted under the terms of a software license agreement between the user
+    176            who downloaded the software, his/her employer (which must be your employer)
+    177            and Texas Instruments Incorporated (the "License").  You may not use this
+    178            Software unless you agree to abide by the terms of the License. The License
+    179            limits your use, and you acknowledge, that the Software may not be modified,
+    180            copied or distributed unless embedded on a Texas Instruments microcontroller
+    181            or used solely and exclusively in conjunction with a Texas Instruments radio
+    182            frequency transceiver, which is integrated into your product.  Other than for
+    183            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+    184            works of, modify, distribute, perform, display or sell this Software and/or
+    185            its documentation for any purpose.
+    186          
+    187            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+    188            PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+    189            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+    190            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+    191            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+    192            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+    193            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+    194            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+    195            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+    196            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+    197            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+    198          
+    199            Should you have any questions regarding your right to use this Software,
+    200            contact Texas Instruments Incorporated at www.TI.com.
+    201          ***********************************************************************************/
+    202          
+
+   Maximum stack usage in bytes:
+
+     Function          ISTACK PSTACK XSTACK
+     --------          ------ ------ ------
+     bufGet                1      0     13
+       -> halIntLock       0      0     26
+       -> halIntUnlock     0      0     26
+     bufInit               0      0      9
+       -> halIntLock       0      0     18
+       -> halIntUnlock     0      0     18
+     bufNumBytes           2      0      0
+     bufPeek               1      0     13
+       -> halIntLock       0      0     26
+       -> halIntUnlock     0      0     26
+     bufPut                1      0     13
+       -> halIntLock       0      0     26
+       -> halIntUnlock     0      0     26
+
+
+   Segment part sizes:
+
+     Function/Label Bytes
+     -------------- -----
+     bufInit          56
+     bufPut          145
+     bufGet          124
+     bufPeek         113
+     bufNumBytes      21
+
+ 
+ 459 bytes in segment NEAR_CODE
+ 
+ 459 bytes of CODE memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,355 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:33 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bs #
+#                          p.c                                                #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\bsp\bsp.c" -D CC1111EM -D ISM_EU    #
+#                          -D MCU_H=<ioCC1111.h> -D chip=1111 -D              #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\bsp.lst                    #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\bsp.r51                     #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\simpliciti\Components\bsp\bsp.c
+      1          /**************************************************************************************************
+      2            Revised:        $Date: 2007-07-06 11:19:00 -0700 (Fri, 06 Jul 2007) $
+      3            Revision:       $Revision: 13579 $
+      4          
+      5            Copyright 2007 Texas Instruments Incorporated.  All rights reserved.
+      6          
+      7            IMPORTANT: Your use of this Software is limited to those specific rights granted under
+      8            the terms of a software license agreement between the user who downloaded the software,
+      9            his/her employer (which must be your employer) and Texas Instruments Incorporated (the
+     10            "License"). You may not use this Software unless you agree to abide by the terms of the
+     11            License. The License limits your use, and you acknowledge, that the Software may not be
+     12            modified, copied or distributed unless embedded on a Texas Instruments microcontroller
+     13            or used solely and exclusively in conjunction with a Texas Instruments radio frequency
+     14            transceiver, which is integrated into your product. Other than for the foregoing purpose,
+     15            you may not use, reproduce, copy, prepare derivative works of, modify, distribute,
+     16            perform, display or sell this Software and/or its documentation for any purpose.
+     17          
+     18            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS”
+     19            WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY
+     20            WARRANTY OF MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
+     21            IN NO EVENT SHALL TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+     22            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER LEGAL EQUITABLE
+     23            THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING BUT NOT LIMITED TO ANY
+     24            INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST
+     25            DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY
+     26            THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+     27          
+     28            Should you have any questions regarding your right to use this Software,
+     29            contact Texas Instruments Incorporated at www.TI.com.
+     30          **************************************************************************************************/
+     31          
+     32          /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+     33           *   BSP (Board Support Package)
+     34           *   Top-level BSP code file.
+     35           * =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+     36           */
+     37          
+     38          /* ------------------------------------------------------------------------------------------------
+     39           *                                            Includes
+     40           * ------------------------------------------------------------------------------------------------
+     41           */
+     42          #include "bsp.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xcb
+   \   unsigned char volatile __sfr T3CTL
+   \                     T3CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xcd
+   \   unsigned char volatile __sfr T3CC0
+   \                     T3CC0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd8
+   \   union <unnamed> volatile __sfr _A_TIMIF
+   \                     _A_TIMIF:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xfe
+   \   unsigned char volatile __sfr P1DIR
+   \                     P1DIR:
+   \   000000                DS 1
+     43          #include "bsp_driver_defs.h"
+     44          
+     45          
+     46          /**************************************************************************************************
+     47           * @fn          BSP_Init
+     48           *
+     49           * @brief       Initialize the board and drivers.
+     50           *
+     51           * @param       none
+     52           *
+     53           * @return      none
+     54           **************************************************************************************************
+     55           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     56          void BSP_Init(void)
+   \                     BSP_Init:
+     57          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 2
+   \   000004   74FE         MOV     A,#-0x2
+   \   000006   12....       LCALL   ?ALLOC_XSTACK8
+     58            BSP_INIT_BOARD();
+   \   000009                ; Setup parameters for call to function BSP_InitBoard
+   \   000009   12....       LCALL   BSP_InitBoard
+     59            BSP_INIT_DRIVERS();
+   \   00000C                ; Setup parameters for call to function BSP_InitDrivers
+   \   00000C   12....       LCALL   BSP_InitDrivers
+     60          
+     61            /*-------------------------------------------------------------
+     62             *  Run time integrity checks.  Perform only if asserts
+     63             *  are enabled.
+     64             */
+     65          #ifdef BSP_ASSERTS_ARE_ON
+     66            /* verify endianess is correctly specified */
+     67            {
+     68              uint16_t test = 0x00AA; /* first storage byte of 'test' is non-zero for little endian */
+   \   00000F   85..82       MOV     DPL,?XSP + 0
+   \   000012   85..83       MOV     DPH,?XSP + 1
+   \   000015   74AA         MOV     A,#-0x56
+   \   000017   F0           MOVX    @DPTR,A
+   \   000018   A3           INC     DPTR
+   \   000019   E4           CLR     A
+   \   00001A   F0           MOVX    @DPTR,A
+     69              BSP_ASSERT(!(*((uint8_t *)&test)) == !BSP_LITTLE_ENDIAN); /* endianess mismatch */
+   \   00001B   85..82       MOV     DPL,?XSP + 0
+   \   00001E   85..83       MOV     DPH,?XSP + 1
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   7004         JNZ     ??BSP_Init_0
+   \   000024   C2AF         CLR     0xa8.7
+   \                     ??BSP_Init_1:
+   \   000026   80FE         SJMP    ??BSP_Init_1
+     70            }
+     71          #endif
+     72          }
+   \                     ??BSP_Init_0:
+   \   000028   7402         MOV     A,#0x2
+   \   00002A   12....       LCALL   ?DEALLOC_XSTACK8
+   \   00002D   D083         POP     DPH
+   \   00002F   D082         POP     DPL
+   \   000031   22           RET
+   \   000032                REQUIRE _A_IEN0
+     73          
+     74          
+     75          /* ================================================================================================
+     76           *                                        C Code Includes
+     77           * ================================================================================================
+     78           */
+     79          #ifdef BSP_BOARD_C
+     80          #include BSP_BOARD_C
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void BSP_InitBoard(void)
+   \                     BSP_InitBoard:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   22           RET
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void BSP_Delay(uint16_t)
+   \                     BSP_Delay:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   53CBEF       ANL     0xcb,#0xef
+   \   000003   C2D8         CLR     0xd8.0
+   \   000005   43CB04       ORL     0xcb,#0x4
+   \   000008   75F00C       MOV     B,#0xc
+   \   00000B   EA           MOV     A,R2
+   \   00000C   A4           MUL     AB
+   \   00000D   F5CD         MOV     0xcd,A
+   \   00000F   E5CB         MOV     A,0xcb
+   \   000011   54FC         ANL     A,#0xfc
+   \   000013   4402         ORL     A,#0x2
+   \   000015   F5CB         MOV     0xcb,A
+   \   000017   43CB10       ORL     0xcb,#0x10
+   \                     ??BSP_Delay_0:
+   \   00001A   A2D8         MOV     C,0xd8.0
+   \   00001C   50FC         JNC     ??BSP_Delay_0
+   \   00001E   53CBEF       ANL     0xcb,#0xef
+   \   000021   C2D8         CLR     0xd8.0
+   \   000023   22           RET
+   \   000024                REQUIRE T3CTL
+   \   000024                REQUIRE _A_TIMIF
+   \   000024                REQUIRE T3CC0
+     81          #endif
+     82          
+     83          #ifdef BSP_DRIVERS_C
+     84          #include BSP_DRIVERS_C
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void BSP_InitDrivers(void)
+   \                     BSP_InitDrivers:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000                ; Setup parameters for call to function BSP_InitLeds
+   \   000000   12....       LCALL   BSP_InitLeds
+   \   000003                ; Setup parameters for call to function BSP_InitButtons
+   \   000003   02....       LJMP    BSP_InitButtons
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void BSP_InitLeds(void)
+   \                     BSP_InitLeds:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   43FE02       ORL     0xfe,#0x2
+   \   000003   C291         CLR     0x90.1
+   \   000005   22           RET
+   \   000006                REQUIRE P1DIR
+   \   000006                REQUIRE _A_P1
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+   \   __near_func __xdata_reentrant void BSP_InitButtons(void)
+   \                     BSP_InitButtons:
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+   \   000000   22           RET
+     85          #endif
+     86          
+     87          
+     88          /* ************************************************************************************************
+     89           *                                   Compile Time Integrity Checks
+     90           * ************************************************************************************************
+     91           */
+     92          BSP_STATIC_ASSERT( sizeof(  uint8_t ) == 1 );
+     93          BSP_STATIC_ASSERT( sizeof(   int8_t ) == 1 );
+     94          BSP_STATIC_ASSERT( sizeof( uint16_t ) == 2 );
+     95          BSP_STATIC_ASSERT( sizeof(  int16_t ) == 2 );
+     96          BSP_STATIC_ASSERT( sizeof( uint32_t ) == 4 );
+     97          BSP_STATIC_ASSERT( sizeof(  int32_t ) == 4 );
+     98          
+     99          
+    100          /**************************************************************************************************
+    101           */
+
+   Maximum stack usage in bytes:
+
+     Function             ISTACK PSTACK XSTACK
+     --------             ------ ------ ------
+     BSP_Delay                0      0      0
+     BSP_Init                 2      0      2
+       -> BSP_InitBoard       4      0      4
+       -> BSP_InitDrivers     4      0      4
+     BSP_InitBoard            0      0      2
+     BSP_InitButtons          0      0      0
+     BSP_InitDrivers          0      0      2
+       -> BSP_InitLeds        0      0      0
+       -> BSP_InitButtons     0      0      0
+     BSP_InitLeds             0      0      0
+
+
+   Segment part sizes:
+
+     Function/Label  Bytes
+     --------------  -----
+     _A_P1              1
+     _A_IEN0            1
+     T3CTL              1
+     T3CC0              1
+     _A_TIMIF           1
+     P1DIR              1
+     BSP_Init          50
+     BSP_InitBoard      1
+     BSP_Delay         36
+     BSP_InitDrivers    6
+     BSP_InitLeds       6
+     BSP_InitButtons    1
+
+ 
+ 100 bytes in segment NEAR_CODE
+   6 bytes in segment SFR_AN
+ 
+ 100 bytes of CODE memory
+   0 bytes of DATA memory (+ 6 bytes shared)
+
+Errors: none
+Warnings: none

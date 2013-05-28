@@ -1,0 +1,2134 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:39 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\usb\library\usb_standard_req #
+#                          uests.c                                            #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\lib #
+#                          rary\usb_standard_requests.c" -D CC1111EM -D       #
+#                          ISM_EU -D MCU_H=<ioCC1111.h> -D chip=1111 -D       #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\usb_standard_requests.lst  #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\usb_standard_requests.r51   #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\usb\library\usb_standard_requests.c
+      1          /***********************************************************************************
+      2          
+      3              Filename:     usb_standard_request.c
+      4          
+      5              Description:  Handle USB standard requests.
+      6          
+      7          ***********************************************************************************/
+      8          
+      9          /// \addtogroup module_usb_standard_requests
+     10          /// @{
+     11          #include "usb_firmware_library_headers.h"
+     12          #include "hal_types.h"
+     13          #include "hal_board.h"
+     14          
+     15          
+     16          
+     17          /** \brief Processes the \ref GET_STATUS request (returns status for the specified recipient)
+     18           *
+     19           * The recipient bits in \ref USB_SETUP_HEADER.requestType specify the desired recipient. This is either the
+     20           * (one and only) device, a specific interface, or a specific endpoint. Some of the status bits can be
+     21           * changed with the SET_FEATURE and CLEAR_FEATURE requests.
+     22           *
+     23           * <b>Parameters</b>:
+     24           * - VALUE: Always 0
+     25           * - INDEX: Depends upon the recipient:
+     26           *     - DEVICE: Always 0
+     27           *     - INTERFACE: Interface number
+     28           *     - ENDPOINT: Endpoint address
+     29           * - LENGTH: Always 2
+     30           *
+     31           * <b>Data (IN)</b>:
+     32           * Depends upon the recipient (the bit field illustrations are MSB first, LSB last):
+     33           * - DEVICE: <tt>00000000.000000RS</tt>, where R(1) = DEVICE_REMOTE_WAKEUP and S(0) = SELF_POWERED
+     34           * - INTERFACE: <tt>00000000.00000000</tt> (all bits are reserved)
+     35           * - ENDPOINT: <tt>00000000.0000000H</tt>, where H(0) = ENDPOINT_HALT
+     36           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     37          void usbsrGetStatus(void)
+   \                     usbsrGetStatus:
+     38          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+     39             uint8 endpoint;
+     40             static uint16 __xdata status;
+     41          
+     42             // Common sanity check
+     43             if (usbSetupHeader.value || HI_UINT16(usbSetupHeader.index) || (usbSetupHeader.length != 2)) {
+   \   000005   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   F8           MOV     R0,A
+   \   00000A   A3           INC     DPTR
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   F9           MOV     R1,A
+   \   00000D   E8           MOV     A,R0
+   \   00000E   49           ORL     A,R1
+   \   00000F   7011         JNZ     ??usbsrGetStatus_0
+   \   000011   A3           INC     DPTR
+   \   000012   E0           MOVX    A,@DPTR
+   \   000013   F8           MOV     R0,A
+   \   000014   A3           INC     DPTR
+   \   000015   E0           MOVX    A,@DPTR
+   \   000016   700A         JNZ     ??usbsrGetStatus_0
+   \   000018   A3           INC     DPTR
+   \   000019   E0           MOVX    A,@DPTR
+   \   00001A   6402         XRL     A,#0x2
+   \   00001C   7002         JNZ     ??usbsrGetStatus_1
+   \   00001E   A3           INC     DPTR
+   \   00001F   E0           MOVX    A,@DPTR
+   \                     ??usbsrGetStatus_1:
+   \   000020   6008         JZ      ??usbsrGetStatus_2
+     44                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrGetStatus_0:
+   \   000022   90....       MOV     DPTR,#usbfwData + 7
+   \   000025   7404         MOV     A,#0x4
+   \   000027   02....       LJMP    ??usbsrGetStatus_3
+     45          
+     46             // Return status for device, interface, or endpoint
+     47             } else {
+     48                switch (usbSetupHeader.requestType) {
+   \                     ??usbsrGetStatus_2:
+   \   00002A   90....       MOV     DPTR,#usbSetupHeader
+   \   00002D   E0           MOVX    A,@DPTR
+   \   00002E   2480         ADD     A,#-0x80
+   \   000030   6008         JZ      ??usbsrGetStatus_4
+   \   000032   14           DEC     A
+   \   000033   6032         JZ      ??usbsrGetStatus_5
+   \   000035   14           DEC     A
+   \   000036   603F         JZ      ??usbsrGetStatus_6
+   \   000038   8003         SJMP    ??usbsrGetStatus_7
+     49          
+     50                   // Device status:
+     51                   //     Bit 0: Self powered
+     52                   //     Bit 1: Remote wake-up allowed
+     53                case RT_IN_DEVICE:
+     54          
+     55                   // Sanity check
+     56                   if (LO_UINT16(usbSetupHeader.index)) {
+   \                     ??usbsrGetStatus_4:
+   \   00003A   E8           MOV     A,R0
+   \   00003B   6008         JZ      ??usbsrGetStatus_8
+     57                      usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrGetStatus_7:
+   \   00003D   90....       MOV     DPTR,#usbfwData + 7
+   \   000040   7404         MOV     A,#0x4
+   \   000042   02....       LJMP    ??usbsrGetStatus_9
+     58          
+     59                   // Get the bit values from the USBFW_DATA struct
+     60                   } else {
+     61          
+     62                      // Self powered?
+     63                      status = usbfwData.selfPowered ? 0x0001 : 0x0000;
+   \                     ??usbsrGetStatus_8:
+   \   000045   90....       MOV     DPTR,#usbfwData + 19
+   \   000048   E0           MOVX    A,@DPTR
+   \   000049   6004         JZ      ??usbsrGetStatus_10
+   \   00004B   7801         MOV     R0,#0x1
+   \   00004D   8002         SJMP    ??usbsrGetStatus_11
+   \                     ??usbsrGetStatus_10:
+   \   00004F   7800         MOV     R0,#0x0
+   \                     ??usbsrGetStatus_11:
+   \   000051   90....       MOV     DPTR,#??status
+   \   000054   E8           MOV     A,R0
+   \   000055   F0           MOVX    @DPTR,A
+   \   000056   A3           INC     DPTR
+   \   000057   E4           CLR     A
+   \   000058   F0           MOVX    @DPTR,A
+     64          
+     65                      // Remote wakeup?
+     66                      if (usbfwData.remoteWakeup) status |= 0x0002;
+   \   000059   90....       MOV     DPTR,#usbfwData + 18
+   \   00005C   E0           MOVX    A,@DPTR
+   \   00005D   6068         JZ      ??usbsrGetStatus_12
+   \   00005F   90....       MOV     DPTR,#??status
+   \   000062   E0           MOVX    A,@DPTR
+   \   000063   4402         ORL     A,#0x2
+   \   000065   805F         SJMP    ??usbsrGetStatus_9
+     67                   }
+     68                   break;
+     69          
+     70                   // Interface status:
+     71                   //     All bits are reserved
+     72                case RT_IN_INTERFACE:
+     73          
+     74                   // Sanity check
+     75                   if (usbfwData.usbState != DEV_CONFIGURED) {
+   \                     ??usbsrGetStatus_5:
+   \   000067   90....       MOV     DPTR,#usbfwData
+   \   00006A   E0           MOVX    A,@DPTR
+   \   00006B   6404         XRL     A,#0x4
+   \   00006D   70CE         JNZ     ??usbsrGetStatus_7
+     76                      usbfwData.ep0Status = EP_STALL;
+     77                   } else {
+     78                      status = 0x0000;
+   \   00006F   90....       MOV     DPTR,#??status
+   \   000072   E4           CLR     A
+   \   000073   F0           MOVX    @DPTR,A
+   \   000074   A3           INC     DPTR
+   \   000075   804F         SJMP    ??usbsrGetStatus_9
+     79                   }
+     80                   break;
+     81          
+     82                   // Endpoint status:
+     83                   //     Bit 0: Endpoint halted
+     84                case RT_IN_ENDPOINT:
+     85                   endpoint = LO_UINT16(usbSetupHeader.index) & 0x7F;
+   \                     ??usbsrGetStatus_6:
+   \   000077   E8           MOV     A,R0
+   \   000078   547F         ANL     A,#0x7f
+   \   00007A   F5..         MOV     ?V0 + 0,A
+     86          
+     87                   // Sanity check
+     88                   if ((usbfwData.usbState != DEV_CONFIGURED) || (endpoint > 5)) {
+   \   00007C   90....       MOV     DPTR,#usbfwData
+   \   00007F   E0           MOVX    A,@DPTR
+   \   000080   6404         XRL     A,#0x4
+   \   000082   70B9         JNZ     ??usbsrGetStatus_7
+   \   000084   E5..         MOV     A,?V0 + 0
+   \   000086   C3           CLR     C
+   \   000087   9406         SUBB    A,#0x6
+   \   000089   50B2         JNC     ??usbsrGetStatus_7
+     89                      usbfwData.ep0Status = EP_STALL;
+     90          
+     91                   // Translate endpoint address to status index and return the status
+     92                   } else {
+     93          
+     94                      // IN
+     95                      if (LO_UINT16(usbSetupHeader.index) & 0x80) {
+   \   00008B   74..         MOV     A,#usbfwData & 0xff
+   \   00008D   25..         ADD     A,?V0 + 0
+   \   00008F   F582         MOV     DPL,A
+   \   000091   74..         MOV     A,#(usbfwData >> 8) & 0xff
+   \   000093   3400         ADDC    A,#0x0
+   \   000095   F583         MOV     DPH,A
+   \   000097   E8           MOV     A,R0
+   \   000098   5480         ANL     A,#0x80
+   \   00009A   6010         JZ      ??usbsrGetStatus_13
+     96                         status = (usbfwData.pEpInStatus[endpoint - 1] == EP_HALT) ? 0x0001 : 0x0000;
+   \   00009C   A3           INC     DPTR
+   \   00009D   A3           INC     DPTR
+   \   00009E   A3           INC     DPTR
+   \   00009F   A3           INC     DPTR
+   \   0000A0   A3           INC     DPTR
+   \   0000A1   A3           INC     DPTR
+   \   0000A2   A3           INC     DPTR
+   \   0000A3   E0           MOVX    A,@DPTR
+   \   0000A4   6403         XRL     A,#0x3
+   \   0000A6   7015         JNZ     ??usbsrGetStatus_14
+   \                     ??usbsrGetStatus_15:
+   \   0000A8   7801         MOV     R0,#0x1
+   \   0000AA   8013         SJMP    ??usbsrGetStatus_16
+     97          
+     98                      // OUT
+     99                      } else {
+    100                         status = (usbfwData.pEpOutStatus[endpoint - 1] == EP_HALT) ? 0x0001 : 0x0000;
+   \                     ??usbsrGetStatus_13:
+   \   0000AC   E582         MOV     A,DPL
+   \   0000AE   240C         ADD     A,#0xc
+   \   0000B0   F582         MOV     DPL,A
+   \   0000B2   E583         MOV     A,DPH
+   \   0000B4   3400         ADDC    A,#0x0
+   \   0000B6   F583         MOV     DPH,A
+   \   0000B8   E0           MOVX    A,@DPTR
+   \   0000B9   6403         XRL     A,#0x3
+   \   0000BB   60EB         JZ      ??usbsrGetStatus_15
+   \                     ??usbsrGetStatus_14:
+   \   0000BD   7800         MOV     R0,#0x0
+   \                     ??usbsrGetStatus_16:
+   \   0000BF   90....       MOV     DPTR,#??status
+   \   0000C2   E8           MOV     A,R0
+   \   0000C3   F0           MOVX    @DPTR,A
+   \   0000C4   A3           INC     DPTR
+   \   0000C5   E4           CLR     A
+   \                     ??usbsrGetStatus_9:
+   \   0000C6   F0           MOVX    @DPTR,A
+    101                      }
+    102                   }
+    103                   break;
+    104          
+    105                default:
+    106                   usbfwData.ep0Status = EP_STALL;
+    107                   break;
+    108                }
+    109          
+    110                if (usbfwData.ep0Status != EP_STALL) {
+   \                     ??usbsrGetStatus_12:
+   \   0000C7   90....       MOV     DPTR,#usbfwData + 7
+   \   0000CA   E0           MOVX    A,@DPTR
+   \   0000CB   6404         XRL     A,#0x4
+   \   0000CD   6019         JZ      ??usbsrGetStatus_17
+    111                   // Send it
+    112                   usbSetupData.pBuffer = (uint8 __generic *)&status;
+   \   0000CF   90....       MOV     DPTR,#usbSetupData
+   \   0000D2   74..         MOV     A,#??status & 0xff
+   \   0000D4   F0           MOVX    @DPTR,A
+   \   0000D5   A3           INC     DPTR
+   \   0000D6   74..         MOV     A,#(??status >> 8) & 0xff
+   \   0000D8   F0           MOVX    @DPTR,A
+   \   0000D9   A3           INC     DPTR
+   \   0000DA   E4           CLR     A
+   \   0000DB   F0           MOVX    @DPTR,A
+    113                   usbSetupData.bytesLeft = 2;
+   \   0000DC   A3           INC     DPTR
+   \   0000DD   7402         MOV     A,#0x2
+   \   0000DF   F0           MOVX    @DPTR,A
+   \   0000E0   A3           INC     DPTR
+   \   0000E1   E4           CLR     A
+   \   0000E2   F0           MOVX    @DPTR,A
+    114                   usbfwData.ep0Status = EP_TX;
+   \   0000E3   90....       MOV     DPTR,#usbfwData + 7
+   \   0000E6   04           INC     A
+   \                     ??usbsrGetStatus_3:
+   \   0000E7   F0           MOVX    @DPTR,A
+    115                }
+    116             }
+    117          } // usbsrGetStatus
+   \                     ??usbsrGetStatus_17:
+   \   0000E8   7F02         MOV     R7,#0x2
+   \   0000EA   02....       LJMP    ?FUNC_LEAVE_XDATA
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??status:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    118          
+    119          
+    120          
+    121          
+    122          /** \brief Internal function used for the very similar \ref SET_FEATURE and \ref CLEAR_FEATURE requests
+    123           *
+    124           * This function either sets or clears the specified feature on the specified recipient.
+    125           *
+    126           * \param[in]       set
+    127           *     When TRUE, the feature is set. When FALSE, the feature is cleared.
+    128           *
+    129           * \return
+    130           *     TRUE if the selected feature is supported by the USB library. FALSE to indicate that
+    131           *     \ref usbsrHookClearFeature() or \ref usbsrHookSetFeature() must be called.
+    132           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    133          static uint8 ChangeFeature(uint8 set)
+   \                     ChangeFeature:
+    134          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   E9           MOV     A,R1
+   \   000006   FE           MOV     R6,A
+    135             uint8 endpoint;
+    136          
+    137             // Sanity check
+    138             if (usbSetupHeader.length || (usbfwData.usbState != DEV_CONFIGURED) && (usbSetupHeader.index != 0)) {
+   \   000007   90....       MOV     DPTR,#usbSetupHeader + 6
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   F8           MOV     R0,A
+   \   00000C   A3           INC     DPTR
+   \   00000D   E0           MOVX    A,@DPTR
+   \   00000E   F9           MOV     R1,A
+   \   00000F   E8           MOV     A,R0
+   \   000010   49           ORL     A,R1
+   \   000011   7014         JNZ     ??ChangeFeature_0
+   \   000013   90....       MOV     DPTR,#usbfwData
+   \   000016   E0           MOVX    A,@DPTR
+   \   000017   6404         XRL     A,#0x4
+   \   000019   6014         JZ      ??ChangeFeature_1
+   \   00001B   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   F8           MOV     R0,A
+   \   000020   A3           INC     DPTR
+   \   000021   E0           MOVX    A,@DPTR
+   \   000022   F9           MOV     R1,A
+   \   000023   E8           MOV     A,R0
+   \   000024   49           ORL     A,R1
+   \   000025   6008         JZ      ??ChangeFeature_1
+    139                usbfwData.ep0Status = EP_STALL;
+   \                     ??ChangeFeature_0:
+   \   000027   90....       MOV     DPTR,#usbfwData + 7
+   \   00002A   7404         MOV     A,#0x4
+   \   00002C   02....       LJMP    ??ChangeFeature_2
+    140          
+    141                // Handle based on recipient
+    142             } else {
+    143                switch (usbSetupHeader.requestType & RT_MASK_RECIP) {
+   \                     ??ChangeFeature_1:
+   \   00002F   90....       MOV     DPTR,#usbSetupHeader
+   \   000032   E0           MOVX    A,@DPTR
+   \   000033   541F         ANL     A,#0x1f
+   \   000035   6008         JZ      ??ChangeFeature_3
+   \   000037   14           DEC     A
+   \   000038   600D         JZ      ??ChangeFeature_4
+   \   00003A   14           DEC     A
+   \   00003B   6024         JZ      ??ChangeFeature_5
+   \   00003D   80E8         SJMP    ??ChangeFeature_0
+    144          
+    145                // Device
+    146                case RT_RECIP_DEV:
+    147          
+    148                   // Sanity check
+    149                   if (LO_UINT16(usbSetupHeader.value) != DEVICE_REMOTE_WAKEUP) {
+   \                     ??ChangeFeature_3:
+   \   00003F   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000042   E0           MOVX    A,@DPTR
+   \   000043   6401         XRL     A,#0x1
+   \   000045   6005         JZ      ??ChangeFeature_6
+    150                      return FALSE;
+   \                     ??ChangeFeature_4:
+   \   000047   7900         MOV     R1,#0x0
+   \   000049   02....       LJMP    ??ChangeFeature_7
+    151                   } else {
+    152                      usbfwData.remoteWakeup = set;
+   \                     ??ChangeFeature_6:
+   \   00004C   EE           MOV     A,R6
+   \   00004D   90....       MOV     DPTR,#usbfwData + 18
+   \   000050   F0           MOVX    @DPTR,A
+    153                      usbsrHookProcessEvent(set ? USBSR_EVENT_REMOTE_WAKEUP_ENABLED : USBSR_EVENT_REMOTE_WAKEUP_DISABLED, 0);
+   \   000051   6004         JZ      ??ChangeFeature_8
+   \   000053   7905         MOV     R1,#0x5
+   \   000055   8002         SJMP    ??ChangeFeature_9
+   \                     ??ChangeFeature_8:
+   \   000057   7906         MOV     R1,#0x6
+   \                     ??ChangeFeature_9:
+   \   000059                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   000059   7A00         MOV     R2,#0x0
+   \   00005B   12....       LCALL   usbsrHookProcessEvent
+    154                   }
+    155                   break;
+   \   00005E   02....       LJMP    ??ChangeFeature_10
+    156          
+    157                // Endpoint
+    158                case RT_RECIP_IF:
+    159                   return FALSE;
+    160          
+    161                // Endpoint
+    162                case RT_RECIP_EP:
+    163                   endpoint = LO_UINT16(usbSetupHeader.index) & 0x7F;
+   \                     ??ChangeFeature_5:
+   \   000061   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   000064   E0           MOVX    A,@DPTR
+   \   000065   547F         ANL     A,#0x7f
+   \   000067   FA           MOV     R2,A
+    164          
+    165                   // Sanity check
+    166                   if (LO_UINT16(usbSetupHeader.value) != ENDPOINT_HALT) {
+   \   000068   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   00006B   E0           MOVX    A,@DPTR
+   \   00006C   70D9         JNZ     ??ChangeFeature_4
+    167                      return FALSE;
+    168                   } else if (endpoint > 5) {
+   \   00006E   EA           MOV     A,R2
+   \   00006F   C3           CLR     C
+   \   000070   9406         SUBB    A,#0x6
+   \   000072   50B3         JNC     ??ChangeFeature_0
+    169                      usbfwData.ep0Status = EP_STALL;
+    170                   } else {
+    171                      USBFW_SELECT_ENDPOINT(endpoint);
+   \   000074   EA           MOV     A,R2
+   \   000075   90DE0E       MOV     DPTR,#-0x21f2
+   \   000078   F0           MOVX    @DPTR,A
+    172          
+    173                      // IN
+    174                      if (LO_UINT16(usbSetupHeader.index) & 0x80) {
+   \   000079   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   00007C   E0           MOVX    A,@DPTR
+   \   00007D   5480         ANL     A,#0x80
+   \   00007F   6033         JZ      ??ChangeFeature_11
+    175                         USBCSIL = set ? USBCSIL_SEND_STALL : USBCSIL_CLR_DATA_TOG;
+   \   000081   EE           MOV     A,R6
+   \   000082   6004         JZ      ??ChangeFeature_12
+   \   000084   7410         MOV     A,#0x10
+   \   000086   8002         SJMP    ??ChangeFeature_13
+   \                     ??ChangeFeature_12:
+   \   000088   7440         MOV     A,#0x40
+   \                     ??ChangeFeature_13:
+   \   00008A   90DE11       MOV     DPTR,#-0x21ef
+   \   00008D   F0           MOVX    @DPTR,A
+    176                         usbfwData.pEpInStatus[endpoint - 1] = set ? EP_HALT : EP_IDLE;
+   \   00008E   EE           MOV     A,R6
+   \   00008F   6004         JZ      ??ChangeFeature_14
+   \   000091   7403         MOV     A,#0x3
+   \   000093   8001         SJMP    ??ChangeFeature_15
+   \                     ??ChangeFeature_14:
+   \   000095   E4           CLR     A
+   \                     ??ChangeFeature_15:
+   \   000096   C0E0         PUSH    A
+   \   000098   8A..         MOV     ?V0 + 0,R2
+   \   00009A   74..         MOV     A,#(usbfwData + 7) & 0xff
+   \   00009C   25..         ADD     A,?V0 + 0
+   \   00009E   F582         MOV     DPL,A
+   \   0000A0   74..         MOV     A,#((usbfwData + 7) >> 8) & 0xff
+   \   0000A2   3400         ADDC    A,#0x0
+   \   0000A4   F583         MOV     DPH,A
+   \   0000A6   D0E0         POP     A
+   \   0000A8   F0           MOVX    @DPTR,A
+    177                         usbsrHookProcessEvent(set ? USBSR_EVENT_EPIN_STALL_SET : USBSR_EVENT_EPIN_STALL_CLEARED, endpoint);
+   \   0000A9   EE           MOV     A,R6
+   \   0000AA   6004         JZ      ??ChangeFeature_16
+   \   0000AC   7908         MOV     R1,#0x8
+   \   0000AE   8035         SJMP    ??ChangeFeature_17
+   \                     ??ChangeFeature_16:
+   \   0000B0   7907         MOV     R1,#0x7
+   \   0000B2                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   0000B2   8031         SJMP    ??ChangeFeature_17
+    178          
+    179                      // OUT
+    180                      } else {
+    181                         USBCSOL = set ? USBCSOL_SEND_STALL : USBCSOL_CLR_DATA_TOG;
+   \                     ??ChangeFeature_11:
+   \   0000B4   EE           MOV     A,R6
+   \   0000B5   6004         JZ      ??ChangeFeature_18
+   \   0000B7   7420         MOV     A,#0x20
+   \   0000B9   8002         SJMP    ??ChangeFeature_19
+   \                     ??ChangeFeature_18:
+   \   0000BB   7480         MOV     A,#-0x80
+   \                     ??ChangeFeature_19:
+   \   0000BD   90DE14       MOV     DPTR,#-0x21ec
+   \   0000C0   F0           MOVX    @DPTR,A
+    182                         usbfwData.pEpOutStatus[endpoint - 1] = set ? EP_HALT : EP_IDLE;
+   \   0000C1   EE           MOV     A,R6
+   \   0000C2   6004         JZ      ??ChangeFeature_20
+   \   0000C4   7403         MOV     A,#0x3
+   \   0000C6   8001         SJMP    ??ChangeFeature_21
+   \                     ??ChangeFeature_20:
+   \   0000C8   E4           CLR     A
+   \                     ??ChangeFeature_21:
+   \   0000C9   C0E0         PUSH    A
+   \   0000CB   8A..         MOV     ?V0 + 0,R2
+   \   0000CD   74..         MOV     A,#(usbfwData + 12) & 0xff
+   \   0000CF   25..         ADD     A,?V0 + 0
+   \   0000D1   F582         MOV     DPL,A
+   \   0000D3   74..         MOV     A,#((usbfwData + 12) >> 8) & 0xff
+   \   0000D5   3400         ADDC    A,#0x0
+   \   0000D7   F583         MOV     DPH,A
+   \   0000D9   D0E0         POP     A
+   \   0000DB   F0           MOVX    @DPTR,A
+    183                         usbsrHookProcessEvent(set ? USBSR_EVENT_EPOUT_STALL_SET : USBSR_EVENT_EPOUT_STALL_CLEARED, endpoint);
+   \   0000DC   EE           MOV     A,R6
+   \   0000DD   6004         JZ      ??ChangeFeature_22
+   \   0000DF   790A         MOV     R1,#0xa
+   \   0000E1   8002         SJMP    ??ChangeFeature_17
+   \                     ??ChangeFeature_22:
+   \   0000E3   7909         MOV     R1,#0x9
+   \                     ??ChangeFeature_17:
+   \   0000E5                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   0000E5   12....       LCALL   usbsrHookProcessEvent
+    184                      }
+    185                      USBFW_SELECT_ENDPOINT(0);
+   \   0000E8   90DE0E       MOV     DPTR,#-0x21f2
+   \   0000EB   E4           CLR     A
+   \                     ??ChangeFeature_2:
+   \   0000EC   F0           MOVX    @DPTR,A
+    186                   }
+    187                   break;
+    188          
+    189                default:
+    190                   usbfwData.ep0Status = EP_STALL;
+    191                   break;
+    192                }
+    193             }
+    194             return TRUE;
+   \                     ??ChangeFeature_10:
+   \   0000ED   7901         MOV     R1,#0x1
+   \                     ??ChangeFeature_7:
+   \   0000EF   7F02         MOV     R7,#0x2
+   \   0000F1   02....       LJMP    ?FUNC_LEAVE_XDATA
+    195          } // ChangeFeature
+    196          
+    197          
+    198          
+    199          
+    200          /** \brief Processes the \ref CLEAR_FEATURE request (clears or disables a specific feature)
+    201           *
+    202           * The feature selector value must be appropriate to the recipient.
+    203           *
+    204           * <b>Parameters</b>:
+    205           * - VALUE: Feature selector:
+    206           *     - \c DEVICE_REMOTE_WAKEUP(1): Enable remote wakeup
+    207           *     - \c ENDPOINT_HALT(0): Clear the halt feature for the specified endpoint (not endpoint 0!)
+    208           * - INDEX: Depends upon the recipient:
+    209           *     - DEVICE: Always 0
+    210           *     - INTERFACE: Interface number
+    211           *     - ENDPOINT: Endpoint address
+    212           * - LENGTH: Always 0
+    213           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    214          void usbsrClearFeature()
+   \                     usbsrClearFeature:
+    215          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    216             if (!ChangeFeature(FALSE)) {
+   \   000000                ; Setup parameters for call to function ChangeFeature
+   \   000000   7900         MOV     R1,#0x0
+   \   000002   12....       LCALL   ChangeFeature
+   \   000005   E9           MOV     A,R1
+   \   000006   7003         JNZ     ??usbsrClearFeature_0
+    217                usbsrHookClearFeature();
+   \   000008                ; Setup parameters for call to function usbsrHookClearFeature
+   \   000008   12....       LCALL   usbsrHookClearFeature
+    218             }
+    219          } // usbsrClearFeature
+   \                     ??usbsrClearFeature_0:
+   \   00000B   22           RET
+    220          
+    221          
+    222          
+    223          
+    224          /** \brief Processes the \ref SET_FEATURE request (sets or enables a specific feature)
+    225           *
+    226           * The feature selector value must be appropriate to the recipient.
+    227           *
+    228           * <b>Parameters</b>:
+    229           * - VALUE: Feature selector:
+    230           *     - \c DEVICE_REMOTE_WAKEUP(1): Enable remote wakeup
+    231           *     - \c ENDPOINT_HALT(0): Set the halt feature for the specified endpoint (not endpoint 0!)
+    232           * - INDEX: Depends upon the recipient:
+    233           *     - DEVICE: Always 0
+    234           *     - INTERFACE: Interface number
+    235           *     - ENDPOINT: Endpoint address
+    236           * - LENGTH: Always 0
+    237           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    238          void usbsrSetFeature(void)
+   \                     usbsrSetFeature:
+    239          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    240             if (!ChangeFeature(TRUE)) {
+   \   000000                ; Setup parameters for call to function ChangeFeature
+   \   000000   7901         MOV     R1,#0x1
+   \   000002   12....       LCALL   ChangeFeature
+   \   000005   E9           MOV     A,R1
+   \   000006   7003         JNZ     ??usbsrSetFeature_0
+    241                usbsrHookSetFeature();
+   \   000008                ; Setup parameters for call to function usbsrHookSetFeature
+   \   000008   12....       LCALL   usbsrHookSetFeature
+    242             }
+    243          } // usbsrSetFeature
+   \                     ??usbsrSetFeature_0:
+   \   00000B   22           RET
+    244          
+    245          
+    246          
+    247          
+    248          /** \brief Processes the \ref SET_ADDRESS request (sets the device address for all future device
+    249           * accesses)
+    250           *
+    251           * If the value is between 1 and 127 and the device is in the default state, it will enter the address
+    252           * state. If it already is in the address state, it starts to use the newly-specified address.
+    253           *
+    254           * If the value is 0 and the device is in the address state, it will enter the default state. If it
+    255           * already is in the default state, nothing happens.
+    256           *
+    257           * <b>Parameters</b>:
+    258           * - VALUE: The device address (0-127)
+    259           * - INDEX: Always 0
+    260           * - LENGTH: Always 0
+    261           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    262          void usbsrSetAddress(void)
+   \                     usbsrSetAddress:
+    263          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    264          
+    265             // Sanity check
+    266             if (usbSetupHeader.index || usbSetupHeader.length || HI_UINT16(usbSetupHeader.value) || (LO_UINT16(usbSetupHeader.value) & 0x80)) {
+   \   000004   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F8           MOV     R0,A
+   \   000009   A3           INC     DPTR
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   F9           MOV     R1,A
+   \   00000C   E8           MOV     A,R0
+   \   00000D   49           ORL     A,R1
+   \   00000E   701C         JNZ     ??usbsrSetAddress_0
+   \   000010   A3           INC     DPTR
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   F8           MOV     R0,A
+   \   000013   A3           INC     DPTR
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   F9           MOV     R1,A
+   \   000016   E8           MOV     A,R0
+   \   000017   49           ORL     A,R1
+   \   000018   7012         JNZ     ??usbsrSetAddress_0
+   \   00001A   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   00001D   E0           MOVX    A,@DPTR
+   \   00001E   F8           MOV     R0,A
+   \   00001F   A3           INC     DPTR
+   \   000020   E0           MOVX    A,@DPTR
+   \   000021   F9           MOV     R1,A
+   \   000022   E8           MOV     A,R0
+   \   000023   5480         ANL     A,#0x80
+   \   000025   FA           MOV     R2,A
+   \   000026   E9           MOV     A,R1
+   \   000027   FB           MOV     R3,A
+   \   000028   EA           MOV     A,R2
+   \   000029   4B           ORL     A,R3
+   \   00002A   6007         JZ      ??usbsrSetAddress_1
+    267                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrSetAddress_0:
+   \   00002C   90....       MOV     DPTR,#usbfwData + 7
+   \   00002F   7404         MOV     A,#0x4
+   \   000031   801E         SJMP    ??usbsrSetAddress_2
+    268          
+    269             // Update the device address
+    270             } else {
+    271                USBADDR = LO_UINT16(usbSetupHeader.value);
+   \                     ??usbsrSetAddress_1:
+   \   000033   E8           MOV     A,R0
+   \   000034   90DE00       MOV     DPTR,#-0x2200
+   \   000037   F0           MOVX    @DPTR,A
+    272                if (LO_UINT16(usbSetupHeader.value) != 0) {
+   \   000038   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   00003B   E0           MOVX    A,@DPTR
+   \   00003C   90....       MOV     DPTR,#usbfwData
+   \   00003F   6009         JZ      ??usbsrSetAddress_3
+    273                   if (usbfwData.usbState == DEV_DEFAULT) usbfwData.usbState = DEV_ADDRESS;
+   \   000041   E0           MOVX    A,@DPTR
+   \   000042   6402         XRL     A,#0x2
+   \   000044   700C         JNZ     ??usbsrSetAddress_4
+   \   000046   7403         MOV     A,#0x3
+   \   000048   8007         SJMP    ??usbsrSetAddress_2
+    274                } else {
+    275                   if (usbfwData.usbState == DEV_ADDRESS) usbfwData.usbState = DEV_DEFAULT;
+   \                     ??usbsrSetAddress_3:
+   \   00004A   E0           MOVX    A,@DPTR
+   \   00004B   6403         XRL     A,#0x3
+   \   00004D   7003         JNZ     ??usbsrSetAddress_4
+   \   00004F   7402         MOV     A,#0x2
+   \                     ??usbsrSetAddress_2:
+   \   000051   F0           MOVX    @DPTR,A
+    276                }
+    277             }
+    278          
+    279          } // usbsrSetAddress
+   \                     ??usbsrSetAddress_4:
+   \   000052   D083         POP     DPH
+   \   000054   D082         POP     DPL
+   \   000056   22           RET
+    280          
+    281          
+    282          
+    283          
+    284          /** \brief Processes the \ref GET_DESCRIPTOR request (returns the specified USB descriptor)
+    285           *
+    286           * The \ref module_usb_descriptor_parser module is used to locate device, configuration and string
+    287           * descriptors. Note that configuration descriptors also include interface, endpoint and other
+    288           * "similar" descriptor types (e.g. HID descriptor), with the total descriptor length specified by
+    289           * the \ref USB_CONFIGURATION_DESCRIPTOR.wTotalLength field.
+    290           *
+    291           * Other descriptor types that are not returned with the configuration descriptor, must be defined in
+    292           * the usbDescriptorMarker.pUsbDescLut lookup-table. This table specifies the values of the VALUE and INDEX fields, and
+    293           * gives a pointer to the descriptor along with it's length.
+    294           *
+    295           * <b>Parameters</b>:
+    296           * - VALUE.MSB: Descriptor type
+    297           * - VALUE.LSB: Descriptor index
+    298           * - INDEX: 0, or language ID for string descriptors (currently not supported)
+    299           * - LENGTH: Descriptor length (either the requested number of bytes, or the length of the descriptor,
+    300           *           whichever is the smallest)
+    301           *
+    302           * <b>Data (IN)</b>:
+    303           * The descriptor(s)
+    304           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    305          void usbsrGetDescriptor(void)
+   \                     usbsrGetDescriptor:
+    306          {
+   \   000000   74F5         MOV     A,#-0xb
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 11
+   \   000005                ; Auto size: 0
+    307             uint8 n;
+    308          
+    309             // Which descriptor?
+    310             switch (HI_UINT16(usbSetupHeader.value)) {
+   \   000005   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   FA           MOV     R2,A
+   \   00000A   A3           INC     DPTR
+   \   00000B   E0           MOVX    A,@DPTR
+   \   00000C   14           DEC     A
+   \   00000D   6009         JZ      ??usbsrGetDescriptor_0
+   \   00000F   14           DEC     A
+   \   000010   602B         JZ      ??usbsrGetDescriptor_1
+   \   000012   14           DEC     A
+   \   000013   6071         JZ      ??usbsrGetDescriptor_2
+   \   000015   02....       LJMP    ??usbsrGetDescriptor_3
+    311          
+    312             // Device descriptor
+    313             case DESC_TYPE_DEVICE:
+    314                usbSetupData.pBuffer = (uint8 __code*) usbdpGetDeviceDesc();
+   \                     ??usbsrGetDescriptor_0:
+   \   000018                ; Setup parameters for call to function usbdpGetDeviceDesc
+   \   000018   12....       LCALL   usbdpGetDeviceDesc
+   \   00001B   90....       MOV     DPTR,#usbSetupData
+   \   00001E   EA           MOV     A,R2
+   \   00001F   F0           MOVX    @DPTR,A
+   \   000020   A3           INC     DPTR
+   \   000021   EB           MOV     A,R3
+   \   000022   F0           MOVX    @DPTR,A
+   \   000023   A3           INC     DPTR
+   \   000024   7480         MOV     A,#-0x80
+   \   000026   F0           MOVX    @DPTR,A
+    315                usbSetupData.bytesLeft = usbSetupData.pBuffer[DESC_LENGTH_IDX];
+   \   000027   90....       MOV     DPTR,#usbSetupData
+   \   00002A   E0           MOVX    A,@DPTR
+   \   00002B   F9           MOV     R1,A
+   \   00002C   A3           INC     DPTR
+   \   00002D   E0           MOVX    A,@DPTR
+   \   00002E   FA           MOV     R2,A
+   \   00002F   A3           INC     DPTR
+   \   000030   E0           MOVX    A,@DPTR
+   \   000031   FB           MOV     R3,A
+   \   000032   12....       LCALL   ?C_GPTR_LOAD
+   \   000035   A3           INC     DPTR
+   \   000036   F0           MOVX    @DPTR,A
+   \   000037   A3           INC     DPTR
+   \   000038   E4           CLR     A
+   \                     ??usbsrGetDescriptor_4:
+   \   000039   F0           MOVX    @DPTR,A
+    316                break;
+   \   00003A   02....       LJMP    ??usbsrGetDescriptor_5
+    317          
+    318             // Configuration descriptor
+    319             case DESC_TYPE_CONFIG:
+    320                usbSetupData.pBuffer = (uint8 __code*) usbdpGetConfigurationDesc(0, LO_UINT16(usbSetupHeader.value));
+   \                     ??usbsrGetDescriptor_1:
+   \   00003D                ; Setup parameters for call to function usbdpGetConfigurationDesc
+   \   00003D   7900         MOV     R1,#0x0
+   \   00003F   12....       LCALL   usbdpGetConfigurationDesc
+   \   000042   90....       MOV     DPTR,#usbSetupData
+   \   000045   EA           MOV     A,R2
+   \   000046   F0           MOVX    @DPTR,A
+   \   000047   A3           INC     DPTR
+   \   000048   EB           MOV     A,R3
+   \   000049   F0           MOVX    @DPTR,A
+   \   00004A   A3           INC     DPTR
+   \   00004B   7480         MOV     A,#-0x80
+   \   00004D   F0           MOVX    @DPTR,A
+    321                usbSetupData.bytesLeft = usbSetupData.pBuffer[DESC_CONFIG_LENGTH_LSB_IDX] +
+    322                                         usbSetupData.pBuffer[DESC_CONFIG_LENGTH_MSB_IDX] * 256;
+   \   00004E   90....       MOV     DPTR,#usbSetupData
+   \   000051   E0           MOVX    A,@DPTR
+   \   000052   F9           MOV     R1,A
+   \   000053   A3           INC     DPTR
+   \   000054   E0           MOVX    A,@DPTR
+   \   000055   FA           MOV     R2,A
+   \   000056   A3           INC     DPTR
+   \   000057   E0           MOVX    A,@DPTR
+   \   000058   FB           MOV     R3,A
+   \   000059   E9           MOV     A,R1
+   \   00005A   2402         ADD     A,#0x2
+   \   00005C   09           INC     R1
+   \   00005D   09           INC     R1
+   \   00005E   EA           MOV     A,R2
+   \   00005F   3400         ADDC    A,#0x0
+   \   000061   FA           MOV     R2,A
+   \   000062   12....       LCALL   ?C_GPTR_LOAD
+   \   000065   FC           MOV     R4,A
+   \   000066   90....       MOV     DPTR,#usbSetupData
+   \   000069   E0           MOVX    A,@DPTR
+   \   00006A   F9           MOV     R1,A
+   \   00006B   A3           INC     DPTR
+   \   00006C   E0           MOVX    A,@DPTR
+   \   00006D   FA           MOV     R2,A
+   \   00006E   A3           INC     DPTR
+   \   00006F   E0           MOVX    A,@DPTR
+   \   000070   FB           MOV     R3,A
+   \   000071   E9           MOV     A,R1
+   \   000072   2403         ADD     A,#0x3
+   \   000074   09           INC     R1
+   \   000075   09           INC     R1
+   \   000076   09           INC     R1
+   \   000077   EA           MOV     A,R2
+   \   000078   3400         ADDC    A,#0x0
+   \   00007A   FA           MOV     R2,A
+   \   00007B   12....       LCALL   ?C_GPTR_LOAD
+   \   00007E   F9           MOV     R1,A
+   \   00007F   EC           MOV     A,R4
+   \   000080   A3           INC     DPTR
+   \   000081   F0           MOVX    @DPTR,A
+   \   000082   A3           INC     DPTR
+   \   000083   E9           MOV     A,R1
+   \   000084   80B3         SJMP    ??usbsrGetDescriptor_4
+    323                break;
+    324          
+    325             // String descriptor
+    326             case DESC_TYPE_STRING:
+    327                // TODO: Implement language ID
+    328                usbSetupData.pBuffer = (uint8 __code*) usbdpGetStringDesc(LO_UINT16(usbSetupHeader.value));
+   \                     ??usbsrGetDescriptor_2:
+   \   000086                ; Setup parameters for call to function usbdpGetStringDesc
+   \   000086   EA           MOV     A,R2
+   \   000087   F9           MOV     R1,A
+   \   000088   12....       LCALL   usbdpGetStringDesc
+   \   00008B   90....       MOV     DPTR,#usbSetupData
+   \   00008E   EA           MOV     A,R2
+   \   00008F   F0           MOVX    @DPTR,A
+   \   000090   A3           INC     DPTR
+   \   000091   EB           MOV     A,R3
+   \   000092   F0           MOVX    @DPTR,A
+   \   000093   A3           INC     DPTR
+   \   000094   7480         MOV     A,#-0x80
+   \   000096   F0           MOVX    @DPTR,A
+    329                usbSetupData.bytesLeft = usbSetupData.pBuffer[DESC_LENGTH_IDX];
+   \   000097   90....       MOV     DPTR,#usbSetupData
+   \   00009A   E0           MOVX    A,@DPTR
+   \   00009B   F9           MOV     R1,A
+   \   00009C   A3           INC     DPTR
+   \   00009D   E0           MOVX    A,@DPTR
+   \   00009E   FA           MOV     R2,A
+   \   00009F   A3           INC     DPTR
+   \   0000A0   E0           MOVX    A,@DPTR
+   \   0000A1   FB           MOV     R3,A
+   \   0000A2   12....       LCALL   ?C_GPTR_LOAD
+   \   0000A5   A3           INC     DPTR
+   \   0000A6   F0           MOVX    @DPTR,A
+   \   0000A7   A3           INC     DPTR
+   \   0000A8   E4           CLR     A
+   \   0000A9   F0           MOVX    @DPTR,A
+    330                break;
+   \   0000AA   02....       LJMP    ??usbsrGetDescriptor_5
+    331          
+    332             // Other descriptor type
+    333             default:
+    334                // Perform a table search (on index and value)
+    335                usbSetupData.pBuffer = NULL;
+   \                     ??usbsrGetDescriptor_3:
+   \   0000AD   90....       MOV     DPTR,#usbSetupData
+   \   0000B0   E4           CLR     A
+   \   0000B1   F0           MOVX    @DPTR,A
+   \   0000B2   A3           INC     DPTR
+   \   0000B3   F0           MOVX    @DPTR,A
+   \   0000B4   A3           INC     DPTR
+   \   0000B5   F0           MOVX    @DPTR,A
+    336                for (n = 0; n < ((uint16)usbDescriptorMarker.pUsbDescLutEnd - (uint16)usbDescriptorMarker.pUsbDescLut) / sizeof(DESC_LUT_INFO); n++) {
+   \   0000B6   FC           MOV     R4,A
+   \   0000B7   02....       LJMP    ??usbsrGetDescriptor_6
+    337                   if ((usbDescriptorMarker.pUsbDescLut[n].valueMsb == HI_UINT16(usbSetupHeader.value))
+    338                       && (usbDescriptorMarker.pUsbDescLut[n].valueLsb == LO_UINT16(usbSetupHeader.value))
+    339                       && (usbDescriptorMarker.pUsbDescLut[n].indexMsb == HI_UINT16(usbSetupHeader.index))
+    340                       && (usbDescriptorMarker.pUsbDescLut[n].indexLsb == LO_UINT16(usbSetupHeader.index)) )
+   \                     ??usbsrGetDescriptor_7:
+   \   0000BA   75..00       MOV     ?V0 + 1,#0x0
+   \   0000BD   7403         MOV     A,#0x3
+   \   0000BF   78..         MOV     R0,#?V0 + 0
+   \   0000C1   12....       LCALL   ?S_SHL
+   \   0000C4   AE..         MOV     R6,?V0 + 0
+   \   0000C6   AF..         MOV     R7,?V0 + 1
+   \   0000C8   EA           MOV     A,R2
+   \   0000C9   2E           ADD     A,R6
+   \   0000CA   F8           MOV     R0,A
+   \   0000CB   EB           MOV     A,R3
+   \   0000CC   3F           ADDC    A,R7
+   \   0000CD   F9           MOV     R1,A
+   \   0000CE   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   0000D1   E0           MOVX    A,@DPTR
+   \   0000D2   F5..         MOV     ?V0 + 0,A
+   \   0000D4   A3           INC     DPTR
+   \   0000D5   E0           MOVX    A,@DPTR
+   \   0000D6   F5..         MOV     ?V0 + 1,A
+   \   0000D8   8882         MOV     DPL,R0
+   \   0000DA   8983         MOV     DPH,R1
+   \   0000DC   E4           CLR     A
+   \   0000DD   93           MOVC    A,@A+DPTR
+   \   0000DE   AA..         MOV     R2,?V0 + 1
+   \   0000E0   6A           XRL     A,R2
+   \   0000E1   706C         JNZ     ??usbsrGetDescriptor_8
+   \   0000E3   A3           INC     DPTR
+   \   0000E4   E4           CLR     A
+   \   0000E5   93           MOVC    A,@A+DPTR
+   \   0000E6   65..         XRL     A,?V0 + 0
+   \   0000E8   7065         JNZ     ??usbsrGetDescriptor_8
+   \   0000EA   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   0000ED   E0           MOVX    A,@DPTR
+   \   0000EE   F5..         MOV     ?V0 + 0,A
+   \   0000F0   A3           INC     DPTR
+   \   0000F1   E0           MOVX    A,@DPTR
+   \   0000F2   F5..         MOV     ?V0 + 1,A
+   \   0000F4   8882         MOV     DPL,R0
+   \   0000F6   8983         MOV     DPH,R1
+   \   0000F8   A3           INC     DPTR
+   \   0000F9   A3           INC     DPTR
+   \   0000FA   E4           CLR     A
+   \   0000FB   93           MOVC    A,@A+DPTR
+   \   0000FC   AA..         MOV     R2,?V0 + 1
+   \   0000FE   6A           XRL     A,R2
+   \   0000FF   704E         JNZ     ??usbsrGetDescriptor_8
+   \   000101   8882         MOV     DPL,R0
+   \   000103   8983         MOV     DPH,R1
+   \   000105   A3           INC     DPTR
+   \   000106   A3           INC     DPTR
+   \   000107   A3           INC     DPTR
+   \   000108   E4           CLR     A
+   \   000109   93           MOVC    A,@A+DPTR
+   \   00010A   65..         XRL     A,?V0 + 0
+   \   00010C   7041         JNZ     ??usbsrGetDescriptor_8
+    341                   {
+    342                      usbSetupData.pBuffer = usbDescriptorMarker.pUsbDescLut[n].pDescStart;
+   \   00010E   8882         MOV     DPL,R0
+   \   000110   8983         MOV     DPH,R1
+   \   000112   A3           INC     DPTR
+   \   000113   A3           INC     DPTR
+   \   000114   A3           INC     DPTR
+   \   000115   A3           INC     DPTR
+   \   000116   E4           CLR     A
+   \   000117   93           MOVC    A,@A+DPTR
+   \   000118   F5..         MOV     ?V0 + 0,A
+   \   00011A   7401         MOV     A,#0x1
+   \   00011C   93           MOVC    A,@A+DPTR
+   \   00011D   F5..         MOV     ?V0 + 1,A
+   \   00011F   90....       MOV     DPTR,#usbSetupData
+   \   000122   E5..         MOV     A,?V0 + 0
+   \   000124   F0           MOVX    @DPTR,A
+   \   000125   A3           INC     DPTR
+   \   000126   E5..         MOV     A,?V0 + 1
+   \   000128   F0           MOVX    @DPTR,A
+   \   000129   A3           INC     DPTR
+   \   00012A   7480         MOV     A,#-0x80
+   \   00012C   F0           MOVX    @DPTR,A
+    343                      usbSetupData.bytesLeft = usbDescriptorMarker.pUsbDescLut[n].length;
+   \   00012D   90....       MOV     DPTR,#usbDescriptorMarker + 4
+   \   000130   E0           MOVX    A,@DPTR
+   \   000131   2E           ADD     A,R6
+   \   000132   F8           MOV     R0,A
+   \   000133   A3           INC     DPTR
+   \   000134   E0           MOVX    A,@DPTR
+   \   000135   3F           ADDC    A,R7
+   \   000136   8882         MOV     DPL,R0
+   \   000138   F583         MOV     DPH,A
+   \   00013A   A3           INC     DPTR
+   \   00013B   A3           INC     DPTR
+   \   00013C   A3           INC     DPTR
+   \   00013D   A3           INC     DPTR
+   \   00013E   A3           INC     DPTR
+   \   00013F   A3           INC     DPTR
+   \   000140   E4           CLR     A
+   \   000141   93           MOVC    A,@A+DPTR
+   \   000142   F8           MOV     R0,A
+   \   000143   7401         MOV     A,#0x1
+   \   000145   93           MOVC    A,@A+DPTR
+   \   000146   F9           MOV     R1,A
+   \   000147   90....       MOV     DPTR,#usbSetupData + 3
+   \   00014A   E8           MOV     A,R0
+   \   00014B   F0           MOVX    @DPTR,A
+   \   00014C   A3           INC     DPTR
+   \   00014D   E9           MOV     A,R1
+   \   00014E   F0           MOVX    @DPTR,A
+    344                   }
+    345                }
+   \                     ??usbsrGetDescriptor_8:
+   \   00014F   0C           INC     R4
+   \                     ??usbsrGetDescriptor_6:
+   \   000150   90....       MOV     DPTR,#usbDescriptorMarker + 4
+   \   000153   E0           MOVX    A,@DPTR
+   \   000154   FA           MOV     R2,A
+   \   000155   A3           INC     DPTR
+   \   000156   E0           MOVX    A,@DPTR
+   \   000157   FB           MOV     R3,A
+   \   000158   8C..         MOV     ?V0 + 0,R4
+   \   00015A   A3           INC     DPTR
+   \   00015B   E0           MOVX    A,@DPTR
+   \   00015C   F8           MOV     R0,A
+   \   00015D   A3           INC     DPTR
+   \   00015E   E0           MOVX    A,@DPTR
+   \   00015F   F9           MOV     R1,A
+   \   000160   E8           MOV     A,R0
+   \   000161   C3           CLR     C
+   \   000162   9A           SUBB    A,R2
+   \   000163   F5..         MOV     ?V0 + 2,A
+   \   000165   E9           MOV     A,R1
+   \   000166   9B           SUBB    A,R3
+   \   000167   F5..         MOV     ?V0 + 3,A
+   \   000169   7403         MOV     A,#0x3
+   \   00016B   78..         MOV     R0,#?V0 + 2
+   \   00016D   12....       LCALL   ?US_SHR
+   \   000170   C3           CLR     C
+   \   000171   E5..         MOV     A,?V0 + 0
+   \   000173   95..         SUBB    A,?V0 + 2
+   \   000175   E4           CLR     A
+   \   000176   95..         SUBB    A,?V0 + 3
+   \   000178   5003         JNC     $+5
+   \   00017A   02....       LJMP    ??usbsrGetDescriptor_7
+    346             }
+    347          
+    348             // Stall EP0 if no descriptor was found
+    349             if (usbSetupData.pBuffer == NULL) usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrGetDescriptor_5:
+   \   00017D   90....       MOV     DPTR,#usbSetupData
+   \   000180   E0           MOVX    A,@DPTR
+   \   000181   FC           MOV     R4,A
+   \   000182   A3           INC     DPTR
+   \   000183   E0           MOVX    A,@DPTR
+   \   000184   FD           MOV     R5,A
+   \   000185   A3           INC     DPTR
+   \   000186   E0           MOVX    A,@DPTR
+   \   000187   FE           MOV     R6,A
+   \   000188   EC           MOV     A,R4
+   \   000189   4D           ORL     A,R5
+   \   00018A   4E           ORL     A,R6
+   \   00018B   7006         JNZ     ??usbsrGetDescriptor_9
+   \   00018D   90....       MOV     DPTR,#usbfwData + 7
+   \   000190   7404         MOV     A,#0x4
+   \   000192   F0           MOVX    @DPTR,A
+    350          
+    351             if (usbfwData.ep0Status != EP_STALL) {
+   \                     ??usbsrGetDescriptor_9:
+   \   000193   90....       MOV     DPTR,#usbfwData + 7
+   \   000196   E0           MOVX    A,@DPTR
+   \   000197   6404         XRL     A,#0x4
+   \   000199   6025         JZ      ??usbsrGetDescriptor_10
+    352          
+    353                // Limit the returned descriptor size (the PC wants to know about sizes before
+    354                // polling the complete descriptors)
+    355                if (usbSetupData.bytesLeft > usbSetupHeader.length) {
+   \   00019B   90....       MOV     DPTR,#usbSetupHeader + 6
+   \   00019E   E0           MOVX    A,@DPTR
+   \   00019F   FA           MOV     R2,A
+   \   0001A0   A3           INC     DPTR
+   \   0001A1   E0           MOVX    A,@DPTR
+   \   0001A2   FB           MOV     R3,A
+   \   0001A3   90....       MOV     DPTR,#usbSetupData + 3
+   \   0001A6   E0           MOVX    A,@DPTR
+   \   0001A7   F8           MOV     R0,A
+   \   0001A8   A3           INC     DPTR
+   \   0001A9   E0           MOVX    A,@DPTR
+   \   0001AA   F9           MOV     R1,A
+   \   0001AB   C3           CLR     C
+   \   0001AC   EA           MOV     A,R2
+   \   0001AD   98           SUBB    A,R0
+   \   0001AE   EB           MOV     A,R3
+   \   0001AF   99           SUBB    A,R1
+   \   0001B0   5008         JNC     ??usbsrGetDescriptor_11
+    356                   usbSetupData.bytesLeft = usbSetupHeader.length;
+   \   0001B2   90....       MOV     DPTR,#usbSetupData + 3
+   \   0001B5   EA           MOV     A,R2
+   \   0001B6   F0           MOVX    @DPTR,A
+   \   0001B7   A3           INC     DPTR
+   \   0001B8   EB           MOV     A,R3
+   \   0001B9   F0           MOVX    @DPTR,A
+    357                }
+    358          
+    359                usbfwData.ep0Status = EP_TX;
+   \                     ??usbsrGetDescriptor_11:
+   \   0001BA   90....       MOV     DPTR,#usbfwData + 7
+   \   0001BD   7401         MOV     A,#0x1
+   \   0001BF   F0           MOVX    @DPTR,A
+    360             }
+    361          
+    362          } // usbsrGetDescriptor
+   \                     ??usbsrGetDescriptor_10:
+   \   0001C0   7F04         MOV     R7,#0x4
+   \   0001C2   02....       LJMP    ?FUNC_LEAVE_XDATA
+    363          
+    364          
+    365          
+    366          /** \brief Internally used function that configures all endpoints for the specified interface
+    367           *
+    368           * The new endpoint setup overwrites the old, without any warning. Unused endpoints keep their current
+    369           * setup. The user is responsible for ensuring that no endpoint buffers overwrite each other, and that
+    370           * interfaces do not cause conflicts. The pUsbDblbufLutInfo table must contain an entry for each
+    371           * interface descriptor to define endpoint double-buffering.
+    372           *
+    373           * \param[in]       *pInterface
+    374           *     A pointer to the interface descriptor
+    375           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    376          static void ConfigureEndpoints(USB_INTERFACE_DESCRIPTOR __code *pInterface)
+   \                     ConfigureEndpoints:
+    377          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 0
+    378             uint8 n;
+    379             uint16 maxpRegValue;
+    380             uint8 csRegValue;
+    381             uint8 endpoint;
+    382             USB_ENDPOINT_DESCRIPTOR __code *pEndpoint;
+    383             DBLBUF_LUT_INFO __code *pUsbDblbufLutInfo;
+    384          
+    385             // Locate the double buffer settings
+    386             if (pInterface->bNumEndpoints) {
+   \   000005   EA           MOV     A,R2
+   \   000006   2404         ADD     A,#0x4
+   \   000008   F5..         MOV     ?V0 + 6,A
+   \   00000A   EB           MOV     A,R3
+   \   00000B   3400         ADDC    A,#0x0
+   \   00000D   F5..         MOV     ?V0 + 7,A
+   \   00000F   85..82       MOV     DPL,?V0 + 6
+   \   000012   F583         MOV     DPH,A
+   \   000014   E4           CLR     A
+   \   000015   93           MOVC    A,@A+DPTR
+   \   000016   6024         JZ      ??ConfigureEndpoints_0
+    387                 pUsbDblbufLutInfo = (DBLBUF_LUT_INFO __code*) usbDescriptorMarker.pUsbDblbufLut;
+   \   000018   90....       MOV     DPTR,#usbDescriptorMarker + 8
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   FE           MOV     R6,A
+   \   00001D   A3           INC     DPTR
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   8007         SJMP    ??ConfigureEndpoints_1
+    388                 while (pUsbDblbufLutInfo->pInterface != pInterface) {
+    389                    pUsbDblbufLutInfo++;
+   \                     ??ConfigureEndpoints_2:
+   \   000021   EE           MOV     A,R6
+   \   000022   2404         ADD     A,#0x4
+   \   000024   FE           MOV     R6,A
+   \   000025   EF           MOV     A,R7
+   \   000026   3400         ADDC    A,#0x0
+   \                     ??ConfigureEndpoints_1:
+   \   000028   FF           MOV     R7,A
+    390                 }
+   \   000029   8E82         MOV     DPL,R6
+   \   00002B   8F83         MOV     DPH,R7
+   \   00002D   E4           CLR     A
+   \   00002E   93           MOVC    A,@A+DPTR
+   \   00002F   F8           MOV     R0,A
+   \   000030   7401         MOV     A,#0x1
+   \   000032   93           MOVC    A,@A+DPTR
+   \   000033   F9           MOV     R1,A
+   \   000034   EA           MOV     A,R2
+   \   000035   68           XRL     A,R0
+   \   000036   7002         JNZ     ??ConfigureEndpoints_3
+   \   000038   EB           MOV     A,R3
+   \   000039   69           XRL     A,R1
+   \                     ??ConfigureEndpoints_3:
+   \   00003A   70E5         JNZ     ??ConfigureEndpoints_2
+    391             }
+    392          
+    393             // For each endpoint in this interface
+    394             for (n = 0; n < pInterface->bNumEndpoints; n++) {
+   \                     ??ConfigureEndpoints_0:
+   \   00003C   75..00       MOV     ?V0 + 0,#0x0
+   \   00003F   8057         SJMP    ??ConfigureEndpoints_4
+    395                if (pEndpoint = usbdpFindNext(DESC_TYPE_ENDPOINT, 0)) {
+    396          
+    397                   // Get the endpoint index
+    398                   endpoint = pEndpoint->bEndpointAddress & 0x0F;
+    399                   USBFW_SELECT_ENDPOINT(endpoint);
+    400          
+    401                   csRegValue = 0x00;
+    402                   maxpRegValue = (pEndpoint->wMaxPacketSize + 7) >> 3;
+    403          
+    404                   // For IN endpoints...
+    405                   if (pEndpoint->bEndpointAddress & 0x80) {
+    406          
+    407                      // Clear data toggle, and flush twice (due to double buffering)
+    408                      USBCSIL = USBCSIL_CLR_DATA_TOG | USBCSIL_FLUSH_PACKET;
+    409                      USBCSIL = USBCSIL_FLUSH_PACKET;
+    410          
+    411                      // USBCSIH
+    412                      if ((pEndpoint->bmAttributes & EP_ATTR_TYPE_BM) == EP_ATTR_ISO) csRegValue |= USBCSIH_ISO;  // ISO flag
+    413                      if (pUsbDblbufLutInfo->inMask & (1 << endpoint)) csRegValue |= USBCSIH_IN_DBL_BUF;          // Double buffering
+    414                      USBCSIH = csRegValue;
+    415          
+    416                      // Max transfer size
+    417                      USBMAXI = maxpRegValue;
+    418          
+    419                      // Endpoint status
+    420                      usbfwData.pEpInStatus[endpoint - 1] = EP_IDLE;
+    421          
+    422                   // For OUT endpoints...
+    423                   } else {
+    424          
+    425                      // Clear data toggle, and flush twice (due to double buffering)
+    426                      USBCSOL = USBCSOL_CLR_DATA_TOG | USBCSOL_FLUSH_PACKET;
+   \                     ??ConfigureEndpoints_5:
+   \   000041   90DE14       MOV     DPTR,#-0x21ec
+   \   000044   7490         MOV     A,#-0x70
+   \   000046   F0           MOVX    @DPTR,A
+    427                      USBCSOL = USBCSOL_FLUSH_PACKET;
+   \   000047   7410         MOV     A,#0x10
+   \   000049   F0           MOVX    @DPTR,A
+    428          
+    429                      // USBCSOH
+    430                      if ((pEndpoint->bmAttributes & EP_ATTR_TYPE_BM) == EP_ATTR_ISO) csRegValue |= USBCSOH_ISO;  // ISO flag
+   \   00004A   8C82         MOV     DPL,R4
+   \   00004C   8D83         MOV     DPH,R5
+   \   00004E   E4           CLR     A
+   \   00004F   93           MOVC    A,@A+DPTR
+   \   000050   5403         ANL     A,#0x3
+   \   000052   6401         XRL     A,#0x1
+   \   000054   7003         JNZ     ??ConfigureEndpoints_6
+   \   000056   75..40       MOV     ?V0 + 1,#0x40
+    431                      if (pUsbDblbufLutInfo->outMask & (1 << endpoint)) csRegValue |= USBCSOH_OUT_DBL_BUF;        // Double buffering
+   \                     ??ConfigureEndpoints_6:
+   \   000059   75..01       MOV     ?V0 + 2,#0x1
+   \   00005C   75..00       MOV     ?V0 + 3,#0x0
+   \   00005F   E9           MOV     A,R1
+   \   000060   78..         MOV     R0,#?V0 + 2
+   \   000062   12....       LCALL   ?S_SHL
+   \   000065   8E82         MOV     DPL,R6
+   \   000067   8F83         MOV     DPH,R7
+   \   000069   A3           INC     DPTR
+   \   00006A   A3           INC     DPTR
+   \   00006B   A3           INC     DPTR
+   \   00006C   93           MOVC    A,@A+DPTR
+   \   00006D   55..         ANL     A,?V0 + 2
+   \   00006F   6006         JZ      ??ConfigureEndpoints_7
+   \   000071   E5..         MOV     A,?V0 + 1
+   \   000073   D2E0         SETB    0xE0 /* A   */.0
+   \   000075   F5..         MOV     ?V0 + 1,A
+    432                      USBCSOH = csRegValue;
+   \                     ??ConfigureEndpoints_7:
+   \   000077   E5..         MOV     A,?V0 + 1
+   \   000079   90DE15       MOV     DPTR,#-0x21eb
+   \   00007C   F0           MOVX    @DPTR,A
+    433          
+    434                      // Max transfer size
+    435                      USBMAXO = maxpRegValue;
+   \   00007D   EA           MOV     A,R2
+   \   00007E   90DE13       MOV     DPTR,#-0x21ed
+   \   000081   F0           MOVX    @DPTR,A
+    436          
+    437                      // Endpoint status
+    438                      usbfwData.pEpOutStatus[endpoint - 1] = EP_IDLE;
+   \   000082   89..         MOV     ?V0 + 2,R1
+   \   000084   74..         MOV     A,#(usbfwData + 12) & 0xff
+   \   000086   25..         ADD     A,?V0 + 2
+   \   000088   F582         MOV     DPL,A
+   \   00008A   74..         MOV     A,#((usbfwData + 12) >> 8) & 0xff
+   \                     ??ConfigureEndpoints_8:
+   \   00008C   3400         ADDC    A,#0x0
+   \   00008E   F583         MOV     DPH,A
+   \   000090   E4           CLR     A
+   \   000091   F0           MOVX    @DPTR,A
+    439                   }
+    440                   USBFW_SELECT_ENDPOINT(0);
+   \   000092   90DE0E       MOV     DPTR,#-0x21f2
+   \   000095   F0           MOVX    @DPTR,A
+   \                     ??ConfigureEndpoints_9:
+   \   000096   05..         INC     ?V0 + 0
+   \                     ??ConfigureEndpoints_4:
+   \   000098   85..82       MOV     DPL,?V0 + 6
+   \   00009B   85..83       MOV     DPH,?V0 + 7
+   \   00009E   E4           CLR     A
+   \   00009F   93           MOVC    A,@A+DPTR
+   \   0000A0   F8           MOV     R0,A
+   \   0000A1   E5..         MOV     A,?V0 + 0
+   \   0000A3   C3           CLR     C
+   \   0000A4   98           SUBB    A,R0
+   \   0000A5   4003         JC      $+5
+   \   0000A7   02....       LJMP    ??ConfigureEndpoints_10
+   \   0000AA                ; Setup parameters for call to function usbdpFindNext
+   \   0000AA   7A00         MOV     R2,#0x0
+   \   0000AC   7905         MOV     R1,#0x5
+   \   0000AE   12....       LCALL   usbdpFindNext
+   \   0000B1   8A..         MOV     ?V0 + 2,R2
+   \   0000B3   8B..         MOV     ?V0 + 3,R3
+   \   0000B5   AC..         MOV     R4,?V0 + 2
+   \   0000B7   AD..         MOV     R5,?V0 + 3
+   \   0000B9   EC           MOV     A,R4
+   \   0000BA   4D           ORL     A,R5
+   \   0000BB   60D9         JZ      ??ConfigureEndpoints_9
+   \   0000BD   EC           MOV     A,R4
+   \   0000BE   2402         ADD     A,#0x2
+   \   0000C0   F5..         MOV     ?V0 + 4,A
+   \   0000C2   ED           MOV     A,R5
+   \   0000C3   3400         ADDC    A,#0x0
+   \   0000C5   F5..         MOV     ?V0 + 5,A
+   \   0000C7   85..82       MOV     DPL,?V0 + 4
+   \   0000CA   F583         MOV     DPH,A
+   \   0000CC   E4           CLR     A
+   \   0000CD   93           MOVC    A,@A+DPTR
+   \   0000CE   540F         ANL     A,#0xf
+   \   0000D0   F9           MOV     R1,A
+   \   0000D1   90DE0E       MOV     DPTR,#-0x21f2
+   \   0000D4   F0           MOVX    @DPTR,A
+   \   0000D5   75..00       MOV     ?V0 + 1,#0x0
+   \   0000D8   8C82         MOV     DPL,R4
+   \   0000DA   8D83         MOV     DPH,R5
+   \   0000DC   A3           INC     DPTR
+   \   0000DD   A3           INC     DPTR
+   \   0000DE   A3           INC     DPTR
+   \   0000DF   A3           INC     DPTR
+   \   0000E0   E4           CLR     A
+   \   0000E1   93           MOVC    A,@A+DPTR
+   \   0000E2   2407         ADD     A,#0x7
+   \   0000E4   F5..         MOV     ?V0 + 2,A
+   \   0000E6   A3           INC     DPTR
+   \   0000E7   E4           CLR     A
+   \   0000E8   93           MOVC    A,@A+DPTR
+   \   0000E9   3400         ADDC    A,#0x0
+   \   0000EB   F5..         MOV     ?V0 + 3,A
+   \   0000ED   7403         MOV     A,#0x3
+   \   0000EF   78..         MOV     R0,#?V0 + 2
+   \   0000F1   12....       LCALL   ?US_SHR
+   \   0000F4   AA..         MOV     R2,?V0 + 2
+   \   0000F6   EC           MOV     A,R4
+   \   0000F7   2403         ADD     A,#0x3
+   \   0000F9   0C           INC     R4
+   \   0000FA   0C           INC     R4
+   \   0000FB   0C           INC     R4
+   \   0000FC   ED           MOV     A,R5
+   \   0000FD   3400         ADDC    A,#0x0
+   \   0000FF   FD           MOV     R5,A
+   \   000100   85..82       MOV     DPL,?V0 + 4
+   \   000103   85..83       MOV     DPH,?V0 + 5
+   \   000106   E4           CLR     A
+   \   000107   93           MOVC    A,@A+DPTR
+   \   000108   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00010A   4003         JC      $+5
+   \   00010C   02....       LJMP    ??ConfigureEndpoints_5
+   \   00010F   90DE11       MOV     DPTR,#-0x21ef
+   \   000112   7448         MOV     A,#0x48
+   \   000114   F0           MOVX    @DPTR,A
+   \   000115   7408         MOV     A,#0x8
+   \   000117   F0           MOVX    @DPTR,A
+   \   000118   8C82         MOV     DPL,R4
+   \   00011A   8D83         MOV     DPH,R5
+   \   00011C   E4           CLR     A
+   \   00011D   93           MOVC    A,@A+DPTR
+   \   00011E   5403         ANL     A,#0x3
+   \   000120   6401         XRL     A,#0x1
+   \   000122   7003         JNZ     ??ConfigureEndpoints_11
+   \   000124   75..40       MOV     ?V0 + 1,#0x40
+   \                     ??ConfigureEndpoints_11:
+   \   000127   75..01       MOV     ?V0 + 2,#0x1
+   \   00012A   75..00       MOV     ?V0 + 3,#0x0
+   \   00012D   E9           MOV     A,R1
+   \   00012E   78..         MOV     R0,#?V0 + 2
+   \   000130   12....       LCALL   ?S_SHL
+   \   000133   8E82         MOV     DPL,R6
+   \   000135   8F83         MOV     DPH,R7
+   \   000137   A3           INC     DPTR
+   \   000138   A3           INC     DPTR
+   \   000139   93           MOVC    A,@A+DPTR
+   \   00013A   55..         ANL     A,?V0 + 2
+   \   00013C   6006         JZ      ??ConfigureEndpoints_12
+   \   00013E   E5..         MOV     A,?V0 + 1
+   \   000140   D2E0         SETB    0xE0 /* A   */.0
+   \   000142   F5..         MOV     ?V0 + 1,A
+   \                     ??ConfigureEndpoints_12:
+   \   000144   E5..         MOV     A,?V0 + 1
+   \   000146   90DE12       MOV     DPTR,#-0x21ee
+   \   000149   F0           MOVX    @DPTR,A
+   \   00014A   EA           MOV     A,R2
+   \   00014B   90DE10       MOV     DPTR,#-0x21f0
+   \   00014E   F0           MOVX    @DPTR,A
+   \   00014F   89..         MOV     ?V0 + 2,R1
+   \   000151   74..         MOV     A,#(usbfwData + 7) & 0xff
+   \   000153   25..         ADD     A,?V0 + 2
+   \   000155   F582         MOV     DPL,A
+   \   000157   74..         MOV     A,#((usbfwData + 7) >> 8) & 0xff
+   \   000159   02....       LJMP    ??ConfigureEndpoints_8
+    441                }
+    442             }
+    443          } // ConfigureEndpoints
+   \                     ??ConfigureEndpoints_10:
+   \   00015C   7F08         MOV     R7,#0x8
+   \   00015E   02....       LJMP    ?FUNC_LEAVE_XDATA
+    444          
+    445          
+    446          
+    447          
+    448          /** \brief Processes the \ref GET_CONFIGURATION request (returns the current device configuration value)
+    449           *
+    450           * If the returned value is 0, the device is not configured (not in the configured state)
+    451           *
+    452           * <b>Parameters</b>:
+    453           * - VALUE: Always 0
+    454           * - INDEX: Always 0
+    455           * - LENGTH: Always 1
+    456           *
+    457           * <b>Data (IN)</b>:
+    458           * The non-zero \ref USB_CONFIGURATION_DESCRIPTOR.bConfigurationValue of the currently selected
+    459           * configuration.
+    460           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    461          void usbsrGetConfiguration(void)
+   \                     usbsrGetConfiguration:
+    462          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    463          
+    464             // Sanity check
+    465             if (usbSetupHeader.value || usbSetupHeader.index || (usbSetupHeader.length != 1)) {
+   \   000004   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000007   E0           MOVX    A,@DPTR
+   \   000008   F8           MOV     R0,A
+   \   000009   A3           INC     DPTR
+   \   00000A   E0           MOVX    A,@DPTR
+   \   00000B   F9           MOV     R1,A
+   \   00000C   E8           MOV     A,R0
+   \   00000D   49           ORL     A,R1
+   \   00000E   7014         JNZ     ??usbsrGetConfiguration_0
+   \   000010   A3           INC     DPTR
+   \   000011   E0           MOVX    A,@DPTR
+   \   000012   F8           MOV     R0,A
+   \   000013   A3           INC     DPTR
+   \   000014   E0           MOVX    A,@DPTR
+   \   000015   F9           MOV     R1,A
+   \   000016   E8           MOV     A,R0
+   \   000017   49           ORL     A,R1
+   \   000018   700A         JNZ     ??usbsrGetConfiguration_0
+   \   00001A   A3           INC     DPTR
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   6401         XRL     A,#0x1
+   \   00001E   7002         JNZ     ??usbsrGetConfiguration_1
+   \   000020   A3           INC     DPTR
+   \   000021   E0           MOVX    A,@DPTR
+   \                     ??usbsrGetConfiguration_1:
+   \   000022   6007         JZ      ??usbsrGetConfiguration_2
+    466                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrGetConfiguration_0:
+   \   000024   90....       MOV     DPTR,#usbfwData + 7
+   \   000027   7404         MOV     A,#0x4
+   \   000029   8017         SJMP    ??usbsrGetConfiguration_3
+    467          
+    468             // Return the current configuration
+    469             } else {
+    470                usbSetupData.pBuffer = &usbfwData.configurationValue;
+   \                     ??usbsrGetConfiguration_2:
+   \   00002B   90....       MOV     DPTR,#usbSetupData
+   \   00002E   74..         MOV     A,#(usbfwData + 1) & 0xff
+   \   000030   F0           MOVX    @DPTR,A
+   \   000031   A3           INC     DPTR
+   \   000032   74..         MOV     A,#((usbfwData + 1) >> 8) & 0xff
+   \   000034   F0           MOVX    @DPTR,A
+   \   000035   A3           INC     DPTR
+   \   000036   E4           CLR     A
+   \   000037   F0           MOVX    @DPTR,A
+    471                usbSetupData.bytesLeft = 1;
+   \   000038   A3           INC     DPTR
+   \   000039   04           INC     A
+   \   00003A   F0           MOVX    @DPTR,A
+   \   00003B   A3           INC     DPTR
+   \   00003C   E4           CLR     A
+   \   00003D   F0           MOVX    @DPTR,A
+    472                usbfwData.ep0Status = EP_TX;
+   \   00003E   90....       MOV     DPTR,#usbfwData + 7
+   \   000041   04           INC     A
+   \                     ??usbsrGetConfiguration_3:
+   \   000042   F0           MOVX    @DPTR,A
+    473             }
+    474          
+    475          } // usbsrGetConfiguration
+   \   000043   D083         POP     DPH
+   \   000045   D082         POP     DPL
+   \   000047   22           RET
+    476          
+    477          
+    478          
+    479          
+    480          /** \brief Processes the \ref SET_CONFIGURATION request (sets the device configuration)
+    481           *
+    482           * The configuration value must either be 0, in which case the device enters the address state, or it
+    483           * must match a configuration value from one of the USB configuration descriptors. If there is a match,
+    484           * the device enters the configured state.
+    485           *
+    486           * This request resets all interfaces to alternate setting 0, and uses the \c ConfigureEndpoints()
+    487           * function to automatically setup all endpoint registers.
+    488           *
+    489           * <b>Parameters</b>:
+    490           * - VALUE: The configuration value (0-255)
+    491           * - INDEX: Always 0
+    492           * - LENGTH: Always 0
+    493           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    494          void usbsrSetConfiguration(void)
+   \                     usbsrSetConfiguration:
+    495          {
+   \   000000   74F3         MOV     A,#-0xd
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 13
+   \   000005                ; Auto size: 0
+    496             uint8 n;
+    497             USB_CONFIGURATION_DESCRIPTOR __code *pConfiguration;
+    498             USB_INTERFACE_DESCRIPTOR __code *pInterface;
+    499          
+    500             // Sanity check
+    501             if ((usbfwData.usbState == DEV_DEFAULT) || usbSetupHeader.index || usbSetupHeader.length || HI_UINT16(usbSetupHeader.value)) {
+   \   000005   90....       MOV     DPTR,#usbfwData
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   6402         XRL     A,#0x2
+   \   00000B   601C         JZ      ??usbsrSetConfiguration_0
+   \   00000D   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   F8           MOV     R0,A
+   \   000012   A3           INC     DPTR
+   \   000013   E0           MOVX    A,@DPTR
+   \   000014   F9           MOV     R1,A
+   \   000015   E8           MOV     A,R0
+   \   000016   49           ORL     A,R1
+   \   000017   7010         JNZ     ??usbsrSetConfiguration_0
+   \   000019   A3           INC     DPTR
+   \   00001A   E0           MOVX    A,@DPTR
+   \   00001B   F8           MOV     R0,A
+   \   00001C   A3           INC     DPTR
+   \   00001D   E0           MOVX    A,@DPTR
+   \   00001E   F9           MOV     R1,A
+   \   00001F   E8           MOV     A,R0
+   \   000020   49           ORL     A,R1
+   \   000021   7006         JNZ     ??usbsrSetConfiguration_0
+   \   000023   90....       MOV     DPTR,#usbSetupHeader + 3
+   \   000026   E0           MOVX    A,@DPTR
+   \   000027   6009         JZ      ??usbsrSetConfiguration_1
+    502                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrSetConfiguration_0:
+   \   000029   90....       MOV     DPTR,#usbfwData + 7
+   \   00002C   7404         MOV     A,#0x4
+   \   00002E   F0           MOVX    @DPTR,A
+   \   00002F   02....       LJMP    ??usbsrSetConfiguration_2
+    503          
+    504             // Default endpoint setup
+    505             } else {
+    506                usbsrHookProcessEvent(USBSR_EVENT_CONFIGURATION_CHANGING, 0);
+   \                     ??usbsrSetConfiguration_1:
+   \   000032                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   000032   7A00         MOV     R2,#0x0
+   \   000034   7901         MOV     R1,#0x1
+   \   000036   12....       LCALL   usbsrHookProcessEvent
+    507          
+    508                // Configure relevant endpoints
+    509                if (LO_UINT16(usbSetupHeader.value)) {
+   \   000039   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   00003C   E0           MOVX    A,@DPTR
+   \   00003D   606E         JZ      ??usbsrSetConfiguration_3
+    510          
+    511                   // Find the correct configuration descriptor...
+    512                   pConfiguration = usbdpGetConfigurationDesc(LO_UINT16(usbSetupHeader.value), 0);
+   \   00003F                ; Setup parameters for call to function usbdpGetConfigurationDesc
+   \   00003F   7A00         MOV     R2,#0x0
+   \   000041   F9           MOV     R1,A
+   \   000042   12....       LCALL   usbdpGetConfigurationDesc
+   \   000045   8A..         MOV     ?V0 + 0,R2
+   \   000047   8B..         MOV     ?V0 + 1,R3
+    513          
+    514                   // If it exists...
+    515                   if (pConfiguration) {
+   \   000049   EA           MOV     A,R2
+   \   00004A   45..         ORL     A,?V0 + 1
+   \   00004C   6057         JZ      ??usbsrSetConfiguration_4
+    516                      usbfwData.usbState = DEV_CONFIGURED;
+   \   00004E   90....       MOV     DPTR,#usbfwData
+   \   000051   7404         MOV     A,#0x4
+   \   000053   F0           MOVX    @DPTR,A
+    517                      usbfwData.configurationValue = LO_UINT16(usbSetupHeader.value);
+   \   000054   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000057   E0           MOVX    A,@DPTR
+   \   000058   90....       MOV     DPTR,#usbfwData + 1
+   \   00005B   F0           MOVX    @DPTR,A
+    518          
+    519                      // For each interface...
+    520                      for (n = 0; n < pConfiguration->bNumInterfaces; n++) {
+   \   00005C   75..00       MOV     ?V0 + 2,#0x0
+   \                     ??usbsrSetConfiguration_5:
+   \   00005F   85..82       MOV     DPL,?V0 + 0
+   \   000062   85..83       MOV     DPH,?V0 + 1
+   \   000065   A3           INC     DPTR
+   \   000066   A3           INC     DPTR
+   \   000067   A3           INC     DPTR
+   \   000068   A3           INC     DPTR
+   \   000069   E4           CLR     A
+   \   00006A   93           MOVC    A,@A+DPTR
+   \   00006B   F8           MOV     R0,A
+   \   00006C   E5..         MOV     A,?V0 + 2
+   \   00006E   C3           CLR     C
+   \   00006F   98           SUBB    A,R0
+   \   000070   5049         JNC     ??usbsrSetConfiguration_6
+    521                         usbfwData.pAlternateSetting[n] = 0x00;
+   \   000072   85....       MOV     ?V0 + 4,?V0 + 2
+   \   000075   74..         MOV     A,#(usbfwData + 2) & 0xff
+   \   000077   25..         ADD     A,?V0 + 4
+   \   000079   FE           MOV     R6,A
+   \   00007A   74..         MOV     A,#((usbfwData + 2) >> 8) & 0xff
+   \   00007C   3400         ADDC    A,#0x0
+   \   00007E   FF           MOV     R7,A
+   \   00007F   8E82         MOV     DPL,R6
+   \   000081   8F83         MOV     DPH,R7
+   \   000083   E4           CLR     A
+   \   000084   F0           MOVX    @DPTR,A
+    522          
+    523                         // Look only for alternate setting 0
+    524                         do {
+    525                            pInterface = usbdpFindNext(DESC_TYPE_INTERFACE, 0);
+   \                     ??usbsrSetConfiguration_7:
+   \   000085                ; Setup parameters for call to function usbdpFindNext
+   \   000085   7A00         MOV     R2,#0x0
+   \   000087   7904         MOV     R1,#0x4
+   \   000089   12....       LCALL   usbdpFindNext
+    526                         } while (pInterface->bAlternateSetting != usbfwData.pAlternateSetting[n]);
+   \   00008C   8A82         MOV     DPL,R2
+   \   00008E   8B83         MOV     DPH,R3
+   \   000090   A3           INC     DPTR
+   \   000091   A3           INC     DPTR
+   \   000092   A3           INC     DPTR
+   \   000093   E4           CLR     A
+   \   000094   93           MOVC    A,@A+DPTR
+   \   000095   F8           MOV     R0,A
+   \   000096   8E82         MOV     DPL,R6
+   \   000098   8F83         MOV     DPH,R7
+   \   00009A   E0           MOVX    A,@DPTR
+   \   00009B   68           XRL     A,R0
+   \   00009C   70E7         JNZ     ??usbsrSetConfiguration_7
+    527          
+    528                         // Configure all endpoints in this interface
+    529                         ConfigureEndpoints(pInterface);
+   \   00009E                ; Setup parameters for call to function ConfigureEndpoints
+   \   00009E   12....       LCALL   ConfigureEndpoints
+    530                      }
+   \   0000A1   05..         INC     ?V0 + 2
+   \   0000A3   80BA         SJMP    ??usbsrSetConfiguration_5
+    531          
+    532                   // If not, then stall the endpoint
+    533                   } else {
+    534                      usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrSetConfiguration_4:
+   \   0000A5   90....       MOV     DPTR,#usbfwData + 7
+   \   0000A8   7404         MOV     A,#0x4
+   \   0000AA   F0           MOVX    @DPTR,A
+   \   0000AB   800E         SJMP    ??usbsrSetConfiguration_6
+    535                   }
+    536          
+    537                // Unconfigure endpoints
+    538                } else {
+    539                   usbfwData.configurationValue = LO_UINT16(usbSetupHeader.value);
+   \                     ??usbsrSetConfiguration_3:
+   \   0000AD   90....       MOV     DPTR,#usbfwData + 1
+   \   0000B0   F0           MOVX    @DPTR,A
+    540                   usbfwData.usbState = DEV_ADDRESS;
+   \   0000B1   90....       MOV     DPTR,#usbfwData
+   \   0000B4   7403         MOV     A,#0x3
+   \   0000B6   F0           MOVX    @DPTR,A
+    541                   usbfwSetAllEpStatus(EP_HALT);
+   \   0000B7                ; Setup parameters for call to function usbfwSetAllEpStatus
+   \   0000B7   F9           MOV     R1,A
+   \   0000B8   12....       LCALL   usbfwSetAllEpStatus
+    542                }
+    543                usbsrHookProcessEvent(USBSR_EVENT_CONFIGURATION_CHANGED, 0);
+   \                     ??usbsrSetConfiguration_6:
+   \   0000BB                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   0000BB   7A00         MOV     R2,#0x0
+   \   0000BD   7902         MOV     R1,#0x2
+   \   0000BF   12....       LCALL   usbsrHookProcessEvent
+    544             }
+    545          
+    546          } // usbsrSetConfiguration
+   \                     ??usbsrSetConfiguration_2:
+   \   0000C2   7F06         MOV     R7,#0x6
+   \   0000C4   02....       LJMP    ?FUNC_LEAVE_XDATA
+    547          
+    548          
+    549          
+    550          
+    551          /** \brief Processes the \ref GET_INTERFACE request (returns the selected alternate setting for the
+    552           * specified interface)
+    553           *
+    554           * Some USB devices have configurations with mutually exclusive interface settings. This request allows
+    555           * the host to determine the currently selected alternate setting.
+    556           *
+    557           * <b>Parameters</b>:
+    558           * - VALUE: Always 0
+    559           * - INDEX: Interface number
+    560           * - LENGTH: Always 1
+    561           *
+    562           * <b>Data (IN)</b>:
+    563           * The alternate setting for the selected interface
+    564           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    565          void usbsrGetInterface(void)
+   \                     usbsrGetInterface:
+    566          {
+   \   000000   74F6         MOV     A,#-0xa
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+    567          
+    568             // Sanity check
+    569             if ((usbfwData.usbState != DEV_CONFIGURED) || (usbSetupHeader.requestType != RT_IN_INTERFACE) || usbSetupHeader.value || (usbSetupHeader.length != 1)) {
+   \   000005   90....       MOV     DPTR,#usbfwData
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   6404         XRL     A,#0x4
+   \   00000B   7020         JNZ     ??usbsrGetInterface_0
+   \   00000D   90....       MOV     DPTR,#usbSetupHeader
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   6481         XRL     A,#0x81
+   \   000013   7018         JNZ     ??usbsrGetInterface_0
+   \   000015   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000018   E0           MOVX    A,@DPTR
+   \   000019   F8           MOV     R0,A
+   \   00001A   A3           INC     DPTR
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   F9           MOV     R1,A
+   \   00001D   E8           MOV     A,R0
+   \   00001E   49           ORL     A,R1
+   \   00001F   700C         JNZ     ??usbsrGetInterface_0
+   \   000021   90....       MOV     DPTR,#usbSetupHeader + 6
+   \   000024   E0           MOVX    A,@DPTR
+   \   000025   6401         XRL     A,#0x1
+   \   000027   7002         JNZ     ??usbsrGetInterface_1
+   \   000029   A3           INC     DPTR
+   \   00002A   E0           MOVX    A,@DPTR
+   \                     ??usbsrGetInterface_1:
+   \   00002B   6007         JZ      ??usbsrGetInterface_2
+    570                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrGetInterface_0:
+   \   00002D   90....       MOV     DPTR,#usbfwData + 7
+   \   000030   7404         MOV     A,#0x4
+   \   000032   8025         SJMP    ??usbsrGetInterface_3
+    571          
+    572             // Return the current alternate setting
+    573             } else {
+    574                usbSetupData.pBuffer = &usbfwData.pAlternateSetting[usbSetupHeader.index];
+   \                     ??usbsrGetInterface_2:
+   \   000034   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   000037   E0           MOVX    A,@DPTR
+   \   000038   24..         ADD     A,#(usbfwData + 2) & 0xff
+   \   00003A   F5..         MOV     ?V0 + 0,A
+   \   00003C   A3           INC     DPTR
+   \   00003D   E0           MOVX    A,@DPTR
+   \   00003E   34..         ADDC    A,#((usbfwData + 2) >> 8) & 0xff
+   \   000040   F5..         MOV     ?V0 + 1,A
+   \   000042   90....       MOV     DPTR,#usbSetupData
+   \   000045   E5..         MOV     A,?V0 + 0
+   \   000047   F0           MOVX    @DPTR,A
+   \   000048   A3           INC     DPTR
+   \   000049   E5..         MOV     A,?V0 + 1
+   \   00004B   F0           MOVX    @DPTR,A
+   \   00004C   A3           INC     DPTR
+   \   00004D   E4           CLR     A
+   \   00004E   F0           MOVX    @DPTR,A
+    575                usbSetupData.bytesLeft = 1;
+   \   00004F   A3           INC     DPTR
+   \   000050   04           INC     A
+   \   000051   F0           MOVX    @DPTR,A
+   \   000052   A3           INC     DPTR
+   \   000053   E4           CLR     A
+   \   000054   F0           MOVX    @DPTR,A
+    576                usbfwData.ep0Status = EP_TX;
+   \   000055   90....       MOV     DPTR,#usbfwData + 7
+   \   000058   04           INC     A
+   \                     ??usbsrGetInterface_3:
+   \   000059   F0           MOVX    @DPTR,A
+    577             }
+    578          
+    579          } // usbsrGetInterface
+   \   00005A   7F03         MOV     R7,#0x3
+   \   00005C   02....       LJMP    ?FUNC_LEAVE_XDATA
+    580          
+    581          
+    582          
+    583          
+    584          /** \brief Processes the \ref SET_INTERFACE request (selects an alternate setting for the specified
+    585           * interface)
+    586           *
+    587           * Some USB devices have configurations with mutually exclusive interface settings. This request allows
+    588           * the host to select the desired alternate setting.
+    589           *
+    590           * This function uses the \c ConfigureEndpoints() to automatically setup the relevant endpoint
+    591           * registers.
+    592           *
+    593           * <b>Parameters</b>:
+    594           * - VALUE: Alternate setting
+    595           * - INDEX: Interface number
+    596           * - LENGTH: Always 0
+    597           */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    598          void usbsrSetInterface(void)
+   \                     usbsrSetInterface:
+    599          {
+   \   000000   74F7         MOV     A,#-0x9
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+    600             USB_INTERFACE_DESCRIPTOR __code *pInterface;
+    601          
+    602             // Sanity check
+    603             if ((usbfwData.usbState != DEV_CONFIGURED) || (usbSetupHeader.requestType != RT_OUT_INTERFACE) || usbSetupHeader.length) {
+   \   000005   90....       MOV     DPTR,#usbfwData
+   \   000008   E0           MOVX    A,@DPTR
+   \   000009   6404         XRL     A,#0x4
+   \   00000B   7014         JNZ     ??usbsrSetInterface_0
+   \   00000D   90....       MOV     DPTR,#usbSetupHeader
+   \   000010   E0           MOVX    A,@DPTR
+   \   000011   6401         XRL     A,#0x1
+   \   000013   700C         JNZ     ??usbsrSetInterface_0
+   \   000015   90....       MOV     DPTR,#usbSetupHeader + 6
+   \   000018   E0           MOVX    A,@DPTR
+   \   000019   F8           MOV     R0,A
+   \   00001A   A3           INC     DPTR
+   \   00001B   E0           MOVX    A,@DPTR
+   \   00001C   F9           MOV     R1,A
+   \   00001D   E8           MOV     A,R0
+   \   00001E   49           ORL     A,R1
+   \   00001F   6008         JZ      ??usbsrSetInterface_1
+    604                usbfwData.ep0Status = EP_STALL;
+   \                     ??usbsrSetInterface_0:
+   \   000021   90....       MOV     DPTR,#usbfwData + 7
+   \   000024   7404         MOV     A,#0x4
+   \   000026   F0           MOVX    @DPTR,A
+   \   000027   8056         SJMP    ??usbsrSetInterface_2
+    605          
+    606             // Verify that the desired alternate setting is available, and then make the switch
+    607             } else {
+    608                if (pInterface = usbdpGetInterfaceDesc(usbfwData.configurationValue, usbSetupHeader.index, usbSetupHeader.value)) {
+   \                     ??usbsrSetInterface_1:
+   \   000029                ; Setup parameters for call to function usbdpGetInterfaceDesc
+   \   000029   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   00002C   E0           MOVX    A,@DPTR
+   \   00002D   FB           MOV     R3,A
+   \   00002E   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   FA           MOV     R2,A
+   \   000033   90....       MOV     DPTR,#usbfwData + 1
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   F9           MOV     R1,A
+   \   000038   12....       LCALL   usbdpGetInterfaceDesc
+   \   00003B   8A..         MOV     ?V0 + 0,R2
+   \   00003D   8B..         MOV     ?V0 + 1,R3
+   \   00003F   A8..         MOV     R0,?V0 + 0
+   \   000041   A9..         MOV     R1,?V0 + 1
+   \   000043   E8           MOV     A,R0
+   \   000044   FE           MOV     R6,A
+   \   000045   E9           MOV     A,R1
+   \   000046   FF           MOV     R7,A
+   \   000047   E8           MOV     A,R0
+   \   000048   49           ORL     A,R1
+   \   000049   60D6         JZ      ??usbsrSetInterface_0
+    609                   usbsrHookProcessEvent(USBSR_EVENT_INTERFACE_CHANGING, usbSetupHeader.index);
+   \   00004B                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   00004B   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   00004E   E0           MOVX    A,@DPTR
+   \   00004F   FA           MOV     R2,A
+   \   000050   7903         MOV     R1,#0x3
+   \   000052   12....       LCALL   usbsrHookProcessEvent
+    610                   usbfwData.pAlternateSetting[usbSetupHeader.index] = usbSetupHeader.value;
+   \   000055   90....       MOV     DPTR,#usbSetupHeader + 2
+   \   000058   E0           MOVX    A,@DPTR
+   \   000059   C0E0         PUSH    A
+   \   00005B   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   00005E   E0           MOVX    A,@DPTR
+   \   00005F   24..         ADD     A,#(usbfwData + 2) & 0xff
+   \   000061   F8           MOV     R0,A
+   \   000062   A3           INC     DPTR
+   \   000063   E0           MOVX    A,@DPTR
+   \   000064   34..         ADDC    A,#((usbfwData + 2) >> 8) & 0xff
+   \   000066   F9           MOV     R1,A
+   \   000067   8882         MOV     DPL,R0
+   \   000069   8983         MOV     DPH,R1
+   \   00006B   D0E0         POP     A
+   \   00006D   F0           MOVX    @DPTR,A
+    611          
+    612                   // Configure all endpoints in this interface
+    613                   ConfigureEndpoints(pInterface);
+   \   00006E                ; Setup parameters for call to function ConfigureEndpoints
+   \   00006E   EE           MOV     A,R6
+   \   00006F   FA           MOV     R2,A
+   \   000070   EF           MOV     A,R7
+   \   000071   FB           MOV     R3,A
+   \   000072   12....       LCALL   ConfigureEndpoints
+    614                   usbsrHookProcessEvent(USBSR_EVENT_INTERFACE_CHANGED, usbSetupHeader.index);
+   \   000075                ; Setup parameters for call to function usbsrHookProcessEvent
+   \   000075   90....       MOV     DPTR,#usbSetupHeader + 4
+   \   000078   E0           MOVX    A,@DPTR
+   \   000079   FA           MOV     R2,A
+   \   00007A   7904         MOV     R1,#0x4
+   \   00007C   12....       LCALL   usbsrHookProcessEvent
+    615          
+    616                // This interface does not exist
+    617                } else {
+    618                   usbfwData.ep0Status = EP_STALL;
+    619                }
+    620             }
+    621          
+    622          } // usbsrSetInterface
+   \                     ??usbsrSetInterface_2:
+   \   00007F   7F02         MOV     R7,#0x2
+   \   000081   02....       LJMP    ?FUNC_LEAVE_XDATA
+    623          
+    624          //@}
+    625          
+    626          /*
+    627          +------------------------------------------------------------------------------
+    628          |  Copyright 2004-2007 Texas Instruments Incorporated. All rights reserved.
+    629          |
+    630          |  IMPORTANT: Your use of this Software is limited to those specific rights
+    631          |  granted under the terms of a software license agreement between the user who
+    632          |  downloaded the software, his/her employer (which must be your employer) and
+    633          |  Texas Instruments Incorporated (the "License"). You may not use this Software
+    634          |  unless you agree to abide by the terms of the License. The License limits
+    635          |  your use, and you acknowledge, that the Software may not be modified, copied
+    636          |  or distributed unless embedded on a Texas Instruments microcontroller or used
+    637          |  solely and exclusively in conjunction with a Texas Instruments radio
+    638          |  frequency transceiver, which is integrated into your product. Other than for
+    639          |  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+    640          |  works of, modify, distribute, perform, display or sell this Software and/or
+    641          |  its documentation for any purpose.
+    642          |
+    643          |  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+    644          |  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+    645          |  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+    646          |  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+    647          |  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+    648          |  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+    649          |  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES INCLUDING
+    650          |  BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
+    651          |  CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
+    652          |  SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+    653          |  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+    654          |
+    655          |  Should you have any questions regarding your right to use this Software,
+    656          |  contact Texas Instruments Incorporated at www.TI.com.
+    657          |
+    658          +------------------------------------------------------------------------------
+    659          */
+
+   Maximum stack usage in bytes:
+
+     Function                       ISTACK PSTACK XSTACK
+     --------                       ------ ------ ------
+     ChangeFeature                      1      0      9
+       -> usbsrHookProcessEvent         0      0     18
+       -> usbsrHookProcessEvent         0      0     18
+       -> usbsrHookProcessEvent         0      0     18
+     ConfigureEndpoints                 0      0     28
+       -> usbdpFindNext                 0      0     30
+     usbsrClearFeature                  0      0      0
+       -> ChangeFeature                 0      0      0
+       -> usbsrHookClearFeature         0      0      0
+     usbsrGetConfiguration              2      0      0
+     usbsrGetDescriptor                 1      0     11
+       -> usbdpGetDeviceDesc            0      0     22
+       -> usbdpGetConfigurationDesc     0      0     22
+       -> usbdpGetStringDesc            0      0     22
+     usbsrGetInterface                  0      0     10
+     usbsrGetStatus                     0      0      9
+     usbsrSetAddress                    2      0      0
+     usbsrSetConfiguration              0      0     13
+       -> usbsrHookProcessEvent         0      0     26
+       -> usbdpGetConfigurationDesc     0      0     26
+       -> usbdpFindNext                 0      0     26
+       -> ConfigureEndpoints            0      0     26
+       -> usbfwSetAllEpStatus           0      0     26
+       -> usbsrHookProcessEvent         0      0     26
+     usbsrSetFeature                    0      0      0
+       -> ChangeFeature                 0      0      0
+       -> usbsrHookSetFeature           0      0      0
+     usbsrSetInterface                  1      0      9
+       -> usbdpGetInterfaceDesc         0      0     18
+       -> usbsrHookProcessEvent         0      0     18
+       -> ConfigureEndpoints            0      0     18
+       -> usbsrHookProcessEvent         0      0     18
+
+
+   Segment part sizes:
+
+     Function/Label        Bytes
+     --------------        -----
+     usbsrGetStatus         237
+     status                   2
+     ChangeFeature          244
+     usbsrClearFeature       12
+     usbsrSetFeature         12
+     usbsrSetAddress         87
+     usbsrGetDescriptor     453
+     ConfigureEndpoints     353
+     usbsrGetConfiguration   72
+     usbsrSetConfiguration  199
+     usbsrGetInterface       95
+     usbsrSetInterface      132
+
+ 
+ 1 896 bytes in segment NEAR_CODE
+     2 bytes in segment XDATA_Z
+ 
+ 1 896 bytes of CODE  memory
+     2 bytes of XDATA memory
+
+Errors: none
+Warnings: none

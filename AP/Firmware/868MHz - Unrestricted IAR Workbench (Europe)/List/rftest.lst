@@ -1,0 +1,1729 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.11.1.40489/W32 for 8051         25/Jun/2012  17:26:58 #
+# Copyright 2004-2012 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  D:\PFC\Proyecto\Server\Server_IAR\rftest.c         #
+#    Command line       =  -f "D:\PFC\Proyecto\Server\Server_IAR\simpliciti\C #
+#                          onfiguration\Access Point\smpl_config.dat"         #
+#                          (-DNUM_CONNECTIONS=1 -DSIZE_INFRAME_Q=6            #
+#                          -DSIZE_OUTFRAME_Q=2 "-DTHIS_DEVICE_ADDRESS={0x78,  #
+#                          0x56, 0x34, 0x10}" -DACCESS_POINT                  #
+#                          -DAP_IS_DATA_HUB -DNUM_STORE_AND_FWD_CLIENTS=3     #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f                       #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Confi #
+#                          guration\smpl_nwk_config.dat (-DMAX_HOPS=3         #
+#                          -DMAX_HOPS_FROM_AP=1 -DMAX_NWK_PAYLOAD=9           #
+#                          -DMAX_APP_PAYLOAD=19 -DDEFAULT_LINK_TOKEN=0x010203 #
+#                          04 -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK  #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) D:\PFC\Proyecto\Server\Server_IAR\rft #
+#                          est.c -D ISM_EU -D MCU_H=<ioCC1111.h> -D           #
+#                          chip=1111 -D RF_FREQUENCY=868000 -D MRFI_CC1111    #
+#                          -D NDEBUG -lC "D:\PFC\Proyecto\Server\Server_IAR\8 #
+#                          68MHz - Unrestricted IAR Workbench                 #
+#                          (Europe)\List\" -o "D:\PFC\Proyecto\Server\Server_ #
+#                          IAR\868MHz - Unrestricted IAR Workbench            #
+#                          (Europe)\Obj\" -e --no_unroll --no_inline          #
+#                          --no_tbaa --debug --core=plain --dptr=16,1         #
+#                          --data_model=large --code_model=near               #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          D:\PFC\Proyecto\Server\Server_IAR\bm-br1\ -I       #
+#                          D:\PFC\Proyecto\Server\Server_IAR\HAL\include\ -I  #
+#                          D:\PFC\Proyecto\Server\Server_IAR\HAL\source\ -I   #
+#                          D:\PFC\Proyecto\Server\Server_IAR\wbsl\ -I         #
+#                          D:\PFC\Proyecto\Server\Server_IAR\usb\ -I          #
+#                          D:\PFC\Proyecto\Server\Server_IAR\usb\class_cdc\   #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\usb\library\  #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\usb\library\c #
+#                          cxx11\ -I D:\PFC\Proyecto\Server\Server_IAR\sync\  #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\simpliciti\   #
+#                          -I D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Co #
+#                          mponents\bsp\ -I D:\PFC\Proyecto\Server\Server_IAR #
+#                          \simpliciti\Components\bsp\drivers\ -I             #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Compo #
+#                          nents\bsp\boards\RFUSB\ -I                         #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Compo #
+#                          nents\mrfi\ -I D:\PFC\Proyecto\Server\Server_IAR\s #
+#                          impliciti\Components\nwk\ -I                       #
+#                          D:\PFC\Proyecto\Server\Server_IAR\simpliciti\Compo #
+#                          nents\nwk_applications\ -Om                        #
+#    List file          =  D:\PFC\Proyecto\Server\Server_IAR\868MHz -         #
+#                          Unrestricted IAR Workbench                         #
+#                          (Europe)\List\rftest.lst                           #
+#    Object file        =  D:\PFC\Proyecto\Server\Server_IAR\868MHz -         #
+#                          Unrestricted IAR Workbench (Europe)\Obj\rftest.r51 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+D:\PFC\Proyecto\Server\Server_IAR\rftest.c
+      1          // *************************************************************************************************
+      2          //
+      3          //	Copyright (C) 2009 Texas Instruments Incorporated - http://www.ti.com/ 
+      4          //	 
+      5          //	 
+      6          //	  Redistribution and use in source and binary forms, with or without 
+      7          //	  modification, are permitted provided that the following conditions 
+      8          //	  are met:
+      9          //	
+     10          //	    Redistributions of source code must retain the above copyright 
+     11          //	    notice, this list of conditions and the following disclaimer.
+     12          //	 
+     13          //	    Redistributions in binary form must reproduce the above copyright
+     14          //	    notice, this list of conditions and the following disclaimer in the 
+     15          //	    documentation and/or other materials provided with the   
+     16          //	    distribution.
+     17          //	 
+     18          //	    Neither the name of Texas Instruments Incorporated nor the names of
+     19          //	    its contributors may be used to endorse or promote products derived
+     20          //	    from this software without specific prior written permission.
+     21          //	
+     22          //	  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+     23          //	  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+     24          //	  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+     25          //	  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
+     26          //	  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+     27          //	  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+     28          //	  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+     29          //	  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+     30          //	  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+     31          //	  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+     32          //	  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     33          //
+     34          // *************************************************************************************************
+     35          // Test routines used for calibration during production test
+     36          // *************************************************************************************************
+     37          
+     38          
+     39          // *************************************************************************************************
+     40          // Include section
+     41          #include "project.h"
+
+   \                                 In  segment SFR_AN, at 0x88
+   \   union <unnamed> volatile __sfr _A_TCON
+   \                     _A_TCON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x91
+   \   unsigned char volatile __sfr RFIM
+   \                     RFIM:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9a
+   \   unsigned char volatile __sfr IEN2
+   \                     IEN2:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0x9b
+   \   unsigned char volatile __sfr S1CON
+   \                     S1CON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xa8
+   \   union <unnamed> volatile __sfr _A_IEN0
+   \                     _A_IEN0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb8
+   \   union <unnamed> volatile __sfr _A_IEN1
+   \                     _A_IEN1:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xd9
+   \   unsigned char volatile __sfr RFD
+   \                     RFD:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe1
+   \   unsigned char volatile __sfr RFST
+   \                     RFST:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe2
+   \   unsigned char volatile __sfr T1CNTL
+   \                     T1CNTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe3
+   \   unsigned char volatile __sfr T1CNTH
+   \                     T1CNTH:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe4
+   \   unsigned char volatile __sfr T1CTL
+   \                     T1CTL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe5
+   \   unsigned char volatile __sfr T1CCTL0
+   \                     T1CCTL0:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xe9
+   \   unsigned char volatile __sfr RFIF
+   \                     RFIF:
+   \   000000                DS 1
+     42          #include "rftest.h"
+     43          #include "timer1.h"
+     44          
+     45          
+     46          // *************************************************************************************************
+     47          // Defines section
+     48          #define RFTEST_SYNC_WORD		(0xCABA)
+     49          #define RFTEST_PACKET_LENGTH		(10u)
+     50          #define RFTEST_PACKET_COUNT		(10u)
+     51          #define RFTEST_OUTPUT_POWER		(0x5A)
+     52          #define RFTEST_OUTPUT_POWER_MAX		(0xC0)
+     53          #define RFTEST_ACLK_DEVIATION_MAX	(4u)
+     54          #define RFTEST_FREQEST_MIN		(-25)
+     55          #define RFTEST_FREQEST_MAX		(+25)
+     56          
+     57          
+     58          // *************************************************************************************************
+     59          // Global Variable section
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     60          u8 	rftest_packet[RFTEST_PACKET_LENGTH];
+   \                     rftest_packet:
+   \   000000                DS 10
+   \   00000A                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     61          u8      rftest_packet_ptr;
+   \                     rftest_packet_ptr:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     62          u8 	rftest_count;
+   \                     rftest_count:
+   \   000000                DS 1
+   \   000001                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     63          u32     rftest_time;
+   \                     rftest_time:
+   \   000000                DS 4
+   \   000004                REQUIRE __INIT_XDATA_Z
+     64          
+     65          typedef struct {
+     66          	u8    valid;
+     67          	u16   time;
+     68          	u8    packet_nb;
+     69          	u8    freqoffset;
+     70          } s_rftest;
+     71          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     72          s_rftest rftest[RFTEST_PACKET_COUNT];
+   \                     rftest:
+   \   000000                DS 50
+   \   000032                REQUIRE __INIT_XDATA_Z
+     73          		
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     74          const u8 ref_packet[RFTEST_PACKET_LENGTH] = { 0x00, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55 };
+   \                     ref_packet:
+   \   000000                DS 10
+   \   00000A                REQUIRE `?<Initializer for ref_packet>`
+   \   00000A                REQUIRE __INIT_XDATA_I
+     75          
+     76          
+     77          
+     78          // *************************************************************************************************
+     79          // Extern section
+     80          extern u16 test_result;
+     81          
+     82          
+     83          // *************************************************************************************************
+     84          // Static Function prototype section
+     85          
+     86          void rftest_init(void);
+     87          void rftest_radio_init(void);
+     88          
+     89          
+     90          // *************************************************************************************************
+     91          // Implementation
+     92          
+     93          
+     94          // *************************************************************************************************
+     95          // Init test variables
+     96          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     97          void rftest_init(void)
+   \                     rftest_init:
+     98          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+     99            u8 i;
+    100            
+    101            // Init and calibrate radio
+    102            rftest_radio_init();
+   \   000004                ; Setup parameters for call to function rftest_radio_init
+   \   000004   12....       LCALL   rftest_radio_init
+    103            
+    104            // Clear RX variables
+    105            rftest_count = 0;
+   \   000007   90....       MOV     DPTR,#rftest_count
+   \   00000A   E4           CLR     A
+   \   00000B   F0           MOVX    @DPTR,A
+    106            for (i=0; i<RFTEST_PACKET_COUNT; i++)
+   \   00000C   FB           MOV     R3,A
+   \   00000D   802C         SJMP    ??rftest_init_0
+    107            {
+    108                    rftest[i].valid      = 0;
+   \                     ??rftest_init_1:
+   \   00000F   EB           MOV     A,R3
+   \   000010   75F005       MOV     B,#0x5
+   \   000013   A4           MUL     AB
+   \   000014   F8           MOV     R0,A
+   \   000015   A9F0         MOV     R1,B
+   \   000017   74..         MOV     A,#rftest & 0xff
+   \   000019   28           ADD     A,R0
+   \   00001A   F8           MOV     R0,A
+   \   00001B   74..         MOV     A,#(rftest >> 8) & 0xff
+   \   00001D   39           ADDC    A,R1
+   \   00001E   F9           MOV     R1,A
+   \   00001F   8882         MOV     DPL,R0
+   \   000021   8983         MOV     DPH,R1
+   \   000023   E4           CLR     A
+   \   000024   F0           MOVX    @DPTR,A
+    109                    rftest[i].time       = 0;
+   \   000025   A3           INC     DPTR
+   \   000026   F0           MOVX    @DPTR,A
+   \   000027   A3           INC     DPTR
+   \   000028   F0           MOVX    @DPTR,A
+    110                    rftest[i].packet_nb  = 0;
+   \   000029   8882         MOV     DPL,R0
+   \   00002B   8983         MOV     DPH,R1
+   \   00002D   A3           INC     DPTR
+   \   00002E   A3           INC     DPTR
+   \   00002F   A3           INC     DPTR
+   \   000030   F0           MOVX    @DPTR,A
+    111                    rftest[i].freqoffset = 0;
+   \   000031   8882         MOV     DPL,R0
+   \   000033   8983         MOV     DPH,R1
+   \   000035   A3           INC     DPTR
+   \   000036   A3           INC     DPTR
+   \   000037   A3           INC     DPTR
+   \   000038   A3           INC     DPTR
+   \   000039   F0           MOVX    @DPTR,A
+    112            }
+   \   00003A   0B           INC     R3
+   \                     ??rftest_init_0:
+   \   00003B   EB           MOV     A,R3
+   \   00003C   C3           CLR     C
+   \   00003D   940A         SUBB    A,#0xa
+   \   00003F   40CE         JC      ??rftest_init_1
+    113          }
+   \   000041   D083         POP     DPH
+   \   000043   D082         POP     DPL
+   \   000045   22           RET
+    114          
+    115          
+    116          // *************************************************************************************************
+    117          // Test RF reception
+    118          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    119          void test_rf(void) 
+   \                     test_rf:
+    120          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 5
+   \   000005   74FB         MOV     A,#-0x5
+   \   000007   12....       LCALL   ?ALLOC_XSTACK8
+    121            u16 time1, time2, packet1, packet2, div;
+    122            s16 ref, delta;
+    123            u8 i;
+    124            s16 freqest;
+    125            u8 freqest1;
+    126            s16 freqest0;
+    127            u8 continue_test = YES;
+   \   00000A   85..82       MOV     DPL,?XSP + 0
+   \   00000D   85..83       MOV     DPH,?XSP + 1
+   \   000010   7401         MOV     A,#0x1
+   \   000012   F0           MOVX    @DPTR,A
+    128            
+    129            // Config radio for RX
+    130            rftest_init();
+   \   000013                ; Setup parameters for call to function rftest_init
+   \   000013   12....       LCALL   rftest_init
+    131          
+    132            // Set timeout in 1.5 seconds
+    133            reset_timer1();
+   \   000016                ; Setup parameters for call to function reset_timer1
+   \   000016   12....       LCALL   reset_timer1
+    134            set_timer1(32768*1.5);
+   \   000019                ; Setup parameters for call to function set_timer1
+   \   000019   7A00         MOV     R2,#0x0
+   \   00001B   7BC0         MOV     R3,#-0x40
+   \   00001D   12....       LCALL   set_timer1
+    135            T1CCTL0 = 0x44;
+   \   000020   75E544       MOV     0xe5,#0x44
+    136            T1CTL   = 0x02;
+   \   000023   75E402       MOV     0xe4,#0x2
+    137          
+    138            // Clear RF interrupts
+    139            S1CON &= ~(BIT1 | BIT0);  // Clear MCU interrupt flag 
+   \   000026   539BFC       ANL     0x9b,#0xfc
+    140            RFIF &= ~BIT4;            // Clear "receive/transmit done" interrupt 
+   \   000029   53E9EF       ANL     0xe9,#0xef
+    141            RFIM |= BIT4;             // Enable "receive/transmit done" interrupt
+   \   00002C   439110       ORL     0x91,#0x10
+    142          
+    143            // Enable IRQ
+    144            INT_ENABLE(INUM_RFTXRX, INT_ON);
+   \   00002F   D2A8         SETB    0xa8.0
+    145            INT_ENABLE(INUM_RF, INT_ON);
+   \   000031   439A01       ORL     0x9a,#0x1
+    146            INT_ENABLE(INUM_T1, INT_ON);
+   \   000034   D2B9         SETB    0xb8.1
+    147            
+    148            // Clear test result variable
+    149            test_result = 0;
+   \   000036   90....       MOV     DPTR,#test_result
+   \   000039   E4           CLR     A
+   \   00003A   F0           MOVX    @DPTR,A
+   \   00003B   A3           INC     DPTR
+   \   00003C   F0           MOVX    @DPTR,A
+   \   00003D   800B         SJMP    ??test_rf_0
+    150            
+    151            // Continue to receive packets until timeout
+    152            while ((rftest_count < RFTEST_PACKET_COUNT) && (!sTimer1.iflag))
+    153            {
+    154              // Start new RX if radio is IDLE
+    155              if (MARCSTATE == 0x01) SRX();
+   \                     ??test_rf_1:
+   \   00003F   90DF3B       MOV     DPTR,#-0x20c5
+   \   000042   E0           MOVX    A,@DPTR
+   \   000043   6401         XRL     A,#0x1
+   \   000045   7003         JNZ     ??test_rf_0
+   \   000047   75E102       MOV     0xe1,#0x2
+    156            }
+   \                     ??test_rf_0:
+   \   00004A   90....       MOV     DPTR,#rftest_count
+   \   00004D   E0           MOVX    A,@DPTR
+   \   00004E   C3           CLR     C
+   \   00004F   940A         SUBB    A,#0xa
+   \   000051   5006         JNC     ??test_rf_2
+   \   000053   90....       MOV     DPTR,#sTimer1 + 1
+   \   000056   E0           MOVX    A,@DPTR
+   \   000057   60E6         JZ      ??test_rf_1
+    157            SIDLE();
+   \                     ??test_rf_2:
+   \   000059   75E104       MOV     0xe1,#0x4
+    158            
+    159            // Analyze received packets
+    160            if (sTimer1.iflag || rftest_count < RFTEST_PACKET_COUNT/2)
+   \   00005C   90....       MOV     DPTR,#sTimer1 + 1
+   \   00005F   E0           MOVX    A,@DPTR
+   \   000060   7009         JNZ     ??test_rf_3
+   \   000062   90....       MOV     DPTR,#rftest_count
+   \   000065   E0           MOVX    A,@DPTR
+   \   000066   C3           CLR     C
+   \   000067   9405         SUBB    A,#0x5
+   \   000069   500B         JNC     ??test_rf_4
+    161            {
+    162              // Timeout - no or not enough packets received
+    163              test_result = 0x8000;
+   \                     ??test_rf_3:
+   \   00006B   90....       MOV     DPTR,#test_result
+   \   00006E   E4           CLR     A
+   \   00006F   F0           MOVX    @DPTR,A
+   \   000070   A3           INC     DPTR
+   \   000071   7480         MOV     A,#-0x80
+   \   000073   02....       LJMP    ??test_rf_5
+    164              continue_test = NO;
+    165            }
+    166            else
+    167            {
+    168                // Store last and first packet
+    169                for (i=0; i<RFTEST_PACKET_COUNT; i++)
+   \                     ??test_rf_4:
+   \   000076   7800         MOV     R0,#0x0
+   \   000078   8001         SJMP    ??test_rf_6
+   \                     ??test_rf_7:
+   \   00007A   08           INC     R0
+   \                     ??test_rf_6:
+   \   00007B   E8           MOV     A,R0
+   \   00007C   C3           CLR     C
+   \   00007D   940A         SUBB    A,#0xa
+   \   00007F   5034         JNC     ??test_rf_8
+    170                {
+    171                  if (rftest[i].valid) 
+   \   000081   E8           MOV     A,R0
+   \   000082   75F005       MOV     B,#0x5
+   \   000085   A4           MUL     AB
+   \   000086   FA           MOV     R2,A
+   \   000087   ABF0         MOV     R3,B
+   \   000089   74..         MOV     A,#rftest & 0xff
+   \   00008B   2A           ADD     A,R2
+   \   00008C   FA           MOV     R2,A
+   \   00008D   74..         MOV     A,#(rftest >> 8) & 0xff
+   \   00008F   3B           ADDC    A,R3
+   \   000090   FB           MOV     R3,A
+   \   000091   8A82         MOV     DPL,R2
+   \   000093   8B83         MOV     DPH,R3
+   \   000095   E0           MOVX    A,@DPTR
+   \   000096   60E2         JZ      ??test_rf_7
+    172                  {
+    173                    time1   = rftest[i].time;
+   \   000098   A3           INC     DPTR
+   \   000099   E0           MOVX    A,@DPTR
+   \   00009A   F8           MOV     R0,A
+   \   00009B   A3           INC     DPTR
+   \   00009C   E0           MOVX    A,@DPTR
+   \   00009D   F9           MOV     R1,A
+   \   00009E   7403         MOV     A,#0x3
+   \   0000A0   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000A3   E8           MOV     A,R0
+   \   0000A4   F0           MOVX    @DPTR,A
+   \   0000A5   A3           INC     DPTR
+   \   0000A6   E9           MOV     A,R1
+   \   0000A7   F0           MOVX    @DPTR,A
+    174                    packet1 = rftest[i].packet_nb;
+   \   0000A8   8A82         MOV     DPL,R2
+   \   0000AA   8B83         MOV     DPH,R3
+   \   0000AC   A3           INC     DPTR
+   \   0000AD   A3           INC     DPTR
+   \   0000AE   A3           INC     DPTR
+   \   0000AF   E0           MOVX    A,@DPTR
+   \   0000B0   F5..         MOV     ?V0 + 4,A
+   \   0000B2   75..00       MOV     ?V0 + 5,#0x0
+    175                    break;
+    176                  }
+    177                }
+    178                for (i=RFTEST_PACKET_COUNT-1; i>0; i--)
+   \                     ??test_rf_8:
+   \   0000B5   7809         MOV     R0,#0x9
+   \   0000B7   8001         SJMP    ??test_rf_9
+   \                     ??test_rf_10:
+   \   0000B9   18           DEC     R0
+   \                     ??test_rf_9:
+   \   0000BA   E8           MOV     A,R0
+   \   0000BB   6031         JZ      ??test_rf_11
+    179                {
+    180                  if (rftest[i].valid) 
+   \   0000BD   75F005       MOV     B,#0x5
+   \   0000C0   A4           MUL     AB
+   \   0000C1   FA           MOV     R2,A
+   \   0000C2   ABF0         MOV     R3,B
+   \   0000C4   74..         MOV     A,#rftest & 0xff
+   \   0000C6   2A           ADD     A,R2
+   \   0000C7   FA           MOV     R2,A
+   \   0000C8   74..         MOV     A,#(rftest >> 8) & 0xff
+   \   0000CA   3B           ADDC    A,R3
+   \   0000CB   FB           MOV     R3,A
+   \   0000CC   8A82         MOV     DPL,R2
+   \   0000CE   8B83         MOV     DPH,R3
+   \   0000D0   E0           MOVX    A,@DPTR
+   \   0000D1   60E6         JZ      ??test_rf_10
+    181                  {
+    182                    time2   = rftest[i].time;
+   \   0000D3   A3           INC     DPTR
+   \   0000D4   E0           MOVX    A,@DPTR
+   \   0000D5   F8           MOV     R0,A
+   \   0000D6   A3           INC     DPTR
+   \   0000D7   E0           MOVX    A,@DPTR
+   \   0000D8   F9           MOV     R1,A
+   \   0000D9   7401         MOV     A,#0x1
+   \   0000DB   12....       LCALL   ?XSTACK_DISP0_8
+   \   0000DE   E8           MOV     A,R0
+   \   0000DF   F0           MOVX    @DPTR,A
+   \   0000E0   A3           INC     DPTR
+   \   0000E1   E9           MOV     A,R1
+   \   0000E2   F0           MOVX    @DPTR,A
+    183                    packet2 = rftest[i].packet_nb;
+   \   0000E3   8A82         MOV     DPL,R2
+   \   0000E5   8B83         MOV     DPH,R3
+   \   0000E7   A3           INC     DPTR
+   \   0000E8   A3           INC     DPTR
+   \   0000E9   A3           INC     DPTR
+   \   0000EA   E0           MOVX    A,@DPTR
+   \   0000EB   FE           MOV     R6,A
+   \   0000EC   7F00         MOV     R7,#0x0
+    184                    break;
+    185                  }
+    186                }
+    187                
+    188                // Calculate mean freqest
+    189                freqest = 0;
+   \                     ??test_rf_11:
+   \   0000EE   75..00       MOV     ?V0 + 0,#0x0
+   \   0000F1   75..00       MOV     ?V0 + 1,#0x0
+    190                div = 0;
+   \   0000F4   7C00         MOV     R4,#0x0
+   \   0000F6   7D00         MOV     R5,#0x0
+    191                for (i=0; i<RFTEST_PACKET_COUNT; i++)
+   \   0000F8   7800         MOV     R0,#0x0
+   \   0000FA   8015         SJMP    ??test_rf_12
+    192                {
+    193                  if (rftest[i].valid) 
+    194                  {
+    195                      // Sign extend negative numbers
+    196                      if ((rftest[i].freqoffset & BIT7) == BIT7) 
+    197                      {
+    198                        freqest += (s16)(0xFF00 | rftest[i].freqoffset);
+    199                      }
+    200                      else
+    201                      {
+    202                        freqest += (s16)(rftest[i].freqoffset);
+   \                     ??test_rf_13:
+   \   0000FC   E5..         MOV     A,?V0 + 0
+   \   0000FE   25..         ADD     A,?V0 + 2
+   \   000100   F5..         MOV     ?V0 + 0,A
+   \   000102   E5..         MOV     A,?V0 + 1
+   \   000104   3400         ADDC    A,#0x0
+   \                     ??test_rf_14:
+   \   000106   F5..         MOV     ?V0 + 1,A
+    203                      }
+    204                      div++;
+   \   000108   EC           MOV     A,R4
+   \   000109   2401         ADD     A,#0x1
+   \   00010B   0C           INC     R4
+   \   00010C   ED           MOV     A,R5
+   \   00010D   3400         ADDC    A,#0x0
+   \   00010F   FD           MOV     R5,A
+   \                     ??test_rf_15:
+   \   000110   08           INC     R0
+   \                     ??test_rf_12:
+   \   000111   E8           MOV     A,R0
+   \   000112   C3           CLR     C
+   \   000113   940A         SUBB    A,#0xa
+   \   000115   5036         JNC     ??test_rf_16
+   \   000117   E8           MOV     A,R0
+   \   000118   75F005       MOV     B,#0x5
+   \   00011B   A4           MUL     AB
+   \   00011C   FA           MOV     R2,A
+   \   00011D   ABF0         MOV     R3,B
+   \   00011F   74..         MOV     A,#rftest & 0xff
+   \   000121   2A           ADD     A,R2
+   \   000122   F582         MOV     DPL,A
+   \   000124   74..         MOV     A,#(rftest >> 8) & 0xff
+   \   000126   3B           ADDC    A,R3
+   \   000127   F583         MOV     DPH,A
+   \   000129   E0           MOVX    A,@DPTR
+   \   00012A   60E4         JZ      ??test_rf_15
+   \   00012C   E582         MOV     A,DPL
+   \   00012E   2404         ADD     A,#0x4
+   \   000130   F582         MOV     DPL,A
+   \   000132   E583         MOV     A,DPH
+   \   000134   3400         ADDC    A,#0x0
+   \   000136   F583         MOV     DPH,A
+   \   000138   E0           MOVX    A,@DPTR
+   \   000139   F5..         MOV     ?V0 + 2,A
+   \   00013B   E0           MOVX    A,@DPTR
+   \   00013C   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00013E   50BC         JNC     ??test_rf_13
+   \   000140   AA..         MOV     R2,?V0 + 2
+   \   000142   E5..         MOV     A,?V0 + 0
+   \   000144   2A           ADD     A,R2
+   \   000145   F5..         MOV     ?V0 + 0,A
+   \   000147   E5..         MOV     A,?V0 + 1
+   \   000149   34FF         ADDC    A,#-0x1
+   \   00014B   80B9         SJMP    ??test_rf_14
+    205                  }
+    206                }
+    207                
+    208                // FREQEST range check
+    209                freqest0 = freqest/(s16)div;
+   \                     ??test_rf_16:
+   \   00014D   A8..         MOV     R0,?V0 + 0
+   \   00014F   A9..         MOV     R1,?V0 + 1
+   \   000151   EC           MOV     A,R4
+   \   000152   FA           MOV     R2,A
+   \   000153   ED           MOV     A,R5
+   \   000154   FB           MOV     R3,A
+   \   000155   12....       LCALL   ?S_DIV_MOD
+   \   000158   88..         MOV     ?V0 + 6,R0
+    210                if ((freqest0 < RFTEST_FREQEST_MIN) || (freqest0 > RFTEST_FREQEST_MAX)) 
+   \   00015A   E8           MOV     A,R0
+   \   00015B   2419         ADD     A,#0x19
+   \   00015D   F8           MOV     R0,A
+   \   00015E   E9           MOV     A,R1
+   \   00015F   3400         ADDC    A,#0x0
+   \   000161   F9           MOV     R1,A
+   \   000162   C3           CLR     C
+   \   000163   E8           MOV     A,R0
+   \   000164   9433         SUBB    A,#0x33
+   \   000166   E9           MOV     A,R1
+   \   000167   9400         SUBB    A,#0x0
+   \   000169   400C         JC      ??test_rf_17
+    211                {
+    212                        test_result = 0x2000 | (u8)freqest0;
+   \   00016B   E5..         MOV     A,?V0 + 6
+   \   00016D   90....       MOV     DPTR,#test_result
+   \   000170   F0           MOVX    @DPTR,A
+   \   000171   A3           INC     DPTR
+   \   000172   7420         MOV     A,#0x20
+   \   000174   02....       LJMP    ??test_rf_5
+    213                        continue_test = NO;
+    214                }
+    215                else
+    216                { // FREQEST range ok
+    217                
+    218                  // Calculate distance between 1 and 2
+    219                  // TX sends packet each 3276 ACLK ticks (= 1145 T1CLK ticks)
+    220                  ref = (packet2 - packet1)*3276;
+   \                     ??test_rf_17:
+   \   000177   EE           MOV     A,R6
+   \   000178   C3           CLR     C
+   \   000179   95..         SUBB    A,?V0 + 4
+   \   00017B   F8           MOV     R0,A
+   \   00017C   EF           MOV     A,R7
+   \   00017D   95..         SUBB    A,?V0 + 5
+   \   00017F   F9           MOV     R1,A
+   \   000180   E8           MOV     A,R0
+   \   000181   75F0CC       MOV     B,#-0x34
+   \   000184   A4           MUL     AB
+   \   000185   C8           XCH     A,R0
+   \   000186   AAF0         MOV     R2,B
+   \   000188   75F00C       MOV     B,#0xc
+   \   00018B   A4           MUL     AB
+   \   00018C   2A           ADD     A,R2
+   \   00018D   FA           MOV     R2,A
+   \   00018E   75F0CC       MOV     B,#-0x34
+   \   000191   E9           MOV     A,R1
+   \   000192   A4           MUL     AB
+   \   000193   2A           ADD     A,R2
+   \   000194   F9           MOV     R1,A
+    221                  delta = time2 - time1;
+   \   000195   7401         MOV     A,#0x1
+   \   000197   12....       LCALL   ?XSTACK_DISP0_8
+   \   00019A   C082         PUSH    DPL
+   \   00019C   C083         PUSH    DPH
+   \   00019E   7403         MOV     A,#0x3
+   \   0001A0   12....       LCALL   ?XSTACK_DISP0_8
+   \   0001A3   E0           MOVX    A,@DPTR
+   \   0001A4   FA           MOV     R2,A
+   \   0001A5   A3           INC     DPTR
+   \   0001A6   E0           MOVX    A,@DPTR
+   \   0001A7   FB           MOV     R3,A
+   \   0001A8   D083         POP     DPH
+   \   0001AA   D082         POP     DPL
+   \   0001AC   E0           MOVX    A,@DPTR
+   \   0001AD   C3           CLR     C
+   \   0001AE   9A           SUBB    A,R2
+   \   0001AF   FE           MOV     R6,A
+   \   0001B0   A3           INC     DPTR
+   \   0001B1   E0           MOVX    A,@DPTR
+   \   0001B2   9B           SUBB    A,R3
+   \   0001B3   FF           MOV     R7,A
+    222            
+    223                  if ((ref - delta) < RFTEST_ACLK_DEVIATION_MAX)
+   \   0001B4   E8           MOV     A,R0
+   \   0001B5   C3           CLR     C
+   \   0001B6   9E           SUBB    A,R6
+   \   0001B7   FA           MOV     R2,A
+   \   0001B8   E9           MOV     A,R1
+   \   0001B9   9F           SUBB    A,R7
+   \   0001BA   FB           MOV     R3,A
+   \   0001BB   C3           CLR     C
+   \   0001BC   EA           MOV     A,R2
+   \   0001BD   9404         SUBB    A,#0x4
+   \   0001BF   EB           MOV     A,R3
+   \   0001C0   9400         SUBB    A,#0x0
+   \   0001C2   5033         JNC     ??test_rf_18
+    224                  {
+    225                    // Store ACLK deviation in test result
+    226                    test_result = ((ref - delta)&0x0F) << 8; 
+   \   0001C4   EA           MOV     A,R2
+   \   0001C5   540F         ANL     A,#0xf
+   \   0001C7   F9           MOV     R1,A
+   \   0001C8   90....       MOV     DPTR,#test_result
+   \   0001CB   E4           CLR     A
+   \   0001CC   F0           MOVX    @DPTR,A
+   \   0001CD   A3           INC     DPTR
+   \   0001CE   E9           MOV     A,R1
+   \   0001CF   F0           MOVX    @DPTR,A
+    227                    
+    228                    // Store average FREQEST
+    229                    if (freqest < 0)
+   \   0001D0   C3           CLR     C
+   \   0001D1   E5..         MOV     A,?V0 + 1
+   \   0001D3   9400         SUBB    A,#0x0
+   \   0001D5   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   0001D7   65D0         XRL     A,PSW
+   \   0001D9   33           RLC     A
+   \   0001DA   5043         JNC     ??test_rf_19
+    230                    {
+    231                      freqest1 = (u8)((freqest*(-1))/div);
+    232                      freqest1 = ~freqest1 + 1;
+    233                      test_result |= freqest1;
+   \                     ??test_rf_20:
+   \   0001DC   C3           CLR     C
+   \   0001DD   E4           CLR     A
+   \   0001DE   95..         SUBB    A,?V0 + 0
+   \   0001E0   F8           MOV     R0,A
+   \   0001E1   E4           CLR     A
+   \   0001E2   95..         SUBB    A,?V0 + 1
+   \   0001E4   F9           MOV     R1,A
+   \   0001E5   EC           MOV     A,R4
+   \   0001E6   FA           MOV     R2,A
+   \   0001E7   ED           MOV     A,R5
+   \   0001E8   FB           MOV     R3,A
+   \   0001E9   12....       LCALL   ?US_DIV_MOD
+   \   0001EC   E8           MOV     A,R0
+   \   0001ED   F4           CPL     A
+   \   0001EE   04           INC     A
+   \   0001EF   F8           MOV     R0,A
+   \                     ??test_rf_21:
+   \   0001F0   90....       MOV     DPTR,#test_result
+   \   0001F3   E0           MOVX    A,@DPTR
+   \   0001F4   48           ORL     A,R0
+   \   0001F5   8045         SJMP    ??test_rf_22
+    234                    }
+    235                    else
+    236                    {
+    237                      test_result |= (u8)(freqest/div);
+    238                    } 
+    239                  }
+    240                  else if ((delta - ref) < RFTEST_ACLK_DEVIATION_MAX)
+   \                     ??test_rf_18:
+   \   0001F7   EE           MOV     A,R6
+   \   0001F8   C3           CLR     C
+   \   0001F9   98           SUBB    A,R0
+   \   0001FA   F8           MOV     R0,A
+   \   0001FB   EF           MOV     A,R7
+   \   0001FC   99           SUBB    A,R1
+   \   0001FD   F9           MOV     R1,A
+   \   0001FE   C3           CLR     C
+   \   0001FF   E8           MOV     A,R0
+   \   000200   9404         SUBB    A,#0x4
+   \   000202   E9           MOV     A,R1
+   \   000203   9400         SUBB    A,#0x0
+   \   000205   5025         JNC     ??test_rf_23
+    241                  {
+    242                    // Store ACLK deviation in test result
+    243                    test_result = ((delta - ref)&0x0F) << 8; 
+   \   000207   E8           MOV     A,R0
+   \   000208   540F         ANL     A,#0xf
+   \   00020A   F9           MOV     R1,A
+   \   00020B   90....       MOV     DPTR,#test_result
+   \   00020E   E4           CLR     A
+   \   00020F   F0           MOVX    @DPTR,A
+   \   000210   A3           INC     DPTR
+   \   000211   E9           MOV     A,R1
+   \   000212   F0           MOVX    @DPTR,A
+    244                    
+    245                    // Store average FREQEST
+    246                    if (freqest < 0)
+   \   000213   C3           CLR     C
+   \   000214   E5..         MOV     A,?V0 + 1
+   \   000216   9400         SUBB    A,#0x0
+   \   000218   A2D2         MOV     C,0xD0 /* PSW */.2
+   \   00021A   65D0         XRL     A,PSW
+   \   00021C   33           RLC     A
+   \   00021D   40BD         JC      ??test_rf_20
+    247                    {
+    248                      freqest1 = (u8)((freqest*(-1))/div);
+    249                      freqest1 = ~freqest1 + 1;
+    250                      test_result |= freqest1;
+    251                    }
+    252                    else
+    253                    {
+    254                      test_result |= (u8)(freqest/div);
+    255                    } 			
+    256                  }
+   \                     ??test_rf_19:
+   \   00021F   A8..         MOV     R0,?V0 + 0
+   \   000221   A9..         MOV     R1,?V0 + 1
+   \   000223   EC           MOV     A,R4
+   \   000224   FA           MOV     R2,A
+   \   000225   ED           MOV     A,R5
+   \   000226   FB           MOV     R3,A
+   \   000227   12....       LCALL   ?US_DIV_MOD
+   \   00022A   80C4         SJMP    ??test_rf_21
+    257                  else
+    258                  {
+    259                    // Too high ACLK deviation
+    260                    test_result = 0x4000;
+   \                     ??test_rf_23:
+   \   00022C   90....       MOV     DPTR,#test_result
+   \   00022F   E4           CLR     A
+   \   000230   F0           MOVX    @DPTR,A
+   \   000231   A3           INC     DPTR
+   \   000232   7440         MOV     A,#0x40
+   \                     ??test_rf_5:
+   \   000234   F0           MOVX    @DPTR,A
+    261                    continue_test = NO;
+   \   000235   85..82       MOV     DPL,?XSP + 0
+   \   000238   85..83       MOV     DPH,?XSP + 1
+   \   00023B   E4           CLR     A
+   \                     ??test_rf_22:
+   \   00023C   F0           MOVX    @DPTR,A
+    262                  }
+    263                }
+    264            }
+    265            
+    266            // 2nd test stage - use RF offset to catch another few packets
+    267            if (continue_test == YES)
+   \   00023D   85..82       MOV     DPL,?XSP + 0
+   \   000240   85..83       MOV     DPH,?XSP + 1
+   \   000243   E0           MOVX    A,@DPTR
+   \   000244   6401         XRL     A,#0x1
+   \   000246   6003         JZ      $+5
+   \   000248   02....       LJMP    ??test_rf_24
+    268            {
+    269              rftest_count = 0;
+   \   00024B   90....       MOV     DPTR,#rftest_count
+   \   00024E   E4           CLR     A
+   \   00024F   F0           MOVX    @DPTR,A
+    270              
+    271              // Clear RX variables
+    272              for (i=0; i<RFTEST_PACKET_COUNT; i++)
+   \   000250   F8           MOV     R0,A
+   \   000251   802C         SJMP    ??test_rf_25
+    273              {
+    274                      rftest[i].valid      = 0;
+   \                     ??test_rf_26:
+   \   000253   E8           MOV     A,R0
+   \   000254   75F005       MOV     B,#0x5
+   \   000257   A4           MUL     AB
+   \   000258   FA           MOV     R2,A
+   \   000259   ABF0         MOV     R3,B
+   \   00025B   74..         MOV     A,#rftest & 0xff
+   \   00025D   2A           ADD     A,R2
+   \   00025E   FA           MOV     R2,A
+   \   00025F   74..         MOV     A,#(rftest >> 8) & 0xff
+   \   000261   3B           ADDC    A,R3
+   \   000262   FB           MOV     R3,A
+   \   000263   8A82         MOV     DPL,R2
+   \   000265   8B83         MOV     DPH,R3
+   \   000267   E4           CLR     A
+   \   000268   F0           MOVX    @DPTR,A
+    275                      rftest[i].time 	     = 0;
+   \   000269   A3           INC     DPTR
+   \   00026A   F0           MOVX    @DPTR,A
+   \   00026B   A3           INC     DPTR
+   \   00026C   F0           MOVX    @DPTR,A
+    276                      rftest[i].packet_nb  = 0;
+   \   00026D   8A82         MOV     DPL,R2
+   \   00026F   8B83         MOV     DPH,R3
+   \   000271   A3           INC     DPTR
+   \   000272   A3           INC     DPTR
+   \   000273   A3           INC     DPTR
+   \   000274   F0           MOVX    @DPTR,A
+    277                      rftest[i].freqoffset = 0;
+   \   000275   8A82         MOV     DPL,R2
+   \   000277   8B83         MOV     DPH,R3
+   \   000279   A3           INC     DPTR
+   \   00027A   A3           INC     DPTR
+   \   00027B   A3           INC     DPTR
+   \   00027C   A3           INC     DPTR
+   \   00027D   F0           MOVX    @DPTR,A
+    278              }
+   \   00027E   08           INC     R0
+   \                     ??test_rf_25:
+   \   00027F   E8           MOV     A,R0
+   \   000280   C3           CLR     C
+   \   000281   940A         SUBB    A,#0xa
+   \   000283   40CE         JC      ??test_rf_26
+    279              
+    280              // Set frequency offset
+    281              FSCTRL0 = freqest0;
+   \   000285   E5..         MOV     A,?V0 + 6
+   \   000287   90DF08       MOV     DPTR,#-0x20f8
+   \   00028A   F0           MOVX    @DPTR,A
+    282              
+    283              // Set timeout in 0.5 seconds
+    284              reset_timer1();
+   \   00028B                ; Setup parameters for call to function reset_timer1
+   \   00028B   12....       LCALL   reset_timer1
+    285              set_timer1(32768*0.5);
+   \   00028E                ; Setup parameters for call to function set_timer1
+   \   00028E   7A00         MOV     R2,#0x0
+   \   000290   7B40         MOV     R3,#0x40
+   \   000292   12....       LCALL   set_timer1
+   \   000295   800B         SJMP    ??test_rf_27
+    286              
+    287              // Try to receive just 1 packet
+    288              while ((rftest_count < 1) && (!sTimer1.iflag))
+    289              {
+    290                // Start new RX if radio is IDLE
+    291                if (MARCSTATE == 0x01) SRX();
+   \                     ??test_rf_28:
+   \   000297   90DF3B       MOV     DPTR,#-0x20c5
+   \   00029A   E0           MOVX    A,@DPTR
+   \   00029B   6401         XRL     A,#0x1
+   \   00029D   7003         JNZ     ??test_rf_27
+   \   00029F   75E102       MOV     0xe1,#0x2
+    292              }
+   \                     ??test_rf_27:
+   \   0002A2   90....       MOV     DPTR,#rftest_count
+   \   0002A5   E0           MOVX    A,@DPTR
+   \   0002A6   7006         JNZ     ??test_rf_29
+   \   0002A8   90....       MOV     DPTR,#sTimer1 + 1
+   \   0002AB   E0           MOVX    A,@DPTR
+   \   0002AC   60E9         JZ      ??test_rf_28
+    293              SIDLE();
+   \                     ??test_rf_29:
+   \   0002AE   75E104       MOV     0xe1,#0x4
+    294              
+    295              // Analyze received packets frequency offset - should be close to 0
+    296              if (rftest_count > 0)
+   \   0002B1   90....       MOV     DPTR,#rftest_count
+   \   0002B4   E0           MOVX    A,@DPTR
+   \   0002B5   600B         JZ      ??test_rf_30
+    297              {
+    298                      if (!((rftest[0].freqoffset >= 0xFE) || (rftest[0].freqoffset <= 0x02)))
+   \   0002B7   90....       MOV     DPTR,#rftest + 4
+   \   0002BA   E0           MOVX    A,@DPTR
+   \   0002BB   24FD         ADD     A,#-0x3
+   \   0002BD   C3           CLR     C
+   \   0002BE   94FB         SUBB    A,#-0x5
+   \   0002C0   5009         JNC     ??test_rf_24
+    299                      {
+    300                              test_result = 0x1000;
+   \                     ??test_rf_30:
+   \   0002C2   90....       MOV     DPTR,#test_result
+   \   0002C5   E4           CLR     A
+   \   0002C6   F0           MOVX    @DPTR,A
+   \   0002C7   A3           INC     DPTR
+   \   0002C8   7410         MOV     A,#0x10
+   \   0002CA   F0           MOVX    @DPTR,A
+    301                      }
+    302              }
+    303              else
+    304              {
+    305                      test_result = 0x1000;
+    306              }
+    307            }
+    308          
+    309            // Disable IRQ
+    310            INT_ENABLE(INUM_RFTXRX, INT_OFF);
+   \                     ??test_rf_24:
+   \   0002CB   C2A8         CLR     0xa8.0
+    311            INT_ENABLE(INUM_RF, INT_OFF);
+   \   0002CD   539AFE       ANL     0x9a,#0xfe
+    312            INT_ENABLE(INUM_T1, INT_OFF);
+   \   0002D0   C2B9         CLR     0xb8.1
+    313          
+    314            // Stop Timer1 
+    315            T1CTL  = 0x00;
+   \   0002D2   75E400       MOV     0xe4,#0x0
+    316            T1CNTL = 0x55;
+   \   0002D5   75E255       MOV     0xe2,#0x55
+    317            reset_timer1();
+   \   0002D8                ; Setup parameters for call to function reset_timer1
+   \   0002D8   12....       LCALL   reset_timer1
+    318          }
+   \   0002DB   7405         MOV     A,#0x5
+   \   0002DD   12....       LCALL   ?DEALLOC_XSTACK8
+   \   0002E0   7F08         MOV     R7,#0x8
+   \   0002E2   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   0002E5                REQUIRE T1CCTL0
+   \   0002E5                REQUIRE T1CTL
+   \   0002E5                REQUIRE S1CON
+   \   0002E5                REQUIRE RFIF
+   \   0002E5                REQUIRE RFIM
+   \   0002E5                REQUIRE _A_IEN0
+   \   0002E5                REQUIRE IEN2
+   \   0002E5                REQUIRE _A_IEN1
+   \   0002E5                REQUIRE RFST
+   \   0002E5                REQUIRE T1CNTL
+    319          
+    320          
+    321          // *************************************************************************************************
+    322          // Sets the radio hardware to the required initial state.
+    323          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    324          void rftest_radio_init(void)
+   \                     rftest_radio_init:
+    325          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    326            u8 FSCAL3_Register_u8;
+    327          
+    328            SYNC1       = RFTEST_SYNC_WORD >> 8;  /*  Sync word, high byte                                */
+   \   000004   90DF00       MOV     DPTR,#-0x2100
+   \   000007   74CA         MOV     A,#-0x36
+   \   000009   F0           MOVX    @DPTR,A
+    329            SYNC0       = (u8) RFTEST_SYNC_WORD;  /*  Sync word, low byte                                 */
+   \   00000A   A3           INC     DPTR
+   \   00000B   74BA         MOV     A,#-0x46
+   \   00000D   F0           MOVX    @DPTR,A
+    330            PKTLEN      = RFTEST_PACKET_LENGTH;   /*  Packet length                                       */
+   \   00000E   A3           INC     DPTR
+   \   00000F   740A         MOV     A,#0xa
+   \   000011   F0           MOVX    @DPTR,A
+    331            PKTCTRL1    = 0x00;               /*  Packet automation control                           */
+   \   000012   A3           INC     DPTR
+   \   000013   E4           CLR     A
+   \   000014   F0           MOVX    @DPTR,A
+    332            PKTCTRL0    = 0x00;               /*  Packet automation control                           */
+   \   000015   A3           INC     DPTR
+   \   000016   F0           MOVX    @DPTR,A
+    333            ADDR        = 0x00;               /*  Device address                                      */
+   \   000017   A3           INC     DPTR
+   \   000018   F0           MOVX    @DPTR,A
+    334            CHANNR      = 0x00;               /*  Channel number                                      */
+   \   000019   A3           INC     DPTR
+   \   00001A   F0           MOVX    @DPTR,A
+    335            FSCTRL1     = 0x12;               /*  Frequency synthesizer control                       */
+   \   00001B   A3           INC     DPTR
+   \   00001C   7412         MOV     A,#0x12
+   \   00001E   F0           MOVX    @DPTR,A
+    336            FSCTRL0     = 0x00;               /*  Frequency synthesizer control                       */
+   \   00001F   A3           INC     DPTR
+   \   000020   E4           CLR     A
+   \   000021   F0           MOVX    @DPTR,A
+    337          #ifdef ISM_EU
+    338            FREQ2       = 0x24;               /*  Frequency control word, high byte                   */
+   \   000022   A3           INC     DPTR
+   \   000023   7424         MOV     A,#0x24
+   \   000025   F0           MOVX    @DPTR,A
+    339            FREQ1       = 0x2D;               /*  Frequency control word, middle byte                 */
+   \   000026   A3           INC     DPTR
+   \   000027   742D         MOV     A,#0x2d
+   \   000029   F0           MOVX    @DPTR,A
+    340            FREQ0       = 0x55;               /*  Frequency control word, low byte                    */
+   \   00002A   A3           INC     DPTR
+   \   00002B   7455         MOV     A,#0x55
+   \   00002D   F0           MOVX    @DPTR,A
+    341            MDMCFG4     = 0x3D;               /*  Modem configuration                                 */
+   \   00002E   A3           INC     DPTR
+   \   00002F   743D         MOV     A,#0x3d
+   \   000031   F0           MOVX    @DPTR,A
+    342            MDMCFG3     = 0x55;               /*  Modem configuration                                 */
+   \   000032   A3           INC     DPTR
+   \   000033   7455         MOV     A,#0x55
+   \   000035   F0           MOVX    @DPTR,A
+    343            MDMCFG2     = 0x15;               /*  Modem configuration                                 */
+   \   000036   A3           INC     DPTR
+   \   000037   7415         MOV     A,#0x15
+   \   000039   F0           MOVX    @DPTR,A
+    344            MDMCFG1     = 0x12;               /*  Modem configuration                                 */
+   \   00003A   A3           INC     DPTR
+   \   00003B   7412         MOV     A,#0x12
+   \   00003D   F0           MOVX    @DPTR,A
+    345            MDMCFG0     = 0x11;               /*  Modem configuration                                 */
+   \   00003E   A3           INC     DPTR
+   \   00003F   14           DEC     A
+   \   000040   F0           MOVX    @DPTR,A
+    346          #else
+    347            #ifdef ISM_US
+    348            FREQ2       = 0x26;               /*  Frequency control word, high byte                   */
+    349            FREQ1       = 0x19;               /*  Frequency control word, middle byte                 */
+    350            FREQ0       = 0x11;               /*  Frequency control word, low byte                    */
+    351            MDMCFG4     = 0x3D;               /*  Modem configuration                                 */
+    352            MDMCFG3     = 0x55;               /*  Modem configuration                                 */
+    353            MDMCFG2     = 0x15;               /*  Modem configuration                                 */
+    354            MDMCFG1     = 0x12;               /*  Modem configuration                                 */
+    355            MDMCFG0     = 0x11;               /*  Modem configuration                                 */ 
+    356            #else
+    357              #ifdef ISM_LF
+    358              FREQ2       = 0x12;               /*  Frequency control word, high byte                   */
+    359              FREQ1       = 0x0A;               /*  Frequency control word, middle byte                 */
+    360              FREQ0       = 0xAA;               /*  Frequency control word, low byte                    */
+    361              MDMCFG4     = 0x3D;               /*  Modem configuration                                 */
+    362              MDMCFG3     = 0x55;               /*  Modem configuration                                 */
+    363              MDMCFG2     = 0x15;               /*  Modem configuration                                 */
+    364              MDMCFG1     = 0x12;               /*  Modem configuration                                 */
+    365              MDMCFG0     = 0x11;               /*  Modem configuration                                 */ 
+    366              #else
+    367                #error "No ISM band specified"
+    368              #endif
+    369            #endif
+    370          #endif
+    371            DEVIATN     = 0x60;               /*  Modem deviation setting                             */
+   \   000041   A3           INC     DPTR
+   \   000042   7460         MOV     A,#0x60
+   \   000044   F0           MOVX    @DPTR,A
+    372            MCSM2       = 0x07;               /*  Main Radio Control State Machine configuration      */
+   \   000045   A3           INC     DPTR
+   \   000046   7407         MOV     A,#0x7
+   \   000048   F0           MOVX    @DPTR,A
+    373            MCSM1       = 0x02;               /*  Main Radio Control State Machine configuration      */
+   \   000049   A3           INC     DPTR
+   \   00004A   7402         MOV     A,#0x2
+   \   00004C   F0           MOVX    @DPTR,A
+    374            MCSM0       = 0x18;               /*  Main Radio Control State Machine configuration      */
+   \   00004D   A3           INC     DPTR
+   \   00004E   7418         MOV     A,#0x18
+   \   000050   F0           MOVX    @DPTR,A
+    375            FOCCFG      = 0x1D;               /*  Frequency Offset Compensation configuration         */
+   \   000051   A3           INC     DPTR
+   \   000052   741D         MOV     A,#0x1d
+   \   000054   F0           MOVX    @DPTR,A
+    376            BSCFG       = 0x1C;               /*  Bit Synchronization configuration                   */
+   \   000055   A3           INC     DPTR
+   \   000056   14           DEC     A
+   \   000057   F0           MOVX    @DPTR,A
+    377            AGCCTRL2    = 0xC7;               /*  AGC control                                         */
+   \   000058   A3           INC     DPTR
+   \   000059   74C7         MOV     A,#-0x39
+   \   00005B   F0           MOVX    @DPTR,A
+    378            AGCCTRL1    = 0x10;               /*  AGC control                                         */
+   \   00005C   A3           INC     DPTR
+   \   00005D   7410         MOV     A,#0x10
+   \   00005F   F0           MOVX    @DPTR,A
+    379            AGCCTRL0    = 0xB2;               /*  AGC control                                         */
+   \   000060   A3           INC     DPTR
+   \   000061   74B2         MOV     A,#-0x4e
+   \   000063   F0           MOVX    @DPTR,A
+    380            FREND1      = 0xB6;               /*  Front end RX configuration                          */
+   \   000064   A3           INC     DPTR
+   \   000065   74B6         MOV     A,#-0x4a
+   \   000067   F0           MOVX    @DPTR,A
+    381            FREND0      = 0x10;               /*  Front end TX configuration                          */
+   \   000068   A3           INC     DPTR
+   \   000069   7410         MOV     A,#0x10
+   \   00006B   F0           MOVX    @DPTR,A
+    382            FSCAL3      = 0xEA;               /*  Frequency synthesizer calibration                   */
+   \   00006C   A3           INC     DPTR
+   \   00006D   74EA         MOV     A,#-0x16
+   \   00006F   F0           MOVX    @DPTR,A
+    383            FSCAL2      = 0x2A;               /*  Frequency synthesizer calibration                   */
+   \   000070   A3           INC     DPTR
+   \   000071   742A         MOV     A,#0x2a
+   \   000073   F0           MOVX    @DPTR,A
+    384            FSCAL1      = 0x00;               /*  Frequency synthesizer calibration                   */
+   \   000074   A3           INC     DPTR
+   \   000075   E4           CLR     A
+   \   000076   F0           MOVX    @DPTR,A
+    385            FSCAL0      = 0x1F;               /*  Frequency synthesizer calibration                   */
+   \   000077   A3           INC     DPTR
+   \   000078   741F         MOV     A,#0x1f
+   \   00007A   F0           MOVX    @DPTR,A
+    386            IOCFG2      = 0x00;               /*  Radio Test Signal Configuration (P1_7)              */
+   \   00007B   90DF2F       MOV     DPTR,#-0x20d1
+   \   00007E   E4           CLR     A
+   \   00007F   F0           MOVX    @DPTR,A
+    387            IOCFG1      = 0x00;               /*  Radio Test Signal Configuration (P1_6)              */
+   \   000080   A3           INC     DPTR
+   \   000081   F0           MOVX    @DPTR,A
+    388            IOCFG0      = 0x00;               /*  Radio Test Signal Configuration (P1_5)              */
+   \   000082   A3           INC     DPTR
+   \   000083   F0           MOVX    @DPTR,A
+    389            TEST1       = 0x31;
+   \   000084   90DF24       MOV     DPTR,#-0x20dc
+   \   000087   7431         MOV     A,#0x31
+   \   000089   F0           MOVX    @DPTR,A
+    390          
+    391            // Read FSCAL3 register, set bits enabling charge pump calibration and write register again
+    392            FSCAL3_Register_u8 = FSCAL3 | 0x20;
+   \   00008A   90DF1C       MOV     DPTR,#-0x20e4
+   \   00008D   E0           MOVX    A,@DPTR
+   \   00008E   4420         ORL     A,#0x20
+    393            FSCAL3 = FSCAL3_Register_u8;
+   \   000090   F0           MOVX    @DPTR,A
+    394          
+    395            // Set output power
+    396            PA_TABLE0 = RFTEST_OUTPUT_POWER; 
+   \   000091   90DF2E       MOV     DPTR,#-0x20d2
+   \   000094   745A         MOV     A,#0x5a
+   \   000096   F0           MOVX    @DPTR,A
+    397          
+    398            // Start calibration manually
+    399            SIDLE();
+   \   000097   75E104       MOV     0xe1,#0x4
+    400            SCAL();
+   \   00009A   75E101       MOV     0xe1,#0x1
+    401          
+    402            // Wait until calibration completed
+    403            while(MARCSTATE != 0x01);
+   \                     ??rftest_radio_init_0:
+   \   00009D   90DF3B       MOV     DPTR,#-0x20c5
+   \   0000A0   E0           MOVX    A,@DPTR
+   \   0000A1   6401         XRL     A,#0x1
+   \   0000A3   70F8         JNZ     ??rftest_radio_init_0
+    404            FSCAL3 &= ~0x30;  
+   \   0000A5   90DF1C       MOV     DPTR,#-0x20e4
+   \   0000A8   E0           MOVX    A,@DPTR
+   \   0000A9   54CF         ANL     A,#0xcf
+   \   0000AB   F0           MOVX    @DPTR,A
+    405              
+    406            // Enter powerdown mode
+    407            SIDLE();
+   \   0000AC   75E104       MOV     0xe1,#0x4
+    408          }
+   \   0000AF   D083         POP     DPH
+   \   0000B1   D082         POP     DPL
+   \   0000B3   22           RET
+   \   0000B4                REQUIRE RFST
+    409          
+    410          
+    411          // *************************************************************************************************
+    412          // RF TX/RX IRQ providing data handling
+    413          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    414          void rftest_RfTxRxIsr(void)
+   \                     rftest_RfTxRxIsr:
+    415          {
+   \   000000   74F1         MOV     A,#-0xf
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 15
+   \   000005                ; Auto size: 0
+    416            u8 pass, i;
+    417            u16 time, timeout;
+    418            
+    419            // First clear pointer to fifo
+    420            rftest_packet_ptr = 0;
+    421          
+    422            // Read first byte
+    423            rftest_packet[rftest_packet_ptr++] = RFD;
+   \   000005   E5D9         MOV     A,0xd9
+   \   000007   90....       MOV     DPTR,#rftest_packet
+   \   00000A   F0           MOVX    @DPTR,A
+   \   00000B   90....       MOV     DPTR,#rftest_packet_ptr
+   \   00000E   7401         MOV     A,#0x1
+   \   000010   F0           MOVX    @DPTR,A
+    424            
+    425            // Load timeout counter  
+    426            timeout = 400;
+   \   000011   7890         MOV     R0,#-0x70
+   \   000013   F9           MOV     R1,A
+   \   000014   8020         SJMP    ??rftest_RfTxRxIsr_0
+    427          
+    428            // Wait until all 10 bytes have been received
+    429            while ( (rftest_packet_ptr < RFTEST_PACKET_LENGTH)  && (timeout-- != 0) ) 
+    430            {
+    431              if ((TCON & BIT1) == BIT1)
+   \                     ??rftest_RfTxRxIsr_1:
+   \   000016   A289         MOV     C,0x88.1
+   \   000018   501C         JNC     ??rftest_RfTxRxIsr_0
+    432              {
+    433                // Read next bytes
+    434                rftest_packet[rftest_packet_ptr++] = RFD;
+   \   00001A   E5D9         MOV     A,0xd9
+   \   00001C   C0E0         PUSH    A
+   \   00001E   E0           MOVX    A,@DPTR
+   \   00001F   FA           MOV     R2,A
+   \   000020   74..         MOV     A,#rftest_packet & 0xff
+   \   000022   2A           ADD     A,R2
+   \   000023   F582         MOV     DPL,A
+   \   000025   74..         MOV     A,#(rftest_packet >> 8) & 0xff
+   \   000027   3400         ADDC    A,#0x0
+   \   000029   F583         MOV     DPH,A
+   \   00002B   D0E0         POP     A
+   \   00002D   F0           MOVX    @DPTR,A
+   \   00002E   90....       MOV     DPTR,#rftest_packet_ptr
+   \   000031   E0           MOVX    A,@DPTR
+   \   000032   04           INC     A
+   \   000033   F0           MOVX    @DPTR,A
+    435          
+    436                // Clear IRQ flag
+    437                TCON &= ~BIT1;
+   \   000034   C289         CLR     0x88.1
+    438              }
+    439            }
+   \                     ??rftest_RfTxRxIsr_0:
+   \   000036   E0           MOVX    A,@DPTR
+   \   000037   C3           CLR     C
+   \   000038   940A         SUBB    A,#0xa
+   \   00003A   5010         JNC     ??rftest_RfTxRxIsr_2
+   \   00003C   E8           MOV     A,R0
+   \   00003D   FA           MOV     R2,A
+   \   00003E   E9           MOV     A,R1
+   \   00003F   FB           MOV     R3,A
+   \   000040   EA           MOV     A,R2
+   \   000041   24FF         ADD     A,#-0x1
+   \   000043   18           DEC     R0
+   \   000044   EB           MOV     A,R3
+   \   000045   34FF         ADDC    A,#-0x1
+   \   000047   F9           MOV     R1,A
+   \   000048   EA           MOV     A,R2
+   \   000049   4B           ORL     A,R3
+   \   00004A   70CA         JNZ     ??rftest_RfTxRxIsr_1
+    440          
+    441            // Indicate that RX is over
+    442            if (rftest_packet_ptr == RFTEST_PACKET_LENGTH) 
+   \                     ??rftest_RfTxRxIsr_2:
+   \   00004C   E0           MOVX    A,@DPTR
+   \   00004D   640A         XRL     A,#0xa
+   \   00004F   6003         JZ      $+5
+   \   000051   02....       LJMP    ??rftest_RfTxRxIsr_3
+    443            {
+    444              // Radio off during decoding
+    445              SIDLE();
+   \   000054   75E104       MOV     0xe1,#0x4
+    446              
+    447              // Store current 16-bit time
+    448              time  = T1CNTL;
+   \   000057   A8E2         MOV     R0,0xe2
+   \   000059   8882         MOV     DPL,R0
+   \   00005B   8582..       MOV     ?V0 + 0,DPL
+    449              time |= T1CNTH << 8;
+   \   00005E   E5E3         MOV     A,0xe3
+   \   000060   F5..         MOV     ?V0 + 1,A
+    450              time = (sTimer1.cycles*11453) + (u16)(((u32)time*32768)/187500);
+   \   000062   90....       MOV     DPTR,#sTimer1 + 8
+   \   000065   E0           MOVX    A,@DPTR
+   \   000066   FA           MOV     R2,A
+   \   000067   75F0BD       MOV     B,#-0x43
+   \   00006A   A4           MUL     AB
+   \   00006B   CA           XCH     A,R2
+   \   00006C   A8F0         MOV     R0,B
+   \   00006E   75F02C       MOV     B,#0x2c
+   \   000071   A4           MUL     AB
+   \   000072   28           ADD     A,R0
+   \   000073   FB           MOV     R3,A
+   \   000074   E4           CLR     A
+   \   000075   F5..         MOV     ?V0 + 2,A
+   \   000077   F5..         MOV     ?V0 + 3,A
+   \   000079   740F         MOV     A,#0xf
+   \   00007B   78..         MOV     R0,#?V0 + 0
+   \   00007D   12....       LCALL   ?L_SHL
+   \   000080   90....       MOV     DPTR,#__Constant_2dc6c
+   \   000083   78..         MOV     R0,#?V0 + 4
+   \   000085   12....       LCALL   ?L_MOV_X
+   \   000088   78..         MOV     R0,#?V0 + 0
+   \   00008A   79..         MOV     R1,#?V0 + 4
+   \   00008C   12....       LCALL   ?UL_DIV_MOD
+   \   00008F   EA           MOV     A,R2
+   \   000090   25..         ADD     A,?V0 + 0
+   \   000092   F5..         MOV     ?V0 + 0,A
+   \   000094   EB           MOV     A,R3
+   \   000095   35..         ADDC    A,?V0 + 1
+   \   000097   F5..         MOV     ?V0 + 1,A
+    451              
+    452              // Check if packet is valid
+    453              pass = 1;
+   \   000099   7C01         MOV     R4,#0x1
+    454              for (i=1; i<RFTEST_PACKET_LENGTH; i++)
+   \   00009B   7B01         MOV     R3,#0x1
+   \   00009D   8023         SJMP    ??rftest_RfTxRxIsr_4
+    455              {
+    456                if (rftest_packet[i] != ref_packet[i]) pass = 0;
+   \                     ??rftest_RfTxRxIsr_5:
+   \   00009F   8B82         MOV     DPL,R3
+   \   0000A1   A882         MOV     R0,DPL
+   \   0000A3   74..         MOV     A,#rftest_packet & 0xff
+   \   0000A5   28           ADD     A,R0
+   \   0000A6   F582         MOV     DPL,A
+   \   0000A8   74..         MOV     A,#(rftest_packet >> 8) & 0xff
+   \   0000AA   3400         ADDC    A,#0x0
+   \   0000AC   F583         MOV     DPH,A
+   \   0000AE   E0           MOVX    A,@DPTR
+   \   0000AF   FA           MOV     R2,A
+   \   0000B0   74..         MOV     A,#ref_packet & 0xff
+   \   0000B2   28           ADD     A,R0
+   \   0000B3   F582         MOV     DPL,A
+   \   0000B5   74..         MOV     A,#(ref_packet >> 8) & 0xff
+   \   0000B7   3400         ADDC    A,#0x0
+   \   0000B9   F583         MOV     DPH,A
+   \   0000BB   E0           MOVX    A,@DPTR
+   \   0000BC   6A           XRL     A,R2
+   \   0000BD   6002         JZ      ??rftest_RfTxRxIsr_6
+   \   0000BF   7C00         MOV     R4,#0x0
+    457              }
+   \                     ??rftest_RfTxRxIsr_6:
+   \   0000C1   0B           INC     R3
+   \                     ??rftest_RfTxRxIsr_4:
+   \   0000C2   EB           MOV     A,R3
+   \   0000C3   C3           CLR     C
+   \   0000C4   940A         SUBB    A,#0xa
+   \   0000C6   40D7         JC      ??rftest_RfTxRxIsr_5
+    458              
+    459              // Continue if packet ok
+    460              if (pass)
+   \   0000C8   EC           MOV     A,R4
+   \   0000C9   6041         JZ      ??rftest_RfTxRxIsr_3
+    461              {
+    462                rftest[rftest_count].valid        = 1;
+   \   0000CB   90....       MOV     DPTR,#rftest_count
+   \   0000CE   E0           MOVX    A,@DPTR
+   \   0000CF   75F005       MOV     B,#0x5
+   \   0000D2   A4           MUL     AB
+   \   0000D3   F8           MOV     R0,A
+   \   0000D4   A9F0         MOV     R1,B
+   \   0000D6   74..         MOV     A,#rftest & 0xff
+   \   0000D8   28           ADD     A,R0
+   \   0000D9   F8           MOV     R0,A
+   \   0000DA   74..         MOV     A,#(rftest >> 8) & 0xff
+   \   0000DC   39           ADDC    A,R1
+   \   0000DD   F9           MOV     R1,A
+   \   0000DE   8882         MOV     DPL,R0
+   \   0000E0   8983         MOV     DPH,R1
+   \   0000E2   7401         MOV     A,#0x1
+   \   0000E4   F0           MOVX    @DPTR,A
+    463                rftest[rftest_count].time 	= time;
+   \   0000E5   A3           INC     DPTR
+   \   0000E6   E5..         MOV     A,?V0 + 0
+   \   0000E8   F0           MOVX    @DPTR,A
+   \   0000E9   A3           INC     DPTR
+   \   0000EA   E5..         MOV     A,?V0 + 1
+   \   0000EC   F0           MOVX    @DPTR,A
+    464                rftest[rftest_count].packet_nb	= rftest_packet[0];
+   \   0000ED   90....       MOV     DPTR,#rftest_packet
+   \   0000F0   E0           MOVX    A,@DPTR
+   \   0000F1   8882         MOV     DPL,R0
+   \   0000F3   8983         MOV     DPH,R1
+   \   0000F5   A3           INC     DPTR
+   \   0000F6   A3           INC     DPTR
+   \   0000F7   A3           INC     DPTR
+   \   0000F8   F0           MOVX    @DPTR,A
+    465                rftest[rftest_count].freqoffset	= FREQEST;
+   \   0000F9   90DF38       MOV     DPTR,#-0x20c8
+   \   0000FC   E0           MOVX    A,@DPTR
+   \   0000FD   8882         MOV     DPL,R0
+   \   0000FF   8983         MOV     DPH,R1
+   \   000101   A3           INC     DPTR
+   \   000102   A3           INC     DPTR
+   \   000103   A3           INC     DPTR
+   \   000104   A3           INC     DPTR
+   \   000105   F0           MOVX    @DPTR,A
+    466                rftest_count++;
+   \   000106   90....       MOV     DPTR,#rftest_count
+   \   000109   E0           MOVX    A,@DPTR
+   \   00010A   04           INC     A
+   \   00010B   F0           MOVX    @DPTR,A
+    467              }
+    468            }
+    469          }
+   \                     ??rftest_RfTxRxIsr_3:
+   \   00010C   7F08         MOV     R7,#0x8
+   \   00010E   02....       LJMP    ?FUNC_LEAVE_XDATA
+   \   000111                REQUIRE RFD
+   \   000111                REQUIRE _A_TCON
+   \   000111                REQUIRE RFST
+   \   000111                REQUIRE T1CNTL
+   \   000111                REQUIRE T1CNTH
+    470          
+    471          
+    472          // *************************************************************************************************
+    473          // RF TX/RX general IRQ providing status handling
+    474          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    475          void rftest_RfIsr(void)
+   \                     rftest_RfIsr:
+    476          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    477            u8 rfif_reg = RFIF;
+   \   000004   E5E9         MOV     A,0xe9
+    478            
+    479            // Clear CPU int flag
+    480            S1CON &= ~0x03;
+   \   000006   539BFC       ANL     0x9b,#0xfc
+    481            
+    482            // check status register
+    483            if ((rfif_reg & BIT7) == BIT7)
+   \   000009   A2E7         MOV     C,0xE0 /* A   */.7
+   \   00000B   5005         JNC     ??rftest_RfIsr_0
+    484            {
+    485              // TX underflow error
+    486              SIDLE();
+   \   00000D   75E104       MOV     0xe1,#0x4
+   \   000010   8014         SJMP    ??rftest_RfIsr_1
+    487            }
+    488            else if ((rfif_reg & IRQ_RXOVF) == IRQ_RXOVF)
+   \                     ??rftest_RfIsr_0:
+   \   000012   A2E6         MOV     C,0xE0 /* A   */.6
+   \   000014   5010         JNC     ??rftest_RfIsr_1
+    489            {
+    490              // RX overflow error
+    491              SIDLE();
+   \   000016   75E104       MOV     0xe1,#0x4
+    492              while(MARCSTATE != 0x01);
+   \                     ??rftest_RfIsr_2:
+   \   000019   90DF3B       MOV     DPTR,#-0x20c5
+   \   00001C   E0           MOVX    A,@DPTR
+   \   00001D   6401         XRL     A,#0x1
+   \   00001F   70F8         JNZ     ??rftest_RfIsr_2
+    493              rftest_packet_ptr = 0;
+   \   000021   90....       MOV     DPTR,#rftest_packet_ptr
+   \   000024   E4           CLR     A
+   \   000025   F0           MOVX    @DPTR,A
+    494            } 
+    495          
+    496            // Clear IRQ
+    497            RFIF = 0x00;  
+   \                     ??rftest_RfIsr_1:
+   \   000026   75E900       MOV     0xe9,#0x0
+    498          }
+   \   000029   D083         POP     DPH
+   \   00002B   D082         POP     DPL
+   \   00002D   22           RET
+   \   00002E                REQUIRE RFIF
+   \   00002E                REQUIRE S1CON
+   \   00002E                REQUIRE RFST
+    499          
+    500          
+    501          // *************************************************************************************************
+    502          // Continuous TX - used for spectrum analysis and high current check
+    503          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    504          void start_continuous_tx(void)
+   \                     start_continuous_tx:
+    505          {
+   \   000000   C082         PUSH    DPL
+   \   000002   C083         PUSH    DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    506            // Disable IRQ
+    507            INT_ENABLE(INUM_RFTXRX, INT_OFF);
+   \   000004   C2A8         CLR     0xa8.0
+    508            INT_ENABLE(INUM_RF, INT_OFF);
+   \   000006   539AFE       ANL     0x9a,#0xfe
+    509          
+    510          #ifdef TX_SIMPLE_TEST
+    511            CHANNR = 0;
+    512          #else
+    513            // Send on far away channel
+    514            CHANNR = 0xFF;
+   \   000009   90DF06       MOV     DPTR,#-0x20fa
+   \   00000C   74FF         MOV     A,#-0x1
+   \   00000E   F0           MOVX    @DPTR,A
+    515          #endif
+    516            
+    517            // Max output power
+    518            PA_TABLE0 = RFTEST_OUTPUT_POWER_MAX;
+   \   00000F   90DF2E       MOV     DPTR,#-0x20d2
+   \   000012   74C0         MOV     A,#-0x40
+   \   000014   F0           MOVX    @DPTR,A
+    519            
+    520            // Packet length is 1
+    521            PKTLEN = 1;
+   \   000015   90DF02       MOV     DPTR,#-0x20fe
+   \   000018   7401         MOV     A,#0x1
+   \   00001A   F0           MOVX    @DPTR,A
+    522            
+    523            // Write first byte to RFD register
+    524            RFD = 0x55;
+   \   00001B   75D955       MOV     0xd9,#0x55
+    525            
+    526            // Transmit
+    527            STX();  
+   \   00001E   75E103       MOV     0xe1,#0x3
+    528          }
+   \   000021   D083         POP     DPH
+   \   000023   D082         POP     DPL
+   \   000025   22           RET
+   \   000026                REQUIRE _A_IEN0
+   \   000026                REQUIRE IEN2
+   \   000026                REQUIRE _A_IEN1
+   \   000026                REQUIRE RFD
+   \   000026                REQUIRE RFST
+    529          
+    530          
+    531          
+    532          // *************************************************************************************************
+    533          // Exit continuous TX
+    534          // *************************************************************************************************
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    535          void stop_continuous_tx(void)
+   \                     stop_continuous_tx:
+    536          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    537            SIDLE();
+   \   000000   75E104       MOV     0xe1,#0x4
+    538          }
+   \   000003   22           RET
+   \   000004                REQUIRE RFST
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     __Constant_2dc6c:
+   \   000000                DS 4
+   \   000004                REQUIRE `?<Initializer for __Constant_2dc6c>`
+   \   000004                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for ref_packet>`:
+   \   000000   00           DB 0
+   \   000001   55           DB 85
+   \   000002   AA           DB 170
+   \   000003   55           DB 85
+   \   000004   AA           DB 170
+   \   000005   55           DB 85
+   \   000006   AA           DB 170
+   \   000007   55           DB 85
+   \   000008   AA           DB 170
+   \   000009   55           DB 85
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for __Constant_2dc6c>`:
+   \   000000   6CDC0200     DD 187500
+
+   Maximum stack usage in bytes:
+
+     Function               ISTACK PSTACK XSTACK
+     --------               ------ ------ ------
+     rftest_RfIsr               2      0      0
+     rftest_RfTxRxIsr           1      0     15
+     rftest_init                2      0     20
+       -> rftest_radio_init     4      0      0
+     rftest_radio_init          2      0      0
+     start_continuous_tx        2      0      0
+     stop_continuous_tx         0      0      0
+     test_rf                    2      0     20
+       -> rftest_init           0      0     40
+       -> reset_timer1          0      0     40
+       -> set_timer1            0      0     40
+       -> reset_timer1          0      0     40
+       -> set_timer1            0      0     40
+       -> reset_timer1          0      0     40
+
+
+   Segment part sizes:
+
+     Function/Label                      Bytes
+     --------------                      -----
+     _A_TCON                                1
+     RFIM                                   1
+     IEN2                                   1
+     S1CON                                  1
+     _A_IEN0                                1
+     _A_IEN1                                1
+     RFD                                    1
+     RFST                                   1
+     T1CNTL                                 1
+     T1CNTH                                 1
+     T1CTL                                  1
+     T1CCTL0                                1
+     RFIF                                   1
+     rftest_packet                         10
+     rftest_packet_ptr                      1
+     rftest_count                           1
+     rftest_time                            4
+     rftest                                50
+     ref_packet                            10
+     rftest_init                           70
+     test_rf                              741
+     rftest_radio_init                    180
+     rftest_RfTxRxIsr                     273
+     rftest_RfIsr                          46
+     start_continuous_tx                   38
+     stop_continuous_tx                     4
+     __Constant_2dc6c                       4
+     ?<Initializer for ref_packet>         10
+     ?<Initializer for __Constant_2dc6c>    4
+
+ 
+ 1 352 bytes in segment NEAR_CODE
+    13 bytes in segment SFR_AN
+    14 bytes in segment XDATA_I
+    14 bytes in segment XDATA_ID
+    66 bytes in segment XDATA_Z
+ 
+ 1 362 bytes of CODE  memory (+  4 bytes shared)
+     0 bytes of DATA  memory (+ 13 bytes shared)
+    76 bytes of XDATA memory (+  4 bytes shared)
+
+Errors: none
+Warnings: none

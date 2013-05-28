@@ -1,0 +1,39 @@
+CONFIGURACION Y ACTIVACION DEL PUNTO DE ACCESO
+
+0x00. Copiar accesspoint.conf en /etc/
+0x01. Editar accesspoint.conf dependendiendo de los directorios que usemos y del tipo de configuración que queramos.
+0x02. Copiar los archivos y directorios definidos en accesspoint.conf
+0x03. Copiar AP_CC1111.py en /usr/share/AP_CC1111/
+0x04. Copiar el certificado del servidor en /usr/share/AP_CC1111/ o el path que tengamos en accesspoint.conf
+
+Permisos que debe tener los archivos de los cuales root debe ser el propietario:
+	accesspoint.conf 	-rw-r--r--
+file_pam: -rw-r-----
+
+PARA ACTIVAR EL DEMONIO DEL AP
+
+0x00. Copiar daemon_AP en /etc/init.d/
+0x01. chmod +x /etc/init.d/daemon_AP
+0x02. chkconfig daemon_AP --add
+0x03. chkconfig daemon_AP on		o	systemctl enable daemon_AP			
+0x04. service daemon_AP start		o	systemctl start daemon_AP
+
+ACCESS POINT CONFIGURATION AND ACTIVATION 
+
+0x00. Copy accesspoint.conf in /etc/
+0x01. Edit /etc/accesspoint.conf
+0x02. Copy files and directories defined in accesspoint.conf
+0x03. Copy administradorSSL.py in /usr/share/AP_CC1111/
+0x04. Copy the server certificate in /usr/share/AP_CC1111/ or the path that you wrote in accesspoint.conf
+
+the files should have the permissions and root must be propietary:
+	accesspoint.conf 	-rw-r--r--
+file_pam: -rw-r-----
+
+ACTIVATE AP DAEMON
+
+0x00. Copy daemon_AP in /etc/init.d/
+0x01. chmod +x /etc/init.d/daemon_AP
+0x02. chkconfig daemon_AP --add
+0x03. chkconfig daemon_AP on 		or 		systemctl enable daemon_AP
+0x04. service daemon_AP start		or		systemctl start daemon_AP

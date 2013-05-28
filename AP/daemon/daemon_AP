@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+#	/etc/rc.d/init.d/daemon_AP
+#
+# Starts the Access Point (CC1111) Daemon
+#
+# chkconfig: 2345 90 10
+# description: Access Point (CC1111) Daemon
+# processname: daemon_AP
+# pidfile: /var/run/AP_CC1111.pid
+
+# Source function library
+. /etc/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+[ "${NETWORKING}" = "no" ] && exit 0
+ 
+prog="/usr/bin/python /usr/share/AP_CC1111/AP_CC111.py"
+pidfile="/var/run/AP_CC1111.pid"
+lockfile=/var/lock/subsys/AP_CC1111.py
+
+start() {
+	echo "Starting Access Point"
+	daemon "$prog $OPTIONS" 
+  	RETVAL=$?
+ 	echo
+  	[ $RETVAL -eq 0 ] && touch $lockfile
+	return $RETVAL
+}
+
+stop() {
+	echo "Stopping ACC login"
+	killproc $proc
+	RETVAL=$?
+  	echo
+	[ $RETVAL -eq 0 ] && rm -f $lockfile
+}
+
+#Script -- No changes needed below.
+case "$1" in
+	start)
+		#Start Server
+		start
+		;;
+	stop)
+		#Shutdown Server
+		stop
+		;;
+	restart)
+		stop
+		sleep 2
+		start
+		;;
+	status)
+		status $prog
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|status}"
+		exit 1
+esac
+exit 0

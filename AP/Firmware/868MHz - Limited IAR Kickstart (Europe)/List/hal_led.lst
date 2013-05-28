@@ -1,0 +1,187 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Jun/2012  09:07:47 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\HAL\source\hal_led.c         #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\HAL\sou #
+#                          rce\hal_led.c" -D ISM_EU -D MCU_H=<ioCC1111.h> -D  #
+#                          chip=1111 -D RF_FREQUENCY=868000 -D MRFI_CC1111    #
+#                          -D NDEBUG -lC "C:\Documents and                    #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Limited IAR Kickstart (Europe)\List\" -o         #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\Obj\" -e --no_unroll            #
+#                          --no_inline --no_tbaa --debug --core=plain         #
+#                          --dptr=16,1 --data_model=large --code_model=near   #
+#                          --calling_convention=xdata_reentrant               #
+#                          --place_constants=data --nr_virtual_regs 8 -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\List\hal_led.lst                #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Limited IAR         #
+#                          Kickstart (Europe)\Obj\hal_led.r51                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\hal_led.c
+      1          /***********************************************************************************
+      2              Filename: hal_led.c
+      3          
+      4              Copyright 2007 Texas Instruments, Inc.
+      5          ***********************************************************************************/
+      6          
+      7          #include "hal_types.h"
+      8          #include "hal_led.h"
+      9          #include "hal_board.h"
+
+   \                                 In  segment SFR_AN, at 0x90
+   \   union <unnamed> volatile __sfr _A_P1
+   \                     _A_P1:
+   \   000000                DS 1
+     10          
+     11          
+     12          
+     13          //----------------------------------------------------------------------------------
+     14          //  void halLedSet(uint8 id)
+     15          //
+     16          //  DESCRIPTION:
+     17          //    Turn LED on.
+     18          //----------------------------------------------------------------------------------
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     19          void halLedSet(uint8 id)
+   \                     halLedSet:
+     20          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     21              HAL_LED_SET();
+   \   000000   D290         SETB    0x90.0
+     22          }
+   \   000002   22           RET
+   \   000003                REQUIRE _A_P1
+     23          
+     24          //----------------------------------------------------------------------------------
+     25          //  void halLedClear(uint8 id)
+     26          //
+     27          //  DESCRIPTION:
+     28          //    Turn LED off.
+     29          //----------------------------------------------------------------------------------
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     30          void halLedClear(uint8 id)
+   \                     halLedClear:
+     31          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     32              HAL_LED_CLR();
+   \   000000   C290         CLR     0x90.0
+     33          }
+   \   000002   22           RET
+   \   000003                REQUIRE _A_P1
+     34          
+     35          //----------------------------------------------------------------------------------
+     36          //  void halLedToggle(uint8 id)
+     37          //
+     38          //  DESCRIPTION:
+     39          //    Change state of LED. If on, turn it off. Else turn on.
+     40          //----------------------------------------------------------------------------------
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     41          void halLedToggle(uint8 id)
+   \                     halLedToggle:
+     42          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     43              HAL_LED_TGL();
+   \   000000   639001       XRL     0x90,#0x1
+     44          }
+   \   000003   22           RET
+   \   000004                REQUIRE _A_P1
+     45          
+     46          
+
+   Maximum stack usage in bytes:
+
+     Function     ISTACK PSTACK XSTACK
+     --------     ------ ------ ------
+     halLedClear      0      0      0
+     halLedSet        0      0      0
+     halLedToggle     0      0      0
+
+
+   Segment part sizes:
+
+     Function/Label Bytes
+     -------------- -----
+     _A_P1             1
+     halLedSet         3
+     halLedClear       3
+     halLedToggle      4
+
+ 
+ 10 bytes in segment NEAR_CODE
+  1 byte  in segment SFR_AN
+ 
+ 10 bytes of CODE memory
+  0 bytes of DATA memory (+ 1 byte shared)
+
+Errors: none
+Warnings: none

@@ -1,0 +1,379 @@
+###############################################################################
+#                                                                             #
+# IAR C/C++ Compiler V8.10.3.40338/W32 for 8051         26/Nov/2012  10:49:33 #
+# Copyright 2004-2011 IAR Systems AB.                                         #
+#                                                                             #
+#    Core               =  plain                                              #
+#    Code model         =  near                                               #
+#    Data model         =  large                                              #
+#    Calling convention =  xdata reentrant                                    #
+#    Constant location  =  data                                               #
+#    Dptr setup         =  1,16                                               #
+#    Source file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\HAL\source\hal_mcu.c         #
+#    Command line       =  -f "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Configuration\Acc #
+#                          ess Point\smpl_config.dat" (-DNUM_CONNECTIONS=1    #
+#                          -DSIZE_INFRAME_Q=6 -DSIZE_OUTFRAME_Q=2             #
+#                          "-DTHIS_DEVICE_ADDRESS={0x78, 0x56, 0x34, 0x10}"   #
+#                          -DACCESS_POINT -DAP_IS_DATA_HUB                    #
+#                          -DNUM_STORE_AND_FWD_CLIENTS=3                      #
+#                          -DSTARTUP_JOINCONTEXT_ON) -f "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Configuration\smpl_nwk_config.dat"             #
+#                          (-DMAX_HOPS=3 -DMAX_HOPS_FROM_AP=1                 #
+#                          -DMAX_NWK_PAYLOAD=9 -DMAX_APP_PAYLOAD=19           #
+#                          -DDEFAULT_LINK_TOKEN=0x01020304                    #
+#                          -DDEFAULT_JOIN_TOKEN=0x05060708 -DAPP_AUTO_ACK     #
+#                          -DEXTENDED_API -DxSMPL_SECURE -DxNVOBJECT_SUPPORT  #
+#                          -DxSW_TIMER) "C:\Documents and                     #
+#                          Settings\usuario\Mis documentos\Server_IAR\HAL\sou #
+#                          rce\hal_mcu.c" -D CC1111EM -D ISM_EU -D            #
+#                          MCU_H=<ioCC1111.h> -D chip=1111 -D                 #
+#                          RF_FREQUENCY=868000 -D MRFI_CC1111 -D NDEBUG -lC   #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\" -o "C:\Documents and     #
+#                          Settings\usuario\Mis documentos\Server_IAR\868MHz  #
+#                          - Unrestricted IAR Workbench (Europe)\Obj\" -e     #
+#                          --no_unroll --no_inline --no_tbaa --debug          #
+#                          --core=plain --dptr=16,1 --data_model=large        #
+#                          --code_model=near --calling_convention=xdata_reent #
+#                          rant --place_constants=data --nr_virtual_regs 8    #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\bm-br1\" -I "C:\Documents    #
+#                          and Settings\usuario\Mis                           #
+#                          documentos\Server_IAR\HAL\include\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\HAL\source\" -I              #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\wbsl\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\usb\"   #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\usb\class_cdc\" -I           #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\" -I             #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\usb\library\ccxx11\" -I      #
+#                          "C:\Documents and Settings\usuario\Mis             #
+#                          documentos\Server_IAR\sync\" -I "C:\Documents and  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\" -I "C:\Documents and Settings\usuario\Mis    #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\"  #
+#                          -I "C:\Documents and Settings\usuario\Mis          #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\dr #
+#                          ivers\" -I "C:\Documents and Settings\usuario\Mis  #
+#                          documentos\Server_IAR\simpliciti\Components\bsp\bo #
+#                          ards\RFUSB\" -I "C:\Documents and                  #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\mrfi\" -I "C:\Documents and         #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk\" -I "C:\Documents and          #
+#                          Settings\usuario\Mis documentos\Server_IAR\simplic #
+#                          iti\Components\nwk_applications\" -Om              #
+#    List file          =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\List\hal_mcu.lst                #
+#    Object file        =  C:\Documents and Settings\usuario\Mis              #
+#                          documentos\Server_IAR\868MHz - Unrestricted IAR    #
+#                          Workbench (Europe)\Obj\hal_mcu.r51                 #
+#                                                                             #
+#                                                                             #
+###############################################################################
+
+C:\Documents and Settings\usuario\Mis documentos\Server_IAR\HAL\source\hal_mcu.c
+      1          /***********************************************************************************
+      2            Filename:     hal_mcu.c
+      3          
+      4            Description:  hal mcu library
+      5          
+      6          ***********************************************************************************/
+      7          
+      8          
+      9          #include "hal_types.h"
+     10          #include "hal_mcu.h"
+     11          
+     12          #include "clock.h"
+
+   \                                 In  segment SFR_AN, at 0xc9
+   \   unsigned char volatile __sfr WDCTL
+   \                     WDCTL:
+   \   000000                DS 1
+     13          
+     14          /***********************************************************************************
+     15          * @fn          halMcuInit
+     16          *
+     17          * @brief       Set system clock
+     18          *
+     19          * @param       none
+     20          *
+     21          * @return      none
+     22          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     23          void halMcuInit(void)
+   \                     halMcuInit:
+     24          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     25              clockSetMainSrc(CLOCK_SRC_XOSC);
+   \   000000                ; Setup parameters for call to function clockSetMainSrc
+   \   000000   7900         MOV     R1,#0x0
+   \   000002   02....       LJMP    clockSetMainSrc
+     26          }
+     27          
+     28          
+     29          /***********************************************************************************
+     30          * @fn          halMcuWaitUs
+     31          *
+     32          * @brief       Busy wait function. Waits the specified number of microseconds. Use
+     33          *              assumptions about number of clock cycles needed for the various
+     34          *              instructions.
+     35          *
+     36          *              NB! This function is highly dependent on architecture and compiler!
+     37          *
+     38          * @param       uint16 usec - number of microseconds delay
+     39          *
+     40          * @return      none
+     41          */
+     42          #pragma optimize=none
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     43          void halMcuWaitUs(uint16 usec)
+   \                     halMcuWaitUs:
+     44          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     45              usec>>= 1;          // Divide by 2 to achieve better resolution
+   \   000000   EB           MOV     A,R3
+   \   000001   C3           CLR     C
+   \   000002   13           RRC     A
+   \   000003   FB           MOV     R3,A
+   \   000004   EA           MOV     A,R2
+   \   000005   13           RRC     A
+   \   000006   FA           MOV     R2,A
+     46          
+     47              while(usec > 1)     // compare: ~13 cycles
+   \                     ??halMcuWaitUs_0:
+   \   000007   C3           CLR     C
+   \   000008   EA           MOV     A,R2
+   \   000009   9402         SUBB    A,#0x2
+   \   00000B   EB           MOV     A,R3
+   \   00000C   9400         SUBB    A,#0x0
+   \   00000E   4014         JC      ??halMcuWaitUs_1
+     48              {
+     49                  asm("NOP");     // 1 cycle/NOP
+   \   000010   00           NOP
+     50                  asm("NOP");
+   \   000011   00           NOP
+     51                  asm("NOP");
+   \   000012   00           NOP
+     52                  asm("NOP");
+   \   000013   00           NOP
+     53                  asm("NOP");
+   \   000014   00           NOP
+     54                  asm("NOP");
+   \   000015   00           NOP
+     55                  asm("NOP");
+   \   000016   00           NOP
+     56                  asm("NOP");
+   \   000017   00           NOP
+     57                  asm("NOP");
+   \   000018   00           NOP
+     58                  asm("NOP");
+   \   000019   00           NOP
+     59          
+     60                  usec--;        // decr: ~7 cycles
+   \   00001A   EA           MOV     A,R2
+   \   00001B   24FF         ADD     A,#-0x1
+   \   00001D   FA           MOV     R2,A
+   \   00001E   EB           MOV     A,R3
+   \   00001F   34FF         ADDC    A,#-0x1
+   \   000021   FB           MOV     R3,A
+   \   000022   80E3         SJMP    ??halMcuWaitUs_0
+     61              }
+     62          }
+   \                     ??halMcuWaitUs_1:
+   \   000024   22           RET
+     63          
+     64          /***********************************************************************************
+     65          * @fn          halMcuWaitMs
+     66          *
+     67          * @brief       Busy wait function. Waits the specified number of milliseconds. Use
+     68          *              assumptions about number of clock cycles needed for the various
+     69          *              instructions.
+     70          *
+     71          *              NB! This function is highly dependent on architecture and compiler!
+     72          *
+     73          * @param       uint16 millisec - number of milliseconds delay
+     74          *
+     75          * @return      none
+     76          */
+     77          #pragma optimize=none
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     78          void halMcuWaitMs(uint16 msec)
+   \                     halMcuWaitMs:
+     79          {
+   \   000000   74F8         MOV     A,#-0x8
+   \   000002   12....       LCALL   ?FUNC_ENTER_XDATA
+   \   000005                ; Saved register size: 8
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV     A,R2
+   \   000006   FE           MOV     R6,A
+   \   000007   EB           MOV     A,R3
+   \   000008   FF           MOV     R7,A
+     80              while(msec--)
+   \                     ??halMcuWaitMs_0:
+   \   000009   EE           MOV     A,R6
+   \   00000A   F8           MOV     R0,A
+   \   00000B   EF           MOV     A,R7
+   \   00000C   F9           MOV     R1,A
+   \   00000D   E8           MOV     A,R0
+   \   00000E   24FF         ADD     A,#-0x1
+   \   000010   FE           MOV     R6,A
+   \   000011   E9           MOV     A,R1
+   \   000012   34FF         ADDC    A,#-0x1
+   \   000014   FF           MOV     R7,A
+   \   000015   E8           MOV     A,R0
+   \   000016   49           ORL     A,R1
+   \   000017   6009         JZ      ??halMcuWaitMs_1
+     81                  halMcuWaitUs(1000);
+   \   000019                ; Setup parameters for call to function halMcuWaitUs
+   \   000019   7AE8         MOV     R2,#-0x18
+   \   00001B   7B03         MOV     R3,#0x3
+   \   00001D   12....       LCALL   halMcuWaitUs
+   \   000020   80E7         SJMP    ??halMcuWaitMs_0
+     82          }
+   \                     ??halMcuWaitMs_1:
+   \   000022   7F01         MOV     R7,#0x1
+   \   000024   02....       LJMP    ?FUNC_LEAVE_XDATA
+     83          
+     84          /***********************************************************************************
+     85          * @fn          halMcuSetLowPowerMode
+     86          *
+     87          * @brief      Sets the MCU in a low power mode. Will turn global interrupts on at
+     88          *             the same time as entering the LPM mode. The MCU must be waken from
+     89          *             an interrupt (status register on stack must be modified).
+     90          *
+     91          *              NB! This function is highly dependent on architecture and compiler!
+     92          *
+     93          * @param       uint8 mode - power mode
+     94          *
+     95          * @return      none
+     96          */
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+     97          void halMcuSetLowPowerMode(uint8 mode)
+   \                     halMcuSetLowPowerMode:
+     98          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+     99            // comment: not yet implemented
+    100            //HAL_ASSERT(FALSE);
+    101          }
+   \   000000   22           RET
+    102          
+    103          
+    104          /******************************************************************************
+    105          * @fn  halMcuReset
+    106          *
+    107          * @brief
+    108          * Resets the MCU. This utilize the watchdog timer as there is no other way
+    109          * for a software reset. The reset will not occur until ~2 ms.
+    110          * NB: The function will not return! (hangs until reset)
+    111          *
+    112          * Parameters:
+    113          *
+    114          * @param  void
+    115          *
+    116          * @return void
+    117          *
+    118          ******************************************************************************/
+
+   \                                 In  segment NEAR_CODE, align 1, keep-with-next
+    119          void halMcuReset(void)
+   \                     halMcuReset:
+    120          {
+   \   000000                ; Saved register size: 0
+   \   000000                ; Auto size: 0
+    121              const uint8 WDT_INTERVAL_MSEC_2=   0x03;   // after ~2 ms
+    122          
+    123              WDCTL = ((WDCTL & 0xFC) | (WDT_INTERVAL_MSEC_2 & 0x03));
+   \   000000   43C903       ORL     0xc9,#0x3
+    124              // Start watchdog
+    125              WDCTL &= ~0x04;     // Select watchdog mode
+   \   000003   53C9FB       ANL     0xc9,#0xfb
+    126              WDCTL |= 0x08;      // Enable timer
+   \   000006   43C908       ORL     0xc9,#0x8
+    127              while(1);                                   // Halt here until reset
+   \                     ??halMcuReset_0:
+   \   000009   80FE         SJMP    ??halMcuReset_0
+   \   00000B                REQUIRE WDCTL
+    128          }
+    129          
+    130          /***********************************************************************************
+    131            Copyright 2007 Texas Instruments Incorporated. All rights reserved.
+    132          
+    133            IMPORTANT: Your use of this Software is limited to those specific rights
+    134            granted under the terms of a software license agreement between the user
+    135            who downloaded the software, his/her employer (which must be your employer)
+    136            and Texas Instruments Incorporated (the "License").  You may not use this
+    137            Software unless you agree to abide by the terms of the License. The License
+    138            limits your use, and you acknowledge, that the Software may not be modified,
+    139            copied or distributed unless embedded on a Texas Instruments microcontroller
+    140            or used solely and exclusively in conjunction with a Texas Instruments radio
+    141            frequency transceiver, which is integrated into your product.  Other than for
+    142            the foregoing purpose, you may not use, reproduce, copy, prepare derivative
+    143            works of, modify, distribute, perform, display or sell this Software and/or
+    144            its documentation for any purpose.
+    145          
+    146            YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
+    147            PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+    148            INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
+    149            NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
+    150            TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
+    151            NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
+    152            LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
+    153            INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
+    154            OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
+    155            OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
+    156            (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
+    157          
+    158            Should you have any questions regarding your right to use this Software,
+    159            contact Texas Instruments Incorporated at www.TI.com.
+    160          ***********************************************************************************/
+
+   Maximum stack usage in bytes:
+
+     Function              ISTACK PSTACK XSTACK
+     --------              ------ ------ ------
+     halMcuInit                0      0      0
+       -> clockSetMainSrc      0      0      0
+     halMcuReset               0      0      0
+     halMcuSetLowPowerMode     0      0      0
+     halMcuWaitMs              0      0      8
+       -> halMcuWaitUs         0      0     16
+     halMcuWaitUs              0      0      8
+
+
+   Segment part sizes:
+
+     Function/Label        Bytes
+     --------------        -----
+     WDCTL                    1
+     halMcuInit               5
+     halMcuWaitUs            37
+     halMcuWaitMs            39
+     halMcuSetLowPowerMode    1
+     halMcuReset             11
+
+ 
+ 93 bytes in segment NEAR_CODE
+  1 byte  in segment SFR_AN
+ 
+ 93 bytes of CODE memory
+  0 bytes of DATA memory (+ 1 byte shared)
+
+Errors: none
+Warnings: none
