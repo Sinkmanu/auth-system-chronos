@@ -22,7 +22,6 @@ import serial
 import binascii
 import eZ430
 import time
-import string
 import os
 import random
 import struct
@@ -214,7 +213,7 @@ def ping_session(id_user):
 	contador = 0
 	ping_resp = 1
 
-	while (contador < timeout) and ping_resp: 
+	while (contador < int(timeout)) and ping_resp: 
 		try:
 			#envio
 			n = random.randint(1,999999999)
