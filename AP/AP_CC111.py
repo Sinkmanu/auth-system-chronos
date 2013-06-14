@@ -187,14 +187,14 @@ def lectura_info():
 def open_graphic_session(uid):
 	username = get_username(uid)
 	if username != 0:
-		if (login_mode == 2):
+		if (int(login_mode) == 2):
 			write_autologin(username)
 			time.sleep(0.2)
 			os.system("init 3")
 			time.sleep(1)
 			os.system("init 5")
 			restore_files()
-		elif (login_mode == 1):
+		elif (int(login_mode) == 1):
 			escribe_fichero(username)
 			time.sleep(int(mode1_time)) # tiempo que tienes para logearte en el sistema
 			resetea_fichero()
