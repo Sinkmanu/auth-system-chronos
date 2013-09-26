@@ -12,7 +12,7 @@ We use symmetric cryptography for communication between AP and Client, and asymm
 (Para la comunicación se usara un protocolo especifico para esta tarea. El cual usará criptografía simetrica para la comunicación entre AP y Clienta, y criptografia asimétrica entre AP y Servidor.)
 
 
-[diagrama](http://img853.imageshack.us/img853/760/hef5.png "Generic diagram")
+![](http://img853.imageshack.us/img853/760/hef5.png "Generic diagram")
 
 
 
