@@ -17,10 +17,13 @@ We use symmetric cryptography for communication between AP and Client, and asymm
 Installation
 -----------
 
-###For the client. You should read in the client ("Chronos Auth System" folder) README.
+###For the client. 
+´You should read in the client ("Chronos Auth System" folder) README.´
 
-###For the AP. You should read the AP README.
+###For the AP. 
+´You should read the AP README.´
 
-###For the Server. You should read the Server README.
+###For the Server. 
+´You should read the Server README.´
 
 
