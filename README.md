@@ -1,4 +1,4 @@
-Proximity-based Access Contrul using eZ430-Chronos & CC1111.
+Proximity-based Access Control using eZ430-Chronos & CC1111.
 ============================================================
 (Autenticación de usuarios por proximidad usando la plataforma eZ430-Chronos)
 -----------------------------------------------------------------------------
