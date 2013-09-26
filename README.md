@@ -6,9 +6,11 @@ Proximity-based Access Control using eZ430-Chronos & CC1111.
 Client:	eZ430-Chronos
 AP:	CC1111+PC
 Server: PC 
+	
+Working
+-------
 
 We use symmetric cryptography for communication between AP and Client, and asymmetric cryptography between AP and Server. The configuration of server/client/AP is in README file in each folder.
-
 (Para la comunicación se usara un protocolo especifico para esta tarea. El cual usará criptografía simetrica para la comunicación entre AP y Clienta, y criptografia asimétrica entre AP y Servidor.)
 
 
@@ -18,12 +20,12 @@ Installation
 -----------
 
 ###For the client. 
-´You should read in the client ("Chronos Auth System" folder) README.´
+You should read in the client ("Chronos Auth System" folder) README.
 
 ###For the AP. 
-´You should read the AP README.´
+You should read the AP README.
 
 ###For the Server. 
-´You should read the Server README.´
+You should read the Server README.
 
 
