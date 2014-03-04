@@ -1,20 +1,32 @@
-Proximity-based Access Control using eZ430-Chronos & CC1111.
+Proximity Authentication using eZ430-Chronos and CC1111.
 ============================================================
-(Autenticación de usuarios por proximidad usando la plataforma eZ430-Chronos)
------------------------------------------------------------------------------
 
-Client:	eZ430-Chronos
-AP:	CC1111+PC
-Server: PC 
+Authentication system by proximity using the eZ430-Chronos watch.
+
+Involved elements
+-----------------
+```
+Client:     eZ430-Chronos
+AP:         CC1111 + PC	
+Server:     PC	
+```
 	
 Working
 -------
 
-We use symmetric cryptography for communication between AP and Client, and asymmetric cryptography between AP and Server. The configuration of server/client/AP is in README file in each folder.
-(Para la comunicación se usara un protocolo especifico para esta tarea. El cual usará criptografía simetrica para la comunicación entre AP y Clienta, y criptografia asimétrica entre AP y Servidor.)
+We have made a protocol to communicate between the eZ430-Chronos and the CC1111 (and PC),  between these they communicate using symmetric cryptography with the AES algorithm as You can see in the figure 1. Between the Access Point and the Server, we use SSL. Figure 2. In the Figure 3, you can see a global vision of the system.
 
+![Access Point to eZ430-Chronos diagram](https://raw.github.com/wiki/Sinkmanu/auth-system-chronos/AP2Chronos.png "Access Point to eZ430-Chronos diagram")
 
-![](http://img853.imageshack.us/img853/760/hef5.png "Generic diagram")
+<small>Figure 1.</small>
+
+![Access Point to Server diagram](https://raw.github.com/wiki/Sinkmanu/auth-system-chronos/AP2Server.png "Access Point to Server diagram")
+
+<small>Figure 2.</small>
+
+![Complete diagram](https://raw.github.com/wiki/Sinkmanu/auth-system-chronos/Generico.png "Complete diagram")
+
+<small>Figure 3.</small>
 
 Installation
 -----------
@@ -27,5 +39,15 @@ You should read the AP README.
 
 ###For the Server. 
 You should read the Server README.
+
+
+References and more details
+---------------------------
+
+####Slides
+```
+http://www.slideshare.net/ManuelMancera/presentacion-23634783
+```
+
 
 
