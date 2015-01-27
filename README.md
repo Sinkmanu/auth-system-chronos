@@ -16,7 +16,7 @@ Working
 
 We have made a protocol to communicate between the eZ430-Chronos and the CC1111 (and PC),  between these they communicate using symmetric cryptography with the AES algorithm as You can see in the figure 1. Between the Access Point and the Server, we use SSL. Figure 2. In the Figure 3, you can see a global vision of the system.
 
-![ScreenShot](https://raw.github.com/wiki/Sinkmanu/auth-system-chronos/AP2Chronos.png)
+![ScreenShot](https://raw.githubusercontent.com/wiki/Sinkmanu/auth-system-chronos/Generico.png)
 
 <small>Figure 1.</small>
 
