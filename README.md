@@ -20,11 +20,11 @@ We have made a protocol to communicate between the eZ430-Chronos and the CC1111 
 
 <small>Figure 1.</small>
 
-![ScreenShot](https://raw.github.com/wiki/Sinkmanu/auth-system-chronos/AP2Server.png)
+![ScreenShot](https://raw.githubusercontent.com/wiki/Sinkmanu/auth-system-chronos/AP2Server.png)
 
 <small>Figure 2.</small>
 
-![ScreenShot](https://raw.github.com/wiki/Sinkmanu/auth-system-chronos/Generico.png)
+![ScreenShot](https://raw.githubusercontent.com/wiki/Sinkmanu/auth-system-chronos/Generico.png)
 
 <small>Figure 3.</small>
 
